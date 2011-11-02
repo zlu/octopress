@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[My Open Voice]]></title>
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2011-11-01T21:54:35-07:00</updated>
+  <updated>2011-11-01T22:07:42-07:00</updated>
   <id>http://yoursite.com/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[Zhao Lu]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git auto complete]]></title>
+    <link href="http://yoursite.com/blog/2011/11/01/git-auto-complete/"/>
+    <updated>2011-11-01T22:04:00-07:00</updated>
+    <id>http://yoursite.com/blog/2011/11/01/git-auto-complete</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
   
 </feed>
