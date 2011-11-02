@@ -9,8 +9,7 @@
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="
-">
+  <meta name="description" content="Git auto complete is a convenient feature. This feature is based on git-completion file comes with git. On OS X, if you install git via homebrew, you &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,7 +83,53 @@
   </header>
 
 
-<div class="entry-content">
+<div class="entry-content"><p>Git auto complete is a convenient feature.</p>
+
+<p>This feature is based on git-completion file comes with git.</p>
+
+<p>On OS X, if you install git via homebrew, you can find git source directory using:</p>
+
+<p><code>locate git | grep Cellar</code></p>
+
+<p>Locate the git-completion file.</p>
+
+<p>In my case, it is `/usr/local/Cellar/git/1.7.5/etc/bash_completion.d/git-completion.bash</p>
+
+<p>Open this file and you will find this explanation:</p>
+
+<p>The contained completion routines provide support for completing:</p>
+
+<ul>
+<li>local and remote branch names</li>
+<li>local and remote tag names</li>
+<li>.git/remotes file names</li>
+<li>git &#8216;subcommands&#8217;</li>
+<li>tree paths within &#8216;ref:path/to/file&#8217; expressions</li>
+<li>common &#8211;long-options</li>
+</ul>
+
+
+<p>And the steps to enable this</p>
+
+<ul>
+<li>Copy this file to somewhere (e.g. ~/.git-completion.sh).</li>
+<li>Add the following line <code>source ~/.git-completion.sh</code> to your .bashrc</li>
+<li>Changing PS1 to show current branch <code>PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '</code></li>
+</ul>
+
+
+<p>If you want some color in git prompt</p>
+
+<p><code>PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '</code></p>
+
+<p>If you want the prompt to show git-ps1 state
+<code>GIT_PS1_SHOWDIRTYSTATE=true</code></p>
+
+<p><code>Generating Site with Jekyllbe rake generate</code></p>
+
+<p>Example:</p>
+
+<p><code>zlu@zlu-mba:~/projects/me/octopress (master *)</code></p>
 </div>
 
 
