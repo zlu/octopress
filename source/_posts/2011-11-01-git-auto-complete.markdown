@@ -12,7 +12,9 @@ This feature is based on git-completion file comes with git.
 
 On OS X, if you install git via homebrew, you can find git source directory using:
 
-`locate git | grep Cellar`
+{% codeblock lang:bash %}
+locate git | grep Cellar
+{% endcodeblock lang:objc %}
 
 Locate the git-completion file.
 

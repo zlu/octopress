@@ -4,7 +4,7 @@
   <title><![CDATA[My Open Voice]]></title>
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2011-11-01T22:22:00-07:00</updated>
+  <updated>2011-11-03T01:06:24-07:00</updated>
   <id>http://yoursite.com/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -24,7 +24,10 @@
 
 <p>On OS X, if you install git via homebrew, you can find git source directory using:</p>
 
-<p><code>locate git | grep Cellar</code></p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>locate git | grep Cellar
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Locate the git-completion file.</p>
 
