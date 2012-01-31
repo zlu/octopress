@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: git | My Open Voice]]></title>
+  <link href="http://www.zlu.com/blog/categories/git/atom.xml" rel="self"/>
+  <link href="http://www.zlu.com/"/>
+  <updated>2012-01-31T00:11:33-08:00</updated>
+  <id>http://www.zlu.com/</id>
+  <author>
+    <name><![CDATA[Zhao Lu]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Git auto complete]]></title>
+    <link href="http://www.zlu.com/blog/2011/11/01/git-auto-complete/"/>
+    <updated>2011-11-01T22:04:00-07:00</updated>
+    <id>http://www.zlu.com/blog/2011/11/01/git-auto-complete</id>
+    <content type="html"><![CDATA[<p>Git auto complete is a convenient feature.</p>
+
+<p>This feature is based on git-completion file comes with git.</p>
+
+<p>On OS X, if you install git via homebrew, you can find git source directory using:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>locate git | grep Cellar
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Locate the git-completion file.</p>
+
+<p>In my case, it is `/usr/local/Cellar/git/1.7.5/etc/bash_completion.d/git-completion.bash</p>
+
+<p>Open this file and you will find this explanation:</p>
+
+<p>The contained completion routines provide support for completing:</p>
+
+<ul>
+<li>local and remote branch names</li>
+<li>local and remote tag names</li>
+<li>.git/remotes file names</li>
+<li>git 'subcommands'</li>
+<li>tree paths within 'ref:path/to/file' expressions</li>
+<li>common --long-options</li>
+</ul>
+
+
+<p>And the steps to enable this</p>
+
+<ul>
+<li>Copy this file to somewhere (e.g. ~/.git-completion.sh).</li>
+<li>Add the following line <code>source ~/.git-completion.sh</code> to your .bashrc</li>
+<li>Changing PS1 to show current branch <code>PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '</code></li>
+</ul>
+
+
+<p>If you want some color in git prompt</p>
+
+<p><code>PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '</code></p>
+
+<p>If you want the prompt to show git-ps1 state
+<code>GIT_PS1_SHOWDIRTYSTATE=true</code></p>
+
+<p><code>Generating Site with Jekyllbe rake generate</code></p>
+
+<p>Example:</p>
+
+<p><code>zlu@zlu-mba:~/projects/me/octopress (master *)</code></p>
+]]></content>
+  </entry>
+  
+</feed>
