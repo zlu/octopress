@@ -9,10 +9,7 @@
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="RSpec lets you test the number, type, and order of arguments. For example, 1
-2
-Foo.should_receive(:bar).with(1, kind_of(Hash), anything())
-Foo.bar(1 &hellip;">
+  <meta name="description" content="Private Pub is a convinent gem wraps around [Faye] (http://faye.jcoglan.com/ruby.html). There are a few things to consider when using PrivatePub. It &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +76,55 @@ Foo.bar(1 &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/12/a-couple-things-to-watch-out-for-using-privatepub/">A Couple Things to Watch Out for Using PrivatePub</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-12T20:38:00-08:00" pubdate data-updated="true">Feb 12<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/02/12/a-couple-things-to-watch-out-for-using-privatepub/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://github.com/ryanb/private_pub">Private Pub</a> is a convinent gem wraps around [Faye] (http://faye.jcoglan.com/ruby.html).</p>
+
+<p>There are a few things to consider when using PrivatePub.</p>
+
+<ol>
+<li><p>It does <strong>not</strong> support ssl.
+However, there is a <a href="https://github.com/ryanb/private_pub/pull/33">pull request</a> for it.</p></li>
+<li><p>You almost always want to add some sort of filtering on the server or client side, or maybe both.
+For example, if you don&#8217;t want your chat message to be received by everyone logged in, you will need to
+publish to a channel uniquely identified by each session of the chat.</p></li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -346,6 +392,10 @@ flaws.  Afterall, coders want to deliver better code.</p>
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/02/12/a-couple-things-to-watch-out-for-using-privatepub/">A Couple Things to Watch Out For Using PrivatePub</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2012/02/12/rspec-arbitrary-handling-of-arguments/">RSpec Arbitrary Handling of Arguments</a>
