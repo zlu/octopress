@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: rspec | @zlu]]></title>
+  <link href="http://www.zlu.com/blog/categories/rspec/atom.xml" rel="self"/>
+  <link href="http://www.zlu.com/"/>
+  <updated>2012-02-12T19:54:05-08:00</updated>
+  <id>http://www.zlu.com/</id>
+  <author>
+    <name><![CDATA[Zhao Lu]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[RSpec Arbitrary Handling of Arguments]]></title>
+    <link href="http://www.zlu.com/blog/2012/02/12/rspec-arbitrary-handling-of-arguments/"/>
+    <updated>2012-02-12T19:32:00-08:00</updated>
+    <id>http://www.zlu.com/blog/2012/02/12/rspec-arbitrary-handling-of-arguments</id>
+    <content type="html"><![CDATA[<p>RSpec lets you test the number, type, and order of arguments.  For example,</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Foo</span><span class="o">.</span><span class="n">should_receive</span><span class="p">(</span><span class="ss">:bar</span><span class="p">)</span><span class="o">.</span><span class="n">with</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">kind_of</span><span class="p">(</span><span class="no">Hash</span><span class="p">),</span> <span class="n">anything</span><span class="p">())</span>
+</span><span class='line'><span class="no">Foo</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;b&#39;</span><span class="p">},</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">b</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+Pass!</p>
+
+<p>This tests that class method <strong>bar</strong> will be called against class <strong>Foo</strong> with 3 arguments.  The first argument is integer 1,
+the second argument is an instance of Hash, the third argument can be anything.</p>
+
+<p>What if you want to test a bit more on the argument than that?</p>
+
+<p>For example, in order to test a <a href="https://github.com/ryanb/private_pub">private_pub</a> method <strong>publish_to</strong>:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">PrivatePub</span><span class="o">.</span><span class="n">should_receive</span><span class="p">(</span><span class="ss">:publish_to</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">channel</span><span class="p">,</span> <span class="n">data</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">channel</span><span class="o">.</span><span class="n">should</span> <span class="n">eq</span> <span class="s1">&#39;messages/new&#39;</span>
+</span><span class='line'>  <span class="n">data</span><span class="o">[</span><span class="ss">:foo</span><span class="o">].</span><span class="n">should</span> <span class="n">eq</span> <span class="s1">&#39;foo&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="no">PrivatePub</span><span class="o">.</span><span class="n">publish_to</span><span class="o">[</span><span class="s1">&#39;messages/new&#39;</span><span class="p">,</span> <span class="p">{</span><span class="ss">:foo</span> <span class="o">=&gt;</span> <span class="s1">&#39;foo&#39;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+Pass!</p>
+
+<p>This tests that <strong>publish_to</strong> takes 2 arguments.  The first is channel and should be equal to 'messages/new'.
+The second is a hash and it equals to {:foo => 'foo'}</p>
+]]></content>
+  </entry>
+  
+</feed>
