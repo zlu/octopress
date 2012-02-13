@@ -1,23 +1,23 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://www.zlu.com/blog/2011/11/01/git-auto-complete/</loc>
+        <loc>http://www.zlu.me/blog/2011/11/01/git-auto-complete/</loc>
         <lastmod>2012-01-31T00:10:56-08:00</lastmod>
     </url>
     <url>
-        <loc>http://www.zlu.com/blog/2012/01/30/on-agile/</loc>
+        <loc>http://www.zlu.me/blog/2012/01/30/on-agile/</loc>
         <lastmod>2012-01-31T00:10:57-08:00</lastmod>
     </url>
     <url>
-        <loc>http://www.zlu.com/blog/2012/02/12/rspec-arbitrary-handling-of-arguments/</loc>
+        <loc>http://www.zlu.me/blog/2012/02/12/rspec-arbitrary-handling-of-arguments/</loc>
         <lastmod>2012-02-12T19:54:04-08:00</lastmod>
     </url>
     <url>
-        <loc>http://www.zlu.com/blog/archives/</loc>
+        <loc>http://www.zlu.me/blog/archives/</loc>
         <lastmod>2012-02-12T19:54:04-08:00</lastmod>
     </url>
     <url>
-        <loc>http://www.zlu.com/</loc>
+        <loc>http://www.zlu.me/</loc>
         <lastmod>2012-02-12T19:54:04-08:00</lastmod>
     </url>
 </urlset>
