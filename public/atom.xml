@@ -4,7 +4,7 @@
   <title><![CDATA[@zlu]]></title>
   <link href="http://www.zlu.me/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2012-02-12T20:51:30-08:00</updated>
+  <updated>2012-02-14T20:32:45-08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[RubyMine and PivotalTracker Integration]]></title>
+    <link href="http://www.zlu.me/blog/2012/02/14/rubymine-and-pivotaltracker-integration/"/>
+    <updated>2012-02-14T20:32:00-08:00</updated>
+    <id>http://www.zlu.me/blog/2012/02/14/rubymine-and-pivotaltracker-integration</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A Couple Things to Watch Out For Using PrivatePub]]></title>
@@ -24,7 +33,9 @@
 
 <ol>
 <li><p>It does <strong>not</strong> support ssl.
-However, there is a <a href="https://github.com/ryanb/private_pub/pull/33">pull request</a> for it.</p></li>
+However, there is a <a href="https://github.com/ryanb/private_pub/pull/33">pull request</a> for it.
+<strong>UPDATE</strong> @rbates has merged this pull request.
+<strong>UPDATE</strong> I was able to verify ssl support indeed works!</p></li>
 <li><p>You almost always want to add some sort of filtering on the server or client side, or maybe both.
 For example, if you don&#8217;t want your chat message to be received by everyone logged in, you will need to
 publish to a channel uniquely identified by each session of the chat.</p></li>
