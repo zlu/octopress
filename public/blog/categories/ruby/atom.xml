@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | @zlu]]></title>
   <link href="http://www.zlu.me/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2012-02-14T20:48:09-08:00</updated>
+  <updated>2012-02-14T21:08:29-08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -31,8 +31,7 @@ publish to a channel uniquely identified by each session of the chat.</p></li>
 </ol>
 
 
-<p><strong>UPDATE</strong> @rbates has merged this pull request.
-<strong>UPDATE</strong> I was able to verify ssl support indeed works!</p>
+<p><strong>UPDATE</strong> @rbates has merged this pull request.  I was able to verify ssl support indeed works!</p>
 ]]></content>
   </entry>
   

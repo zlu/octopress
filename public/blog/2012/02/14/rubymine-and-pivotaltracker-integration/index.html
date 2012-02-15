@@ -9,8 +9,8 @@
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="
-">
+  <meta name="description" content="Task Server is a lesser known feature in RubyMine. You can enable PivotalTracker (PT) integration by adding
+PT project as a Task Server. Press cmd &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -105,7 +105,31 @@
   </header>
 
 
-<div class="entry-content">
+<div class="entry-content"><p><strong>Task Server</strong> is a lesser known feature in RubyMine.  You can enable PivotalTracker (PT) integration by adding
+PT project as a Task Server.</p>
+
+<p>Press cmd + , to open Preferences.  Type task to see this panel:</p>
+
+<p>{% img http://cl.ly/0q2Z231T2P3x452L0O1W %}</p>
+
+<p>Add PivotalTracker project by supplying project ID and api token.</p>
+
+<p>Now every story can be easily turned into a RubyMine changelist.
+Press cmd + shift + a, and type task.  Select open task.  Type part of the story to see a list of matched tracker stories.</p>
+
+<p>{% http://cl.ly/0p3L1L430g010Z11322T %}</p>
+
+<p>Select the desired story to work on and check start story.  Now every change will be in this change list and RubyMine will
+autostart the story.</p>
+
+<p>Let&#8217;s say you TDD&#8217;ed and finished the story.  Press cmd + k to open changelist view.</p>
+
+<p>{% http://cl.ly/3S3S08072n271t0S231g %}</p>
+
+<p>You will see that commit message has been filled with story text.  Commit the change and RubyMine will automatically
+finish the story.  How cool is that?  Now try to do that in Emacs or VI, I dare you :P</p>
+
+<p>P.S. I like Emacs.</p>
 </div>
 
 

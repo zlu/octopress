@@ -4,7 +4,7 @@
   <title><![CDATA[@zlu]]></title>
   <link href="http://www.zlu.me/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2012-02-14T20:48:09-08:00</updated>
+  <updated>2012-02-14T21:08:29-08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -18,7 +18,31 @@
     <link href="http://www.zlu.me/blog/2012/02/14/rubymine-and-pivotaltracker-integration/"/>
     <updated>2012-02-14T20:32:00-08:00</updated>
     <id>http://www.zlu.me/blog/2012/02/14/rubymine-and-pivotaltracker-integration</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<p><strong>Task Server</strong> is a lesser known feature in RubyMine.  You can enable PivotalTracker (PT) integration by adding
+PT project as a Task Server.</p>
+
+<p>Press cmd + , to open Preferences.  Type task to see this panel:</p>
+
+<p>{% img http://cl.ly/0q2Z231T2P3x452L0O1W %}</p>
+
+<p>Add PivotalTracker project by supplying project ID and api token.</p>
+
+<p>Now every story can be easily turned into a RubyMine changelist.
+Press cmd + shift + a, and type task.  Select open task.  Type part of the story to see a list of matched tracker stories.</p>
+
+<p>{% http://cl.ly/0p3L1L430g010Z11322T %}</p>
+
+<p>Select the desired story to work on and check start story.  Now every change will be in this change list and RubyMine will
+autostart the story.</p>
+
+<p>Let&#8217;s say you TDD&#8217;ed and finished the story.  Press cmd + k to open changelist view.</p>
+
+<p>{% http://cl.ly/3S3S08072n271t0S231g %}</p>
+
+<p>You will see that commit message has been filled with story text.  Commit the change and RubyMine will automatically
+finish the story.  How cool is that?  Now try to do that in Emacs or VI, I dare you :P</p>
+
+<p>P.S. I like Emacs.</p>
 ]]></content>
   </entry>
   
@@ -40,8 +64,7 @@ publish to a channel uniquely identified by each session of the chat.</p></li>
 </ol>
 
 
-<p><strong>UPDATE</strong> @rbates has merged this pull request.
-<strong>UPDATE</strong> I was able to verify ssl support indeed works!</p>
+<p><strong>UPDATE</strong> @rbates has merged this pull request.  I was able to verify ssl support indeed works!</p>
 ]]></content>
   </entry>
   

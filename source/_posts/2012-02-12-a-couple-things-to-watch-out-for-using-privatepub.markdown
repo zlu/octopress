@@ -17,5 +17,4 @@ However, there is a [pull request](https://github.com/ryanb/private_pub/pull/33)
 For example, if you don't want your chat message to be received by everyone logged in, you will need to
 publish to a channel uniquely identified by each session of the chat.
 
-__UPDATE__ @rbates has merged this pull request.
-__UPDATE__ I was able to verify ssl support indeed works!
+__UPDATE__ @rbates has merged this pull request.  I was able to verify ssl support indeed works!
