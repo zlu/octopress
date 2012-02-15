@@ -12,9 +12,10 @@ There are a few things to consider when using PrivatePub.
 
 1. It does __not__ support ssl.
 However, there is a [pull request](https://github.com/ryanb/private_pub/pull/33) for it.
-__UPDATE__ @rbates has merged this pull request.
-__UPDATE__ I was able to verify ssl support indeed works!
 
 2. You almost always want to add some sort of filtering on the server or client side, or maybe both.
 For example, if you don't want your chat message to be received by everyone logged in, you will need to
 publish to a channel uniquely identified by each session of the chat.
+
+__UPDATE__ @rbates has merged this pull request.
+__UPDATE__ I was able to verify ssl support indeed works!
