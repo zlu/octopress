@@ -1,0 +1,27 @@
+---
+layout: post
+title: "CPU Load"
+date: 2012-03-12 18:59
+comments: true
+categories: [devops]
+---
+
+CPU Load
+
+Definition
+
+top
+
+uptime
+
+grep 'model name' /proc/cpuinfo
+
+sysctl -a hw | grep cpu
+
+NewRelic
+
+Disk I/O
+
+Memory
+
+free -m

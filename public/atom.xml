@@ -4,7 +4,7 @@
   <title><![CDATA[@zlu]]></title>
   <link href="http://www.zlu.me/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2012-02-21T14:26:15-05:00</updated>
+  <updated>2012-02-28T09:30:37-08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -14,9 +14,18 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Running Wireshark on Mountain Lion]]></title>
+    <link href="http://www.zlu.me/blog/2012/02/28/running-wireshark-on-mountain-lion/"/>
+    <updated>2012-02-28T09:06:00-08:00</updated>
+    <id>http://www.zlu.me/blog/2012/02/28/running-wireshark-on-mountain-lion</id>
+    <content type="html"><![CDATA[<p>X11 has been removed from Mountain Lion and you first need to install XQuartz</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Install Native Ruby Gem in Mountain Lion Preview]]></title>
     <link href="http://www.zlu.me/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview/"/>
-    <updated>2012-02-21T13:59:00-05:00</updated>
+    <updated>2012-02-21T13:59:00-08:00</updated>
     <id>http://www.zlu.me/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview</id>
     <content type="html"><![CDATA[<p>In Preview of OS X Mountain Lion, XCode has been distributed as a .app package verses the traditional installer.
 Also the Commandline Tools are not installed by default.  Commandline Tools contains cc/gcc that you will need.</p>
@@ -79,7 +88,7 @@ Provided configuration options:
   <entry>
     <title type="html"><![CDATA[RubyMine and PivotalTracker Integration]]></title>
     <link href="http://www.zlu.me/blog/2012/02/14/rubymine-and-pivotaltracker-integration/"/>
-    <updated>2012-02-14T20:32:00-05:00</updated>
+    <updated>2012-02-14T20:32:00-08:00</updated>
     <id>http://www.zlu.me/blog/2012/02/14/rubymine-and-pivotaltracker-integration</id>
     <content type="html"><![CDATA[<p><strong>Task Server</strong> is a lesser known feature in RubyMine.  You can enable PivotalTracker (PT) integration by adding
 PT project as a Task Server.</p>
@@ -112,7 +121,7 @@ finish the story.  How cool is that?  Now try to do that in Emacs or VI, I dare 
   <entry>
     <title type="html"><![CDATA[A Couple Things to Watch Out For Using PrivatePub]]></title>
     <link href="http://www.zlu.me/blog/2012/02/12/a-couple-things-to-watch-out-for-using-privatepub/"/>
-    <updated>2012-02-12T20:38:00-05:00</updated>
+    <updated>2012-02-12T20:38:00-08:00</updated>
     <id>http://www.zlu.me/blog/2012/02/12/a-couple-things-to-watch-out-for-using-privatepub</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/ryanb/private_pub">Private Pub</a> is a convinent gem wraps around [Faye] (http://faye.jcoglan.com/ruby.html).</p>
 
@@ -134,7 +143,7 @@ publish to a channel uniquely identified by each session of the chat.</p></li>
   <entry>
     <title type="html"><![CDATA[RSpec Arbitrary Handling of Arguments]]></title>
     <link href="http://www.zlu.me/blog/2012/02/12/rspec-arbitrary-handling-of-arguments/"/>
-    <updated>2012-02-12T19:32:00-05:00</updated>
+    <updated>2012-02-12T19:32:00-08:00</updated>
     <id>http://www.zlu.me/blog/2012/02/12/rspec-arbitrary-handling-of-arguments</id>
     <content type="html"><![CDATA[<p>RSpec lets you test the number, type, and order of arguments.  For example,</p>
 
@@ -177,7 +186,7 @@ The second is a hash and it equals to {:foo => &#8216;foo&#8217;}</p>
   <entry>
     <title type="html"><![CDATA[On Agile]]></title>
     <link href="http://www.zlu.me/blog/2012/01/30/on-agile/"/>
-    <updated>2012-01-30T18:11:00-05:00</updated>
+    <updated>2012-01-30T18:11:00-08:00</updated>
     <id>http://www.zlu.me/blog/2012/01/30/on-agile</id>
     <content type="html"><![CDATA[<p>Programmers do not like rules.</p>
 
@@ -240,7 +249,7 @@ flaws.  Afterall, coders want to deliver better code.</p>
   <entry>
     <title type="html"><![CDATA[Git auto complete]]></title>
     <link href="http://www.zlu.me/blog/2011/11/01/git-auto-complete/"/>
-    <updated>2011-11-01T22:04:00-04:00</updated>
+    <updated>2011-11-01T22:04:00-07:00</updated>
     <id>http://www.zlu.me/blog/2011/11/01/git-auto-complete</id>
     <content type="html"><![CDATA[<p>Git auto complete is a convenient feature.</p>
 

@@ -3,7 +3,7 @@ layout: post
 title: "Install Native Ruby Gem in Mountain Lion Preview"
 date: 2012-02-21 13:59
 comments: true
-categories: [ruby, os x, gem]
+categories: [ruby, os x, gem, mountain lion]
 ---
 
 In Preview of OS X Mountain Lion, XCode has been distributed as a .app package verses the traditional installer.
