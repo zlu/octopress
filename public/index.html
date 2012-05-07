@@ -9,7 +9,8 @@
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="Test configuration change without restarting Nginx nginx -t (sudo) restarting working process kill -HUP cat /var/run/nginx.pid (replace nginx.pid &hellip;">
+  <meta name="description" content="X11 has been removed from Mountain Lion and you first need to install XQuartz
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,114 +77,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/13/nginx-tricks/">Nginx Tricks</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-13T09:19:00-07:00" pubdate data-updated="true">Mar 13<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/03/13/nginx-tricks/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Test configuration change without restarting Nginx</p>
-
-<p>nginx -t (sudo)</p>
-
-<p>restarting working process</p>
-
-<p>kill -HUP <code>cat /var/run/nginx.pid</code> (replace nginx.pid with your system)</p>
-
-<p>log file full</p>
-
-<p>cat /dev/null | sudo tee /var/log/nginx/error.log</p>
-
-<p>then reopen log file</p>
-
-<p>kill -USR1</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/12/cpu-load/">CPU Load</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-12T18:59:00-07:00" pubdate data-updated="true">Mar 12<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/03/12/cpu-load/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>CPU Load</p>
-
-<p>Definition</p>
-
-<p>top</p>
-
-<p>uptime</p>
-
-<p>grep &#8216;model name&#8217; /proc/cpuinfo</p>
-
-<p>sysctl -a hw | grep cpu</p>
-
-<p>NewRelic</p>
-
-<p>Disk I/O</p>
-
-<p>Memory</p>
-
-<p>free -m</p>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -696,14 +589,6 @@ flaws.  Afterall, coders want to deliver better code.</p>
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2012/03/13/nginx-tricks/">Nginx Tricks</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/03/12/cpu-load/">CPU Load</a>
-      </li>
-    
-      <li class="post">
         <a href="/blog/2012/02/28/running-wireshark-on-mountain-lion/">Running Wireshark on Mountain Lion</a>
       </li>
     
@@ -713,6 +598,14 @@ flaws.  Afterall, coders want to deliver better code.</p>
     
       <li class="post">
         <a href="/blog/2012/02/14/rubymine-and-pivotaltracker-integration/">RubyMine and PivotalTracker Integration</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/02/12/a-couple-things-to-watch-out-for-using-privatepub/">A Couple Things to Watch Out For Using PrivatePub</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/02/12/rspec-arbitrary-handling-of-arguments/">RSpec Arbitrary Handling of Arguments</a>
       </li>
     
   </ul>
