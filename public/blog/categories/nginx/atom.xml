@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Nginx | @zlu]]></title>
+  <link href="http://www.zlu.me/blog/categories/nginx/atom.xml" rel="self"/>
+  <link href="http://www.zlu.me/"/>
+  <updated>2012-05-07T12:01:05-07:00</updated>
+  <id>http://www.zlu.me/</id>
+  <author>
+    <name><![CDATA[Zhao Lu]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Nginx Tricks]]></title>
+    <link href="http://www.zlu.me/blog/2012/03/13/nginx-tricks/"/>
+    <updated>2012-03-13T09:19:00-07:00</updated>
+    <id>http://www.zlu.me/blog/2012/03/13/nginx-tricks</id>
+    <content type="html"><![CDATA[<p>Test configuration change without restarting Nginx</p>
+
+<p>nginx -t (sudo)</p>
+
+<p>restarting working process</p>
+
+<p>kill -HUP <code>cat /var/run/nginx.pid</code> (replace nginx.pid with your system)</p>
+
+<p>log file full</p>
+
+<p>cat /dev/null | sudo tee /var/log/nginx/error.log</p>
+
+<p>then reopen log file</p>
+
+<p>kill -USR1</p>
+]]></content>
+  </entry>
+  
+</feed>
