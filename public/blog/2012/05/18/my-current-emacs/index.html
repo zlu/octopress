@@ -5,14 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>RSpec Arbitrary Handling of Arguments - @zlu</title>
+  <title>my_current_emacs - @zlu</title>
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="RSpec lets you test the number, type, and order of arguments. For example, 1
-2
-Foo.should_receive(:bar).with(1, kind_of(Hash), anything())
-Foo.bar(1 &hellip;">
+  <meta name="description" content="Emacs with Sidebar enabled.
+Emacs shows: file size, (row, col), file mode (Erlang), time, CPU load, [Battery]
+Emacs uses Tango dark theme.
+Emacs &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +21,7 @@ Foo.bar(1 &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.zlu.me/blog/2012/02/12/rspec-arbitrary-handling-of-arguments">
+  <link rel="canonical" href="http://www.zlu.me/blog/2012/05/18/my-current-emacs">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -82,7 +82,7 @@ Foo.bar(1 &hellip;">
   
   <header>
     
-      <h1 class="entry-title">RSpec Arbitrary Handling of Arguments</h1>
+      <h1 class="entry-title">My_current_emacs</h1>
     
     
       <p class="meta">
@@ -98,7 +98,7 @@ Foo.bar(1 &hellip;">
   
 
 
-<time datetime="2012-02-12T19:32:00-08:00" pubdate data-updated="true">Feb 12<span>th</span>, 2012</time>
+<time datetime="2012-05-18T19:49:00-07:00" pubdate data-updated="true">May 18<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,41 +107,17 @@ Foo.bar(1 &hellip;">
   </header>
 
 
-<div class="entry-content"><p>RSpec lets you test the number, type, and order of arguments.  For example,</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Foo</span><span class="o">.</span><span class="n">should_receive</span><span class="p">(</span><span class="ss">:bar</span><span class="p">)</span><span class="o">.</span><span class="n">with</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">kind_of</span><span class="p">(</span><span class="no">Hash</span><span class="p">),</span> <span class="n">anything</span><span class="p">())</span>
-</span><span class='line'><span class="no">Foo</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;b&#39;</span><span class="p">},</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Pass!</p>
-
-<p>This tests that class method <strong>bar</strong> will be called against class <strong>Foo</strong> with 3 arguments.  The first argument is integer 1,
-the second argument is an instance of Hash, the third argument can be anything.</p>
-
-<p>What if you want to test a bit more on the argument than that?</p>
-
-<p>For example, in order to test a <a href="https://github.com/ryanb/private_pub">private_pub</a> method <strong>publish_to</strong>:</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">PrivatePub</span><span class="o">.</span><span class="n">should_receive</span><span class="p">(</span><span class="ss">:publish_to</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">channel</span><span class="p">,</span> <span class="n">data</span><span class="o">|</span>
-</span><span class='line'>  <span class="n">channel</span><span class="o">.</span><span class="n">should</span> <span class="n">eq</span> <span class="s1">&#39;messages/new&#39;</span>
-</span><span class='line'>  <span class="n">data</span><span class="o">[</span><span class="ss">:foo</span><span class="o">].</span><span class="n">should</span> <span class="n">eq</span> <span class="s1">&#39;foo&#39;</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="no">PrivatePub</span><span class="o">.</span><span class="n">publish_to</span><span class="o">[</span><span class="s1">&#39;messages/new&#39;</span><span class="p">,</span> <span class="p">{</span><span class="ss">:foo</span> <span class="o">=&gt;</span> <span class="s1">&#39;foo&#39;</span><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<div class="entry-content"><pre>
+Emacs with Sidebar enabled.
+Emacs shows: file size, (row, col), file mode (Erlang), time, CPU load, [Battery]
+Emacs uses Tango dark theme.
+Emacs with Rinari enabled.
+</pre>
 
 
-<p>Pass!</p>
+<p><a href="https://gist.github.com/2727854">.emacs</a></p>
 
-<p>This tests that <strong>publish_to</strong> takes 2 arguments.  The first is channel and should be equal to &#8216;messages/new&#8217;.
-The second is a hash and it equals to {:foo => &#8216;foo&#8217;}</p>
+<p><img src="http://f.cl.ly/items/152h3x2t0N440t2Q2D0Q/Screen%20Shot%202012-05-18%20at%207.51.27%20PM.png"></p>
 </div>
 
 
@@ -164,12 +140,12 @@ The second is a hash and it equals to {:foo => &#8216;foo&#8217;}</p>
   
 
 
-<time datetime="2012-02-12T19:32:00-08:00" pubdate data-updated="true">Feb 12<span>th</span>, 2012</time>
+<time datetime="2012-05-18T19:49:00-07:00" pubdate data-updated="true">May 18<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/rspec/'>rspec</a>, <a class='category' href='/blog/categories/tdd/'>tdd</a>
+    <a class='category' href='/blog/categories/emacs/'>Emacs</a>
   
 </span>
 
@@ -178,7 +154,7 @@ The second is a hash and it equals to {:foo => &#8216;foo&#8217;}</p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.zlu.me/blog/2012/02/12/rspec-arbitrary-handling-of-arguments/" data-via="zlu" data-counturl="http://www.zlu.me/blog/2012/02/12/rspec-arbitrary-handling-of-arguments/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.zlu.me/blog/2012/05/18/my-current-emacs/" data-via="zlu" data-counturl="http://www.zlu.me/blog/2012/05/18/my-current-emacs/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="small"></div>
@@ -191,10 +167,8 @@ The second is a hash and it equals to {:foo => &#8216;foo&#8217;}</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/01/30/on-agile/" title="Previous Post: On Agile">&laquo; On Agile</a>
+        <a class="basic-alignment left" href="/blog/2012/05/13/tdd-by-jim-weirich/" title="Previous Post: TDD_By_Jim_Weirich">&laquo; TDD_By_Jim_Weirich</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/02/12/a-couple-things-to-watch-out-for-using-privatepub/" title="next Post: A Couple Things to Watch Out For Using PrivatePub">A Couple Things to Watch Out For Using PrivatePub &raquo;</a>
       
     </p>
   </footer>
@@ -338,8 +312,8 @@ The second is a hash and it equals to {:foo => &#8216;foo&#8217;}</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.zlu.me/blog/2012/02/12/rspec-arbitrary-handling-of-arguments/';
-        var disqus_url = 'http://www.zlu.me/blog/2012/02/12/rspec-arbitrary-handling-of-arguments/';
+        var disqus_identifier = 'http://www.zlu.me/blog/2012/05/18/my-current-emacs/';
+        var disqus_url = 'http://www.zlu.me/blog/2012/05/18/my-current-emacs/';
         var disqus_script = 'embed.js';
       
     (function () {
