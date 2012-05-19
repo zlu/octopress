@@ -6,7 +6,7 @@ comments: true
 categories: [ruby]
 ---
 
-[Private Pub](https://github.com/ryanb/private_pub) is a convinent gem wraps around [Faye] (http://faye.jcoglan.com/ruby.html).
+[Private Pub](https://github.com/ryanb/private_pub) is a convinent gem wraps around [Faye](http://faye.jcoglan.com/ruby.html).
 
 There are a few things to consider when using PrivatePub.
 
