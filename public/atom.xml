@@ -4,7 +4,7 @@
   <title><![CDATA[@zlu]]></title>
   <link href="http://www.zlu.me/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2012-07-17T21:29:49-07:00</updated>
+  <updated>2012-07-17T21:43:59-07:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -124,7 +124,7 @@
 </span><span class='line'>      <span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;test_file&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
 </span><span class='line'>        <span class="n">f</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span> <span class="c1"># this is required or uploader_test.file.url will be nil</span>
 </span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>      <span class="n">uploader_test</span> <span class="o">=</span> <span class="no">FileUploader</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>      <span class="n">uploader_test</span> <span class="o">=</span> <span class="no">TestFileUploader</span><span class="o">.</span><span class="n">new</span>
 </span><span class='line'>      <span class="n">uploader_test</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;test_file&#39;</span><span class="p">)</span>
 </span><span class='line'>      <span class="n">uploader_test</span><span class="o">.</span><span class="n">save!</span>
 </span><span class='line'>      <span class="n">uploader_test</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">should</span> <span class="n">match</span><span class="sr"> /.*\/dev-bucket.*/</span> <span class="c1">#test to make sure that it is not production-bucket</span>
@@ -135,7 +135,8 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-
+<p>Now the test is complete.  It uses fakefs to generate a fake file which is non-empty.  Fog will pretent to upload the file
+using the FileUploader under test.  The upload url is the subject under test.</p>
 ]]></content>
   </entry>
   

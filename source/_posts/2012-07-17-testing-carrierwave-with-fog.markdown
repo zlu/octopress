@@ -69,7 +69,7 @@ describe FileUploader do
       File.open('test_file', 'w') do |f|
         f.puts('foo') # this is required or uploader_test.file.url will be nil
       end
-      uploader_test = FileUploader.new
+      uploader_test = TestFileUploader.new
       uploader_test.file = File.open('test_file')
       uploader_test.save!
       uploader_test.file.url.should match /.*\/dev-bucket.*/ #test to make sure that it is not production-bucket
