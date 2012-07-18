@@ -41,11 +41,15 @@
         <lastmod>2012-05-18T20:02:27-07:00</lastmod>
     </url>
     <url>
+        <loc>http://www.zlu.me/blog/2012/07/17/testing-carrierwave-with-fog/</loc>
+        <lastmod>2012-07-17T21:32:42-07:00</lastmod>
+    </url>
+    <url>
         <loc>http://www.zlu.me/blog/archives/</loc>
-        <lastmod>2012-05-18T20:13:31-07:00</lastmod>
+        <lastmod>2012-07-17T21:32:42-07:00</lastmod>
     </url>
     <url>
         <loc>http://www.zlu.me/</loc>
-        <lastmod>2012-05-18T20:13:31-07:00</lastmod>
+        <lastmod>2012-07-17T21:32:42-07:00</lastmod>
     </url>
 </urlset>
