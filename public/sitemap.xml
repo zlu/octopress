@@ -2,54 +2,58 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://www.zlu.me/blog/2011/11/01/git-auto-complete/</loc>
-        <lastmod>2012-01-31T00:10:56-08:00</lastmod>
+        <lastmod>2012-07-19T16:18:55-07:00</lastmod>
     </url>
     <url>
         <loc>http://www.zlu.me/blog/2012/01/30/on-agile/</loc>
-        <lastmod>2012-01-31T00:10:57-08:00</lastmod>
+        <lastmod>2012-07-19T16:18:55-07:00</lastmod>
     </url>
     <url>
         <loc>http://www.zlu.me/blog/2012/02/12/rspec-arbitrary-handling-of-arguments/</loc>
-        <lastmod>2012-02-12T19:54:04-08:00</lastmod>
+        <lastmod>2012-07-19T16:18:55-07:00</lastmod>
     </url>
     <url>
         <loc>
             http://www.zlu.me/blog/2012/02/12/a-couple-things-to-watch-out-for-using-privatepub/
         </loc>
-        <lastmod>2012-05-18T20:13:31-07:00</lastmod>
+        <lastmod>2012-07-19T16:18:55-07:00</lastmod>
     </url>
     <url>
         <loc>http://www.zlu.me/blog/2012/02/14/rubymine-and-pivotaltracker-integration/</loc>
-        <lastmod>2012-02-14T21:15:56-08:00</lastmod>
+        <lastmod>2012-07-19T16:18:55-07:00</lastmod>
     </url>
     <url>
         <loc>
             http://www.zlu.me/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview/
         </loc>
-        <lastmod>2012-02-28T09:09:24-08:00</lastmod>
+        <lastmod>2012-07-19T16:18:55-07:00</lastmod>
     </url>
     <url>
         <loc>http://www.zlu.me/blog/2012/02/28/running-wireshark-on-mountain-lion/</loc>
-        <lastmod>2012-02-28T09:30:36-08:00</lastmod>
+        <lastmod>2012-07-19T16:18:55-07:00</lastmod>
     </url>
     <url>
         <loc>http://www.zlu.me/blog/2012/05/13/tdd-by-jim-weirich/</loc>
-        <lastmod>2012-05-13T18:36:06-07:00</lastmod>
+        <lastmod>2012-07-19T16:18:55-07:00</lastmod>
     </url>
     <url>
         <loc>http://www.zlu.me/blog/2012/05/18/my-current-emacs/</loc>
-        <lastmod>2012-05-18T20:02:27-07:00</lastmod>
+        <lastmod>2012-07-19T16:18:55-07:00</lastmod>
     </url>
     <url>
         <loc>http://www.zlu.me/blog/2012/07/17/testing-carrierwave-with-fog/</loc>
-        <lastmod>2012-07-17T21:43:43-07:00</lastmod>
+        <lastmod>2012-07-19T16:18:55-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.zlu.me/blog/2012/07/19/pretty-print-json-in-command-line/</loc>
+        <lastmod>2012-07-19T16:34:13-07:00</lastmod>
     </url>
     <url>
         <loc>http://www.zlu.me/blog/archives/</loc>
-        <lastmod>2012-07-17T21:43:43-07:00</lastmod>
+        <lastmod>2012-07-19T16:34:13-07:00</lastmod>
     </url>
     <url>
         <loc>http://www.zlu.me/</loc>
-        <lastmod>2012-07-17T21:43:43-07:00</lastmod>
+        <lastmod>2012-07-19T16:34:13-07:00</lastmod>
     </url>
 </urlset>
