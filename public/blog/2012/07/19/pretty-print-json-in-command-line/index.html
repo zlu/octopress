@@ -112,48 +112,82 @@ It is hard to read.</p>
 
 <p>On OS X, simply issue <code>brew install jsonpp</code></p>
 
-<pre>
-zlu@zlu-mba:~/projects (master *)$ curl --user foo@bar.com:abc123 http://localhost:3000/users
-[{"_id":"500859f1827bc70b84000001","created_at":"2012-07-19T12:03:22-07:00","email":"zlu@foo.bar","facebook_access_token":null,"facebook_access_token_expiration":null,"facebook_id":null,"family_id":null,"first_name":"zhao","last_name":"lu","phone_number":null,"updated_at":"2012-07-19T12:03:22-07:00"},{"_id":"500864a1827bc710a9000004","created_at":"2012-07-19T12:48:49-07:00","email":"foo@bar.com","facebook_access_token":null,"facebook_access_token_expiration":null,"facebook_id":null,"family_id":null,"first_name":"foo","last_name":"bar","phone_number":null,"updated_at":"2012-07-19T12:48:49-07:00"}]
-</pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>zlu@zlu-mba:~/projects <span class="o">(</span>master *<span class="o">)</span><span class="nv">$ </span>curl --user foo@bar.com:abc123 http://localhost:3000/users
+</span><span class='line'><span class="o">[{</span><span class="s2">&quot;_id&quot;</span>:<span class="s2">&quot;500859f1827bc70b84000001&quot;</span>,<span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;2012-07-19T12:03:22-07:00&quot;</span>,<span class="s2">&quot;email&quot;</span>:<span class="s2">&quot;zlu@foo.bar&quot;</span>,<span class="s2">&quot;facebook_access_token&quot;</span>:null,<span class="s2">&quot;facebook_access_token_expiration&quot;</span>:null,<span class="s2">&quot;facebook_id&quot;</span>:null,<span class="s2">&quot;family_id&quot;</span>:null,<span class="s2">&quot;first_name&quot;</span>:<span class="s2">&quot;zhao&quot;</span>,<span class="s2">&quot;last_name&quot;</span>:<span class="s2">&quot;lu&quot;</span>,<span class="s2">&quot;phone_number&quot;</span>:null,<span class="s2">&quot;updated_at&quot;</span>:<span class="s2">&quot;2012-07-19T12:03:22-07:00&quot;</span><span class="o">}</span>,<span class="o">{</span><span class="s2">&quot;_id&quot;</span>:<span class="s2">&quot;500864a1827bc710a9000004&quot;</span>,<span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;2012-07-19T12:48:49-07:00&quot;</span>,<span class="s2">&quot;email&quot;</span>:<span class="s2">&quot;foo@bar.com&quot;</span>,<span class="s2">&quot;facebook_access_token&quot;</span>:null,<span class="s2">&quot;facebook_access_token_expiration&quot;</span>:null,<span class="s2">&quot;facebook_id&quot;</span>:null,<span class="s2">&quot;family_id&quot;</span>:null,<span class="s2">&quot;first_name&quot;</span>:<span class="s2">&quot;foo&quot;</span>,<span class="s2">&quot;last_name&quot;</span>:<span class="s2">&quot;bar&quot;</span>,<span class="s2">&quot;phone_number&quot;</span>:null,<span class="s2">&quot;updated_at&quot;</span>:<span class="s2">&quot;2012-07-19T12:48:49-07:00&quot;</span><span class="o">}]</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>After piping through jsonpp</p>
 
-<pre>
-zlu@zlu-mba:~/projects (master *)$ curl --user foo@bar.com:abc123 http://localho000/users | jsonpp
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100   604  100   604    0     0  45280      0 --:--:-- --:--:-- --:--:-- 60400
-[
-  {
-    "_id": "500859f1827bc70b84000001",
-    "created_at": "2012-07-19T12:03:22-07:00",
-    "email": "zlu@foo.bar",
-    "facebook_access_token": null,
-    "facebook_access_token_expiration": null,
-    "facebook_id": null,
-    "family_id": null,
-    "first_name": "zhao",
-    "last_name": "lu",
-    "phone_number": null,
-    "updated_at": "2012-07-19T12:03:22-07:00"
-  },
-  {
-    "_id": "500864a1827bc710a9000004",
-    "created_at": "2012-07-19T12:48:49-07:00",
-    "email": "foo@bar.com",
-    "facebook_access_token": null,
-    "facebook_access_token_expiration": null,
-    "facebook_id": null,
-    "family_id": null,
-    "first_name": "foo",
-    "last_name": "bar",
-    "phone_number": null,
-    "updated_at": "2012-07-19T12:48:49-07:00"
-  }
-]
-</pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>zlu@zlu-mba:~/projects <span class="o">(</span>master *<span class="o">)</span><span class="nv">$ </span>curl --user foo@bar.com:abc123 http://localho000/users | jsonpp
+</span><span class='line'>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+</span><span class='line'>                                 Dload  Upload   Total   Spent    Left  Speed
+</span><span class='line'>100   604  100   604    0     0  45280      0 --:--:-- --:--:-- --:--:-- 60400
+</span><span class='line'><span class="o">[</span>
+</span><span class='line'>  <span class="o">{</span>
+</span><span class='line'>    <span class="s2">&quot;_id&quot;</span>: <span class="s2">&quot;500859f1827bc70b84000001&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;created_at&quot;</span>: <span class="s2">&quot;2012-07-19T12:03:22-07:00&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;email&quot;</span>: <span class="s2">&quot;zlu@foo.bar&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;facebook_access_token&quot;</span>: null,
+</span><span class='line'>    <span class="s2">&quot;facebook_access_token_expiration&quot;</span>: null,
+</span><span class='line'>    <span class="s2">&quot;facebook_id&quot;</span>: null,
+</span><span class='line'>    <span class="s2">&quot;family_id&quot;</span>: null,
+</span><span class='line'>    <span class="s2">&quot;first_name&quot;</span>: <span class="s2">&quot;zhao&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;last_name&quot;</span>: <span class="s2">&quot;lu&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;phone_number&quot;</span>: null,
+</span><span class='line'>    <span class="s2">&quot;updated_at&quot;</span>: <span class="s2">&quot;2012-07-19T12:03:22-07:00&quot;</span>
+</span><span class='line'>  <span class="o">}</span>,
+</span><span class='line'>  <span class="o">{</span>
+</span><span class='line'>    <span class="s2">&quot;_id&quot;</span>: <span class="s2">&quot;500864a1827bc710a9000004&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;created_at&quot;</span>: <span class="s2">&quot;2012-07-19T12:48:49-07:00&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;email&quot;</span>: <span class="s2">&quot;foo@bar.com&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;facebook_access_token&quot;</span>: null,
+</span><span class='line'>    <span class="s2">&quot;facebook_access_token_expiration&quot;</span>: null,
+</span><span class='line'>    <span class="s2">&quot;facebook_id&quot;</span>: null,
+</span><span class='line'>    <span class="s2">&quot;family_id&quot;</span>: null,
+</span><span class='line'>    <span class="s2">&quot;first_name&quot;</span>: <span class="s2">&quot;foo&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;last_name&quot;</span>: <span class="s2">&quot;bar&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;phone_number&quot;</span>: null,
+</span><span class='line'>    <span class="s2">&quot;updated_at&quot;</span>: <span class="s2">&quot;2012-07-19T12:48:49-07:00&quot;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
 
 </div>
 
