@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "TDD_By_Jim_Weirich"
+title: "TDD by Jim Weirich"
 date: 2012-05-13 18:28
 comments: true
 categories: [BDD, Agile]

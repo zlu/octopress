@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "my_current_emacs"
+title: "My Current Emacs"
 date: 2012-05-18 19:49
 comments: true
 categories: [Emacs]
