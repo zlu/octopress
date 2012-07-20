@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tools | @zlu]]></title>
   <link href="http://www.zlu.me/blog/categories/tools/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2012-07-19T16:40:58-07:00</updated>
+  <updated>2012-07-19T17:17:59-07:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -23,21 +23,21 @@ PT project as a Task Server.</p>
 
 <p>Press cmd + , to open Preferences.  Type task to see this panel:</p>
 
-<p>{% img http://f.cl.ly/items/0q0C3G471G1K3R2D0r1V/Screen%20Shot%202012-02-14%20at%208.56.43%20PM.png %}</p>
+<p><img src="http://f.cl.ly/items/0q0C3G471G1K3R2D0r1V/Screen%20Shot%202012-02-14%20at%208.56.43%20PM.png"></p>
 
 <p>Add PivotalTracker project by supplying project ID and api token.</p>
 
 <p>Now every story can be easily turned into a RubyMine changelist.
 Press cmd + shift + a, and type task.  Select open task.  Type part of the story to see a list of matched tracker stories.</p>
 
-<p>{% img http://f.cl.ly/items/2O1I0v3M403D2W1N2P0X/Screen%20Shot%202012-02-14%20at%208.59.44%20PM.png %}</p>
+<p><img src="http://f.cl.ly/items/2O1I0v3M403D2W1N2P0X/Screen%20Shot%202012-02-14%20at%208.59.44%20PM.png"></p>
 
 <p>Select the desired story to work on and check start story.  Now every change will be in this change list and RubyMine will
 autostart the story.</p>
 
 <p>Let's say you TDD'ed and finished the story.  Press cmd + k to open changelist view.</p>
 
-<p>{% img http://f.cl.ly/items/0w1K2E1E3S3S2m301W1Q/Screen%20Shot%202012-02-14%20at%209.03.29%20PM.png %}</p>
+<p><img src="http://f.cl.ly/items/0w1K2E1E3S3S2m301W1Q/Screen%20Shot%202012-02-14%20at%209.03.29%20PM.png"></p>
 
 <p>You will see that commit message has been filled with story text.  Commit the change and RubyMine will automatically
 finish the story.  How cool is that?  Now try to do that in Emacs or VI, I dare you :P</p>

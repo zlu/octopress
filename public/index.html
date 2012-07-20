@@ -9,7 +9,8 @@
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="Testing file upload using CarrierWave with Fog with S3 turns out to be difficult. CarrierWave/Fog need a non-empty file, otherwise the url to the S3 &hellip;">
+  <meta name="description" content="We often deal with viewing JSON documents in command line such as using curl against a server that returns JSON response.
+It is hard to read. jsonpp &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +77,93 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/19/pretty-print-json-in-command-line/">Pretty Print JSON in Command Line</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-19T16:28:00-07:00" pubdate data-updated="true">Jul 19<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/19/pretty-print-json-in-command-line/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>We often deal with viewing JSON documents in command line such as using curl against a server that returns JSON response.
+It is hard to read.</p>
+
+<p><a href="https://github.com/jmhodges/jsonpp/">jsonpp</a> comes to rescue.</p>
+
+<p>On OS X, simply issue <code>brew install jsonpp</code></p>
+
+<pre>
+zlu@zlu-mba:~/projects (master *)$ curl --user foo@bar.com:abc123 http://localhost:3000/users
+[{"_id":"500859f1827bc70b84000001","created_at":"2012-07-19T12:03:22-07:00","email":"zlu@foo.bar","facebook_access_token":null,"facebook_access_token_expiration":null,"facebook_id":null,"family_id":null,"first_name":"zhao","last_name":"lu","phone_number":null,"updated_at":"2012-07-19T12:03:22-07:00"},{"_id":"500864a1827bc710a9000004","created_at":"2012-07-19T12:48:49-07:00","email":"foo@bar.com","facebook_access_token":null,"facebook_access_token_expiration":null,"facebook_id":null,"family_id":null,"first_name":"foo","last_name":"bar","phone_number":null,"updated_at":"2012-07-19T12:48:49-07:00"}]
+</pre>
+
+
+<p>After piping through jsonpp</p>
+
+<pre>
+zlu@zlu-mba:~/projects (master *)$ curl --user foo@bar.com:abc123 http://localho000/users | jsonpp
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   604  100   604    0     0  45280      0 --:--:-- --:--:-- --:--:-- 60400
+[
+  {
+    "_id": "500859f1827bc70b84000001",
+    "created_at": "2012-07-19T12:03:22-07:00",
+    "email": "zlu@foo.bar",
+    "facebook_access_token": null,
+    "facebook_access_token_expiration": null,
+    "facebook_id": null,
+    "family_id": null,
+    "first_name": "zhao",
+    "last_name": "lu",
+    "phone_number": null,
+    "updated_at": "2012-07-19T12:03:22-07:00"
+  },
+  {
+    "_id": "500864a1827bc710a9000004",
+    "created_at": "2012-07-19T12:48:49-07:00",
+    "email": "foo@bar.com",
+    "facebook_access_token": null,
+    "facebook_access_token_expiration": null,
+    "facebook_id": null,
+    "family_id": null,
+    "first_name": "foo",
+    "last_name": "bar",
+    "phone_number": null,
+    "updated_at": "2012-07-19T12:48:49-07:00"
+  }
+]
+</pre>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -216,7 +304,7 @@
 </span><span class='line'>      <span class="n">uploader_test</span> <span class="o">=</span> <span class="no">TestFileUploader</span><span class="o">.</span><span class="n">new</span>
 </span><span class='line'>      <span class="n">uploader_test</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;test_file&#39;</span><span class="p">)</span>
 </span><span class='line'>      <span class="n">uploader_test</span><span class="o">.</span><span class="n">save!</span>
-</span><span class='line'>      <span class="n">uploader_test</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">should</span> <span class="n">match</span><span class="sr"> /.*\/dev-bucket.*/</span> <span class="c1">#test to make sure that it is not production-bucket</span>
+</span><span class='line'>      <span class="n">uploader_test</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">should</span> <span class="n">match</span> <span class="sr">/.*\/dev-bucket.*/</span> <span class="c1">#test to make sure that it is not production-bucket</span>
 </span><span class='line'>      <span class="no">FakeFS</span><span class="o">.</span><span class="n">deactivate!</span>
 </span><span class='line'>    <span class="k">end</span>
 </span><span class='line'>  <span class="k">end</span>
@@ -790,94 +878,9 @@ flaws.  Afterall, coders want to deliver better code.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/11/01/git-auto-complete/">Git Auto Complete</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-11-01T22:04:00-07:00" pubdate data-updated="true">Nov 1<span>st</span>, 2011</time>
-        
-         | <a href="/blog/2011/11/01/git-auto-complete/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Git auto complete is a convenient feature.</p>
-
-<p>This feature is based on git-completion file comes with git.</p>
-
-<p>On OS X, if you install git via homebrew, you can find git source directory using:</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>locate git | grep Cellar
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Locate the git-completion file.</p>
-
-<p>In my case, it is `/usr/local/Cellar/git/1.7.5/etc/bash_completion.d/git-completion.bash</p>
-
-<p>Open this file and you will find this explanation:</p>
-
-<p>The contained completion routines provide support for completing:</p>
-
-<ul>
-<li>local and remote branch names</li>
-<li>local and remote tag names</li>
-<li>.git/remotes file names</li>
-<li>git &#8216;subcommands&#8217;</li>
-<li>tree paths within &#8216;ref:path/to/file&#8217; expressions</li>
-<li>common &#8211;long-options</li>
-</ul>
-
-
-<p>And the steps to enable this</p>
-
-<ul>
-<li>Copy this file to somewhere (e.g. ~/.git-completion.sh).</li>
-<li>Add the following line <code>source ~/.git-completion.sh</code> to your .bashrc</li>
-<li>Changing PS1 to show current branch <code>PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '</code></li>
-</ul>
-
-
-<p>If you want some color in git prompt</p>
-
-<p><code>PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '</code></p>
-
-<p>If you want the prompt to show git-ps1 state
-<code>GIT_PS1_SHOWDIRTYSTATE=true</code></p>
-
-<p><code>Generating Site with Jekyllbe rake generate</code></p>
-
-<p>Example:</p>
-
-<p><code>zlu@zlu-mba:~/projects/me/octopress (master *)</code></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -896,6 +899,10 @@ flaws.  Afterall, coders want to deliver better code.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/07/19/pretty-print-json-in-command-line/">Pretty Print JSON in Command Line</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/07/17/testing-carrierwave-with-fog/">Testing Carrierwave with Fog for Amazon S3</a>
       </li>
     
@@ -909,10 +916,6 @@ flaws.  Afterall, coders want to deliver better code.</p>
     
       <li class="post">
         <a href="/blog/2012/02/28/running-wireshark-on-mountain-lion/">Running Wireshark on Mountain Lion</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview/">Install Native Ruby Gem in Mountain Lion Preview</a>
       </li>
     
   </ul>

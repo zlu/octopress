@@ -213,7 +213,7 @@
 </span><span class='line'>      <span class="n">uploader_test</span> <span class="o">=</span> <span class="no">TestFileUploader</span><span class="o">.</span><span class="n">new</span>
 </span><span class='line'>      <span class="n">uploader_test</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;test_file&#39;</span><span class="p">)</span>
 </span><span class='line'>      <span class="n">uploader_test</span><span class="o">.</span><span class="n">save!</span>
-</span><span class='line'>      <span class="n">uploader_test</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">should</span> <span class="n">match</span><span class="sr"> /.*\/dev-bucket.*/</span> <span class="c1">#test to make sure that it is not production-bucket</span>
+</span><span class='line'>      <span class="n">uploader_test</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">should</span> <span class="n">match</span> <span class="sr">/.*\/dev-bucket.*/</span> <span class="c1">#test to make sure that it is not production-bucket</span>
 </span><span class='line'>      <span class="no">FakeFS</span><span class="o">.</span><span class="n">deactivate!</span>
 </span><span class='line'>    <span class="k">end</span>
 </span><span class='line'>  <span class="k">end</span>
@@ -275,6 +275,8 @@ using the FileUploader under test.  The upload url is the subject under test.</p
         <a class="basic-alignment left" href="/blog/2012/05/18/my-current-emacs/" title="Previous Post: my_current_emacs">&laquo; my_current_emacs</a>
       
       
+        <a class="basic-alignment right" href="/blog/2012/07/19/pretty-print-json-in-command-line/" title="next Post: Pretty Print JSON in Command Line">Pretty Print JSON in Command Line &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -300,6 +302,10 @@ using the FileUploader under test.  The upload url is the subject under test.</p
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/07/19/pretty-print-json-in-command-line/">Pretty Print JSON in Command Line</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/07/17/testing-carrierwave-with-fog/">Testing Carrierwave with Fog for Amazon S3</a>
       </li>
     
@@ -313,10 +319,6 @@ using the FileUploader under test.  The upload url is the subject under test.</p
     
       <li class="post">
         <a href="/blog/2012/02/28/running-wireshark-on-mountain-lion/">Running Wireshark on Mountain Lion</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview/">Install Native Ruby Gem in Mountain Lion Preview</a>
       </li>
     
   </ul>
