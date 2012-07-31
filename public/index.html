@@ -9,8 +9,16 @@
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="We often deal with viewing JSON documents in command line such as using curl against a server that returns JSON response.
-It is hard to read. jsonpp &hellip;">
+  <meta name="description" content="Let&#8217;s say you have multiple versions of spree gems installed and want to get rid of the older versions. 1
+2
+3
+4
+5
+6
+7
+8
+9
+zlu@zlu-mba: gem list &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +88,81 @@ It is hard to read. jsonpp &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/31/uninstall-multiple-versions-of-multiple-ruby-gem/">Uninstall Multiple Versions of Multiple Ruby Gems</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-31T10:13:00-07:00" pubdate data-updated="true">Jul 31<span>st</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/31/uninstall-multiple-versions-of-multiple-ruby-gem/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Let&#8217;s say you have multiple versions of spree gems installed and want to get rid of the older versions.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>zlu@zlu-mba: gem list spree
+</span><span class='line'>spree <span class="o">(</span>1.1.3, 1.0.0, 1.0.0.rc2<span class="o">)</span>
+</span><span class='line'>spree_api <span class="o">(</span>1.1.3, 1.0.0, 1.0.0.rc2<span class="o">)</span>
+</span><span class='line'>spree_auth <span class="o">(</span>1.1.3, 1.0.0, 1.0.0.rc2<span class="o">)</span>
+</span><span class='line'>spree_cmd <span class="o">(</span>1.1.3, 1.0.0, 1.0.0.rc2<span class="o">)</span>
+</span><span class='line'>spree_core <span class="o">(</span>1.1.3, 1.0.0, 1.0.0.rc2<span class="o">)</span>
+</span><span class='line'>spree_dash <span class="o">(</span>1.1.3, 1.0.0, 1.0.0.rc2<span class="o">)</span>
+</span><span class='line'>spree_promo <span class="o">(</span>1.1.3, 1.0.0, 1.0.0.rc2<span class="o">)</span>
+</span><span class='line'>spree_sample <span class="o">(</span>1.1.3, 1.0.0, 1.0.0.rc2<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Instead of doing this a bunch of times (for different gems and versions):</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gem uninstall spree -v 1.0.0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Do this:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gem uninstall spree<span class="o">{</span>,_api,_auth,_cmd,_core,_dash,_promo,_sample<span class="o">}</span> -v <span class="o">{</span>1.0.0, 1.0.0.rc2<span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is a feature of bash shell - <a href="http://www.gnu.org/software/bash/manual/html_node/Brace-Expansion.html#Brace-Expansion">brace expansion</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -823,98 +906,6 @@ The second is a hash and it equals to {:foo => &#8216;foo&#8217;}</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/30/on-agile/">On Agile</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-30T18:11:00-08:00" pubdate data-updated="true">Jan 30<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/01/30/on-agile/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Programmers do not like rules.</p>
-
-<p>Programmers who are hesitate about adopting agile say agile is about adding rules
-to their development.</p>
-
-<p>Agile is not about implementing new rules.  It is about breaking existing rules.<br/>
-The first rule to break when introducing XP into a traditional work place is to take down
-the cubicles.</p>
-
-<p>Agile is about communication.  Pair programming is all about communication.  The pair
-communicate via code.  One write test, sees it fail, and the other write enough code
-to make the test pass.  The pair constantly communicate verbally to making design decisions.</p>
-
-<p>Agile is about communication across functional areas.  Customers, production, development, and
-QA all need to communicate.  That is why heterogeneous pairing is so important.  Has
-QA accepted the done criteria before developers start working on it?  How many times
-do you have stories rejected and then started to talk to QA about what this feature
-is about?  Miscommunication and missed communication imply wasted development and test cycles.</p>
-
-<p>The hardest thing for most developers to get about XP is TDD/BDD.  If there is
-one thing you want to start with Agile, that has to be TDD.  TDD is not about writing
-some code then a couple of tests to cover what you think is sufficient.  It is about
-starting a feature by writing a single test and only enough code to make it pass.  A
-method with a hard-coded string sometime is enough to make the test pass and that is ok.<br/>
-Another example is simply returning a 200 for a web request.  The next test will be
-forcing the hard-coded string to change or returning an actual response body (or at
-least part of it).  It is harder to think about test first, it is also more code to
-write because you may have several tests for a single line of production code.  But
-the result is more robust and reliable code.  You will save time in the end because
-you have considered how to defeat and defend your own code from the beginning, and
-you will want to naturally refactor towards the end goal.  You will be less focused
-on the postive case, which is usually easy and spend more time on negative paths.</p>
-
-<p>Agile builds better programmers.  You may think TDD is a rule.  But it&#8217;s really a habit.<br/>
-It is like Zen, a practice of life.  When thinking about a feature, you think about
-how to make it testable.  If you can&#8217;t seem to figure out how to write test first, it
-means you are not understanding the feature well or the story needs redesign or being
-brutely honest, not getting TDD.  TDD takes practice, much like learning a new programming
-language.  I remember learning Java when I already know C.  OO concepts seem to be foreign
-and hard to grasp, at first.</p>
-
-<p>Agile does not stop you from experimenting with new technology and building prototypes just
-to figure out whether something will work or not.  It is called spikes.  You can spike
-often as needed but remember developer time is valuable and obligation to deliver
-features to customers on time.  Using existing infrastructure to meet customer requirements
-and refactor towards end goal is ideal.</p>
-
-<p>Agile is about emotions.  Believe or not, coders are also emotional beings.  Agile
-considers emotions first then about machines and programming languages.  In order to
-better delivery business values, the team, as an aggregation of humans, needs to work
-towards the same goal.  By effective communication and interaction, people make better
-decisions.  Pair programming eliminates personal blames.  Shifting pairs changes
-code ownership from individual to team.  By building trust, pair forms a natural support
-system.  It is often comforting to have someone sitting next to you to point out logical
-flaws.  Afterall, coders want to deliver better code.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -936,6 +927,10 @@ flaws.  Afterall, coders want to deliver better code.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/07/31/uninstall-multiple-versions-of-multiple-ruby-gem/">Uninstall Multiple Versions of Multiple Ruby Gems</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/07/19/pretty-print-json-in-command-line/">Pretty Print JSON in Command Line</a>
       </li>
     
@@ -949,10 +944,6 @@ flaws.  Afterall, coders want to deliver better code.</p>
     
       <li class="post">
         <a href="/blog/2012/05/13/tdd-by-jim-weirich/">TDD by Jim Weirich</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/02/28/running-wireshark-on-mountain-lion/">Running Wireshark on Mountain Lion</a>
       </li>
     
   </ul>
