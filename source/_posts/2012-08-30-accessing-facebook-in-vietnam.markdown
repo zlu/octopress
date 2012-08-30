@@ -6,7 +6,7 @@ comments: true
 categories: [DNS, Censorship]
 ---
 
-I just traveled to Saigon, Vietnam.  After checked into my Airbnb host family, I logged onto Wifi and went to Facebook.
+I just traveled to Saigon, Vietnam.  After checking hotel, I logged onto Wifi and browsed to Facebook.
 It won't load!
 
 ```
