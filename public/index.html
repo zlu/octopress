@@ -9,16 +9,10 @@
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="Let&#8217;s say you have multiple versions of spree gems installed and want to get rid of the older versions. 1
+  <meta name="description" content="I just traveled to Saigon, Vietnam. After checked into my Airbnb host family, I logged onto Wifi and went to Facebook.
+It won&#8217;t load! 1
 2
-3
-4
-5
-6
-7
-8
-9
-zlu@zlu-mba: gem list &hellip;">
+zlu@ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +88,66 @@ zlu@zlu-mba: gem list &hellip;">
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/08/30/accessing-facebook-in-vietnam/">Accessing Facebook in Vietnam</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-30T21:56:00+07:00" pubdate data-updated="true">Aug 30<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/30/accessing-facebook-in-vietnam/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I just traveled to Saigon, Vietnam.  After checked into my Airbnb host family, I logged onto Wifi and went to Facebook.
+It won&#8217;t load!</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>zlu@zlu-mba:~$ ping www.facebook.com
+</span><span class='line'>ping: cannot resolve www.facebook.com: Unknown host</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Hmm, that was strange.  A quick google search shows that some ISPs block Facebook due to government regulation.  But the
+fix is quit easy.  All you need to do is to change your DNS server to Google DNS (8.8.8.8).</p>
+
+<p>In OSX, open System Preferences -> Network -> DNS, add 8.8.8.8 to DNS servers (making sure it&#8217;s the first in the list).</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>zlu@zlu-mba:~$ ping www.facebook.com
+</span><span class='line'>PING www.facebook.com (66.220.153.70): 56 data bytes
+</span><span class='line'>64 bytes from 66.220.153.70: icmp_seq=0 ttl=238 time=269.573 ms</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now you can browse Facebook again.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/07/31/uninstall-multiple-versions-of-multiple-ruby-gem/">Uninstall Multiple Versions of Multiple Ruby Gems</a></h1>
     
     
@@ -110,7 +164,7 @@ zlu@zlu-mba: gem list &hellip;">
   
 
 
-<time datetime="2012-07-31T10:13:00-07:00" pubdate data-updated="true">Jul 31<span>st</span>, 2012</time>
+<time datetime="2012-07-31T10:13:00+07:00" pubdate data-updated="true">Jul 31<span>st</span>, 2012</time>
         
          | <a href="/blog/2012/07/31/uninstall-multiple-versions-of-multiple-ruby-gem/#disqus_thread">Comments</a>
         
@@ -185,7 +239,7 @@ zlu@zlu-mba: gem list &hellip;">
   
 
 
-<time datetime="2012-07-19T16:28:00-07:00" pubdate data-updated="true">Jul 19<span>th</span>, 2012</time>
+<time datetime="2012-07-19T16:28:00+07:00" pubdate data-updated="true">Jul 19<span>th</span>, 2012</time>
         
          | <a href="/blog/2012/07/19/pretty-print-json-in-command-line/#disqus_thread">Comments</a>
         
@@ -306,7 +360,7 @@ It is hard to read.</p>
   
 
 
-<time datetime="2012-07-17T21:10:00-07:00" pubdate data-updated="true">Jul 17<span>th</span>, 2012</time>
+<time datetime="2012-07-17T21:10:00+07:00" pubdate data-updated="true">Jul 17<span>th</span>, 2012</time>
         
          | <a href="/blog/2012/07/17/testing-carrierwave-with-fog/#disqus_thread">Comments</a>
         
@@ -462,7 +516,7 @@ using the FileUploader under test.  The upload url is the subject under test.</p
   
 
 
-<time datetime="2012-05-18T19:49:00-07:00" pubdate data-updated="true">May 18<span>th</span>, 2012</time>
+<time datetime="2012-05-18T19:49:00+07:00" pubdate data-updated="true">May 18<span>th</span>, 2012</time>
         
          | <a href="/blog/2012/05/18/my-current-emacs/#disqus_thread">Comments</a>
         
@@ -510,7 +564,7 @@ Emacs with Rinari enabled.
   
 
 
-<time datetime="2012-05-13T18:28:00-07:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
+<time datetime="2012-05-13T18:28:00+07:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
         
          | <a href="/blog/2012/05/13/tdd-by-jim-weirich/#disqus_thread">Comments</a>
         
@@ -612,7 +666,7 @@ actions are and_return</p>
   
 
 
-<time datetime="2012-02-28T09:06:00-08:00" pubdate data-updated="true">Feb 28<span>th</span>, 2012</time>
+<time datetime="2012-02-28T09:06:00+07:00" pubdate data-updated="true">Feb 28<span>th</span>, 2012</time>
         
          | <a href="/blog/2012/02/28/running-wireshark-on-mountain-lion/#disqus_thread">Comments</a>
         
@@ -650,7 +704,7 @@ actions are and_return</p>
   
 
 
-<time datetime="2012-02-21T13:59:00-08:00" pubdate data-updated="true">Feb 21<span>st</span>, 2012</time>
+<time datetime="2012-02-21T13:59:00+07:00" pubdate data-updated="true">Feb 21<span>st</span>, 2012</time>
         
          | <a href="/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview/#disqus_thread">Comments</a>
         
@@ -742,7 +796,7 @@ Provided configuration options:
   
 
 
-<time datetime="2012-02-14T20:32:00-08:00" pubdate data-updated="true">Feb 14<span>th</span>, 2012</time>
+<time datetime="2012-02-14T20:32:00+07:00" pubdate data-updated="true">Feb 14<span>th</span>, 2012</time>
         
          | <a href="/blog/2012/02/14/rubymine-and-pivotaltracker-integration/#disqus_thread">Comments</a>
         
@@ -804,7 +858,7 @@ finish the story.  How cool is that?  Now try to do that in Emacs or VI, I dare 
   
 
 
-<time datetime="2012-02-12T20:38:00-08:00" pubdate data-updated="true">Feb 12<span>th</span>, 2012</time>
+<time datetime="2012-02-12T20:38:00+07:00" pubdate data-updated="true">Feb 12<span>th</span>, 2012</time>
         
          | <a href="/blog/2012/02/12/a-couple-things-to-watch-out-for-using-privatepub/#disqus_thread">Comments</a>
         
@@ -834,78 +888,6 @@ publish to a channel uniquely identified by each session of the chat.</p></li>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/02/12/rspec-arbitrary-handling-of-arguments/">RSpec Arbitrary Handling of Arguments</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-12T19:32:00-08:00" pubdate data-updated="true">Feb 12<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/02/12/rspec-arbitrary-handling-of-arguments/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>RSpec lets you test the number, type, and order of arguments.  For example,</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Foo</span><span class="o">.</span><span class="n">should_receive</span><span class="p">(</span><span class="ss">:bar</span><span class="p">)</span><span class="o">.</span><span class="n">with</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">kind_of</span><span class="p">(</span><span class="no">Hash</span><span class="p">),</span> <span class="n">anything</span><span class="p">())</span>
-</span><span class='line'><span class="no">Foo</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;b&#39;</span><span class="p">},</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Pass!</p>
-
-<p>This tests that class method <strong>bar</strong> will be called against class <strong>Foo</strong> with 3 arguments.  The first argument is integer 1,
-the second argument is an instance of Hash, the third argument can be anything.</p>
-
-<p>What if you want to test a bit more on the argument than that?</p>
-
-<p>For example, in order to test a <a href="https://github.com/ryanb/private_pub">private_pub</a> method <strong>publish_to</strong>:</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">PrivatePub</span><span class="o">.</span><span class="n">should_receive</span><span class="p">(</span><span class="ss">:publish_to</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">channel</span><span class="p">,</span> <span class="n">data</span><span class="o">|</span>
-</span><span class='line'>  <span class="n">channel</span><span class="o">.</span><span class="n">should</span> <span class="n">eq</span> <span class="s1">&#39;messages/new&#39;</span>
-</span><span class='line'>  <span class="n">data</span><span class="o">[</span><span class="ss">:foo</span><span class="o">].</span><span class="n">should</span> <span class="n">eq</span> <span class="s1">&#39;foo&#39;</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="no">PrivatePub</span><span class="o">.</span><span class="n">publish_to</span><span class="o">[</span><span class="s1">&#39;messages/new&#39;</span><span class="p">,</span> <span class="p">{</span><span class="ss">:foo</span> <span class="o">=&gt;</span> <span class="s1">&#39;foo&#39;</span><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Pass!</p>
-
-<p>This tests that <strong>publish_to</strong> takes 2 arguments.  The first is channel and should be equal to &#8216;messages/new&#8217;.
-The second is a hash and it equals to {:foo => &#8216;foo&#8217;}</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -927,6 +909,10 @@ The second is a hash and it equals to {:foo => &#8216;foo&#8217;}</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/08/30/accessing-facebook-in-vietnam/">Accessing Facebook in Vietnam</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/07/31/uninstall-multiple-versions-of-multiple-ruby-gem/">Uninstall Multiple Versions of Multiple Ruby Gems</a>
       </li>
     
@@ -940,10 +926,6 @@ The second is a hash and it equals to {:foo => &#8216;foo&#8217;}</p>
     
       <li class="post">
         <a href="/blog/2012/05/18/my-current-emacs/">My Current Emacs</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/05/13/tdd-by-jim-weirich/">TDD by Jim Weirich</a>
       </li>
     
   </ul>

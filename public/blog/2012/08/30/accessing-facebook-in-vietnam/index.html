@@ -5,11 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: rspec - @zlu</title>
+  <title>Accessing Facebook in Vietnam - @zlu</title>
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="Category: rspec">
+  <meta name="description" content="I just traveled to Saigon, Vietnam. After checked into my Airbnb host family, I logged onto Wifi and went to Facebook.
+It won&#8217;t load! 1
+2
+zlu@ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +21,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.zlu.meblog/categories/rspec/">
+  <link rel="canonical" href="http://www.zlu.me/blog/2012/08/30/accessing-facebook-in-vietnam/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -78,50 +81,119 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Rspec</h1>
+    
+      <h1 class="entry-title">Accessing Facebook in Vietnam</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-30T21:56:00+07:00" pubdate data-updated="true">Aug 30<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>I just traveled to Saigon, Vietnam.  After checked into my Airbnb host family, I logged onto Wifi and went to Facebook.
+It won&#8217;t load!</p>
 
-  
-  <h2>2012</h2>
-
-<article>
-  
-<h1><a href="/blog/2012/07/17/testing-carrierwave-with-fog/">Testing Carrierwave with Fog for Amazon S3</a></h1>
-<time datetime="2012-07-17T21:10:00+07:00" pubdate><span class='month'>Jul</span> <span class='day'>17</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/carrierwave/'>carrierwave</a>, <a class='category' href='/blog/categories/fog/'>fog</a>, <a class='category' href='/blog/categories/mocking/'>mocking</a>, <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/rspec/'>rspec</a>, <a class='category' href='/blog/categories/s3/'>s3</a></span>
-</footer>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>zlu@zlu-mba:~$ ping www.facebook.com
+</span><span class='line'>ping: cannot resolve www.facebook.com: Unknown host</span></code></pre></td></tr></table></div></figure>
 
 
-</article>
+<p>Hmm, that was strange.  A quick google search shows that some ISPs block Facebook due to government regulation.  But the
+fix is quit easy.  All you need to do is to change your DNS server to Google DNS (8.8.8.8).</p>
+
+<p>In OSX, open System Preferences -> Network -> DNS, add 8.8.8.8 to DNS servers (making sure it&#8217;s the first in the list).</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>zlu@zlu-mba:~$ ping www.facebook.com
+</span><span class='line'>PING www.facebook.com (66.220.153.70): 56 data bytes
+</span><span class='line'>64 bytes from 66.220.153.70: icmp_seq=0 ttl=238 time=269.573 ms</span></code></pre></td></tr></table></div></figure>
 
 
-
-<article>
-  
-<h1><a href="/blog/2012/02/12/rspec-arbitrary-handling-of-arguments/">RSpec Arbitrary Handling of Arguments</a></h1>
-<time datetime="2012-02-12T19:32:00+07:00" pubdate><span class='month'>Feb</span> <span class='day'>12</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/rspec/'>rspec</a>, <a class='category' href='/blog/categories/tdd/'>tdd</a></span>
-</footer>
-
-
-</article>
-
+<p>Now you can browse Facebook again.</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Zhao Lu</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-30T21:56:00+07:00" pubdate data-updated="true">Aug 30<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/censorship/'>Censorship</a>, <a class='category' href='/blog/categories/dns/'>DNS</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.zlu.me/blog/2012/08/30/accessing-facebook-in-vietnam/" data-via="zlu" data-counturl="http://www.zlu.me/blog/2012/08/30/accessing-facebook-in-vietnam/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="small"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/07/31/uninstall-multiple-versions-of-multiple-ruby-gem/" title="Previous Post: Uninstall Multiple Versions of Multiple Ruby Gems">&laquo; Uninstall Multiple Versions of Multiple Ruby Gems</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -254,7 +326,10 @@
       var disqus_shortname = 'zlu';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.zlu.me/blog/2012/08/30/accessing-facebook-in-vietnam/';
+        var disqus_url = 'http://www.zlu.me/blog/2012/08/30/accessing-facebook-in-vietnam/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

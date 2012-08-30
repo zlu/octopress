@@ -4,7 +4,7 @@
   <title><![CDATA[Category: gem | @zlu]]></title>
   <link href="http://www.zlu.me/blog/categories/gem/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2012-07-31T11:00:29-07:00</updated>
+  <updated>2012-08-30T22:04:23+07:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Uninstall Multiple Versions of Multiple Ruby Gems]]></title>
     <link href="http://www.zlu.me/blog/2012/07/31/uninstall-multiple-versions-of-multiple-ruby-gem/"/>
-    <updated>2012-07-31T10:13:00-07:00</updated>
+    <updated>2012-07-31T10:13:00+07:00</updated>
     <id>http://www.zlu.me/blog/2012/07/31/uninstall-multiple-versions-of-multiple-ruby-gem</id>
     <content type="html"><![CDATA[<p>Let's say you have multiple versions of spree gems installed and want to get rid of the older versions.</p>
 
@@ -59,7 +59,7 @@
   <entry>
     <title type="html"><![CDATA[Install Native Ruby Gem in Mountain Lion Preview]]></title>
     <link href="http://www.zlu.me/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview/"/>
-    <updated>2012-02-21T13:59:00-08:00</updated>
+    <updated>2012-02-21T13:59:00+07:00</updated>
     <id>http://www.zlu.me/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview</id>
     <content type="html"><![CDATA[<p>In Preview of OS X Mountain Lion, XCode has been distributed as a .app package verses the traditional installer.
 Also the Commandline Tools are not installed by default.  Commandline Tools contains cc/gcc that you will need.</p>
