@@ -5,11 +5,16 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: s3 - @zlu</title>
+  <title>Segmentation fault with Rails and JSON - @zlu</title>
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="Category: s3">
+  <meta name="description" content="After manually cleaning Ruby gems on my system, I got this error running rails c or rails s 1
+2
+3
+4
+5
+zlu@zlu-mba:~/projects/foo (master *)$ rails c &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +23,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.zlu.meblog/categories/s3/">
+  <link rel="canonical" href="http://www.zlu.me/blog/2012/10/16/segmentation-fault-with-rails-and-json/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -78,36 +83,127 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: S3</h1>
+    
+      <h1 class="entry-title">Segmentation Fault With Rails and JSON</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-16T21:03:00-07:00" pubdate data-updated="true">Oct 16<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>After manually cleaning Ruby gems on my system, I got this error running <code>rails c</code> or <code>rails s</code></p>
 
-  
-  <h2>2012</h2>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>zlu@zlu-mba:~/projects/foo <span class="o">(</span>master *<span class="o">)</span><span class="nv">$ </span>rails c
+</span><span class='line'>/Users/zlu/.rvm/gems/ruby-1.9.3-p0/gems/json-1.7.5/lib/json/ext/parser.bundle: <span class="o">[</span>BUG<span class="o">]</span> Segmentation fault
+</span><span class='line'>ruby 1.8.7 <span class="o">(</span>2012-02-08 patchlevel 358<span class="o">)</span> <span class="o">[</span>universal-darwin12.0<span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'>Abort <span class="nb">trap</span>: 6
+</span></code></pre></td></tr></table></div></figure>
 
-<article>
-  
-<h1><a href="/blog/2012/07/17/testing-carrierwave-with-fog/">Testing Carrierwave with Fog for Amazon S3</a></h1>
-<time datetime="2012-07-17T21:10:00-07:00" pubdate><span class='month'>Jul</span> <span class='day'>17</span> <span class='year'>2012</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/carrierwave/'>carrierwave</a>, <a class='category' href='/blog/categories/fog/'>fog</a>, <a class='category' href='/blog/categories/mocking/'>mocking</a>, <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/rspec/'>rspec</a>, <a class='category' href='/blog/categories/s3/'>s3</a></span>
-</footer>
+<p>It is very weird if you think about it.  The <code>ruby -v</code> shows that the system is using ruby version 1.9.3 managed by rvm.
+But the error shows ruby 1.8.7!  It must be something I did with uninstalling versions of gems where executable requirements got messed up.</p>
+
+<p>Instead of imploding rvm, here&#8217;s what I did to correct the problem.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gem list | cut -d<span class="s2">&quot; &quot;</span> -f1 | xargs gem uninstall -aIx
+</span><span class='line'>gem install bundler
+</span><span class='line'>bundle install
+</span></code></pre></td></tr></table></div></figure>
 
 
-</article>
-
+<p>The first command uninstalls all the gems, including bundler.
+After reinstalling bundler, you can run <code>bundle install</code>, assuming you are in a project directory where Gemfile.lock exists.</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Zhao Lu</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-16T21:03:00-07:00" pubdate data-updated="true">Oct 16<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/gem/'>Gem</a>, <a class='category' href='/blog/categories/rvm/'>RVM</a>, <a class='category' href='/blog/categories/rails/'>Rails</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.zlu.me/blog/2012/10/16/segmentation-fault-with-rails-and-json/" data-via="zlu" data-counturl="http://www.zlu.me/blog/2012/10/16/segmentation-fault-with-rails-and-json/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="small"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/08/30/accessing-facebook-in-vietnam/" title="Previous Post: Accessing Facebook in Vietnam">&laquo; Accessing Facebook in Vietnam</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -240,7 +336,10 @@
       var disqus_shortname = 'zlu';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.zlu.me/blog/2012/10/16/segmentation-fault-with-rails-and-json/';
+        var disqus_url = 'http://www.zlu.me/blog/2012/10/16/segmentation-fault-with-rails-and-json/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

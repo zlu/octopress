@@ -9,10 +9,12 @@
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="I just traveled to Saigon, Vietnam. After checking hotel, I logged onto Wifi and browsed to Facebook.
-It won&#8217;t load! 1
+  <meta name="description" content="After manually cleaning Ruby gems on my system, I got this error running rails c or rails s 1
 2
-zlu@zlu-mba:~$ ping &hellip;">
+3
+4
+5
+zlu@zlu-mba:~/projects/foo (master *)$ rails c &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -88,6 +90,74 @@ zlu@zlu-mba:~$ ping &hellip;">
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/10/16/segmentation-fault-with-rails-and-json/">Segmentation Fault With Rails and JSON</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-16T21:03:00-07:00" pubdate data-updated="true">Oct 16<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/10/16/segmentation-fault-with-rails-and-json/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>After manually cleaning Ruby gems on my system, I got this error running <code>rails c</code> or <code>rails s</code></p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>zlu@zlu-mba:~/projects/foo <span class="o">(</span>master *<span class="o">)</span><span class="nv">$ </span>rails c
+</span><span class='line'>/Users/zlu/.rvm/gems/ruby-1.9.3-p0/gems/json-1.7.5/lib/json/ext/parser.bundle: <span class="o">[</span>BUG<span class="o">]</span> Segmentation fault
+</span><span class='line'>ruby 1.8.7 <span class="o">(</span>2012-02-08 patchlevel 358<span class="o">)</span> <span class="o">[</span>universal-darwin12.0<span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'>Abort <span class="nb">trap</span>: 6
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It is very weird if you think about it.  The <code>ruby -v</code> shows that the system is using ruby version 1.9.3 managed by rvm.
+But the error shows ruby 1.8.7!  It must be something I did with uninstalling versions of gems where executable requirements got messed up.</p>
+
+<p>Instead of imploding rvm, here&#8217;s what I did to correct the problem.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gem list | cut -d<span class="s2">&quot; &quot;</span> -f1 | xargs gem uninstall -aIx
+</span><span class='line'>gem install bundler
+</span><span class='line'>bundle install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The first command uninstalls all the gems, including bundler.
+After reinstalling bundler, you can run <code>bundle install</code>, assuming you are in a project directory where Gemfile.lock exists.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/08/30/accessing-facebook-in-vietnam/">Accessing Facebook in Vietnam</a></h1>
     
     
@@ -104,7 +174,7 @@ zlu@zlu-mba:~$ ping &hellip;">
   
 
 
-<time datetime="2012-08-30T21:56:00+07:00" pubdate data-updated="true">Aug 30<span>th</span>, 2012</time>
+<time datetime="2012-08-30T21:56:00-07:00" pubdate data-updated="true">Aug 30<span>th</span>, 2012</time>
         
          | <a href="/blog/2012/08/30/accessing-facebook-in-vietnam/#disqus_thread">Comments</a>
         
@@ -164,7 +234,7 @@ fix is quit easy.  All you need to do is to change your DNS server to Google DNS
   
 
 
-<time datetime="2012-07-31T10:13:00+07:00" pubdate data-updated="true">Jul 31<span>st</span>, 2012</time>
+<time datetime="2012-07-31T10:13:00-07:00" pubdate data-updated="true">Jul 31<span>st</span>, 2012</time>
         
          | <a href="/blog/2012/07/31/uninstall-multiple-versions-of-multiple-ruby-gem/#disqus_thread">Comments</a>
         
@@ -239,7 +309,7 @@ fix is quit easy.  All you need to do is to change your DNS server to Google DNS
   
 
 
-<time datetime="2012-07-19T16:28:00+07:00" pubdate data-updated="true">Jul 19<span>th</span>, 2012</time>
+<time datetime="2012-07-19T16:28:00-07:00" pubdate data-updated="true">Jul 19<span>th</span>, 2012</time>
         
          | <a href="/blog/2012/07/19/pretty-print-json-in-command-line/#disqus_thread">Comments</a>
         
@@ -360,7 +430,7 @@ It is hard to read.</p>
   
 
 
-<time datetime="2012-07-17T21:10:00+07:00" pubdate data-updated="true">Jul 17<span>th</span>, 2012</time>
+<time datetime="2012-07-17T21:10:00-07:00" pubdate data-updated="true">Jul 17<span>th</span>, 2012</time>
         
          | <a href="/blog/2012/07/17/testing-carrierwave-with-fog/#disqus_thread">Comments</a>
         
@@ -516,7 +586,7 @@ using the FileUploader under test.  The upload url is the subject under test.</p
   
 
 
-<time datetime="2012-05-18T19:49:00+07:00" pubdate data-updated="true">May 18<span>th</span>, 2012</time>
+<time datetime="2012-05-18T19:49:00-07:00" pubdate data-updated="true">May 18<span>th</span>, 2012</time>
         
          | <a href="/blog/2012/05/18/my-current-emacs/#disqus_thread">Comments</a>
         
@@ -564,7 +634,7 @@ Emacs with Rinari enabled.
   
 
 
-<time datetime="2012-05-13T18:28:00+07:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
+<time datetime="2012-05-13T18:28:00-07:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
         
          | <a href="/blog/2012/05/13/tdd-by-jim-weirich/#disqus_thread">Comments</a>
         
@@ -666,7 +736,7 @@ actions are and_return</p>
   
 
 
-<time datetime="2012-02-28T09:06:00+07:00" pubdate data-updated="true">Feb 28<span>th</span>, 2012</time>
+<time datetime="2012-02-28T09:06:00-08:00" pubdate data-updated="true">Feb 28<span>th</span>, 2012</time>
         
          | <a href="/blog/2012/02/28/running-wireshark-on-mountain-lion/#disqus_thread">Comments</a>
         
@@ -704,7 +774,7 @@ actions are and_return</p>
   
 
 
-<time datetime="2012-02-21T13:59:00+07:00" pubdate data-updated="true">Feb 21<span>st</span>, 2012</time>
+<time datetime="2012-02-21T13:59:00-08:00" pubdate data-updated="true">Feb 21<span>st</span>, 2012</time>
         
          | <a href="/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview/#disqus_thread">Comments</a>
         
@@ -796,7 +866,7 @@ Provided configuration options:
   
 
 
-<time datetime="2012-02-14T20:32:00+07:00" pubdate data-updated="true">Feb 14<span>th</span>, 2012</time>
+<time datetime="2012-02-14T20:32:00-08:00" pubdate data-updated="true">Feb 14<span>th</span>, 2012</time>
         
          | <a href="/blog/2012/02/14/rubymine-and-pivotaltracker-integration/#disqus_thread">Comments</a>
         
@@ -837,57 +907,6 @@ finish the story.  How cool is that?  Now try to do that in Emacs or VI, I dare 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/02/12/a-couple-things-to-watch-out-for-using-privatepub/">A Couple Things to Watch Out for Using PrivatePub</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-12T20:38:00+07:00" pubdate data-updated="true">Feb 12<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/02/12/a-couple-things-to-watch-out-for-using-privatepub/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="https://github.com/ryanb/private_pub">Private Pub</a> is a convinent gem wraps around <a href="http://faye.jcoglan.com/ruby.html">Faye</a>.</p>
-
-<p>There are a few things to consider when using PrivatePub.</p>
-
-<ol>
-<li><p>It does <strong>not</strong> support ssl.
-However, there is a <a href="https://github.com/ryanb/private_pub/pull/33">pull request</a> for it.</p></li>
-<li><p>You almost always want to add some sort of filtering on the server or client side, or maybe both.
-For example, if you don&#8217;t want your chat message to be received by everyone logged in, you will need to
-publish to a channel uniquely identified by each session of the chat.</p></li>
-</ol>
-
-
-<p><strong>UPDATE</strong> @rbates has merged this pull request.  I was able to verify ssl support indeed works!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -909,6 +928,10 @@ publish to a channel uniquely identified by each session of the chat.</p></li>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/10/16/segmentation-fault-with-rails-and-json/">Segmentation fault with Rails and JSON</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/08/30/accessing-facebook-in-vietnam/">Accessing Facebook in Vietnam</a>
       </li>
     
@@ -922,10 +945,6 @@ publish to a channel uniquely identified by each session of the chat.</p></li>
     
       <li class="post">
         <a href="/blog/2012/07/17/testing-carrierwave-with-fog/">Testing Carrierwave with Fog for Amazon S3</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/05/18/my-current-emacs/">My Current Emacs</a>
       </li>
     
   </ul>
