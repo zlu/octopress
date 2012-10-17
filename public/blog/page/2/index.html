@@ -9,8 +9,8 @@
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="Private Pub is a convinent gem wraps around Faye. There are a few things to consider when using PrivatePub. It does not support ssl.
-However, there &hellip;">
+  <meta name="description" content="Task Server is a lesser known feature in RubyMine. You can enable PivotalTracker (PT) integration by adding
+PT project as a Task Server. Press cmd &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +80,68 @@ However, there &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/14/rubymine-and-pivotaltracker-integration/">RubyMine and PivotalTracker Integration</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-14T20:32:00-08:00" pubdate data-updated="true">Feb 14<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/02/14/rubymine-and-pivotaltracker-integration/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>Task Server</strong> is a lesser known feature in RubyMine.  You can enable PivotalTracker (PT) integration by adding
+PT project as a Task Server.</p>
+
+<p>Press cmd + , to open Preferences.  Type task to see this panel:</p>
+
+<p><img src="http://f.cl.ly/items/0q0C3G471G1K3R2D0r1V/Screen%20Shot%202012-02-14%20at%208.56.43%20PM.png"></p>
+
+<p>Add PivotalTracker project by supplying project ID and api token.</p>
+
+<p>Now every story can be easily turned into a RubyMine changelist.
+Press cmd + shift + a, and type task.  Select open task.  Type part of the story to see a list of matched tracker stories.</p>
+
+<p><img src="http://f.cl.ly/items/2O1I0v3M403D2W1N2P0X/Screen%20Shot%202012-02-14%20at%208.59.44%20PM.png"></p>
+
+<p>Select the desired story to work on and check start story.  Now every change will be in this change list and RubyMine will
+autostart the story.</p>
+
+<p>Let&#8217;s say you TDD&#8217;ed and finished the story.  Press cmd + k to open changelist view.</p>
+
+<p><img src="http://f.cl.ly/items/0w1K2E1E3S3S2m301W1Q/Screen%20Shot%202012-02-14%20at%209.03.29%20PM.png"></p>
+
+<p>You will see that commit message has been filled with story text.  Commit the change and RubyMine will automatically
+finish the story.  How cool is that?  Now try to do that in Emacs or VI, I dare you :P</p>
+
+<p>P.S. I like Emacs.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -404,6 +466,10 @@ flaws.  Afterall, coders want to deliver better code.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/10/16/a-small-difference-between-mongoid-and-activerecord-query-interface/">A Small Difference Between Mongoid and ActiveRecord Query Interface</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/10/16/segmentation-fault-with-rails-and-json/">Segmentation fault with Rails and JSON</a>
       </li>
     
@@ -417,10 +483,6 @@ flaws.  Afterall, coders want to deliver better code.</p>
     
       <li class="post">
         <a href="/blog/2012/07/19/pretty-print-json-in-command-line/">Pretty Print JSON in Command Line</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/07/17/testing-carrierwave-with-fog/">Testing Carrierwave with Fog for Amazon S3</a>
       </li>
     
   </ul>
