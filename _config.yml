@@ -100,7 +100,7 @@ facebook_like: true
 
 # Flickr Badge
 flickr_user: 76883175@N03           # user id (not username)
-flickr_count: 3          # number of photos to show (example: 3)
+flickr_count: 4          # number of photos to show (example: 3)
 flickr_display: random         # random or latest
 flickr_size: t           # t (thumbnail), s (small square), m (medium)
 flickr_source: user         # user, user_tag, all, all_tag
