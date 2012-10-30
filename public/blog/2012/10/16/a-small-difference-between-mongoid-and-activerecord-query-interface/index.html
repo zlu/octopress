@@ -118,6 +118,14 @@ is how the IN operator in SQL is supported.</p>
 as such:</p>
 
 <p><code>MyModel.where(:id =&gt; {:$in =&gt; [1,3,5]})</code></p>
+
+<p>Another example:</p>
+
+<p><code>MyModel.where(:created_at =&gt; {:$gt =&gt; 2.days.ago})</code></p>
+
+<p>This builds a query that returns instances of MyModel that were created in the past 2 days.</p>
+
+<h1>TODO ActiveRecord#from - does not exist in Mongoid</h1>
 </div>
 
 
@@ -170,6 +178,8 @@ as such:</p>
         <a class="basic-alignment left" href="/blog/2012/10/16/segmentation-fault-with-rails-and-json/" title="Previous Post: Segmentation fault with Rails and JSON">&laquo; Segmentation fault with Rails and JSON</a>
       
       
+        <a class="basic-alignment right" href="/blog/2012/10/29/install-and-create-rails-4-dot-0-app/" title="Next Post: Install and Create Rails 4.0 App">Install and Create Rails 4.0 App &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -195,6 +205,10 @@ as such:</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/10/29/install-and-create-rails-4-dot-0-app/">Install and Create Rails 4.0 App</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/10/16/a-small-difference-between-mongoid-and-activerecord-query-interface/">A Small Difference Between Mongoid and ActiveRecord Query Interface</a>
       </li>
     
@@ -208,10 +222,6 @@ as such:</p>
     
       <li class="post">
         <a href="/blog/2012/07/31/uninstall-multiple-versions-of-multiple-ruby-gem/">Uninstall Multiple Versions of Multiple Ruby Gems</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/07/19/pretty-print-json-in-command-line/">Pretty Print JSON in Command Line</a>
       </li>
     
   </ul>

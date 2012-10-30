@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: wireshark - @zlu</title>
+  <title>Install and Create Rails 4.0 App - @zlu</title>
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="Category: wireshark">
+  <meta name="description" content="Rails 4.0 development has started a while back. It was merged into Rails&#8217; master branch on Github in 2011.
+As the writing of this blog entry, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.zlu.meblog/categories/wireshark/">
+  <link rel="canonical" href="http://www.zlu.me/blog/2012/10/29/install-and-create-rails-4-dot-0-app/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -78,36 +79,189 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Wireshark</h1>
+    
+      <h1 class="entry-title">Install and Create Rails 4.0 App</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-29T22:46:00-07:00" pubdate data-updated="true">Oct 29<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
+
+
+<div class="entry-content"><p>Rails 4.0 development has started a while back.  It was merged into Rails&#8217; master branch on Github in 2011.
+As the writing of this blog entry, the stable version of Rails is 3.2.8.  Release candidate is at 3.2.9.rc1.
+Because 4.0 is not yet official available, you have to jump through hoops to get a Rails 4 application up and running.</p>
+
+<h2>Install Rails 4.0 gem</h2>
+
+<p>Create this Gemfile:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>source 'http://rubygems.org'
+</span><span class='line'>
+</span><span class='line'>gem 'rails', :git =&gt; 'git://github.com/rails/rails.git'
+</span><span class='line'>gem 'uglifier', '&gt;= 1.0.30'
+</span><span class='line'>gem 'activerecord-deprecated_finders', :git =&gt; 'git://github.com/rails/activerecord-deprecated_finders.git'
+</span><span class='line'>gem 'journey', :git =&gt; 'git://github.com/rails/journey.git'</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>This Gemfile specifies the master branch of Rails, which contains 4.0 beta.</li>
+<li>Gem activerecord-deprecated_finders is a dependency.</li>
+<li>Gem journey, the Rails router, is also required.</li>
+</ul>
+
+
+<p>In the same directory of the Gemfile, issue <code>bundle install</code>.  This should install Rails 4.0.0.beta.
+But running <code>gem list rails</code> won&#8217;t show 4.0 being installed.  So do this instead:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>zlu@zlu-mba:~/projects/test$ bundle show rails
+</span><span class='line'>/Users/zlu/.rvm/gems/ruby-1.9.3-p0/bundler/gems/rails-4e23c0ef341c</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The Rails executable is at:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>`bundle show rails`/railties/bin/rails</span></code></pre></td></tr></table></div></figure>
 
 
 
-  
-  <h2>2012</h2>
 
-<article>
-  
-<h1><a href="/blog/2012/02/28/running-wireshark-on-mountain-lion/">Running Wireshark on Mountain Lion</a></h1>
-<time datetime="2012-02-28T09:06:00-08:00" pubdate><span class='month'>Feb</span> <span class='day'>28</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/mountain-lion/'>mountain lion</a>, <a class='category' href='/blog/categories/os-x/'>os x</a>, <a class='category' href='/blog/categories/wireshark/'>wireshark</a></span>
-</footer>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>`bundle show rails`/railties/bin/rails -v should show: Rails 4.0.0.beta</span></code></pre></td></tr></table></div></figure>
 
 
-</article>
+<p>Now you can use this version of rails to generate an app named foo.</p>
 
+<h2>Create Rails 4.0 app</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>`bundle show rails`/railties/bin/rails new foo</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This command  creates a typical rails app called foo and output an error about not being able to find Rails 4 gem, which
+should not be a surprise.</p>
+
+<p>You will edit foo/Gemfile to make <code>bundle install</code> work.</p>
+
+<p>Add the two gems Rails depends on:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem 'journey', github: 'rails/journey'
+</span><span class='line'>gem 'activerecord-deprecated_finders', github: 'rails/activerecord-deprecated_finders'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Change the source definition for the following gems:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem 'rails', '4.0.0.beta'
+</span><span class='line'>gem 'sass-rails',   '~&gt; 4.0.0.beta'
+</span><span class='line'>gem 'coffee-rails', '~&gt; 4.0.0.beta'
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem 'rails', github: 'rails/rails'
+</span><span class='line'>gem 'sass-rails', github: 'rails/sass-rails'
+</span><span class='line'>gem 'coffee-rails', github: 'rails/coffee-rails'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now you should be <code>bundle install</code>, sit back and enjoy your new Rails 4.0 app.</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Zhao Lu</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-29T22:46:00-07:00" pubdate data-updated="true">Oct 29<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/rails/'>rails</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.zlu.me/blog/2012/10/29/install-and-create-rails-4-dot-0-app/" data-via="zlu" data-counturl="http://www.zlu.me/blog/2012/10/29/install-and-create-rails-4-dot-0-app/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="small"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/10/16/a-small-difference-between-mongoid-and-activerecord-query-interface/" title="Previous Post: A Small Difference Between Mongoid and ActiveRecord Query Interface">&laquo; A Small Difference Between Mongoid and ActiveRecord Query Interface</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -240,7 +394,10 @@
       var disqus_shortname = 'zlu';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.zlu.me/blog/2012/10/29/install-and-create-rails-4-dot-0-app/';
+        var disqus_url = 'http://www.zlu.me/blog/2012/10/29/install-and-create-rails-4-dot-0-app/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

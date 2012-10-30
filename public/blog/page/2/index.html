@@ -9,8 +9,8 @@
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="Task Server is a lesser known feature in RubyMine. You can enable PivotalTracker (PT) integration by adding
-PT project as a Task Server. Press cmd &hellip;">
+  <meta name="description" content="In Preview of OS X Mountain Lion, XCode has been distributed as a .app package verses the traditional installer.
+Also the Commandline Tools are not &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +80,98 @@ PT project as a Task Server. Press cmd &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview/">Install Native Ruby Gem in Mountain Lion Preview</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-21T13:59:00-08:00" pubdate data-updated="true">Feb 21<span>st</span>, 2012</time>
+        
+         | <a href="/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In Preview of OS X Mountain Lion, XCode has been distributed as a .app package verses the traditional installer.
+Also the Commandline Tools are not installed by default.  Commandline Tools contains cc/gcc that you will need.</p>
+
+<p>After download the preview of XCode 4.4, drop it to the Application directory.</p>
+
+<p>Open XCode and cmd + , to open Preferences panel where you can install Commandline Tools:</p>
+
+<p><img src="https://img.skitch.com/20120221-r2cidbjd92nh9tmswq19hj6rdc.jpg"></p>
+
+<p>Now in shell you should be able to <code>locate cc</code> and <code>locate gcc</code></p>
+
+<p>Now if you try to <code>gem install hpricot</code> or any gem that requires native extension (c), you may encounter problems
+looks like this:</p>
+
+<pre>
+
+checking for main() in -lc... *** extconf.rb failed ***
+Could not create Makefile due to some reason, probably lack of
+necessary libraries and/or headers.  Check the mkmf.log file for more
+details.  You may need configuration options.
+
+Provided configuration options:
+        --with-opt-dir
+        --without-opt-dir
+        --with-opt-include
+        --without-opt-include=${opt-dir}/include
+        --with-opt-lib
+        --without-opt-lib=${opt-dir}/lib
+        --with-make-prog
+        --without-make-prog
+        --srcdir=.
+        --curdir
+        --ruby=C:/ruby/bin/ruby
+        --with-hpricot_scan-dir
+        --without-hpricot_scan-dir
+        --with-hpricot_scan-include
+        --without-hpricot_scan-include=${hpricot_scan-dir}/include
+        --with-hpricot_scan-lib
+        --without-hpricot_scan-lib=${hpricot_scan-dir}/lib
+        --with-clib
+        --without-clib
+
+</pre>
+
+
+<p>If you cat the mkmf.log, you may see something like this:</p>
+
+<p>&#8220;gcc-4.2 -o conftest &#8230;.&#8221;</p>
+
+<p>So the fix is not to add configuration options but to simply create sym link of gcc-4.2:</p>
+
+<figure class='code'><figcaption><span>shell </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ln -s /usr/bin/gcc /usr/bin/gcc-4.2</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -466,6 +558,10 @@ flaws.  Afterall, coders want to deliver better code.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/10/29/install-and-create-rails-4-dot-0-app/">Install and Create Rails 4.0 App</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/10/16/a-small-difference-between-mongoid-and-activerecord-query-interface/">A Small Difference Between Mongoid and ActiveRecord Query Interface</a>
       </li>
     
@@ -479,10 +575,6 @@ flaws.  Afterall, coders want to deliver better code.</p>
     
       <li class="post">
         <a href="/blog/2012/07/31/uninstall-multiple-versions-of-multiple-ruby-gem/">Uninstall Multiple Versions of Multiple Ruby Gems</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/07/19/pretty-print-json-in-command-line/">Pretty Print JSON in Command Line</a>
       </li>
     
   </ul>

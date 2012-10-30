@@ -17,4 +17,11 @@ as such:
 
 `MyModel.where(:id => {:$in => [1,3,5]})`
 
+Another example:
+
+`MyModel.where(:created_at => {:$gt => 2.days.ago})`
+
+This builds a query that returns instances of MyModel that were created in the past 2 days.
+
+#TODO ActiveRecord#from - does not exist in Mongoid
 
