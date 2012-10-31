@@ -4,7 +4,7 @@
   <title><![CDATA[@zlu]]></title>
   <link href="http://www.zlu.me/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2012-10-30T00:48:20-07:00</updated>
+  <updated>2012-10-31T01:32:40-07:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Rolling Deployment]]></title>
+    <link href="http://www.zlu.me/blog/2012/10/30/rolling-deployment/"/>
+    <updated>2012-10-30T20:30:00-07:00</updated>
+    <id>http://www.zlu.me/blog/2012/10/30/rolling-deployment</id>
+    <content type="html"><![CDATA[<p>http://martinfowler.com/bliki/BlueGreenDeployment.html</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Install and Create Rails 4.0 App]]></title>
