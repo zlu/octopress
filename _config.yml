@@ -108,3 +108,4 @@ flickr_tag:             # tagname - set if flickr_source is set to user_tag or a
 
 # Sina Weibo
 weibo_user: 2091903003 #user id (not user name)
+weibo_share_button: true
