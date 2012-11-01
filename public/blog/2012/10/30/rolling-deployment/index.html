@@ -268,24 +268,6 @@
 </section>
 
 
-<section>
-  <h1>My Pinboard</h1>
-  <ul id="pinboard_linkroll">Fetching linkroll...</ul>
-  <p><a href="http://pinboard.in/u:zlu">My Pinboard Bookmarks &raquo;</a></p>
-</section>
-<script type="text/javascript">
-  var linkroll = 'pinboard_linkroll'; //id target for pinboard list
-  var pinboard_user = "zlu"; //id target for pinboard list
-  var pinboard_count = 3; //id target for pinboard list
-  (function(){
-    var pinboardInit = document.createElement('script');
-    pinboardInit.type = 'text/javascript';
-    pinboardInit.async = true;
-    pinboardInit.src = '/javascripts/pinboard.js';
-    document.getElementsByTagName('head')[0].appendChild(pinboardInit);
-  })();
-</script>
-
 
 <section class="googleplus">
   <h1>
@@ -297,7 +279,18 @@
 </section>
 
 
+<html xmlns:wb=“http://open.weibo.com/wb”>
+<head>
+    <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+</head>
 
+
+<section>
+    <wb:follow-button uid="2091903003" type="gray_2" width="136" height="24" ></wb:follow-button>
+</section>
+
+
+</html>
   
 </aside>
 

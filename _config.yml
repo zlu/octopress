@@ -45,7 +45,7 @@ titlecase: true       # Converts page and post titles to titlecase
 
 # list each of the sidebar modules you want to include, in the order you want them to appear.
 # To add custom asides, create files in /source/_includes/custom/asides/ and add them to the list like 'custom/asides/custom_aside_name.html'
-default_asides: [custom/asides/flickr.html, custom/asides/about.html, asides/recent_posts.html, asides/github.html, asides/twitter.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html]
+default_asides: [custom/asides/flickr.html, custom/asides/about.html, asides/recent_posts.html, asides/github.html, asides/twitter.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html, custom/asides/weibo.html]
 
 # Each layout uses the default asides, but they can have their own asides instead. Simply uncomment the lines below
 # and add an array with the asides you want to use.
@@ -81,7 +81,7 @@ googleplus_user: 114923193968506814109
 googleplus_hidden: false
 
 # Pinboard
-pinboard_user: zlu
+pinboard_user:
 pinboard_count: 3
 
 # Delicious
@@ -105,3 +105,6 @@ flickr_display: random         # random or latest
 flickr_size: t           # t (thumbnail), s (small square), m (medium)
 flickr_source: user         # user, user_tag, all, all_tag
 flickr_tag:             # tagname - set if flickr_source is set to user_tag or all_tag
+
+# Sina Weibo
+weibo_user: 2091903003 #user id (not user name)
