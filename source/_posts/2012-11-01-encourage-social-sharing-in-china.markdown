@@ -7,19 +7,19 @@ published: false
 categories: [Social]
 ---
 
-I recently spent a month in China, where access to Facebook, Twitter, and GooglePlus are blocked.
-Many social sharing functions on blogs (and various websites) stop working in China.  I have been using @octopress
-to blog and since none of the built-in sharing functions work in China, I decided to add the support for the sharing on
-[Sina Weibo](http://en.wikipedia.org/wiki/Sina_Weibo).
+I recently spent a month in China, where access to Facebook, Twitter, and GooglePlus are blocked.  I've always known
+about the Great Firewall, but I never really thought about how it can affect content-sharing that I have grown used to over
+the past years.
 
-There are two basic sharing functions:
+I have been using @octopress for blogging.  Octopress has built-in sharing function for Twitter, Facebook, and GooglePlus.
+But none of it works in China.  To encourage social sharing, I add basic support for [Sina Weibo](http://en.wikipedia.org/wiki/Sina_Weibo).
 
-* There should be a share button for Weibo, which allows the user to easily share the link
-of the blog entry.  It should also display how many times the entry has been shared.
-* There should be a follow button (and follower count) at the side bar for Weibo.
+* Weibo share button, on the bottom of the blog entry, allows users to easily share the url.  It also displays how many
+times the entry has been shared.
+* A follow button (and follower count) on the side bar for Weibo.
 
-After a bit work, here's the source code that does just that for other Octopress users.
+Here is the source code: [Octopress Sina Weibo](https://github.com/zlu/octopress-sinaweibo)
 
-[Octopress Sina Weibo](https://github.com/zlu/octopress-sinaweibo)
+I hope more people will implement sharing for Chinese audience.
 
-Enjoy.
+Here is the [developer platform for Sina Weibo](http://open.weibo.com), only in Chinese.
