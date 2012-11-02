@@ -3,7 +3,6 @@ layout: post
 title: "Encourage Social Sharing in China"
 date: 2012-11-01 19:40
 comments: true
-published: false
 categories: [Social]
 ---
 
