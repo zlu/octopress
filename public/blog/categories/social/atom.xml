@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Social | @zlu]]></title>
+  <link href="http://www.zlu.me/blog/categories/social/atom.xml" rel="self"/>
+  <link href="http://www.zlu.me/"/>
+  <updated>2012-11-01T19:59:53-07:00</updated>
+  <id>http://www.zlu.me/</id>
+  <author>
+    <name><![CDATA[Zhao Lu]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Encourage Social Sharing in China]]></title>
+    <link href="http://www.zlu.me/blog/2012/11/01/encourage-social-sharing-in-china/"/>
+    <updated>2012-11-01T19:40:00-07:00</updated>
+    <id>http://www.zlu.me/blog/2012/11/01/encourage-social-sharing-in-china</id>
+    <content type="html"><![CDATA[<p>I recently spent a month in China, where access to Facebook, Twitter, and GooglePlus are blocked.
+Many social sharing functions on blogs (and various websites) stop working in China.  I have been using @octopress
+to blog and since none of the built-in sharing functions work in China, I decided to add the support for the sharing on
+<a href="http://en.wikipedia.org/wiki/Sina_Weibo">Sina Weibo</a>.</p>
+
+<p>There are two basic sharing functions:</p>
+
+<ul>
+<li>There should be a share button for Weibo, which allows the user to easily share the link
+of the blog entry.  It should also display how many times the entry has been shared.</li>
+<li>There should be a follow button (and follower count) at the side bar for Weibo.</li>
+</ul>
+
+
+<p>After a bit work, here's the source code that does just that for other Octopress users.</p>
+
+<p><a href="https://github.com/zlu/octopress-sinaweibo">Octopress Sina Weibo</a></p>
+
+<p>Enjoy.</p>
+]]></content>
+  </entry>
+  
+</feed>

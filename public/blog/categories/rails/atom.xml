@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Rails | @zlu]]></title>
   <link href="http://www.zlu.me/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2012-11-01T19:19:46-07:00</updated>
+  <updated>2012-11-01T19:59:53-07:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -20,46 +20,28 @@
     <id>http://www.zlu.me/blog/2012/10/16/segmentation-fault-with-rails-and-json</id>
     <content type="html"><![CDATA[<p>After manually cleaning Ruby gems on my system, I got this error running <code>rails c</code> or <code>rails s</code></p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;zlu@zlu-mba:~/projects/foo <span class="o">(</span>master *<span class="o">)</span><span class="nv">$ </span>rails c
-</span><span class='line'>/Users/zlu/.rvm/gems/ruby-1.9.3-p0/gems/json-1.7.5/lib/json/ext/parser.bundle: <span class="o">[</span>BUG<span class="o">]</span> Segmentation fault
-</span><span class='line'>ruby 1.8.7 <span class="o">(</span>2012-02-08 patchlevel 358<span class="o">)</span> <span class="o">[</span>universal-darwin12.0<span class="o">]</span>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;Abort <span class="nb">trap</span>: 6&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock lang:bash %}</p>
+
+<p>zlu@zlu-mba:~/projects/foo (master *)$ rails c
+/Users/zlu/.rvm/gems/ruby-1.9.3-p0/gems/json-1.7.5/lib/json/ext/parser.bundle: [BUG] Segmentation fault
+ruby 1.8.7 (2012-02-08 patchlevel 358) [universal-darwin12.0]</p>
+
+<p>Abort trap: 6</p>
+
+<p>{% endcodeblock %}</p>
 
 <p>It is very weird if you think about it.  The <code>ruby -v</code> shows that the system is using ruby version 1.9.3 managed by rvm.
 But the error shows ruby 1.8.7!  It must be something I did with uninstalling versions of gems where executable requirements got messed up.</p>
 
 <p>Instead of imploding rvm, here's what I did to correct the problem.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;gem list | cut -d<span class="s2">&quot; &quot;</span> -f1 | xargs gem uninstall -aIx
-</span><span class='line'>gem install bundler
-</span><span class='line'>bundle install&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock lang:bash %}</p>
+
+<p>gem list | cut -d" " -f1 | xargs gem uninstall -aIx
+gem install bundler
+bundle install</p>
+
+<p>{% endcodeblock %}</p>
 
 <p>The first command uninstalls all the gems, including bundler.
 After reinstalling bundler, you can run <code>bundle install</code>, assuming you are in a project directory where Gemfile.lock exists.</p>

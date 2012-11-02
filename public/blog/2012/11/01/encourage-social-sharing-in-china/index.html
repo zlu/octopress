@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Pretty Print JSON in Command Line - @zlu</title>
+  <title>Encourage Social Sharing in China - @zlu</title>
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="We often deal with viewing JSON documents in command line such as using curl against a server that returns JSON response.
-It is hard to read. jsonpp &hellip;">
+  <meta name="description" content="I recently spent a month in China, where access to Facebook, Twitter, and GooglePlus are blocked.
+Many social sharing functions on blogs (and various &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@ It is hard to read. jsonpp &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.zlu.me/blog/2012/07/19/pretty-print-json-in-command-line/">
+  <link rel="canonical" href="http://www.zlu.me/blog/2012/11/01/encourage-social-sharing-in-china/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -89,7 +89,7 @@ It is hard to read. jsonpp &hellip;">
   <header>
     
       
-        <h1 class="entry-title">Pretty Print JSON in Command Line</h1>
+        <h1 class="entry-title">Encourage Social Sharing in China</h1>
       
     
     
@@ -106,7 +106,7 @@ It is hard to read. jsonpp &hellip;">
   
 
 
-<time datetime="2012-07-19T16:28:00-07:00" pubdate data-updated="true">Jul 19<span>th</span>, 2012</time>
+<time datetime="2012-11-01T19:40:00-07:00" pubdate data-updated="true">Nov 1<span>st</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -115,90 +115,25 @@ It is hard to read. jsonpp &hellip;">
   </header>
 
 
-<div class="entry-content"><p>We often deal with viewing JSON documents in command line such as using curl against a server that returns JSON response.
-It is hard to read.</p>
+<div class="entry-content"><p>I recently spent a month in China, where access to Facebook, Twitter, and GooglePlus are blocked.
+Many social sharing functions on blogs (and various websites) stop working in China.  I have been using @octopress
+to blog and since none of the built-in sharing functions work in China, I decided to add the support for the sharing on
+<a href="http://en.wikipedia.org/wiki/Sina_Weibo">Sina Weibo</a>.</p>
 
-<p><a href="https://github.com/jmhodges/jsonpp/">jsonpp</a> comes to rescue.</p>
+<p>There are two basic sharing functions:</p>
 
-<p>On OS X, simply issue <code>brew install jsonpp</code></p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>zlu@zlu-mba:~/projects <span class="o">(</span>master *<span class="o">)</span><span class="nv">$ </span>curl --user foo@bar.com:abc123 http://localhost:3000/users
-</span><span class='line'><span class="o">[{</span><span class="s2">&quot;_id&quot;</span>:<span class="s2">&quot;500859f1827bc70b84000001&quot;</span>,<span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;2012-07-19T12:03:22-07:00&quot;</span>,<span class="s2">&quot;email&quot;</span>:<span class="s2">&quot;zlu@foo.bar&quot;</span>,<span class="s2">&quot;facebook_access_token&quot;</span>:null,<span class="s2">&quot;facebook_access_token_expiration&quot;</span>:null,<span class="s2">&quot;facebook_id&quot;</span>:null,<span class="s2">&quot;family_id&quot;</span>:null,<span class="s2">&quot;first_name&quot;</span>:<span class="s2">&quot;zhao&quot;</span>,<span class="s2">&quot;last_name&quot;</span>:<span class="s2">&quot;lu&quot;</span>,<span class="s2">&quot;phone_number&quot;</span>:null,<span class="s2">&quot;updated_at&quot;</span>:<span class="s2">&quot;2012-07-19T12:03:22-07:00&quot;</span><span class="o">}</span>,<span class="o">{</span><span class="s2">&quot;_id&quot;</span>:<span class="s2">&quot;500864a1827bc710a9000004&quot;</span>,<span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;2012-07-19T12:48:49-07:00&quot;</span>,<span class="s2">&quot;email&quot;</span>:<span class="s2">&quot;foo@bar.com&quot;</span>,<span class="s2">&quot;facebook_access_token&quot;</span>:null,<span class="s2">&quot;facebook_access_token_expiration&quot;</span>:null,<span class="s2">&quot;facebook_id&quot;</span>:null,<span class="s2">&quot;family_id&quot;</span>:null,<span class="s2">&quot;first_name&quot;</span>:<span class="s2">&quot;foo&quot;</span>,<span class="s2">&quot;last_name&quot;</span>:<span class="s2">&quot;bar&quot;</span>,<span class="s2">&quot;phone_number&quot;</span>:null,<span class="s2">&quot;updated_at&quot;</span>:<span class="s2">&quot;2012-07-19T12:48:49-07:00&quot;</span><span class="o">}]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>After piping through jsonpp</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>zlu@zlu-mba:~/projects <span class="o">(</span>master *<span class="o">)</span><span class="nv">$ </span>curl --user foo@bar.com:abc123 http://localho000/users | jsonpp
-</span><span class='line'>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-</span><span class='line'>                                 Dload  Upload   Total   Spent    Left  Speed
-</span><span class='line'>100   604  100   604    0     0  45280      0 --:--:-- --:--:-- --:--:-- 60400
-</span><span class='line'><span class="o">[</span>
-</span><span class='line'>  <span class="o">{</span>
-</span><span class='line'>    <span class="s2">&quot;_id&quot;</span>: <span class="s2">&quot;500859f1827bc70b84000001&quot;</span>,
-</span><span class='line'>    <span class="s2">&quot;created_at&quot;</span>: <span class="s2">&quot;2012-07-19T12:03:22-07:00&quot;</span>,
-</span><span class='line'>    <span class="s2">&quot;email&quot;</span>: <span class="s2">&quot;zlu@foo.bar&quot;</span>,
-</span><span class='line'>    <span class="s2">&quot;facebook_access_token&quot;</span>: null,
-</span><span class='line'>    <span class="s2">&quot;facebook_access_token_expiration&quot;</span>: null,
-</span><span class='line'>    <span class="s2">&quot;facebook_id&quot;</span>: null,
-</span><span class='line'>    <span class="s2">&quot;family_id&quot;</span>: null,
-</span><span class='line'>    <span class="s2">&quot;first_name&quot;</span>: <span class="s2">&quot;zhao&quot;</span>,
-</span><span class='line'>    <span class="s2">&quot;last_name&quot;</span>: <span class="s2">&quot;lu&quot;</span>,
-</span><span class='line'>    <span class="s2">&quot;phone_number&quot;</span>: null,
-</span><span class='line'>    <span class="s2">&quot;updated_at&quot;</span>: <span class="s2">&quot;2012-07-19T12:03:22-07:00&quot;</span>
-</span><span class='line'>  <span class="o">}</span>,
-</span><span class='line'>  <span class="o">{</span>
-</span><span class='line'>    <span class="s2">&quot;_id&quot;</span>: <span class="s2">&quot;500864a1827bc710a9000004&quot;</span>,
-</span><span class='line'>    <span class="s2">&quot;created_at&quot;</span>: <span class="s2">&quot;2012-07-19T12:48:49-07:00&quot;</span>,
-</span><span class='line'>    <span class="s2">&quot;email&quot;</span>: <span class="s2">&quot;foo@bar.com&quot;</span>,
-</span><span class='line'>    <span class="s2">&quot;facebook_access_token&quot;</span>: null,
-</span><span class='line'>    <span class="s2">&quot;facebook_access_token_expiration&quot;</span>: null,
-</span><span class='line'>    <span class="s2">&quot;facebook_id&quot;</span>: null,
-</span><span class='line'>    <span class="s2">&quot;family_id&quot;</span>: null,
-</span><span class='line'>    <span class="s2">&quot;first_name&quot;</span>: <span class="s2">&quot;foo&quot;</span>,
-</span><span class='line'>    <span class="s2">&quot;last_name&quot;</span>: <span class="s2">&quot;bar&quot;</span>,
-</span><span class='line'>    <span class="s2">&quot;phone_number&quot;</span>: null,
-</span><span class='line'>    <span class="s2">&quot;updated_at&quot;</span>: <span class="s2">&quot;2012-07-19T12:48:49-07:00&quot;</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'><span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure>
+<ul>
+<li>There should be a share button for Weibo, which allows the user to easily share the link
+of the blog entry.  It should also display how many times the entry has been shared.</li>
+<li>There should be a follow button (and follower count) at the side bar for Weibo.</li>
+</ul>
 
 
+<p>After a bit work, here&#8217;s the source code that does just that for other Octopress users.</p>
 
+<p><a href="https://github.com/zlu/octopress-sinaweibo">Octopress Sina Weibo</a></p>
+
+<p>Enjoy.</p>
 </div>
 
 
@@ -221,16 +156,22 @@ It is hard to read.</p>
   
 
 
-<time datetime="2012-07-19T16:28:00-07:00" pubdate data-updated="true">Jul 19<span>th</span>, 2012</time>
+<time datetime="2012-11-01T19:40:00-07:00" pubdate data-updated="true">Nov 1<span>st</span>, 2012</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/social/'>Social</a>
+  
+</span>
 
 
     </p>
     
       <div class="sharing">
     
-    <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.zlu.me/blog/2012/07/19/pretty-print-json-in-command-line/"
-       data-via="zlu" data-counturl="http://www.zlu.me/blog/2012/07/19/pretty-print-json-in-command-line/">Tweet</a>
+    <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.zlu.me/blog/2012/11/01/encourage-social-sharing-in-china/"
+       data-via="zlu" data-counturl="http://www.zlu.me/blog/2012/11/01/encourage-social-sharing-in-china/">Tweet</a>
     
     
     <div class="g-plusone" data-size="small"></div>
@@ -247,7 +188,7 @@ It is hard to read.</p>
         type:'3',
         count:'1', /**是否显示分享数，1显示(可选)*/
         appkey:'', /**您申请的应用appkey,显示分享来源(可选)*/
-        title:"http://www.zlu.me/blog/2012/07/19/pretty-print-json-in-command-line/",/**分享的文字内容(可选，默认为所在页面的title)*/
+        title:"http://www.zlu.me/blog/2012/11/01/encourage-social-sharing-in-china/",/**分享的文字内容(可选，默认为所在页面的title)*/
         pic:'', /**分享图片的路径(可选)*/
         ralateUid:"2091903003", /**关联用户的UID，分享微博会@该用户(可选)*/
     	language:'zh_cn', /**设置语言，zh_cn|zh_tw(可选)*/
@@ -266,10 +207,8 @@ It is hard to read.</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left articlenav" href="/blog/2012/07/17/testing-carrierwave-with-fog/" title="Previous Post: Testing Carrierwave with Fog for Amazon S3">&laquo; Testing Carrierwave with Fog for Amazon S3</a>
+        <a class="basic-alignment left articlenav" href="/blog/2012/10/30/rolling-deployment/" title="Previous Post: Rolling Deployment">&laquo; Rolling Deployment</a>
       
-      
-        <a class="basic-alignment right articlenav" href="/blog/2012/07/31/uninstall-multiple-versions-of-multiple-ruby-gem/" title="Next Post: Uninstall Multiple Versions of Multiple Ruby Gems">Uninstall Multiple Versions of Multiple Ruby Gems &raquo;</a>
       
     </p>
   </footer>
@@ -413,8 +352,8 @@ It is hard to read.</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.zlu.me/blog/2012/07/19/pretty-print-json-in-command-line/';
-        var disqus_url = 'http://www.zlu.me/blog/2012/07/19/pretty-print-json-in-command-line/';
+        var disqus_identifier = 'http://www.zlu.me/blog/2012/11/01/encourage-social-sharing-in-china/';
+        var disqus_url = 'http://www.zlu.me/blog/2012/11/01/encourage-social-sharing-in-china/';
         var disqus_script = 'embed.js';
       
     (function () {

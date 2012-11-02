@@ -3,6 +3,7 @@ layout: post
 title: "Rolling Deployment"
 date: 2012-10-30 20:30
 comments: true
+published: false
 categories: [Deployment]
 ---
 
