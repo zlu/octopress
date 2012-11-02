@@ -19,6 +19,6 @@ times the entry has been shared.
 
 Here is the source code: [Octopress Sina Weibo](https://github.com/zlu/octopress-sinaweibo)
 
-I hope more people will implement sharing for Chinese audience.
+I hope more people will implement social-sharing for Chinese audience.
 
 Here is the [developer platform for Sina Weibo](http://open.weibo.com), only in Chinese.
