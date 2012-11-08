@@ -50,18 +50,14 @@ Example
 In this example, I use Apache's [mod_proxy_balancer](http://httpd.apache.org/docs/2.2/mod/mod_proxy_balancer.html).
 I use a typical Rails web server setup and [Capistrano](https://github.com/capistrano/capistrano) for deployment.
 
-In production.rb, define the following:
-
-``` ruby
+{% codeblock In Rails' production.rb lang:ruby %}
 role :app, "server1.com", :group => :red
 role :app, "server2.com", :group=> :blue
 role :app, "server3.com", :group => :green
 role :apache, "loadbalancer.com", :no_release => true
-```
+{% endcodeblock %}
 
-In Capistrano's deploy.rb, define the following:
-
-``` ruby
+{% codeblock In Capistrano's deploy.rb lang:ruby %}
 def manage_node(action, group)
   uri = URI.parse("http://#{roles[:apache]}/balancer-manager")
   response_body = Net::HTTP.get_response(uri).body
@@ -72,7 +68,7 @@ def manage_node(action, group)
   response = Net::HTTP.get_response(uri)
   response.code == "200"
 end
-```
+{% endcodeblock %}
 
 mod_proxy_balancer has a balancer-manager GUI.  Admin is able to enable and disable node (web server) via a form.
 manage_node method essentially submit the form to the balancer-manager.

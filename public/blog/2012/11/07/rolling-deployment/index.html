@@ -161,9 +161,8 @@ load balancer --> |-> web server2 (blue)  -|---> database
 <p>In this example, I use Apache&#8217;s <a href="http://httpd.apache.org/docs/2.2/mod/mod_proxy_balancer.html">mod_proxy_balancer</a>.
 I use a typical Rails web server setup and <a href="https://github.com/capistrano/capistrano">Capistrano</a> for deployment.</p>
 
-<p>In production.rb, define the following:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>In Rails&#8217; production.rb  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -174,9 +173,10 @@ I use a typical Rails web server setup and <a href="https://github.com/capistran
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>In Capistrano&#8217;s deploy.rb, define the following:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+
+<figure class='code'><figcaption><span>In Capistrano&#8217;s deploy.rb  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
