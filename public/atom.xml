@@ -4,7 +4,7 @@
   <title><![CDATA[@zlu]]></title>
   <link href="http://www.zlu.me/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2012-11-07T16:38:59-08:00</updated>
+  <updated>2012-11-07T16:40:33-08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -127,10 +127,10 @@ to use a Mac Mini for in-house CI (or Travis for open-source projects).  There&#
 can be kept up-to-date with production environment.  I could spin up a CI instance that replicates production but keeping
 them in-sync still takes much effort.  There are also possibilities that integration test suites do not test views where
 a simple route change could prevent user from successfully logging in.  By running a simple Selenium test to login and
-perform one core function of the application, it gives me some level of assurance to continue the deployment.</p>
+perform one core function of the application, it gives me some level of assurance.</p>
 
 <p>Capistrano supports deployment to a single server using HOSTS or HOSTFITLER command line options.  However, the load balancer
-will keep sending requests to the server when deployment and restart is happening.</p>
+will keep sending requests to the server during deployment and server restart.</p>
 
 <h2>Note</h2>
 
