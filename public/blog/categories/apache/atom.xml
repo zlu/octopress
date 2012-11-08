@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Deployment | @zlu]]></title>
-  <link href="http://www.zlu.me/blog/categories/deployment/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Apache | @zlu]]></title>
+  <link href="http://www.zlu.me/blog/categories/apache/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
   <updated>2012-11-07T16:40:33-08:00</updated>
   <id>http://www.zlu.me/</id>

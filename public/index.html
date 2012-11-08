@@ -9,8 +9,8 @@
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="I recently spent a month in China, where access to Facebook, Twitter, and GooglePlus are blocked. I&#8217;ve always known
-about the Great Firewall, &hellip;">
+  <meta name="description" content="It is common to deploy new code to production several times a week (or even a day) in an agile shop. How to make deployment
+less intrusive to end &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -92,6 +92,162 @@ about the Great Firewall, &hellip;">
   <header>
     
       <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2012/11/07/rolling-deployment/">Rolling Deployment</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-07T20:30:00-08:00" pubdate data-updated="true">Nov 7<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/11/07/rolling-deployment/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>It is common to deploy new code to production several times a week (or even a day) in an agile shop.  How to make deployment
+less intrusive to end user has becoming a larger issue.  If you simply use <code>cap deploy production</code>, some web requests will
+time out hence hamper consumer experience.  Heroku supports maintenance mode, which can be turned on before a deployment.
+User will see a maintenance page instead of unresponsive web page.  This is ok but not ideal.</p>
+
+<p>Martin Fowler wrote about <a href="http://martinfowler.com/bliki/BlueGreenDeployment.html">Blue Green Deployment</a>.  The canonical
+form of this deployment strategy is to maintain two identical databases for each environment.  There is an issue of
+dealing with missed transactions when deploying to one environment (stand-by) while the live environment is still taking
+web requests.  There are a few ways to take care of this such as putting the live environment into read-only mode before the
+cut-over.</p>
+
+<p>For a small application (or a typical start-up scenario), having two database is a bit of over-kill and entails higher
+operational costs.  With rolling deployment,  all the production web (application) servers share the same database.  To
+reduce application downtime, only one web server will be taken out of the load balancer at a time.  This web server will then
+be loaded with new code.  We can then run some quick automated tests (simple selenium tests for example) to ensure the build
+is sane, against this web server.  If tests pass, we bring the node back into the load balancer.  We then repeat this process
+for the next server.  If there are database changes that could potentially affect the state of the application and cause
+inconsistency, then measure must be taken in the application to mitigate the problem through for example, back-fill.</p>
+
+<h2>Setup</h2>
+
+<p>A typical setup for a web app where multiple web servers (such as Unicorn) share the same database server.</p>
+
+<pre>
+                  |-> web server1 (red)   -|
+load balancer --> |-> web server2 (blue)  -|---> database
+                  |-> web server3 (green) -|
+</pre>
+
+
+<h2>Steps</h2>
+
+<ul>
+<li>Take the red web server out of load balancer</li>
+<li>Deploy new code to red</li>
+<li>Run deployment tests against red to ensure everything is sane</li>
+<li>If tests pass, put red back to load balancer and continue to the next node, blue</li>
+<li>If tests fail, roll back</li>
+</ul>
+
+
+<h2>Example</h2>
+
+<p>In this example, I use Apache&#8217;s <a href="http://httpd.apache.org/docs/2.2/mod/mod_proxy_balancer.html">mod_proxy_balancer</a>.
+I use a typical Rails web server setup and <a href="https://github.com/capistrano/capistrano">Capistrano</a> for deployment.</p>
+
+<p>In production.rb, define the following:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">role</span> <span class="ss">:app</span><span class="p">,</span> <span class="s2">&quot;server1.com&quot;</span><span class="p">,</span> <span class="ss">:group</span> <span class="o">=&gt;</span> <span class="ss">:red</span>
+</span><span class='line'><span class="n">role</span> <span class="ss">:app</span><span class="p">,</span> <span class="s2">&quot;server2.com&quot;</span><span class="p">,</span> <span class="ss">:group</span><span class="o">=&gt;</span> <span class="ss">:blue</span>
+</span><span class='line'><span class="n">role</span> <span class="ss">:app</span><span class="p">,</span> <span class="s2">&quot;server3.com&quot;</span><span class="p">,</span> <span class="ss">:group</span> <span class="o">=&gt;</span> <span class="ss">:green</span>
+</span><span class='line'><span class="n">role</span> <span class="ss">:apache</span><span class="p">,</span> <span class="s2">&quot;loadbalancer.com&quot;</span><span class="p">,</span> <span class="ss">:no_release</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In Capistrano&#8217;s deploy.rb, define the following:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">manage_node</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;http://</span><span class="si">#{</span><span class="n">roles</span><span class="o">[</span><span class="ss">:apache</span><span class="o">]</span><span class="si">}</span><span class="s2">/balancer-manager&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">response_body</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span><span class="o">.</span><span class="n">body</span>
+</span><span class='line'>  <span class="n">nonce</span> <span class="o">=</span> <span class="n">response_body</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sr">/nonce=(.*)\&quot;/</span><span class="p">)</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+</span><span class='line'>  <span class="n">node</span> <span class="o">=</span> <span class="n">find_servers</span><span class="p">(</span><span class="ss">:roles</span> <span class="o">=&gt;</span> <span class="ss">:app</span><span class="p">,</span> <span class="ss">:only</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:group</span> <span class="o">=&gt;</span> <span class="n">group</span><span class="o">.</span><span class="n">to_sym</span><span class="p">})</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span>
+</span><span class='line'>  <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="ss">:w</span> <span class="o">=&gt;</span> <span class="s2">&quot;http://</span><span class="si">#{</span><span class="n">node</span><span class="si">}</span><span class="s2">:8080&quot;</span><span class="p">,</span> <span class="ss">:b</span> <span class="o">=&gt;</span> <span class="n">stage</span><span class="p">,</span> <span class="ss">:nonce</span> <span class="o">=&gt;</span> <span class="n">nonce</span><span class="p">,</span> <span class="ss">:dw</span> <span class="o">=&gt;</span> <span class="n">action</span><span class="p">}</span>
+</span><span class='line'>  <span class="n">uri</span><span class="o">.</span><span class="n">query</span> <span class="o">=</span> <span class="no">URI</span><span class="o">.</span><span class="n">encode_www_form</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">response</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">response</span><span class="o">.</span><span class="n">code</span> <span class="o">==</span> <span class="s2">&quot;200&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>mod_proxy_balancer has a balancer-manager GUI.  Admin is able to enable and disable node (web server) via a form.
+manage_node method essentially submit the form to the balancer-manager.</p>
+
+<p>To take red node out of the load balancer, simply define a task such as:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">task</span> <span class="ss">:enable</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">manage_mode</span><span class="p">(</span><span class="s2">&quot;Enable&quot;</span><span class="p">,</span> <span class="n">group</span><span class="p">),</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The value of group can be passed in as a command line option for Capistrano</p>
+
+<h2>Other Considerations</h2>
+
+<p>Why do I suggest running some basic tests as the acceptance criteria for rolling deployment?  I assume that the code
+being deployed is well tested and passed CI/QA etc.  But there&#8217;re all kinds of factors that can be different between test,
+CI, and production environment.  Some library have different versions, VM images, or even the OS can be different.  I like
+to use a Mac Mini for in-house CI (or Travis for open-source projects).  There&#8217;s no guarantee that Travis or Mac Mini
+can be kept up-to-date with production environment.  I could spin up a CI instance that replicates production but keeping
+them in-sync still takes much effort.  There are also possibilities that integration test suites do not test views where
+a simple route change could prevent user from successfully logging in.  By running a simple Selenium test to login and
+perform one core function of the application, it gives me some level of assurance to continue the deployment.</p>
+
+<p>Capistrano supports deployment to a single server using HOSTS or HOSTFITLER command line options.  However, the load balancer
+will keep sending requests to the server when deployment and restart is happening.</p>
+
+<h2>Note</h2>
+
+<p><a href="http://rdoc.info/github/capistrano/capistrano/master/Capistrano/Configuration/Servers">find_server API</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
         <h1 class="entry-title"><a href="/blog/2012/11/01/encourage-social-sharing-in-china/">Encourage Social Sharing in China</a></h1>
       
     
@@ -134,49 +290,9 @@ times the entry has been shared.</li>
 
 <p>Here is the source code: <a href="https://github.com/zlu/octopress-sinaweibo">Octopress Sina Weibo</a></p>
 
-<p>I hope more people will implement sharing for Chinese audience.</p>
+<p>I hope more people will implement social-sharing for Chinese audience.</p>
 
 <p>Here is the <a href="http://open.weibo.com">developer platform for Sina Weibo</a>, only in Chinese.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2012/10/30/rolling-deployment/">Rolling Deployment</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-10-30T20:30:00-07:00" pubdate data-updated="true">Oct 30<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/10/30/rolling-deployment/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>http://martinfowler.com/bliki/BlueGreenDeployment.html</p>
 </div>
   
   
@@ -940,11 +1056,11 @@ Emacs with Rinari enabled.
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2012/11/01/encourage-social-sharing-in-china/">Encourage Social Sharing in China</a>
+        <a href="/blog/2012/11/07/rolling-deployment/">Rolling Deployment</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2012/10/30/rolling-deployment/">Rolling Deployment</a>
+        <a href="/blog/2012/11/01/encourage-social-sharing-in-china/">Encourage Social Sharing in China</a>
       </li>
     
       <li class="post">
