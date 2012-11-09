@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: system | @zlu]]></title>
+  <link href="http://www.zlu.me/blog/categories/system/atom.xml" rel="self"/>
+  <link href="http://www.zlu.me/"/>
+  <updated>2012-11-08T16:20:14-08:00</updated>
+  <id>http://www.zlu.me/</id>
+  <author>
+    <name><![CDATA[Zhao Lu]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[What Happened to FD 3 and 4 in MRI]]></title>
+    <link href="http://www.zlu.me/blog/2012/11/08/what-happened-to-fd-3-and-4-in-mri/"/>
+    <updated>2012-11-08T16:07:00-08:00</updated>
+    <id>http://www.zlu.me/blog/2012/11/08/what-happened-to-fd-3-and-4-in-mri</id>
+    <content type="html"><![CDATA[<p>I got curious when this happened:</p>
+
+<p><code>ruby
+1.9.3p286 :032 &gt; File.open('/etc/passwd').fileno
+ =&gt; 5
+</code></p>
+
+<p>I know that file descriptors (FD) 0, 1, and 2 are assigned to STDIN, STDOUT, and STDERR.  I also know that FDs are assigned
+in order.  So what happened to 3 and 4?</p>
+
+<p>``` ruby
+1.9.3p286 :015 > STDIN.fileno
+ => 0</p>
+
+<p>1.9.3p286 :034 > IO.for_fd(3)
+ArgumentError: The given fd is not accessible because RubyVM reserves it</p>
+
+<pre><code>from (irb):34:in `for_fd'
+from (irb):34
+from /Users/zlu/.rvm/rubies/ruby-1.9.3-p286/bin/irb:16:in `&lt;main&gt;'
+</code></pre>
+
+<p>```</p>
+
+<p>Evidently some ruby process is using it, but what process?</p>
+
+<p>``` bash
+zlu@zlu-mba:~$ lsof -d 3,4 | grep ruby
+ruby      4980  zlu    3     PIPE 0xffffff8029fa7860     16384           ->0xffffff8029fa4370
+ruby      4980  zlu    4     PIPE 0xffffff8029fa4370     16384           ->0xffffff8029fa7860</p>
+
+<p>COMMAND    PID  USER   FD    TYPE DEVICE                  SIZE/OFF   NODE NAME
+```</p>
+
+<p>And</p>
+
+<p><code>bash
+zlu@zlu-mba:~$ ps -p 4980
+  PID TTY           TIME CMD
+ 4980 ttys003    0:00.47 irb
+</code></p>
+
+<p>So Ruby's RVM is using <em>pipes</em> with FD 3 and 4.  As far as what these pipes are used for, that'll be another discussion.</p>
+]]></content>
+  </entry>
+  
+</feed>

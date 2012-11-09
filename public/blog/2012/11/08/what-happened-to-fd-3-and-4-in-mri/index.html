@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Git auto complete - @zlu</title>
+  <title>What Happened to FD 3 and 4 in MRI - @zlu</title>
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="Git auto complete is a convenient feature. This feature is based on git-completion file comes with git. On OS X, if you install git via homebrew, you &hellip;">
+  <meta name="description" content="I got curious when this happened: 1
+2
+1.9.3p286 :032 &gt; File.open(&#39;/etc/passwd&#39;).fileno =&gt; 5 I know that file descriptors (FD) 0, 1, and &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.zlu.me/blog/2011/11/01/git-auto-complete/">
+  <link rel="canonical" href="http://www.zlu.me/blog/2012/11/08/what-happened-to-fd-3-and-4-in-mri/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -88,7 +90,7 @@
   <header>
     
       
-        <h1 class="entry-title">Git Auto Complete</h1>
+        <h1 class="entry-title">What Happened to FD 3 and 4 in MRI</h1>
       
     
     
@@ -105,7 +107,7 @@
   
 
 
-<time datetime="2011-11-01T22:04:00-07:00" pubdate data-updated="true">Nov 1<span>st</span>, 2011</time>
+<time datetime="2012-11-08T16:07:00-08:00" pubdate data-updated="true">Nov 8<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -114,56 +116,64 @@
   </header>
 
 
-<div class="entry-content"><p>Git auto complete is a convenient feature.</p>
+<div class="entry-content"><p>I got curious when this happened:</p>
 
-<p>This feature is based on git-completion file comes with git.</p>
-
-<p>On OS X, if you install git via homebrew, you can find git source directory using:</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>locate git | grep Cellar
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p286</span> <span class="p">:</span><span class="mo">032</span> <span class="o">&gt;</span> <span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;/etc/passwd&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fileno</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">5</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Locate the git-completion file.</p>
+<p>I know that file descriptors (FD) 0, 1, and 2 are assigned to STDIN, STDOUT, and STDERR.  I also know that FDs are assigned
+in order.  So what happened to 3 and 4?</p>
 
-<p>In my case, it is `/usr/local/Cellar/git/1.7.5/etc/bash_completion.d/git-completion.bash</p>
-
-<p>Open this file and you will find this explanation:</p>
-
-<p>The contained completion routines provide support for completing:</p>
-
-<ul>
-<li>local and remote branch names</li>
-<li>local and remote tag names</li>
-<li>.git/remotes file names</li>
-<li>git &#8216;subcommands&#8217;</li>
-<li>tree paths within &#8216;ref:path/to/file&#8217; expressions</li>
-<li>common &#8211;long-options</li>
-</ul>
-
-
-<p>And the steps to enable this</p>
-
-<ul>
-<li>Copy this file to somewhere (e.g. ~/.git-completion.sh).</li>
-<li>Add the following line <code>source ~/.git-completion.sh</code> to your .bashrc</li>
-<li>Changing PS1 to show current branch <code>PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '</code></li>
-</ul>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p286</span> <span class="p">:</span><span class="mo">015</span> <span class="o">&gt;</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">fileno</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">0</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p286</span> <span class="p">:</span><span class="mo">034</span> <span class="o">&gt;</span> <span class="no">IO</span><span class="o">.</span><span class="n">for_fd</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span><span class='line'><span class="no">ArgumentError</span><span class="p">:</span> <span class="no">The</span> <span class="n">given</span> <span class="n">fd</span> <span class="n">is</span> <span class="ow">not</span> <span class="n">accessible</span> <span class="n">because</span> <span class="no">RubyVM</span> <span class="n">reserves</span> <span class="n">it</span>
+</span><span class='line'>  <span class="n">from</span> <span class="p">(</span><span class="n">irb</span><span class="p">):</span><span class="mi">34</span><span class="ss">:in</span> <span class="sb">`for_fd&#39;</span>
+</span><span class='line'><span class="sb"> from (irb):34</span>
+</span><span class='line'><span class="sb"> from /Users/zlu/.rvm/rubies/ruby-1.9.3-p286/bin/irb:16:in `</span><span class="o">&lt;</span><span class="n">main</span><span class="o">&gt;</span><span class="err">&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>If you want some color in git prompt</p>
+<p>Evidently some ruby process is using it, but what process?</p>
 
-<p><code>PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '</code></p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>zlu@zlu-mba:~<span class="nv">$ </span>lsof -d 3,4 | grep ruby
+</span><span class='line'>ruby      4980  zlu    3     PIPE 0xffffff8029fa7860     16384           -&gt;0xffffff8029fa4370
+</span><span class='line'>ruby      4980  zlu    4     PIPE 0xffffff8029fa4370     16384           -&gt;0xffffff8029fa7860
+</span><span class='line'>
+</span><span class='line'>COMMAND    PID  USER   FD    TYPE DEVICE                  SIZE/OFF   NODE NAME
+</span></code></pre></td></tr></table></div></figure>
 
-<p>If you want the prompt to show git-ps1 state
-<code>GIT_PS1_SHOWDIRTYSTATE=true</code></p>
 
-<p><code>Generating Site with Jekyllbe rake generate</code></p>
+<p>And</p>
 
-<p>Example:</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>zlu@zlu-mba:~<span class="nv">$ </span>ps -p 4980
+</span><span class='line'>  PID TTY           TIME CMD
+</span><span class='line'> 4980 ttys003    0:00.47 irb
+</span></code></pre></td></tr></table></div></figure>
 
-<p><code>zlu@zlu-mba:~/projects/me/octopress (master *)</code></p>
+
+<p>So Ruby&#8217;s RVM is using <em>pipes</em> with FD 3 and 4.</p>
 </div>
 
 
@@ -186,12 +196,12 @@
   
 
 
-<time datetime="2011-11-01T22:04:00-07:00" pubdate data-updated="true">Nov 1<span>st</span>, 2011</time>
+<time datetime="2012-11-08T16:07:00-08:00" pubdate data-updated="true">Nov 8<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/git/'>git</a>
+    <a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/system/'>system</a>
   
 </span>
 
@@ -200,8 +210,8 @@
     
       <div class="sharing">
     
-    <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.zlu.me/blog/2011/11/01/git-auto-complete/"
-       data-via="zlu" data-counturl="http://www.zlu.me/blog/2011/11/01/git-auto-complete/">Tweet</a>
+    <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.zlu.me/blog/2012/11/08/what-happened-to-fd-3-and-4-in-mri/"
+       data-via="zlu" data-counturl="http://www.zlu.me/blog/2012/11/08/what-happened-to-fd-3-and-4-in-mri/">Tweet</a>
     
     
     <div class="g-plusone" data-size="small"></div>
@@ -219,7 +229,7 @@
         type:'3',
         count:'1', /**是否显示分享数，1显示(可选)*/
         appkey:'', /**您申请的应用appkey,显示分享来源(可选)*/
-        title:"http://www.zlu.me/blog/2011/11/01/git-auto-complete/",/**分享的文字内容(可选，默认为所在页面的title)*/
+        title:"http://www.zlu.me/blog/2012/11/08/what-happened-to-fd-3-and-4-in-mri/",/**分享的文字内容(可选，默认为所在页面的title)*/
         pic:'', /**分享图片的路径(可选)*/
         ralateUid:"2091903003", /**关联用户的UID，分享微博会@该用户(可选)*/
     	language:'zh_cn', /**设置语言，zh_cn|zh_tw(可选)*/
@@ -238,8 +248,8 @@
     
     <p class="meta">
       
+        <a class="basic-alignment left articlenav" href="/blog/2012/11/07/rolling-deployment/" title="Previous Post: Rolling Deployment">&laquo; Rolling Deployment</a>
       
-        <a class="basic-alignment right articlenav" href="/blog/2012/01/30/on-agile/" title="Next Post: On Agile">On Agile &raquo;</a>
       
     </p>
   </footer>
@@ -383,8 +393,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.zlu.me/blog/2011/11/01/git-auto-complete/';
-        var disqus_url = 'http://www.zlu.me/blog/2011/11/01/git-auto-complete/';
+        var disqus_identifier = 'http://www.zlu.me/blog/2012/11/08/what-happened-to-fd-3-and-4-in-mri/';
+        var disqus_url = 'http://www.zlu.me/blog/2012/11/08/what-happened-to-fd-3-and-4-in-mri/';
         var disqus_script = 'embed.js';
       
     (function () {

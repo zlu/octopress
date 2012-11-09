@@ -4,7 +4,7 @@
   <title><![CDATA[@zlu]]></title>
   <link href="http://www.zlu.me/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2012-11-08T00:40:56-08:00</updated>
+  <updated>2012-11-08T16:19:13-08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -12,6 +12,72 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[What Happened to FD 3 and 4 in MRI]]></title>
+    <link href="http://www.zlu.me/blog/2012/11/08/what-happened-to-fd-3-and-4-in-mri/"/>
+    <updated>2012-11-08T16:07:00-08:00</updated>
+    <id>http://www.zlu.me/blog/2012/11/08/what-happened-to-fd-3-and-4-in-mri</id>
+    <content type="html"><![CDATA[<p>I got curious when this happened:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p286</span> <span class="p">:</span><span class="mo">032</span> <span class="o">&gt;</span> <span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;/etc/passwd&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fileno</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">5</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I know that file descriptors (FD) 0, 1, and 2 are assigned to STDIN, STDOUT, and STDERR.  I also know that FDs are assigned
+in order.  So what happened to 3 and 4?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p286</span> <span class="p">:</span><span class="mo">015</span> <span class="o">&gt;</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">fileno</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">0</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p286</span> <span class="p">:</span><span class="mo">034</span> <span class="o">&gt;</span> <span class="no">IO</span><span class="o">.</span><span class="n">for_fd</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span><span class='line'><span class="no">ArgumentError</span><span class="p">:</span> <span class="no">The</span> <span class="n">given</span> <span class="n">fd</span> <span class="n">is</span> <span class="ow">not</span> <span class="n">accessible</span> <span class="n">because</span> <span class="no">RubyVM</span> <span class="n">reserves</span> <span class="n">it</span>
+</span><span class='line'>  <span class="n">from</span> <span class="p">(</span><span class="n">irb</span><span class="p">):</span><span class="mi">34</span><span class="ss">:in</span> <span class="sb">`for_fd&#39;</span>
+</span><span class='line'><span class="sb"> from (irb):34</span>
+</span><span class='line'><span class="sb"> from /Users/zlu/.rvm/rubies/ruby-1.9.3-p286/bin/irb:16:in `</span><span class="o">&lt;</span><span class="n">main</span><span class="o">&gt;</span><span class="err">&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Evidently some ruby process is using it, but what process?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>zlu@zlu-mba:~<span class="nv">$ </span>lsof -d 3,4 | grep ruby
+</span><span class='line'>ruby      4980  zlu    3     PIPE 0xffffff8029fa7860     16384           -&gt;0xffffff8029fa4370
+</span><span class='line'>ruby      4980  zlu    4     PIPE 0xffffff8029fa4370     16384           -&gt;0xffffff8029fa7860
+</span><span class='line'>
+</span><span class='line'>COMMAND    PID  USER   FD    TYPE DEVICE                  SIZE/OFF   NODE NAME
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>zlu@zlu-mba:~<span class="nv">$ </span>ps -p 4980
+</span><span class='line'>  PID TTY           TIME CMD
+</span><span class='line'> 4980 ttys003    0:00.47 irb
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So Ruby&#8217;s RVM is using <em>pipes</em> with FD 3 and 4.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Rolling Deployment]]></title>

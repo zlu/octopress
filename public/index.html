@@ -9,8 +9,9 @@
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="It is common to deploy new code to production several times a week (or even a day) in an agile shop. How to make deployment
-less intrusive to end &hellip;">
+  <meta name="description" content="I got curious when this happened: 1
+2
+1.9.3p286 :032 &gt; File.open(&#39;/etc/passwd&#39;).fileno =&gt; 5 I know that file descriptors (FD) 0, 1, and &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,6 +86,103 @@ less intrusive to end &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2012/11/08/what-happened-to-fd-3-and-4-in-mri/">What Happened to FD 3 and 4 in MRI</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-08T16:07:00-08:00" pubdate data-updated="true">Nov 8<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/11/08/what-happened-to-fd-3-and-4-in-mri/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I got curious when this happened:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p286</span> <span class="p">:</span><span class="mo">032</span> <span class="o">&gt;</span> <span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;/etc/passwd&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fileno</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">5</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I know that file descriptors (FD) 0, 1, and 2 are assigned to STDIN, STDOUT, and STDERR.  I also know that FDs are assigned
+in order.  So what happened to 3 and 4?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p286</span> <span class="p">:</span><span class="mo">015</span> <span class="o">&gt;</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">fileno</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">0</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p286</span> <span class="p">:</span><span class="mo">034</span> <span class="o">&gt;</span> <span class="no">IO</span><span class="o">.</span><span class="n">for_fd</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span><span class='line'><span class="no">ArgumentError</span><span class="p">:</span> <span class="no">The</span> <span class="n">given</span> <span class="n">fd</span> <span class="n">is</span> <span class="ow">not</span> <span class="n">accessible</span> <span class="n">because</span> <span class="no">RubyVM</span> <span class="n">reserves</span> <span class="n">it</span>
+</span><span class='line'>  <span class="n">from</span> <span class="p">(</span><span class="n">irb</span><span class="p">):</span><span class="mi">34</span><span class="ss">:in</span> <span class="sb">`for_fd&#39;</span>
+</span><span class='line'><span class="sb"> from (irb):34</span>
+</span><span class='line'><span class="sb"> from /Users/zlu/.rvm/rubies/ruby-1.9.3-p286/bin/irb:16:in `</span><span class="o">&lt;</span><span class="n">main</span><span class="o">&gt;</span><span class="err">&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Evidently some ruby process is using it, but what process?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>zlu@zlu-mba:~<span class="nv">$ </span>lsof -d 3,4 | grep ruby
+</span><span class='line'>ruby      4980  zlu    3     PIPE 0xffffff8029fa7860     16384           -&gt;0xffffff8029fa4370
+</span><span class='line'>ruby      4980  zlu    4     PIPE 0xffffff8029fa4370     16384           -&gt;0xffffff8029fa7860
+</span><span class='line'>
+</span><span class='line'>COMMAND    PID  USER   FD    TYPE DEVICE                  SIZE/OFF   NODE NAME
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>zlu@zlu-mba:~<span class="nv">$ </span>ps -p 4980
+</span><span class='line'>  PID TTY           TIME CMD
+</span><span class='line'> 4980 ttys003    0:00.47 irb
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So Ruby&#8217;s RVM is using <em>pipes</em> with FD 3 and 4.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -979,56 +1077,6 @@ using the FileUploader under test.  The upload url is the subject under test.</p
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2012/05/18/my-current-emacs/">My Current Emacs</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-18T19:49:00-07:00" pubdate data-updated="true">May 18<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/05/18/my-current-emacs/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><pre>
-Emacs with Sidebar enabled.
-Emacs shows: file size, (row, col), file mode (Erlang), time, CPU load, [Battery]
-Emacs uses Tango dark theme.
-Emacs with Rinari enabled.
-</pre>
-
-
-<p><a href="https://gist.github.com/2727854">.emacs</a></p>
-
-<p><img src="http://f.cl.ly/items/152h3x2t0N440t2Q2D0Q/Screen%20Shot%202012-05-18%20at%207.51.27%20PM.png"></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1056,6 +1104,10 @@ Emacs with Rinari enabled.
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/11/08/what-happened-to-fd-3-and-4-in-mri/">What Happened to FD 3 and 4 in MRI</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/07/rolling-deployment/">Rolling Deployment</a>
       </li>
     
@@ -1069,10 +1121,6 @@ Emacs with Rinari enabled.
     
       <li class="post">
         <a href="/blog/2012/10/16/a-small-difference-between-mongoid-and-activerecord-query-interface/">A Small Difference Between Mongoid and ActiveRecord Query Interface</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/10/16/segmentation-fault-with-rails-and-json/">Segmentation fault with Rails and JSON</a>
       </li>
     
   </ul>
