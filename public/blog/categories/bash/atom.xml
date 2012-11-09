@@ -20,29 +20,37 @@
     <id>http://www.zlu.me/blog/2012/07/31/uninstall-multiple-versions-of-multiple-ruby-gem</id>
     <content type="html"><![CDATA[<p>Let's say you have multiple versions of spree gems installed and want to get rid of the older versions.</p>
 
-<p>{% codeblock lang:bash %}
-zlu@zlu-mba: gem list spree
-spree (1.1.3, 1.0.0, 1.0.0.rc2)
-spree_api (1.1.3, 1.0.0, 1.0.0.rc2)
-spree_auth (1.1.3, 1.0.0, 1.0.0.rc2)
-spree_cmd (1.1.3, 1.0.0, 1.0.0.rc2)
-spree_core (1.1.3, 1.0.0, 1.0.0.rc2)
-spree_dash (1.1.3, 1.0.0, 1.0.0.rc2)
-spree_promo (1.1.3, 1.0.0, 1.0.0.rc2)
-spree_sample (1.1.3, 1.0.0, 1.0.0.rc2)
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>zlu@zlu-mba: gem list spree
+</span><span class='line'>spree <span class="o">(</span>1.1.3, 1.0.0, 1.0.0.rc2<span class="o">)</span>
+</span><span class='line'>spree_api <span class="o">(</span>1.1.3, 1.0.0, 1.0.0.rc2<span class="o">)</span>
+</span><span class='line'>spree_auth <span class="o">(</span>1.1.3, 1.0.0, 1.0.0.rc2<span class="o">)</span>
+</span><span class='line'>spree_cmd <span class="o">(</span>1.1.3, 1.0.0, 1.0.0.rc2<span class="o">)</span>
+</span><span class='line'>spree_core <span class="o">(</span>1.1.3, 1.0.0, 1.0.0.rc2<span class="o">)</span>
+</span><span class='line'>spree_dash <span class="o">(</span>1.1.3, 1.0.0, 1.0.0.rc2<span class="o">)</span>
+</span><span class='line'>spree_promo <span class="o">(</span>1.1.3, 1.0.0, 1.0.0.rc2<span class="o">)</span>
+</span><span class='line'>spree_sample <span class="o">(</span>1.1.3, 1.0.0, 1.0.0.rc2<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Instead of doing this a bunch of times (for different gems and versions):</p>
 
-<p>{% codeblock lang:bash %}
-gem uninstall spree -v 1.0.0
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gem uninstall spree -v 1.0.0
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Do this:</p>
 
-<p>{% codeblock lang:bash %}
-gem uninstall spree{,<em>api,</em>auth,<em>cmd,</em>core,<em>dash,</em>promo,_sample} -v {1.0.0, 1.0.0.rc2}
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gem uninstall spree<span class="o">{</span>,&lt;em&gt;api,&lt;/em&gt;auth,&lt;em&gt;cmd,&lt;/em&gt;core,&lt;em&gt;dash,&lt;/em&gt;promo,_sample<span class="o">}</span> -v <span class="o">{</span>1.0.0, 1.0.0.rc2<span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>This is a feature of bash shell - <a href="http://www.gnu.org/software/bash/manual/html_node/Brace-Expansion.html#Brace-Expansion">brace expansion</a>.</p>
 ]]></content>

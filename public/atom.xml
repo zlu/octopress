@@ -4,7 +4,7 @@
   <title><![CDATA[@zlu]]></title>
   <link href="http://www.zlu.me/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2012-11-08T16:19:13-08:00</updated>
+  <updated>2012-11-08T16:20:14-08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -75,7 +75,7 @@ in order.  So what happened to 3 and 4?</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>So Ruby&#8217;s RVM is using <em>pipes</em> with FD 3 and 4.</p>
+<p>So Ruby&#8217;s RVM is using <em>pipes</em> with FD 3 and 4.  As far as what these pipes are used for, that&#8217;ll be another discussion.</p>
 ]]></content>
   </entry>
   
