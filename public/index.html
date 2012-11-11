@@ -9,9 +9,8 @@
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="I got curious when this happened: 1
-2
-1.9.3p286 :032 &gt; File.open(&#39;/etc/passwd&#39;).fileno =&gt; 5 I know that file descriptors (FD) 0, 1, and &hellip;">
+  <meta name="description" content="When a new version of Ruby comes out, I like to use RVM to install it, migrate ruby gems to new ruby, and remove the
+older version of ruby. This &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,6 +85,103 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2012/11/10/housekeeping-rvm/">Housekeeping RVM</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-10T18:13:00-08:00" pubdate data-updated="true">Nov 10<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/11/10/housekeeping-rvm/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>When a new version of Ruby comes out, I like to use RVM to install it, migrate ruby gems to new ruby, and remove the
+older version of ruby.  This prevent the disk bloated with different versions of Rubies and duplicate gem(sets).</p>
+
+<p>First, always update the RVM because it&#8217;ll also update known list of Ruby.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm get stable
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then list known versions of Rubies</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm list known
+</span><span class='line'>
+</span><span class='line'>...
+</span><span class='line'><span class="o">[</span>ruby-<span class="o">]</span>1.9.3-p286
+</span><span class='line'><span class="o">[</span>ruby-<span class="o">]</span>1.9.3-<span class="o">[</span>p327<span class="o">]</span>
+</span><span class='line'><span class="o">[</span>ruby-<span class="o">]</span>1.9.3-head
+</span><span class='line'><span class="o">[</span>ruby-<span class="o">]</span>2.0.0-preview1
+</span><span class='line'>...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The output shows abridged result since the full list is long.  I currently have p286 installed and I&#8217;m about to install p327
+because it contains a security fix for DoS attack in p286.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm install 1.9.3
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Since p327 is the default stable version (as indicated by []), the command above is sufficient.</p>
+
+<p>Now you can migrate the gem(sets)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm migrate 1.9.3-p286 1.9.3-p327
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As part of the migration, you could opt to remove old ruby version.  Then check the disk usage:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm disk-usage all
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Note</h2>
+
+<p><a href="https://github.com/wayneeseguin/rvm">RVM</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -919,164 +1015,6 @@ It is hard to read.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2012/07/17/testing-carrierwave-with-fog/">Testing Carrierwave With Fog for Amazon S3</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-17T21:10:00-07:00" pubdate data-updated="true">Jul 17<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/17/testing-carrierwave-with-fog/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Testing file upload using CarrierWave with Fog with S3 turns out to be difficult.</p>
-
-<ul>
-<li>CarrierWave/Fog need a non-empty file, otherwise the url to the S3 object will be nil and can&#8217;t be tested.</li>
-<li>Fog.mock! doesn&#8217;t work out of box.  Some extra steps are needed to avoid uploading files to S3 when running tests.</li>
-</ul>
-
-
-<p>First, create config/fog_credentials.yml</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">default</span><span class="p-Indicator">:</span>
-</span><span class='line'>  <span class="l-Scalar-Plain">aws_access_key_id</span><span class="p-Indicator">:</span> <span class="s">&#39;your-aws-access-key-id&#39;</span>
-</span><span class='line'>  <span class="l-Scalar-Plain">aws_secret_access_key</span><span class="p-Indicator">:</span> <span class="s">&#39;your-aws-secret-access-key/&#39;</span>
-</span><span class='line'>  <span class="l-Scalar-Plain">region</span><span class="p-Indicator">:</span> <span class="s">&#39;your-aws-region&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Next, put this to your config/initializers/carrier_wave.rb</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Fog</span><span class="o">.</span><span class="n">credentials_path</span> <span class="o">=</span> <span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;config/fog_credentials.yml&#39;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">fog_dir</span> <span class="o">=</span> <span class="no">Rails</span><span class="o">.</span><span class="n">env</span> <span class="o">==</span> <span class="s1">&#39;production&#39;</span> <span class="p">?</span> <span class="s1">&#39;production-bucket&#39;</span> <span class="p">:</span> <span class="s1">&#39;dev-bucket&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="no">CarrierWave</span><span class="o">.</span><span class="n">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
-</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">fog_credentials</span> <span class="o">=</span> <span class="p">{</span><span class="ss">:provider</span> <span class="o">=&gt;</span> <span class="s1">&#39;AWS&#39;</span><span class="p">}</span>
-</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">fog_directory</span>  <span class="o">=</span> <span class="n">fog_dir</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Next, put this into spec/support/fog_helper.rb</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Fog</span><span class="o">.</span><span class="n">mock!</span>
-</span><span class='line'><span class="no">Fog</span><span class="o">.</span><span class="n">credentials_path</span> <span class="o">=</span> <span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;config/fog_credentials.yml&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">connection</span> <span class="o">=</span> <span class="no">Fog</span><span class="o">::</span><span class="no">Storage</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:provider</span> <span class="o">=&gt;</span> <span class="s1">&#39;AWS&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">connection</span><span class="o">.</span><span class="n">directories</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:key</span> <span class="o">=&gt;</span> <span class="s1">&#39;dev-bucket&#39;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Note, the :key value <em>must</em> match whats defined for fog_dir (dev-bucket) in carrier_wave.rb</p>
-
-<p>Suppose you want to test this class:</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">FileUploader</span> <span class="o">&lt;</span> <span class="no">CarrierWave</span><span class="o">::</span><span class="no">Uploader</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>  <span class="n">storage</span> <span class="ss">:fog</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Your rspec test can be something like this:</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">TestFileUploader</span>
-</span><span class='line'>  <span class="n">mount_uploader</span> <span class="ss">:file</span><span class="p">,</span> <span class="no">FileUploader</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">describe</span> <span class="no">FileUploader</span> <span class="k">do</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">FakeFS</span><span class="o">::</span><span class="no">SpecHelpers</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">context</span> <span class="s1">&#39;for non-production environment&#39;</span> <span class="k">do</span>
-</span><span class='line'>    <span class="n">it</span> <span class="s1">&#39;should upload video clip to dev-bucket on s3&#39;</span> <span class="k">do</span>
-</span><span class='line'>      <span class="no">FakeFS</span><span class="o">.</span><span class="n">activate!</span>
-</span><span class='line'>      <span class="no">FakeFS</span><span class="o">::</span><span class="no">File</span><span class="o">.</span><span class="n">should_receive</span><span class="p">(</span><span class="ss">:chmod</span><span class="p">)</span> <span class="c1">#this is needed or you will get an exception</span>
-</span><span class='line'>      <span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;test_file&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
-</span><span class='line'>        <span class="n">f</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span> <span class="c1"># this is required or uploader_test.file.url will be nil</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>      <span class="n">uploader_test</span> <span class="o">=</span> <span class="no">TestFileUploader</span><span class="o">.</span><span class="n">new</span>
-</span><span class='line'>      <span class="n">uploader_test</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;test_file&#39;</span><span class="p">)</span>
-</span><span class='line'>      <span class="n">uploader_test</span><span class="o">.</span><span class="n">save!</span>
-</span><span class='line'>      <span class="n">uploader_test</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">should</span> <span class="n">match</span> <span class="sr">/.*\/dev-bucket.*/</span> <span class="c1">#test to make sure that it is not production-bucket</span>
-</span><span class='line'>      <span class="no">FakeFS</span><span class="o">.</span><span class="n">deactivate!</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now the test is complete.  It uses fakefs to generate a fake file which is non-empty.  Fog will pretent to upload the file
-using the FileUploader under test.  The upload url is the subject under test.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1104,6 +1042,10 @@ using the FileUploader under test.  The upload url is the subject under test.</p
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/11/10/housekeeping-rvm/">Housekeeping RVM</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/08/what-happened-to-fd-3-and-4-in-mri/">What Happened to FD 3 and 4 in MRI</a>
       </li>
     
@@ -1117,10 +1059,6 @@ using the FileUploader under test.  The upload url is the subject under test.</p
     
       <li class="post">
         <a href="/blog/2012/10/29/install-and-create-rails-4-dot-0-app/">Install and Create Rails 4.0 App</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/10/16/a-small-difference-between-mongoid-and-activerecord-query-interface/">A Small Difference Between Mongoid and ActiveRecord Query Interface</a>
       </li>
     
   </ul>

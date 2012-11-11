@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | @zlu]]></title>
   <link href="http://www.zlu.me/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2012-11-08T16:20:14-08:00</updated>
+  <updated>2012-11-10T18:30:51-08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -12,6 +12,60 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Housekeeping RVM]]></title>
+    <link href="http://www.zlu.me/blog/2012/11/10/housekeeping-rvm/"/>
+    <updated>2012-11-10T18:13:00-08:00</updated>
+    <id>http://www.zlu.me/blog/2012/11/10/housekeeping-rvm</id>
+    <content type="html"><![CDATA[<p>When a new version of Ruby comes out, I like to use RVM to install it, migrate ruby gems to new ruby, and remove the
+older version of ruby.  This prevent the disk bloated with different versions of Rubies and duplicate gem(sets).</p>
+
+<p>First, always update the RVM because it'll also update known list of Ruby.</p>
+
+<p><code>bash
+rvm get stable
+</code></p>
+
+<p>Then list known versions of Rubies</p>
+
+<p>``` bash
+rvm list known</p>
+
+<p>...
+[ruby-]1.9.3-p286
+[ruby-]1.9.3-[p327]
+[ruby-]1.9.3-head
+[ruby-]2.0.0-preview1
+...
+```</p>
+
+<p>The output shows abridged result since the full list is long.  I currently have p286 installed and I'm about to install p327
+because it contains a security fix for DoS attack in p286.</p>
+
+<p><code>bash
+rvm install 1.9.3
+</code></p>
+
+<p>Since p327 is the default stable version (as indicated by []), the command above is sufficient.</p>
+
+<p>Now you can migrate the gem(sets)</p>
+
+<p><code>bash
+rvm migrate 1.9.3-p286 1.9.3-p327
+</code></p>
+
+<p>As part of the migration, you could opt to remove old ruby version.  Then check the disk usage:</p>
+
+<p><code>bash
+rvm disk-usage all
+</code></p>
+
+<h2>Note</h2>
+
+<p><a href="https://github.com/wayneeseguin/rvm">RVM</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Segmentation fault with Rails and JSON]]></title>

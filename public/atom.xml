@@ -4,7 +4,7 @@
   <title><![CDATA[@zlu]]></title>
   <link href="http://www.zlu.me/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2012-11-08T16:20:14-08:00</updated>
+  <updated>2012-11-10T18:30:51-08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -12,6 +12,72 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Housekeeping RVM]]></title>
+    <link href="http://www.zlu.me/blog/2012/11/10/housekeeping-rvm/"/>
+    <updated>2012-11-10T18:13:00-08:00</updated>
+    <id>http://www.zlu.me/blog/2012/11/10/housekeeping-rvm</id>
+    <content type="html"><![CDATA[<p>When a new version of Ruby comes out, I like to use RVM to install it, migrate ruby gems to new ruby, and remove the
+older version of ruby.  This prevent the disk bloated with different versions of Rubies and duplicate gem(sets).</p>
+
+<p>First, always update the RVM because it&#8217;ll also update known list of Ruby.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm get stable
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then list known versions of Rubies</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm list known
+</span><span class='line'>
+</span><span class='line'>...
+</span><span class='line'><span class="o">[</span>ruby-<span class="o">]</span>1.9.3-p286
+</span><span class='line'><span class="o">[</span>ruby-<span class="o">]</span>1.9.3-<span class="o">[</span>p327<span class="o">]</span>
+</span><span class='line'><span class="o">[</span>ruby-<span class="o">]</span>1.9.3-head
+</span><span class='line'><span class="o">[</span>ruby-<span class="o">]</span>2.0.0-preview1
+</span><span class='line'>...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The output shows abridged result since the full list is long.  I currently have p286 installed and I&#8217;m about to install p327
+because it contains a security fix for DoS attack in p286.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm install 1.9.3
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Since p327 is the default stable version (as indicated by []), the command above is sufficient.</p>
+
+<p>Now you can migrate the gem(sets)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm migrate 1.9.3-p286 1.9.3-p327
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As part of the migration, you could opt to remove old ruby version.  Then check the disk usage:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm disk-usage all
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Note</h2>
+
+<p><a href="https://github.com/wayneeseguin/rvm">RVM</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[What Happened to FD 3 and 4 in MRI]]></title>
