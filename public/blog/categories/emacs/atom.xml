@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Emacs | @zlu]]></title>
   <link href="http://www.zlu.me/blog/categories/emacs/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2012-11-10T18:30:51-08:00</updated>
+  <updated>2013-01-12T10:13:18+08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[My Current Emacs]]></title>
     <link href="http://www.zlu.me/blog/2012/05/18/my-current-emacs/"/>
-    <updated>2012-05-18T19:49:00-07:00</updated>
+    <updated>2012-05-18T19:49:00+08:00</updated>
     <id>http://www.zlu.me/blog/2012/05/18/my-current-emacs</id>
     <content type="html"><![CDATA[<pre>
 Emacs with Sidebar enabled.
@@ -28,7 +28,7 @@ Emacs with Rinari enabled.
 
 <p><a href="https://gist.github.com/2727854">.emacs</a></p>
 
-<p><img src="http://f.cl.ly/items/152h3x2t0N440t2Q2D0Q/Screen%20Shot%202012-05-18%20at%207.51.27%20PM.png"></p>
+<p>{% img http://f.cl.ly/items/152h3x2t0N440t2Q2D0Q/Screen%20Shot%202012-05-18%20at%207.51.27%20PM.png %}</p>
 ]]></content>
   </entry>
   

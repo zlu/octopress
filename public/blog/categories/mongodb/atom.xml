@@ -4,7 +4,7 @@
   <title><![CDATA[Category: MongoDB | @zlu]]></title>
   <link href="http://www.zlu.me/blog/categories/mongodb/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2012-11-10T18:30:51-08:00</updated>
+  <updated>2013-01-12T10:13:18+08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[A Small Difference Between Mongoid and ActiveRecord Query Interface]]></title>
     <link href="http://www.zlu.me/blog/2012/10/16/a-small-difference-between-mongoid-and-activerecord-query-interface/"/>
-    <updated>2012-10-16T21:29:00-07:00</updated>
+    <updated>2012-10-16T21:29:00+08:00</updated>
     <id>http://www.zlu.me/blog/2012/10/16/a-small-difference-between-mongoid-and-activerecord-query-interface</id>
     <content type="html"><![CDATA[<p>There are definitely some gotchas when switching from ActiveRecord to MongoDB (with Mongoid for example).  One of them
 is how the IN operator in SQL is supported.</p>
