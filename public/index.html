@@ -121,15 +121,18 @@ here. Issue 1: &hellip;">
   <div class="entry-content"><p>I run postgres locally for development on OS X (mountain lion).  I&#8217;ve run into a few issues and am documenting solutions
 here.</p>
 
-<p>Issue 1: Insufficient shared memory
-Postgres requires sufficient shared memory or it won&#8217;t start.  If there isn&#8217;t enough, postgres server will fail to start
+<h2>Issue 1: Insufficient Shared Memory</h2>
+
+<p>Postgres requires sufficient shared memory or it won&#8217;t start.  If there isn&#8217;t enough, postgres server will fail to start
 and in server.log you will see this:</p>
 
-<pre>
-FATAL:  could not create shared memory segment: Cannot allocate memory
-DETAIL:  Failed system call was shmget(key=5432001, size=3391488, 03600).
-HINT:  This error usually means that PostgreSQL's request for a shared memory segment exceeded available memory or swap space, or exceeded your kernel's SHMALL parameter.  You can either reduce the request size or reconfigure the kernel with larger SHMALL.  To reduce the request size (currently 3391488 bytes), reduce PostgreSQL's shared memory usage, perhaps by reducing shared_buffers or max_connections.
-</pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>FATAL:  could not create shared memory segment: Cannot allocate memory
+</span><span class='line'>DETAIL:  Failed system call was shmget<span class="o">(</span><span class="nv">key</span><span class="o">=</span>5432001, <span class="nv">size</span><span class="o">=</span>3391488, 03600<span class="o">)</span>.
+</span><span class='line'>HINT:  This error usually means that PostgreSQL<span class="s1">&#39;s request for a shared memory segment exceeded available memory or swap space, or exceeded your kernel&#39;</span>s SHMALL parameter.  You can either reduce the request size or reconfigure the kernel with larger SHMALL.  To reduce the request size <span class="o">(</span>currently 3391488 bytes<span class="o">)</span>, reduce PostgreSQL<span class="err">&#39;</span>s shared memory usage, perhaps by reducing shared_buffers or max_connections.
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>There are two ways to correct this problem.</p>
@@ -141,24 +144,31 @@ HINT:  This error usually means that PostgreSQL's request for a shared memory se
 
 <p>On mountain lion, you could create or modify your /etc/sysctl.conf so it has this:</p>
 
-<pre>
-zlu@zlu-mba:~/projects/me/blog-zlu (master)$ cat /etc/sysctl.conf
-kern.sysv.shmmax=4194304
-kern.sysv.shmmin=1
-kern.sysv.shmmni=32
-kern.sysv.shmseg=8
-kern.sysv.shmall=1024
-</pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>zlu@zlu-mba:~/projects/me/blog-zlu <span class="o">(</span>master<span class="o">)</span><span class="nv">$ </span>cat /etc/sysctl.conf
+</span><span class='line'>kern.sysv.shmmax<span class="o">=</span>4194304
+</span><span class='line'>kern.sysv.shmmin<span class="o">=</span>1
+</span><span class='line'>kern.sysv.shmmni<span class="o">=</span>32
+</span><span class='line'>kern.sysv.shmseg<span class="o">=</span>8
+</span><span class='line'>kern.sysv.shmall<span class="o">=</span>1024
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Make sure shmmax is large enough for postgres and other software that requires shared memeory.
 To figure out how much shared memeory you will need for postgres, take a look at postgresql.conf (probably under /usr/local/var/postgres)</p>
 
-<pre>
-max_connections = 20                    # (change requires restart)
-# Note:  Increasing max_connections costs ~400 bytes of shared memory per
-# connection slot, plus lock space (see max_locks_per_transaction).
-</pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">max_connections</span> <span class="o">=</span> 20                    <span class="c"># (change requires restart)</span>
+</span><span class='line'><span class="c"># Note:  Increasing max_connections costs ~400 bytes of shared memory per</span>
+</span><span class='line'><span class="c"># connection slot, plus lock space (see max_locks_per_transaction).</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>More details can be found here:
@@ -171,49 +181,57 @@ Reduce the requirements as you see fit.</li>
 </ol>
 
 
-<p>Upgrade from 9.1.x to 9.2.x</p>
+<h2>Issue 2: Upgrading from 9.1.x to 9.2.x</h2>
 
-<p>There are two main issues to take care of when upgrading postgres from 9.1.x to 9.2.x</p>
-
-<p>The first is database migration which is well-documented here:</p>
+<p>If you need to migration database, you may run into path issues.</p>
 
 <p>http://www.postgresql.org/docs/9.2/static/upgrading.html</p>
 
-<p>I&#8217;ll summarize the steps here:
-1. Backup <em>before</em> you install 9.2 (with homebrew).  This is important if you want to avoid the hussle later with two versions
-of pg_ctl stomping onto each other.  While the 9.1.x server is running, use pg_dumpall to export the database.
-2. Stop 9.1.x server
-3. mv the data directory (e.g. /usr/local/var/postgres) to postgres.bk.
-4. Install postgres 9.2.x (with homebrew).
-5. Create symlink for plist file for launchctl (it is named differently than 9.1 so you will need to do it again).  The post-install
-instruction of homebrew contain the exact command.</p>
-
-<pre>
-cp /usr/local/Cellar/postgresql/9.2.1/homebrew.mxcl.postgresql.plist ~/Library/LaunchAgents/
-</pre>
-
-
-<p>And remove the plist file that belonged to 9.1.x
-6. initdb (this creates the 9.2.x version of the database).
-7. Import the postgres data backup from the previous pg_dumpall command.
-8. Load plist: launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist</p>
+<p>Here is the steps that work for me:</p>
 
 <ol>
-<li>PID file location change
-If you are doing Rails development, after upgrade postgres and issue &#8216;rails s&#8217; for your project, you may see this error
-which fails Rails server from starting:</li>
+<li>Backup <em>before</em> you install 9.2 (with homebrew).  This is important if you want to avoid the hussle later with two versions
+of <code>pg_ctl</code> stomping onto each other.  While the 9.1.x server is running, use <code>pg_dumpall</code> to export the database.</li>
+<li>Stop 9.1.x server</li>
+<li>mv the data directory (e.g. /usr/local/var/postgres) to postgres.bk.</li>
+<li>Install postgres 9.2.x (with homebrew).</li>
+<li>Create symlink for plist file for launchctl (it is named differently than 9.1 so you will need to do it again).  The post-install
+instruction of homebrew contains the exact command.</li>
 </ol>
 
 
-<pre>
-PGError (could not connect to server: Permission denied
-    Is the server running locally and accepting
-    connections on Unix domain socket "/var/pgsql_socket/.s.PGSQL.5432"?
-)
-</pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>cp /usr/local/Cellar/postgresql/9.2.1/homebrew.mxcl.postgresql.plist ~/Library/LaunchAgents/
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Since postgres 9.2, the unix socket has changed to /var/pgsql_socket/alt.  The pg gem is compiled against the older version
+<p>And remove the plist file that belonged to 9.1.x
+6. <code>initdb</code> (this creates the 9.2.x version of the database).
+7. Import the postgres data backup from the previous <code>pg_dumpall</code> command.
+8. Load plist:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Issue 3: Rails Server Fails to Start</h2>
+
+<p>If you are doing Rails development, after upgrade postgres and issue &#8216;rails s&#8217; for your project, you may see this error
+which fails Rails server from starting:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>PGError <span class="o">(</span>could not connect to server: Permission denied
+</span><span class='line'>  Is the server running locally and accepting
+</span><span class='line'>  connections on Unix domain socket <span class="s2">&quot;/var/pgsql_socket/.s.PGSQL.5432&quot;</span>?
+</span><span class='line'><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Since postgres 9.2, the unix socket file has changed to /var/pgsql_socket/alt.  The pg gem is compiled against the older version
 of postgres (9.1.x) so it looks for the socket file in wrong location.  The easist thing to do is to uninstall and reinstall
 pg gem.</p>
 </div>
