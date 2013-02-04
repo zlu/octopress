@@ -5,14 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>My Current Emacs - @zlu</title>
+  <title>Postgres Gotchas - @zlu</title>
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="Emacs with Sidebar enabled.
-Emacs shows: file size, (row, col), file mode (Erlang), time, CPU load, [Battery]
-Emacs uses Tango dark theme.
-Emacs &hellip;">
+  <meta name="description" content="I run postgres locally for development on OS X (mountain lion). I&#8217;ve run into a few issues and am documenting solutions
+here. Issue 1: &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +19,7 @@ Emacs &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.zlu.me/blog/2012/05/18/my-current-emacs/">
+  <link rel="canonical" href="http://www.zlu.me/blog/2013/02/04/postgres-gotchas/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -91,7 +89,7 @@ Emacs &hellip;">
   <header>
     
       
-        <h1 class="entry-title">My Current Emacs</h1>
+        <h1 class="entry-title">Postgres Gotchas</h1>
       
     
     
@@ -108,7 +106,7 @@ Emacs &hellip;">
   
 
 
-<time datetime="2012-05-18T19:49:00+08:00" pubdate data-updated="true">May 18<span>th</span>, 2012</time>
+<time datetime="2013-02-04T11:16:00+08:00" pubdate data-updated="true">Feb 4<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -117,17 +115,104 @@ Emacs &hellip;">
   </header>
 
 
-<div class="entry-content"><pre>
-Emacs with Sidebar enabled.
-Emacs shows: file size, (row, col), file mode (Erlang), time, CPU load, [Battery]
-Emacs uses Tango dark theme.
-Emacs with Rinari enabled.
+<div class="entry-content"><p>I run postgres locally for development on OS X (mountain lion).  I&#8217;ve run into a few issues and am documenting solutions
+here.</p>
+
+<p>Issue 1: Insufficient shared memory
+Postgres requires sufficient shared memory or it won&#8217;t start.  If there isn&#8217;t enough, postgres server will fail to start
+and in server.log you will see this:</p>
+
+<pre>
+FATAL:  could not create shared memory segment: Cannot allocate memory
+DETAIL:  Failed system call was shmget(key=5432001, size=3391488, 03600).
+HINT:  This error usually means that PostgreSQL's request for a shared memory segment exceeded available memory or swap space, or exceeded your kernel's SHMALL parameter.  You can either reduce the request size or reconfigure the kernel with larger SHMALL.  To reduce the request size (currently 3391488 bytes), reduce PostgreSQL's shared memory usage, perhaps by reducing shared_buffers or max_connections.
 </pre>
 
 
-<p><a href="https://gist.github.com/2727854">.emacs</a></p>
+<p>There are two ways to correct this problem.</p>
 
-<p><img src="http://f.cl.ly/items/152h3x2t0N440t2Q2D0Q/Screen%20Shot%202012-05-18%20at%207.51.27%20PM.png"></p>
+<ol>
+<li>Up the shared memory configuration.</li>
+</ol>
+
+
+<p>On mountain lion, you could create or modify your /etc/sysctl.conf so it has this:</p>
+
+<pre>
+zlu@zlu-mba:~/projects/me/blog-zlu (master)$ cat /etc/sysctl.conf
+kern.sysv.shmmax=4194304
+kern.sysv.shmmin=1
+kern.sysv.shmmni=32
+kern.sysv.shmseg=8
+kern.sysv.shmall=1024
+</pre>
+
+
+<p>Make sure shmmax is large enough for postgres and other software that requires shared memeory.
+To figure out how much shared memeory you will need for postgres, take a look at postgresql.conf (probably under /usr/local/var/postgres)</p>
+
+<pre>
+max_connections = 20                    # (change requires restart)
+# Note:  Increasing max_connections costs ~400 bytes of shared memory per
+# connection slot, plus lock space (see max_locks_per_transaction).
+</pre>
+
+
+<p>More details can be found here:
+http://www.postgresql.org/docs/9.2/static/kernel-resources.html#SYSVIPC</p>
+
+<ol>
+<li>Reduce resource requirements
+In postgresql.conf you could search for &#8220;shared memory&#8221; and see all resources (such as max_connections and max_prepared_transactions).
+Reduce the requirements as you see fit.</li>
+</ol>
+
+
+<p>Upgrade from 9.1.x to 9.2.x</p>
+
+<p>There are two main issues to take care of when upgrading postgres from 9.1.x to 9.2.x</p>
+
+<p>The first is database migration which is well-documented here:</p>
+
+<p>http://www.postgresql.org/docs/9.2/static/upgrading.html</p>
+
+<p>I&#8217;ll summarize the steps here:
+1. Backup <em>before</em> you install 9.2 (with homebrew).  This is important if you want to avoid the hussle later with two versions
+of pg_ctl stomping onto each other.  While the 9.1.x server is running, use pg_dumpall to export the database.
+2. Stop 9.1.x server
+3. mv the data directory (e.g. /usr/local/var/postgres) to postgres.bk.
+4. Install postgres 9.2.x (with homebrew).
+5. Create symlink for plist file for launchctl (it is named differently than 9.1 so you will need to do it again).  The post-install
+instruction of homebrew contain the exact command.</p>
+
+<pre>
+cp /usr/local/Cellar/postgresql/9.2.1/homebrew.mxcl.postgresql.plist ~/Library/LaunchAgents/
+</pre>
+
+
+<p>And remove the plist file that belonged to 9.1.x
+6. initdb (this creates the 9.2.x version of the database).
+7. Import the postgres data backup from the previous pg_dumpall command.
+8. Load plist: launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist</p>
+
+<ol>
+<li>PID file location change
+If you are doing Rails development, after upgrade postgres and issue &#8216;rails s&#8217; for your project, you may see this error
+which fails Rails server from starting:</li>
+</ol>
+
+
+<pre>
+PGError (could not connect to server: Permission denied
+    Is the server running locally and accepting
+    connections on Unix domain socket "/var/pgsql_socket/.s.PGSQL.5432"?
+)
+</pre>
+
+
+<p>Since postgres 9.2, the unix socket has changed to /var/pgsql_socket/alt.  The pg gem is compiled against the older version
+of postgres (9.1.x) so it looks for the socket file in wrong location.  The easist thing to do is to uninstall and reinstall
+pg gem.</p>
 </div>
 
 
@@ -150,12 +235,12 @@ Emacs with Rinari enabled.
   
 
 
-<time datetime="2012-05-18T19:49:00+08:00" pubdate data-updated="true">May 18<span>th</span>, 2012</time>
+<time datetime="2013-02-04T11:16:00+08:00" pubdate data-updated="true">Feb 4<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/emacs/'>Emacs</a>
+    <a class='category' href='/blog/categories/database/'>database</a>, <a class='category' href='/blog/categories/sharedmemory/'>sharedmemory</a>, <a class='category' href='/blog/categories/upgrade/'>upgrade</a>
   
 </span>
 
@@ -164,8 +249,8 @@ Emacs with Rinari enabled.
     
       <div class="sharing">
     
-    <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.zlu.me/blog/2012/05/18/my-current-emacs/"
-       data-via="zlu" data-counturl="http://www.zlu.me/blog/2012/05/18/my-current-emacs/">Tweet</a>
+    <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.zlu.me/blog/2013/02/04/postgres-gotchas/"
+       data-via="zlu" data-counturl="http://www.zlu.me/blog/2013/02/04/postgres-gotchas/">Tweet</a>
     
     
     <div class="g-plusone" data-size="small"></div>
@@ -183,7 +268,7 @@ Emacs with Rinari enabled.
         type:'3',
         count:'1', /**是否显示分享数，1显示(可选)*/
         appkey:'', /**您申请的应用appkey,显示分享来源(可选)*/
-        title:"http://www.zlu.me/blog/2012/05/18/my-current-emacs/",/**分享的文字内容(可选，默认为所在页面的title)*/
+        title:"http://www.zlu.me/blog/2013/02/04/postgres-gotchas/",/**分享的文字内容(可选，默认为所在页面的title)*/
         pic:'', /**分享图片的路径(可选)*/
         ralateUid:"2091903003", /**关联用户的UID，分享微博会@该用户(可选)*/
     	language:'zh_cn', /**设置语言，zh_cn|zh_tw(可选)*/
@@ -202,10 +287,8 @@ Emacs with Rinari enabled.
     
     <p class="meta">
       
-        <a class="basic-alignment left articlenav" href="/blog/2012/05/13/tdd-by-jim-weirich/" title="Previous Post: TDD by Jim Weirich">&laquo; TDD by Jim Weirich</a>
+        <a class="basic-alignment left articlenav" href="/blog/2012/11/10/housekeeping-rvm/" title="Previous Post: Housekeeping RVM">&laquo; Housekeeping RVM</a>
       
-      
-        <a class="basic-alignment right articlenav" href="/blog/2012/07/17/testing-carrierwave-with-fog/" title="Next Post: Testing Carrierwave with Fog for Amazon S3">Testing Carrierwave with Fog for Amazon S3 &raquo;</a>
       
     </p>
   </footer>
@@ -349,8 +432,8 @@ Emacs with Rinari enabled.
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.zlu.me/blog/2012/05/18/my-current-emacs/';
-        var disqus_url = 'http://www.zlu.me/blog/2012/05/18/my-current-emacs/';
+        var disqus_identifier = 'http://www.zlu.me/blog/2013/02/04/postgres-gotchas/';
+        var disqus_url = 'http://www.zlu.me/blog/2013/02/04/postgres-gotchas/';
         var disqus_script = 'embed.js';
       
     (function () {

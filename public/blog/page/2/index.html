@@ -9,7 +9,8 @@
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="Testing file upload using CarrierWave with Fog with S3 turns out to be difficult. CarrierWave/Fog need a non-empty file, otherwise the url to the S3 &hellip;">
+  <meta name="description" content="We often deal with viewing JSON documents in command line such as using curl against a server that returns JSON response.
+It is hard to read. jsonpp &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,6 +85,129 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2012/07/19/pretty-print-json-in-command-line/">Pretty Print JSON in Command Line</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-19T16:28:00+08:00" pubdate data-updated="true">Jul 19<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/19/pretty-print-json-in-command-line/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>We often deal with viewing JSON documents in command line such as using curl against a server that returns JSON response.
+It is hard to read.</p>
+
+<p><a href="https://github.com/jmhodges/jsonpp/">jsonpp</a> comes to rescue.</p>
+
+<p>On OS X, simply issue <code>brew install jsonpp</code></p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>zlu@zlu-mba:~/projects <span class="o">(</span>master *<span class="o">)</span><span class="nv">$ </span>curl --user foo@bar.com:abc123 http://localhost:3000/users
+</span><span class='line'><span class="o">[{</span><span class="s2">&quot;_id&quot;</span>:<span class="s2">&quot;500859f1827bc70b84000001&quot;</span>,<span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;2012-07-19T12:03:22-07:00&quot;</span>,<span class="s2">&quot;email&quot;</span>:<span class="s2">&quot;zlu@foo.bar&quot;</span>,<span class="s2">&quot;facebook_access_token&quot;</span>:null,<span class="s2">&quot;facebook_access_token_expiration&quot;</span>:null,<span class="s2">&quot;facebook_id&quot;</span>:null,<span class="s2">&quot;family_id&quot;</span>:null,<span class="s2">&quot;first_name&quot;</span>:<span class="s2">&quot;zhao&quot;</span>,<span class="s2">&quot;last_name&quot;</span>:<span class="s2">&quot;lu&quot;</span>,<span class="s2">&quot;phone_number&quot;</span>:null,<span class="s2">&quot;updated_at&quot;</span>:<span class="s2">&quot;2012-07-19T12:03:22-07:00&quot;</span><span class="o">}</span>,<span class="o">{</span><span class="s2">&quot;_id&quot;</span>:<span class="s2">&quot;500864a1827bc710a9000004&quot;</span>,<span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;2012-07-19T12:48:49-07:00&quot;</span>,<span class="s2">&quot;email&quot;</span>:<span class="s2">&quot;foo@bar.com&quot;</span>,<span class="s2">&quot;facebook_access_token&quot;</span>:null,<span class="s2">&quot;facebook_access_token_expiration&quot;</span>:null,<span class="s2">&quot;facebook_id&quot;</span>:null,<span class="s2">&quot;family_id&quot;</span>:null,<span class="s2">&quot;first_name&quot;</span>:<span class="s2">&quot;foo&quot;</span>,<span class="s2">&quot;last_name&quot;</span>:<span class="s2">&quot;bar&quot;</span>,<span class="s2">&quot;phone_number&quot;</span>:null,<span class="s2">&quot;updated_at&quot;</span>:<span class="s2">&quot;2012-07-19T12:48:49-07:00&quot;</span><span class="o">}]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After piping through jsonpp</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>zlu@zlu-mba:~/projects <span class="o">(</span>master *<span class="o">)</span><span class="nv">$ </span>curl --user foo@bar.com:abc123 http://localho000/users | jsonpp
+</span><span class='line'>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+</span><span class='line'>                                 Dload  Upload   Total   Spent    Left  Speed
+</span><span class='line'>100   604  100   604    0     0  45280      0 --:--:-- --:--:-- --:--:-- 60400
+</span><span class='line'><span class="o">[</span>
+</span><span class='line'>  <span class="o">{</span>
+</span><span class='line'>    <span class="s2">&quot;_id&quot;</span>: <span class="s2">&quot;500859f1827bc70b84000001&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;created_at&quot;</span>: <span class="s2">&quot;2012-07-19T12:03:22-07:00&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;email&quot;</span>: <span class="s2">&quot;zlu@foo.bar&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;facebook_access_token&quot;</span>: null,
+</span><span class='line'>    <span class="s2">&quot;facebook_access_token_expiration&quot;</span>: null,
+</span><span class='line'>    <span class="s2">&quot;facebook_id&quot;</span>: null,
+</span><span class='line'>    <span class="s2">&quot;family_id&quot;</span>: null,
+</span><span class='line'>    <span class="s2">&quot;first_name&quot;</span>: <span class="s2">&quot;zhao&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;last_name&quot;</span>: <span class="s2">&quot;lu&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;phone_number&quot;</span>: null,
+</span><span class='line'>    <span class="s2">&quot;updated_at&quot;</span>: <span class="s2">&quot;2012-07-19T12:03:22-07:00&quot;</span>
+</span><span class='line'>  <span class="o">}</span>,
+</span><span class='line'>  <span class="o">{</span>
+</span><span class='line'>    <span class="s2">&quot;_id&quot;</span>: <span class="s2">&quot;500864a1827bc710a9000004&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;created_at&quot;</span>: <span class="s2">&quot;2012-07-19T12:48:49-07:00&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;email&quot;</span>: <span class="s2">&quot;foo@bar.com&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;facebook_access_token&quot;</span>: null,
+</span><span class='line'>    <span class="s2">&quot;facebook_access_token_expiration&quot;</span>: null,
+</span><span class='line'>    <span class="s2">&quot;facebook_id&quot;</span>: null,
+</span><span class='line'>    <span class="s2">&quot;family_id&quot;</span>: null,
+</span><span class='line'>    <span class="s2">&quot;first_name&quot;</span>: <span class="s2">&quot;foo&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;last_name&quot;</span>: <span class="s2">&quot;bar&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;phone_number&quot;</span>: null,
+</span><span class='line'>    <span class="s2">&quot;updated_at&quot;</span>: <span class="s2">&quot;2012-07-19T12:48:49-07:00&quot;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -816,96 +940,9 @@ flaws.  Afterall, coders want to deliver better code.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2011/11/01/git-auto-complete/">Git Auto Complete</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-11-01T22:04:00+08:00" pubdate data-updated="true">Nov 1<span>st</span>, 2011</time>
-        
-         | <a href="/blog/2011/11/01/git-auto-complete/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Git auto complete is a convenient feature.</p>
-
-<p>This feature is based on git-completion file comes with git.</p>
-
-<p>On OS X, if you install git via homebrew, you can find git source directory using:</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>locate git | grep Cellar
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Locate the git-completion file.</p>
-
-<p>In my case, it is `/usr/local/Cellar/git/1.7.5/etc/bash_completion.d/git-completion.bash</p>
-
-<p>Open this file and you will find this explanation:</p>
-
-<p>The contained completion routines provide support for completing:</p>
-
-<ul>
-<li>local and remote branch names</li>
-<li>local and remote tag names</li>
-<li>.git/remotes file names</li>
-<li>git &#8216;subcommands&#8217;</li>
-<li>tree paths within &#8216;ref:path/to/file&#8217; expressions</li>
-<li>common &#8211;long-options</li>
-</ul>
-
-
-<p>And the steps to enable this</p>
-
-<ul>
-<li>Copy this file to somewhere (e.g. ~/.git-completion.sh).</li>
-<li>Add the following line <code>source ~/.git-completion.sh</code> to your .bashrc</li>
-<li>Changing PS1 to show current branch <code>PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '</code></li>
-</ul>
-
-
-<p>If you want some color in git prompt</p>
-
-<p><code>PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '</code></p>
-
-<p>If you want the prompt to show git-ps1 state
-<code>GIT_PS1_SHOWDIRTYSTATE=true</code></p>
-
-<p><code>Generating Site with Jekyllbe rake generate</code></p>
-
-<p>Example:</p>
-
-<p><code>zlu@zlu-mba:~/projects/me/octopress (master *)</code></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/3/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -932,6 +969,10 @@ flaws.  Afterall, coders want to deliver better code.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/02/04/postgres-gotchas/">Postgres Gotchas</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/10/housekeeping-rvm/">Housekeeping RVM</a>
       </li>
     
@@ -945,10 +986,6 @@ flaws.  Afterall, coders want to deliver better code.</p>
     
       <li class="post">
         <a href="/blog/2012/11/01/encourage-social-sharing-in-china/">Encourage Social Sharing in China</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/10/29/install-and-create-rails-4-dot-0-app/">Install and Create Rails 4.0 App</a>
       </li>
     
   </ul>

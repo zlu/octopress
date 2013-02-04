@@ -4,7 +4,7 @@
   <title><![CDATA[@zlu]]></title>
   <link href="http://www.zlu.me/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2013-01-12T10:13:18+08:00</updated>
+  <updated>2013-02-04T11:45:56+08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -12,6 +12,112 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Postgres Gotchas]]></title>
+    <link href="http://www.zlu.me/blog/2013/02/04/postgres-gotchas/"/>
+    <updated>2013-02-04T11:16:00+08:00</updated>
+    <id>http://www.zlu.me/blog/2013/02/04/postgres-gotchas</id>
+    <content type="html"><![CDATA[<p>I run postgres locally for development on OS X (mountain lion).  I&#8217;ve run into a few issues and am documenting solutions
+here.</p>
+
+<p>Issue 1: Insufficient shared memory
+Postgres requires sufficient shared memory or it won&#8217;t start.  If there isn&#8217;t enough, postgres server will fail to start
+and in server.log you will see this:</p>
+
+<pre>
+FATAL:  could not create shared memory segment: Cannot allocate memory
+DETAIL:  Failed system call was shmget(key=5432001, size=3391488, 03600).
+HINT:  This error usually means that PostgreSQL's request for a shared memory segment exceeded available memory or swap space, or exceeded your kernel's SHMALL parameter.  You can either reduce the request size or reconfigure the kernel with larger SHMALL.  To reduce the request size (currently 3391488 bytes), reduce PostgreSQL's shared memory usage, perhaps by reducing shared_buffers or max_connections.
+</pre>
+
+
+<p>There are two ways to correct this problem.</p>
+
+<ol>
+<li>Up the shared memory configuration.</li>
+</ol>
+
+
+<p>On mountain lion, you could create or modify your /etc/sysctl.conf so it has this:</p>
+
+<pre>
+zlu@zlu-mba:~/projects/me/blog-zlu (master)$ cat /etc/sysctl.conf
+kern.sysv.shmmax=4194304
+kern.sysv.shmmin=1
+kern.sysv.shmmni=32
+kern.sysv.shmseg=8
+kern.sysv.shmall=1024
+</pre>
+
+
+<p>Make sure shmmax is large enough for postgres and other software that requires shared memeory.
+To figure out how much shared memeory you will need for postgres, take a look at postgresql.conf (probably under /usr/local/var/postgres)</p>
+
+<pre>
+max_connections = 20                    # (change requires restart)
+# Note:  Increasing max_connections costs ~400 bytes of shared memory per
+# connection slot, plus lock space (see max_locks_per_transaction).
+</pre>
+
+
+<p>More details can be found here:
+http://www.postgresql.org/docs/9.2/static/kernel-resources.html#SYSVIPC</p>
+
+<ol>
+<li>Reduce resource requirements
+In postgresql.conf you could search for &#8220;shared memory&#8221; and see all resources (such as max_connections and max_prepared_transactions).
+Reduce the requirements as you see fit.</li>
+</ol>
+
+
+<p>Upgrade from 9.1.x to 9.2.x</p>
+
+<p>There are two main issues to take care of when upgrading postgres from 9.1.x to 9.2.x</p>
+
+<p>The first is database migration which is well-documented here:</p>
+
+<p>http://www.postgresql.org/docs/9.2/static/upgrading.html</p>
+
+<p>I&#8217;ll summarize the steps here:
+1. Backup <em>before</em> you install 9.2 (with homebrew).  This is important if you want to avoid the hussle later with two versions
+of pg_ctl stomping onto each other.  While the 9.1.x server is running, use pg_dumpall to export the database.
+2. Stop 9.1.x server
+3. mv the data directory (e.g. /usr/local/var/postgres) to postgres.bk.
+4. Install postgres 9.2.x (with homebrew).
+5. Create symlink for plist file for launchctl (it is named differently than 9.1 so you will need to do it again).  The post-install
+instruction of homebrew contain the exact command.</p>
+
+<pre>
+cp /usr/local/Cellar/postgresql/9.2.1/homebrew.mxcl.postgresql.plist ~/Library/LaunchAgents/
+</pre>
+
+
+<p>And remove the plist file that belonged to 9.1.x
+6. initdb (this creates the 9.2.x version of the database).
+7. Import the postgres data backup from the previous pg_dumpall command.
+8. Load plist: launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist</p>
+
+<ol>
+<li>PID file location change
+If you are doing Rails development, after upgrade postgres and issue &#8216;rails s&#8217; for your project, you may see this error
+which fails Rails server from starting:</li>
+</ol>
+
+
+<pre>
+PGError (could not connect to server: Permission denied
+    Is the server running locally and accepting
+    connections on Unix domain socket "/var/pgsql_socket/.s.PGSQL.5432"?
+)
+</pre>
+
+
+<p>Since postgres 9.2, the unix socket has changed to /var/pgsql_socket/alt.  The pg gem is compiled against the older version
+of postgres (9.1.x) so it looks for the socket file in wrong location.  The easist thing to do is to uninstall and reinstall
+pg gem.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Housekeeping RVM]]></title>
@@ -1081,64 +1187,6 @@ decisions.  Pair programming eliminates personal blames.  Shifting pairs changes
 code ownership from individual to team.  By building trust, pair forms a natural support
 system.  It is often comforting to have someone sitting next to you to point out logical
 flaws.  Afterall, coders want to deliver better code.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Git auto complete]]></title>
-    <link href="http://www.zlu.me/blog/2011/11/01/git-auto-complete/"/>
-    <updated>2011-11-01T22:04:00+08:00</updated>
-    <id>http://www.zlu.me/blog/2011/11/01/git-auto-complete</id>
-    <content type="html"><![CDATA[<p>Git auto complete is a convenient feature.</p>
-
-<p>This feature is based on git-completion file comes with git.</p>
-
-<p>On OS X, if you install git via homebrew, you can find git source directory using:</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>locate git | grep Cellar
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Locate the git-completion file.</p>
-
-<p>In my case, it is `/usr/local/Cellar/git/1.7.5/etc/bash_completion.d/git-completion.bash</p>
-
-<p>Open this file and you will find this explanation:</p>
-
-<p>The contained completion routines provide support for completing:</p>
-
-<ul>
-<li>local and remote branch names</li>
-<li>local and remote tag names</li>
-<li>.git/remotes file names</li>
-<li>git &#8216;subcommands&#8217;</li>
-<li>tree paths within &#8216;ref:path/to/file&#8217; expressions</li>
-<li>common &#8211;long-options</li>
-</ul>
-
-
-<p>And the steps to enable this</p>
-
-<ul>
-<li>Copy this file to somewhere (e.g. ~/.git-completion.sh).</li>
-<li>Add the following line <code>source ~/.git-completion.sh</code> to your .bashrc</li>
-<li>Changing PS1 to show current branch <code>PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '</code></li>
-</ul>
-
-
-<p>If you want some color in git prompt</p>
-
-<p><code>PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '</code></p>
-
-<p>If you want the prompt to show git-ps1 state
-<code>GIT_PS1_SHOWDIRTYSTATE=true</code></p>
-
-<p><code>Generating Site with Jekyllbe rake generate</code></p>
-
-<p>Example:</p>
-
-<p><code>zlu@zlu-mba:~/projects/me/octopress (master *)</code></p>
 ]]></content>
   </entry>
   

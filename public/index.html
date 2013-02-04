@@ -9,8 +9,8 @@
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="When a new version of Ruby comes out, I like to use RVM to install it, migrate ruby gems to new ruby, and remove the
-older version of ruby. This &hellip;">
+  <meta name="description" content="I run postgres locally for development on OS X (mountain lion). I&#8217;ve run into a few issues and am documenting solutions
+here. Issue 1: &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,6 +85,143 @@ older version of ruby. This &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2013/02/04/postgres-gotchas/">Postgres Gotchas</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-04T11:16:00+08:00" pubdate data-updated="true">Feb 4<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/02/04/postgres-gotchas/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I run postgres locally for development on OS X (mountain lion).  I&#8217;ve run into a few issues and am documenting solutions
+here.</p>
+
+<p>Issue 1: Insufficient shared memory
+Postgres requires sufficient shared memory or it won&#8217;t start.  If there isn&#8217;t enough, postgres server will fail to start
+and in server.log you will see this:</p>
+
+<pre>
+FATAL:  could not create shared memory segment: Cannot allocate memory
+DETAIL:  Failed system call was shmget(key=5432001, size=3391488, 03600).
+HINT:  This error usually means that PostgreSQL's request for a shared memory segment exceeded available memory or swap space, or exceeded your kernel's SHMALL parameter.  You can either reduce the request size or reconfigure the kernel with larger SHMALL.  To reduce the request size (currently 3391488 bytes), reduce PostgreSQL's shared memory usage, perhaps by reducing shared_buffers or max_connections.
+</pre>
+
+
+<p>There are two ways to correct this problem.</p>
+
+<ol>
+<li>Up the shared memory configuration.</li>
+</ol>
+
+
+<p>On mountain lion, you could create or modify your /etc/sysctl.conf so it has this:</p>
+
+<pre>
+zlu@zlu-mba:~/projects/me/blog-zlu (master)$ cat /etc/sysctl.conf
+kern.sysv.shmmax=4194304
+kern.sysv.shmmin=1
+kern.sysv.shmmni=32
+kern.sysv.shmseg=8
+kern.sysv.shmall=1024
+</pre>
+
+
+<p>Make sure shmmax is large enough for postgres and other software that requires shared memeory.
+To figure out how much shared memeory you will need for postgres, take a look at postgresql.conf (probably under /usr/local/var/postgres)</p>
+
+<pre>
+max_connections = 20                    # (change requires restart)
+# Note:  Increasing max_connections costs ~400 bytes of shared memory per
+# connection slot, plus lock space (see max_locks_per_transaction).
+</pre>
+
+
+<p>More details can be found here:
+http://www.postgresql.org/docs/9.2/static/kernel-resources.html#SYSVIPC</p>
+
+<ol>
+<li>Reduce resource requirements
+In postgresql.conf you could search for &#8220;shared memory&#8221; and see all resources (such as max_connections and max_prepared_transactions).
+Reduce the requirements as you see fit.</li>
+</ol>
+
+
+<p>Upgrade from 9.1.x to 9.2.x</p>
+
+<p>There are two main issues to take care of when upgrading postgres from 9.1.x to 9.2.x</p>
+
+<p>The first is database migration which is well-documented here:</p>
+
+<p>http://www.postgresql.org/docs/9.2/static/upgrading.html</p>
+
+<p>I&#8217;ll summarize the steps here:
+1. Backup <em>before</em> you install 9.2 (with homebrew).  This is important if you want to avoid the hussle later with two versions
+of pg_ctl stomping onto each other.  While the 9.1.x server is running, use pg_dumpall to export the database.
+2. Stop 9.1.x server
+3. mv the data directory (e.g. /usr/local/var/postgres) to postgres.bk.
+4. Install postgres 9.2.x (with homebrew).
+5. Create symlink for plist file for launchctl (it is named differently than 9.1 so you will need to do it again).  The post-install
+instruction of homebrew contain the exact command.</p>
+
+<pre>
+cp /usr/local/Cellar/postgresql/9.2.1/homebrew.mxcl.postgresql.plist ~/Library/LaunchAgents/
+</pre>
+
+
+<p>And remove the plist file that belonged to 9.1.x
+6. initdb (this creates the 9.2.x version of the database).
+7. Import the postgres data backup from the previous pg_dumpall command.
+8. Load plist: launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist</p>
+
+<ol>
+<li>PID file location change
+If you are doing Rails development, after upgrade postgres and issue &#8216;rails s&#8217; for your project, you may see this error
+which fails Rails server from starting:</li>
+</ol>
+
+
+<pre>
+PGError (could not connect to server: Permission denied
+    Is the server running locally and accepting
+    connections on Unix domain socket "/var/pgsql_socket/.s.PGSQL.5432"?
+)
+</pre>
+
+
+<p>Since postgres 9.2, the unix socket has changed to /var/pgsql_socket/alt.  The pg gem is compiled against the older version
+of postgres (9.1.x) so it looks for the socket file in wrong location.  The easist thing to do is to uninstall and reinstall
+pg gem.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -892,129 +1029,6 @@ fix is quit easy.  All you need to do is to change your DNS server to Google DNS
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2012/07/19/pretty-print-json-in-command-line/">Pretty Print JSON in Command Line</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-19T16:28:00+08:00" pubdate data-updated="true">Jul 19<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/19/pretty-print-json-in-command-line/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>We often deal with viewing JSON documents in command line such as using curl against a server that returns JSON response.
-It is hard to read.</p>
-
-<p><a href="https://github.com/jmhodges/jsonpp/">jsonpp</a> comes to rescue.</p>
-
-<p>On OS X, simply issue <code>brew install jsonpp</code></p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>zlu@zlu-mba:~/projects <span class="o">(</span>master *<span class="o">)</span><span class="nv">$ </span>curl --user foo@bar.com:abc123 http://localhost:3000/users
-</span><span class='line'><span class="o">[{</span><span class="s2">&quot;_id&quot;</span>:<span class="s2">&quot;500859f1827bc70b84000001&quot;</span>,<span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;2012-07-19T12:03:22-07:00&quot;</span>,<span class="s2">&quot;email&quot;</span>:<span class="s2">&quot;zlu@foo.bar&quot;</span>,<span class="s2">&quot;facebook_access_token&quot;</span>:null,<span class="s2">&quot;facebook_access_token_expiration&quot;</span>:null,<span class="s2">&quot;facebook_id&quot;</span>:null,<span class="s2">&quot;family_id&quot;</span>:null,<span class="s2">&quot;first_name&quot;</span>:<span class="s2">&quot;zhao&quot;</span>,<span class="s2">&quot;last_name&quot;</span>:<span class="s2">&quot;lu&quot;</span>,<span class="s2">&quot;phone_number&quot;</span>:null,<span class="s2">&quot;updated_at&quot;</span>:<span class="s2">&quot;2012-07-19T12:03:22-07:00&quot;</span><span class="o">}</span>,<span class="o">{</span><span class="s2">&quot;_id&quot;</span>:<span class="s2">&quot;500864a1827bc710a9000004&quot;</span>,<span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;2012-07-19T12:48:49-07:00&quot;</span>,<span class="s2">&quot;email&quot;</span>:<span class="s2">&quot;foo@bar.com&quot;</span>,<span class="s2">&quot;facebook_access_token&quot;</span>:null,<span class="s2">&quot;facebook_access_token_expiration&quot;</span>:null,<span class="s2">&quot;facebook_id&quot;</span>:null,<span class="s2">&quot;family_id&quot;</span>:null,<span class="s2">&quot;first_name&quot;</span>:<span class="s2">&quot;foo&quot;</span>,<span class="s2">&quot;last_name&quot;</span>:<span class="s2">&quot;bar&quot;</span>,<span class="s2">&quot;phone_number&quot;</span>:null,<span class="s2">&quot;updated_at&quot;</span>:<span class="s2">&quot;2012-07-19T12:48:49-07:00&quot;</span><span class="o">}]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>After piping through jsonpp</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>zlu@zlu-mba:~/projects <span class="o">(</span>master *<span class="o">)</span><span class="nv">$ </span>curl --user foo@bar.com:abc123 http://localho000/users | jsonpp
-</span><span class='line'>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-</span><span class='line'>                                 Dload  Upload   Total   Spent    Left  Speed
-</span><span class='line'>100   604  100   604    0     0  45280      0 --:--:-- --:--:-- --:--:-- 60400
-</span><span class='line'><span class="o">[</span>
-</span><span class='line'>  <span class="o">{</span>
-</span><span class='line'>    <span class="s2">&quot;_id&quot;</span>: <span class="s2">&quot;500859f1827bc70b84000001&quot;</span>,
-</span><span class='line'>    <span class="s2">&quot;created_at&quot;</span>: <span class="s2">&quot;2012-07-19T12:03:22-07:00&quot;</span>,
-</span><span class='line'>    <span class="s2">&quot;email&quot;</span>: <span class="s2">&quot;zlu@foo.bar&quot;</span>,
-</span><span class='line'>    <span class="s2">&quot;facebook_access_token&quot;</span>: null,
-</span><span class='line'>    <span class="s2">&quot;facebook_access_token_expiration&quot;</span>: null,
-</span><span class='line'>    <span class="s2">&quot;facebook_id&quot;</span>: null,
-</span><span class='line'>    <span class="s2">&quot;family_id&quot;</span>: null,
-</span><span class='line'>    <span class="s2">&quot;first_name&quot;</span>: <span class="s2">&quot;zhao&quot;</span>,
-</span><span class='line'>    <span class="s2">&quot;last_name&quot;</span>: <span class="s2">&quot;lu&quot;</span>,
-</span><span class='line'>    <span class="s2">&quot;phone_number&quot;</span>: null,
-</span><span class='line'>    <span class="s2">&quot;updated_at&quot;</span>: <span class="s2">&quot;2012-07-19T12:03:22-07:00&quot;</span>
-</span><span class='line'>  <span class="o">}</span>,
-</span><span class='line'>  <span class="o">{</span>
-</span><span class='line'>    <span class="s2">&quot;_id&quot;</span>: <span class="s2">&quot;500864a1827bc710a9000004&quot;</span>,
-</span><span class='line'>    <span class="s2">&quot;created_at&quot;</span>: <span class="s2">&quot;2012-07-19T12:48:49-07:00&quot;</span>,
-</span><span class='line'>    <span class="s2">&quot;email&quot;</span>: <span class="s2">&quot;foo@bar.com&quot;</span>,
-</span><span class='line'>    <span class="s2">&quot;facebook_access_token&quot;</span>: null,
-</span><span class='line'>    <span class="s2">&quot;facebook_access_token_expiration&quot;</span>: null,
-</span><span class='line'>    <span class="s2">&quot;facebook_id&quot;</span>: null,
-</span><span class='line'>    <span class="s2">&quot;family_id&quot;</span>: null,
-</span><span class='line'>    <span class="s2">&quot;first_name&quot;</span>: <span class="s2">&quot;foo&quot;</span>,
-</span><span class='line'>    <span class="s2">&quot;last_name&quot;</span>: <span class="s2">&quot;bar&quot;</span>,
-</span><span class='line'>    <span class="s2">&quot;phone_number&quot;</span>: null,
-</span><span class='line'>    <span class="s2">&quot;updated_at&quot;</span>: <span class="s2">&quot;2012-07-19T12:48:49-07:00&quot;</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'><span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1042,6 +1056,10 @@ It is hard to read.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/02/04/postgres-gotchas/">Postgres Gotchas</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/10/housekeeping-rvm/">Housekeeping RVM</a>
       </li>
     
@@ -1055,10 +1073,6 @@ It is hard to read.</p>
     
       <li class="post">
         <a href="/blog/2012/11/01/encourage-social-sharing-in-china/">Encourage Social Sharing in China</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/10/29/install-and-create-rails-4-dot-0-app/">Install and Create Rails 4.0 App</a>
       </li>
     
   </ul>
