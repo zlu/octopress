@@ -4,7 +4,7 @@
   <title><![CDATA[Category: sharedmemory | @zlu]]></title>
   <link href="http://www.zlu.me/blog/categories/sharedmemory/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2013-02-04T15:47:09+08:00</updated>
+  <updated>2013-02-04T15:52:50+08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -62,7 +62,7 @@ max_connections = 20                    # (change requires restart)</p>
 <p>```</p>
 
 <p>More details can be found here:
-http://www.postgresql.org/docs/9.2/static/kernel-resources.html#SYSVIPC</p>
+<a href="http://www.postgresql.org/docs/9.2/static/kernel-resources.html#SYSVIPC">Upgrade Postgres</a></p>
 
 <ol>
 <li>Reduce resource requirements
@@ -74,8 +74,6 @@ Reduce the requirements as you see fit.</li>
 <h2>Issue 2: Upgrading from 9.1.x to 9.2.x</h2>
 
 <p>If you need to migration database, you may run into path issues.</p>
-
-<p>http://www.postgresql.org/docs/9.2/static/upgrading.html</p>
 
 <p>Here is the steps that work for me:</p>
 
@@ -99,6 +97,8 @@ launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
 </code></li>
 </ol>
 
+
+<p><a href="http://www.postgresql.org/docs/9.2/static/upgrading.html">Migrating Postgres</a></p>
 
 <h2>Issue 3: Rails Server Fails to Start</h2>
 

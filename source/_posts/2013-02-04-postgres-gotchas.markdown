@@ -25,38 +25,36 @@ There are two ways to correct this problem.
 
 1. Up the shared memory configuration.
 
-On mountain lion, you could create or modify your /etc/sysctl.conf so it has this:
-``` bash
-zlu@zlu-mba:~/projects/me/blog-zlu (master)$ cat /etc/sysctl.conf
-kern.sysv.shmmax=4194304
-kern.sysv.shmmin=1
-kern.sysv.shmmni=32
-kern.sysv.shmseg=8
-kern.sysv.shmall=1024
-```
+    On mountain lion, you could create or modify your /etc/sysctl.conf so it has this:
+    ``` bash
+    zlu@zlu-mba:~/projects/me/blog-zlu (master)$ cat /etc/sysctl.conf
+    kern.sysv.shmmax=4194304
+    kern.sysv.shmmin=1
+    kern.sysv.shmmni=32
+    kern.sysv.shmseg=8
+    kern.sysv.shmall=1024
+    ```
 
-Make sure shmmax is large enough for postgres and other software that requires shared memeory.
-To figure out how much shared memeory you will need for postgres, take a look at postgresql.conf (probably under /usr/local/var/postgres)
+    Make sure shmmax is large enough for postgres and other software that requires shared memeory.
+    To figure out how much shared memeory you will need for postgres, take a look at postgresql.conf (probably under /usr/local/var/postgres)
 
-``` bash
-max_connections = 20                    # (change requires restart)
-# Note:  Increasing max_connections costs ~400 bytes of shared memory per
-# connection slot, plus lock space (see max_locks_per_transaction).
-```
+    ``` bash
+    max_connections = 20                    # (change requires restart)
+    # Note:  Increasing max_connections costs ~400 bytes of shared memory per
+    # connection slot, plus lock space (see max_locks_per_transaction).
+    ```
 
-More details can be found here:
-http://www.postgresql.org/docs/9.2/static/kernel-resources.html#SYSVIPC
+    More details can be found here:
+    [Upgrade Postgres](http://www.postgresql.org/docs/9.2/static/kernel-resources.html#SYSVIPC)
 
 2. Reduce resource requirements
-In postgresql.conf you could search for "shared memory" and see all resources (such as max_connections and max_prepared_transactions).
-Reduce the requirements as you see fit.
+    In postgresql.conf you could search for "shared memory" and see all resources (such as max_connections and max_prepared_transactions).
+    Reduce the requirements as you see fit.
 
 Issue 2: Upgrading from 9.1.x to 9.2.x
 ----
 
 If you need to migration database, you may run into path issues.
-
-http://www.postgresql.org/docs/9.2/static/upgrading.html
 
 Here is the steps that work for me:
 
@@ -77,6 +75,8 @@ And remove the plist file that belonged to 9.1.x
 ``` bash
 launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
 ```
+
+[Migrating Postgres](http://www.postgresql.org/docs/9.2/static/upgrading.html)
 
 Issue 3: Rails Server Fails to Start
 ----

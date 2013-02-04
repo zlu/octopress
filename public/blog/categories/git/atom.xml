@@ -4,7 +4,7 @@
   <title><![CDATA[Category: git | @zlu]]></title>
   <link href="http://www.zlu.me/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2013-02-04T15:47:09+08:00</updated>
+  <updated>2013-02-04T15:55:02+08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -24,9 +24,9 @@
 
 <p>On OS X, if you install git via homebrew, you can find git source directory using:</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>locate git | grep Cellar
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock lang:bash %}
+locate git | grep Cellar
+{% endcodeblock lang:objc %}</p>
 
 <p>Locate the git-completion file.</p>
 
