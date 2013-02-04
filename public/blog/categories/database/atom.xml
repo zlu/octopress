@@ -4,7 +4,7 @@
   <title><![CDATA[Category: database | @zlu]]></title>
   <link href="http://www.zlu.me/blog/categories/database/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2013-02-04T16:05:40+08:00</updated>
+  <updated>2013-02-04T16:09:14+08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -26,11 +26,10 @@ here.</p>
 <p>Postgres requires sufficient shared memory or it won't start.  If there isn't enough, postgres server will fail to start
 and in server.log you will see this:</p>
 
-<p><code>bash
-FATAL:  could not create shared memory segment: Cannot allocate memory
+<pre><code>FATAL:  could not create shared memory segment: Cannot allocate memory
 DETAIL:  Failed system call was shmget(key=5432001, size=3391488, 03600).
 HINT:  This error usually means that PostgreSQL's request for a shared memory segment exceeded available memory or swap space, or exceeded your kernel's SHMALL parameter.  You can either reduce the request size or reconfigure the kernel with larger SHMALL.  To reduce the request size (currently 3391488 bytes), reduce PostgreSQL's shared memory usage, perhaps by reducing shared_buffers or max_connections.
-</code></p>
+</code></pre>
 
 <p>There are two ways to correct this problem.</p>
 
@@ -71,22 +70,23 @@ HINT:  This error usually means that PostgreSQL's request for a shared memory se
 
 <ol>
 <li>Backup <strong>BEFORE</strong> you install 9.2 (with homebrew).  This is important if you want to avoid the hussle later with two versions
-of <code>pg_ctl</code> stomping onto each other.  While the 9.1.x server is running, use <code>pg_dumpall</code> to export the database.</li>
+ of <code>pg_ctl</code> stomping onto each other.  While the 9.1.x server is running, use <code>pg_dumpall</code> to export the database.</li>
 <li>Stop 9.1.x server</li>
 <li>mv the data directory (e.g. /usr/local/var/postgres) to postgres.bk.</li>
 <li>Install postgres 9.2.x (with homebrew).</li>
 <li>Create symlink for plist file for launchctl (it is named differently than 9.1 so you will need to do it again).  The post-install
-instruction of homebrew contains the exact command.
-<code>bash
-cp /usr/local/Cellar/postgresql/9.2.1/homebrew.mxcl.postgresql.plist ~/Library/LaunchAgents/
-</code>
-And remove the plist file that belonged to 9.1.x</li>
+ instruction of homebrew contains the exact command.
+
+<pre><code> cp /usr/local/Cellar/postgresql/9.2.1/homebrew.mxcl.postgresql.plist ~/Library/LaunchAgents/
+</code></pre>
+
+<p> And remove the plist file that belonged to 9.1.x</p></li>
 <li><code>initdb</code> (this creates the 9.2.x version of the database).</li>
 <li>Import the postgres data backup from the previous <code>pg_dumpall</code> command.</li>
 <li>Load plist:
-<code>bash
-launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
-</code></li>
+
+<pre><code> launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+</code></pre></li>
 </ol>
 
 
@@ -95,16 +95,13 @@ launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
 <h2>Issue 3: Rails Server Fails to Start</h2>
 
 <p>If you are doing Rails development, after upgrade postgres and issue 'rails s' for your project, you may see this error
-which fails Rails server from starting:
-``` bash
-PGError (could not connect to server: Permission denied</p>
+which fails Rails server from starting:</p>
 
-<pre><code>Is the server running locally and accepting
-connections on Unix domain socket "/var/pgsql_socket/.s.PGSQL.5432"?
+<pre><code>PGError (could not connect to server: Permission denied
+    Is the server running locally and accepting
+    connections on Unix domain socket "/var/pgsql_socket/.s.PGSQL.5432"?
+)
 </code></pre>
-
-<p>)
-```</p>
 
 <p>Since postgres 9.2, the unix socket file has changed to /var/pgsql_socket/alt.  The pg gem is compiled against the older version
 of postgres (9.1.x) so it looks for the socket file in wrong location.  The easist thing to do is to uninstall and reinstall
