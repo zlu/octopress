@@ -26,23 +26,20 @@ There are two ways to correct this problem.
 1. Up the shared memory configuration.
 
     On mountain lion, you could create or modify your /etc/sysctl.conf so it has this:
-    ``` bash
-    zlu@zlu-mba:~/projects/me/blog-zlu (master)$ cat /etc/sysctl.conf
-    kern.sysv.shmmax=4194304
-    kern.sysv.shmmin=1
-    kern.sysv.shmmni=32
-    kern.sysv.shmseg=8
-    kern.sysv.shmall=1024
-    ```
+
+        zlu@zlu-mba:~/projects/me/blog-zlu (master)$ cat /etc/sysctl.conf
+        kern.sysv.shmmax=4194304
+        kern.sysv.shmmin=1
+        kern.sysv.shmmni=32
+        kern.sysv.shmseg=8
+        kern.sysv.shmall=1024
 
     Make sure shmmax is large enough for postgres and other software that requires shared memeory.
     To figure out how much shared memeory you will need for postgres, take a look at postgresql.conf (probably under /usr/local/var/postgres)
 
-    ``` bash
-    max_connections = 20                    # (change requires restart)
-    # Note:  Increasing max_connections costs ~400 bytes of shared memory per
-    # connection slot, plus lock space (see max_locks_per_transaction).
-    ```
+        max_connections = 20                    # (change requires restart)
+        # Note:  Increasing max_connections costs ~400 bytes of shared memory per
+        # connection slot, plus lock space (see max_locks_per_transaction).
 
     More details can be found here:
     [Upgrade Postgres](http://www.postgresql.org/docs/9.2/static/kernel-resources.html#SYSVIPC)
@@ -58,7 +55,7 @@ If you need to migration database, you may run into path issues.
 
 Here is the steps that work for me:
 
-1. Backup _before_ you install 9.2 (with homebrew).  This is important if you want to avoid the hussle later with two versions
+1. Backup **BEFORE** you install 9.2 (with homebrew).  This is important if you want to avoid the hussle later with two versions
 of <code>pg_ctl</code> stomping onto each other.  While the 9.1.x server is running, use <code>pg_dumpall</code> to export the database.
 2. Stop 9.1.x server
 3. mv the data directory (e.g. /usr/local/var/postgres) to postgres.bk.

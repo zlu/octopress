@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Capistrano | @zlu]]></title>
   <link href="http://www.zlu.me/blog/categories/capistrano/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2013-02-04T15:55:02+08:00</updated>
+  <updated>2013-02-04T16:05:40+08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -64,39 +64,25 @@ load balancer --> |-> web server2 (blue)  -|---> database
 <p>In this example, I use Apache's <a href="http://httpd.apache.org/docs/2.2/mod/mod_proxy_balancer.html">mod_proxy_balancer</a>.
 I use a typical Rails web server setup and <a href="https://github.com/capistrano/capistrano">Capistrano</a> for deployment.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>In Rails' production.rb  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">role</span> <span class="ss">:app</span><span class="p">,</span> <span class="s2">&quot;server1.com&quot;</span><span class="p">,</span> <span class="ss">:group</span> <span class="o">=&gt;</span> <span class="ss">:red</span>
-</span><span class='line'><span class="n">role</span> <span class="ss">:app</span><span class="p">,</span> <span class="s2">&quot;server2.com&quot;</span><span class="p">,</span> <span class="ss">:group</span><span class="o">=&gt;</span> <span class="ss">:blue</span>
-</span><span class='line'><span class="n">role</span> <span class="ss">:app</span><span class="p">,</span> <span class="s2">&quot;server3.com&quot;</span><span class="p">,</span> <span class="ss">:group</span> <span class="o">=&gt;</span> <span class="ss">:green</span>
-</span><span class='line'><span class="n">role</span> <span class="ss">:apache</span><span class="p">,</span> <span class="s2">&quot;loadbalancer.com&quot;</span><span class="p">,</span> <span class="ss">:no_release</span> <span class="o">=&gt;</span> <span class="kp">true</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock In Rails' production.rb lang:ruby %}
+role :app, "server1.com", :group => :red
+role :app, "server2.com", :group=> :blue
+role :app, "server3.com", :group => :green
+role :apache, "loadbalancer.com", :no_release => true
+{% endcodeblock %}</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>In Capistrano's deploy.rb  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">manage_node</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span>
-</span><span class='line'>  <span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;http://</span><span class="si">#{</span><span class="n">roles</span><span class="o">[</span><span class="ss">:apache</span><span class="o">]</span><span class="si">}</span><span class="s2">/balancer-manager&quot;</span><span class="p">)</span>
-</span><span class='line'>  <span class="n">response_body</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span><span class="o">.</span><span class="n">body</span>
-</span><span class='line'>  <span class="n">nonce</span> <span class="o">=</span> <span class="n">response_body</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sr">/nonce=(.*)\&quot;/</span><span class="p">)</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
-</span><span class='line'>  <span class="n">node</span> <span class="o">=</span> <span class="n">find_servers</span><span class="p">(</span><span class="ss">:roles</span> <span class="o">=&gt;</span> <span class="ss">:app</span><span class="p">,</span> <span class="ss">:only</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:group</span> <span class="o">=&gt;</span> <span class="n">group</span><span class="o">.</span><span class="n">to_sym</span><span class="p">})</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span>
-</span><span class='line'>  <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="ss">:w</span> <span class="o">=&gt;</span> <span class="s2">&quot;http://</span><span class="si">#{</span><span class="n">node</span><span class="si">}</span><span class="s2">:8080&quot;</span><span class="p">,</span> <span class="ss">:b</span> <span class="o">=&gt;</span> <span class="n">stage</span><span class="p">,</span> <span class="ss">:nonce</span> <span class="o">=&gt;</span> <span class="n">nonce</span><span class="p">,</span> <span class="ss">:dw</span> <span class="o">=&gt;</span> <span class="n">action</span><span class="p">}</span>
-</span><span class='line'>  <span class="n">uri</span><span class="o">.</span><span class="n">query</span> <span class="o">=</span> <span class="no">URI</span><span class="o">.</span><span class="n">encode_www_form</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-</span><span class='line'>  <span class="n">response</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
-</span><span class='line'>  <span class="n">response</span><span class="o">.</span><span class="n">code</span> <span class="o">==</span> <span class="s2">&quot;200&quot;</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock In Capistrano's deploy.rb lang:ruby %}
+def manage_node(action, group)
+  uri = URI.parse("http://#{roles[:apache]}/balancer-manager")
+  response_body = Net::HTTP.get_response(uri).body
+  nonce = response_body.match(/nonce=(.*)\"/)[1]
+  node = find_servers(:roles => :app, :only => {:group => group.to_sym})[0]
+  params = {:w => "http://#{node}:8080", :b => stage, :nonce => nonce, :dw => action}
+  uri.query = URI.encode_www_form(params)
+  response = Net::HTTP.get_response(uri)
+  response.code == "200"
+end
+{% endcodeblock %}</p>
 
 <p>mod_proxy_balancer has a balancer-manager GUI.  Admin is able to enable and disable node (web server) via a form.
 manage_node method essentially submit the form to the balancer-manager.</p>

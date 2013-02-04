@@ -4,7 +4,7 @@
   <title><![CDATA[@zlu]]></title>
   <link href="http://www.zlu.me/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2013-02-04T15:55:02+08:00</updated>
+  <updated>2013-02-04T16:03:06+08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -41,14 +41,14 @@ and in server.log you will see this:</p>
 <li><p>Up the shared memory configuration.</p>
 
 <p> On mountain lion, you could create or modify your /etc/sysctl.conf so it has this:
- <code>bash
+ <code>
  zlu@zlu-mba:~/projects/me/blog-zlu (master)$ cat /etc/sysctl.conf
  kern.sysv.shmmax=4194304
  kern.sysv.shmmin=1
  kern.sysv.shmmni=32
  kern.sysv.shmseg=8
  kern.sysv.shmall=1024
-</code></p>
+ </code></p>
 
 <p> Make sure shmmax is large enough for postgres and other software that requires shared memeory.
  To figure out how much shared memeory you will need for postgres, take a look at postgresql.conf (probably under /usr/local/var/postgres)</p>
@@ -74,7 +74,7 @@ and in server.log you will see this:</p>
 <p>Here is the steps that work for me:</p>
 
 <ol>
-<li>Backup <em>before</em> you install 9.2 (with homebrew).  This is important if you want to avoid the hussle later with two versions
+<li>Backup <strong>BEFORE</strong> you install 9.2 (with homebrew).  This is important if you want to avoid the hussle later with two versions
 of <code>pg_ctl</code> stomping onto each other.  While the 9.1.x server is running, use <code>pg_dumpall</code> to export the database.</li>
 <li>Stop 9.1.x server</li>
 <li>mv the data directory (e.g. /usr/local/var/postgres) to postgres.bk.</li>
