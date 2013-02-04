@@ -135,46 +135,32 @@ and in server.log you will see this:</p>
 <p>There are two ways to correct this problem.</p>
 
 <ol>
-<li>Up the shared memory configuration.</li>
-</ol>
+<li><p>Up the shared memory configuration.</p>
 
+<p> On mountain lion, you could create or modify your /etc/sysctl.conf so it has this:
+ <code>bash
+ zlu@zlu-mba:~/projects/me/blog-zlu (master)$ cat /etc/sysctl.conf
+ kern.sysv.shmmax=4194304
+ kern.sysv.shmmin=1
+ kern.sysv.shmmni=32
+ kern.sysv.shmseg=8
+ kern.sysv.shmall=1024
+</code></p>
 
-<p>On mountain lion, you could create or modify your /etc/sysctl.conf so it has this:</p>
+<p> Make sure shmmax is large enough for postgres and other software that requires shared memeory.
+ To figure out how much shared memeory you will need for postgres, take a look at postgresql.conf (probably under /usr/local/var/postgres)</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>zlu@zlu-mba:~/projects/me/blog-zlu <span class="o">(</span>master<span class="o">)</span><span class="nv">$ </span>cat /etc/sysctl.conf
-</span><span class='line'>kern.sysv.shmmax<span class="o">=</span>4194304
-</span><span class='line'>kern.sysv.shmmin<span class="o">=</span>1
-</span><span class='line'>kern.sysv.shmmni<span class="o">=</span>32
-</span><span class='line'>kern.sysv.shmseg<span class="o">=</span>8
-</span><span class='line'>kern.sysv.shmall<span class="o">=</span>1024
-</span></code></pre></td></tr></table></div></figure>
+<p> <code>bash
+ max_connections = 20                    # (change requires restart)
+ # Note:  Increasing max_connections costs ~400 bytes of shared memory per
+ # connection slot, plus lock space (see max_locks_per_transaction).
+</code></p>
 
-
-<p>Make sure shmmax is large enough for postgres and other software that requires shared memeory.
-To figure out how much shared memeory you will need for postgres, take a look at postgresql.conf (probably under /usr/local/var/postgres)</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">max_connections</span> <span class="o">=</span> 20                    <span class="c"># (change requires restart)</span>
-</span><span class='line'><span class="c"># Note:  Increasing max_connections costs ~400 bytes of shared memory per</span>
-</span><span class='line'><span class="c"># connection slot, plus lock space (see max_locks_per_transaction).</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>More details can be found here:
-<a href="http://www.postgresql.org/docs/9.2/static/kernel-resources.html#SYSVIPC">Upgrade Postgres</a></p>
-
-<ol>
-<li>Reduce resource requirements
-In postgresql.conf you could search for &#8220;shared memory&#8221; and see all resources (such as max_connections and max_prepared_transactions).
-Reduce the requirements as you see fit.</li>
+<p> More details can be found here:
+ <a href="http://www.postgresql.org/docs/9.2/static/kernel-resources.html#SYSVIPC">Upgrade Postgres</a></p></li>
+<li><p>Reduce resource requirements
+ In postgresql.conf you could search for &#8220;shared memory&#8221; and see all resources (such as max_connections and max_prepared_transactions).
+ Reduce the requirements as you see fit.</p></li>
 </ol>
 
 
