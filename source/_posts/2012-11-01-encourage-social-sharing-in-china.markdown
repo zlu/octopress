@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Encourage Social Sharing in China"
+title: "Encouraging Social Sharing in China"
 date: 2012-11-01 19:40
 comments: true
 categories: [Social]
