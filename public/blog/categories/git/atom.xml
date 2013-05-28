@@ -4,7 +4,7 @@
   <title><![CDATA[Category: git | @zlu]]></title>
   <link href="http://www.zlu.me/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2013-02-17T23:04:48+08:00</updated>
+  <updated>2013-04-22T13:57:09-07:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Git auto complete]]></title>
     <link href="http://www.zlu.me/blog/2011/11/01/git-auto-complete/"/>
-    <updated>2011-11-01T22:04:00+08:00</updated>
+    <updated>2011-11-01T22:04:00-07:00</updated>
     <id>http://www.zlu.me/blog/2011/11/01/git-auto-complete</id>
     <content type="html"><![CDATA[<p>Git auto complete is a convenient feature.</p>
 

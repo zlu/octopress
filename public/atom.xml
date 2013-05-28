@@ -4,7 +4,7 @@
   <title><![CDATA[@zlu]]></title>
   <link href="http://www.zlu.me/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2013-02-17T23:04:48+08:00</updated>
+  <updated>2013-04-22T13:57:09-07:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Postgres Gotchas]]></title>
     <link href="http://www.zlu.me/blog/2013/02/04/postgres-gotchas/"/>
-    <updated>2013-02-04T11:16:00+08:00</updated>
+    <updated>2013-02-04T11:16:00-08:00</updated>
     <id>http://www.zlu.me/blog/2013/02/04/postgres-gotchas</id>
     <content type="html"><![CDATA[<p>I run postgres locally for development on OS X (mountain lion).  I&#8217;ve run into a few issues and am documenting solutions
 here.</p>
@@ -112,7 +112,7 @@ pg gem.</p>
   <entry>
     <title type="html"><![CDATA[Housekeeping RVM]]></title>
     <link href="http://www.zlu.me/blog/2012/11/10/housekeeping-rvm/"/>
-    <updated>2012-11-10T18:13:00+08:00</updated>
+    <updated>2012-11-10T18:13:00-08:00</updated>
     <id>http://www.zlu.me/blog/2012/11/10/housekeeping-rvm</id>
     <content type="html"><![CDATA[<p>When a new version of Ruby comes out, I like to use RVM to install it, migrate ruby gems to new ruby, and remove the
 older version of ruby.  This prevent the disk bloated with different versions of Rubies and duplicate gem(sets).</p>
@@ -178,7 +178,7 @@ because it contains a security fix for DoS attack in p286.</p>
   <entry>
     <title type="html"><![CDATA[What Happened to FD 3 and 4 in MRI]]></title>
     <link href="http://www.zlu.me/blog/2012/11/08/what-happened-to-fd-3-and-4-in-mri/"/>
-    <updated>2012-11-08T16:07:00+08:00</updated>
+    <updated>2012-11-08T16:07:00-08:00</updated>
     <id>http://www.zlu.me/blog/2012/11/08/what-happened-to-fd-3-and-4-in-mri</id>
     <content type="html"><![CDATA[<p>I got curious when this happened:</p>
 
@@ -244,7 +244,7 @@ in order.  So what happened to 3 and 4?</p>
   <entry>
     <title type="html"><![CDATA[Rolling Deployment]]></title>
     <link href="http://www.zlu.me/blog/2012/11/07/rolling-deployment/"/>
-    <updated>2012-11-07T20:30:00+08:00</updated>
+    <updated>2012-11-07T20:30:00-08:00</updated>
     <id>http://www.zlu.me/blog/2012/11/07/rolling-deployment</id>
     <content type="html"><![CDATA[<p>It is common to deploy new code to production several times a week (or even a day) in an agile shop.  How to make deployment
 less intrusive to end user has becoming a larger issue.  If you simply use <code>cap deploy production</code>, some web requests will
@@ -369,7 +369,7 @@ will keep sending requests to the server during deployment and server restart.</
   <entry>
     <title type="html"><![CDATA[Encouraging Social Sharing in China]]></title>
     <link href="http://www.zlu.me/blog/2012/11/01/encourage-social-sharing-in-china/"/>
-    <updated>2012-11-01T19:40:00+08:00</updated>
+    <updated>2012-11-01T19:40:00-07:00</updated>
     <id>http://www.zlu.me/blog/2012/11/01/encourage-social-sharing-in-china</id>
     <content type="html"><![CDATA[<p>I recently spent a month in China, where access to Facebook, Twitter, and GooglePlus are blocked.  I&#8217;ve always known
 about the Great Firewall, but I never really thought about how it can affect content-sharing that I have grown used to over
@@ -396,7 +396,7 @@ times the entry has been shared.</li>
   <entry>
     <title type="html"><![CDATA[Install and Create Rails 4.0 App]]></title>
     <link href="http://www.zlu.me/blog/2012/10/29/install-and-create-rails-4-dot-0-app/"/>
-    <updated>2012-10-29T22:46:00+08:00</updated>
+    <updated>2012-10-29T22:46:00-07:00</updated>
     <id>http://www.zlu.me/blog/2012/10/29/install-and-create-rails-4-dot-0-app</id>
     <content type="html"><![CDATA[<p>Rails 4.0 development has started a while back.  It was merged into Rails&#8217; master branch on Github in 2011.
 As the writing of this blog entry, the stable version of Rails is 3.2.8.  Release candidate is at 3.2.9.rc1.
@@ -497,7 +497,7 @@ should not be a surprise.</p>
   <entry>
     <title type="html"><![CDATA[A Small Difference Between Mongoid and ActiveRecord Query Interface]]></title>
     <link href="http://www.zlu.me/blog/2012/10/16/a-small-difference-between-mongoid-and-activerecord-query-interface/"/>
-    <updated>2012-10-16T21:29:00+08:00</updated>
+    <updated>2012-10-16T21:29:00-07:00</updated>
     <id>http://www.zlu.me/blog/2012/10/16/a-small-difference-between-mongoid-and-activerecord-query-interface</id>
     <content type="html"><![CDATA[<p>There are definitely some gotchas when switching from ActiveRecord to MongoDB (with Mongoid for example).  One of them
 is how the IN operator in SQL is supported.</p>
@@ -523,7 +523,7 @@ as such:</p>
   <entry>
     <title type="html"><![CDATA[Segmentation fault with Rails and JSON]]></title>
     <link href="http://www.zlu.me/blog/2012/10/16/segmentation-fault-with-rails-and-json/"/>
-    <updated>2012-10-16T21:03:00+08:00</updated>
+    <updated>2012-10-16T21:03:00-07:00</updated>
     <id>http://www.zlu.me/blog/2012/10/16/segmentation-fault-with-rails-and-json</id>
     <content type="html"><![CDATA[<p>After manually cleaning Ruby gems on my system, I got this error running <code>rails c</code> or <code>rails s</code></p>
 
@@ -562,7 +562,7 @@ After reinstalling bundler, you can run <code>bundle install</code>, assuming yo
   <entry>
     <title type="html"><![CDATA[Accessing Facebook in Vietnam]]></title>
     <link href="http://www.zlu.me/blog/2012/08/30/accessing-facebook-in-vietnam/"/>
-    <updated>2012-08-30T21:56:00+08:00</updated>
+    <updated>2012-08-30T21:56:00-07:00</updated>
     <id>http://www.zlu.me/blog/2012/08/30/accessing-facebook-in-vietnam</id>
     <content type="html"><![CDATA[<p>I just traveled to Saigon, Vietnam.  After checking hotel, I logged onto Wifi and browsed to Facebook.
 It won&#8217;t load!</p>
@@ -593,7 +593,7 @@ fix is quit easy.  All you need to do is to change your DNS server to Google DNS
   <entry>
     <title type="html"><![CDATA[Uninstall Multiple Versions of Multiple Ruby Gems]]></title>
     <link href="http://www.zlu.me/blog/2012/07/31/uninstall-multiple-versions-of-multiple-ruby-gem/"/>
-    <updated>2012-07-31T10:13:00+08:00</updated>
+    <updated>2012-07-31T10:13:00-07:00</updated>
     <id>http://www.zlu.me/blog/2012/07/31/uninstall-multiple-versions-of-multiple-ruby-gem</id>
     <content type="html"><![CDATA[<p>Let&#8217;s say you have multiple versions of spree gems installed and want to get rid of the older versions.</p>
 
@@ -639,7 +639,7 @@ fix is quit easy.  All you need to do is to change your DNS server to Google DNS
   <entry>
     <title type="html"><![CDATA[Pretty Print JSON in Command Line]]></title>
     <link href="http://www.zlu.me/blog/2012/07/19/pretty-print-json-in-command-line/"/>
-    <updated>2012-07-19T16:28:00+08:00</updated>
+    <updated>2012-07-19T16:28:00-07:00</updated>
     <id>http://www.zlu.me/blog/2012/07/19/pretty-print-json-in-command-line</id>
     <content type="html"><![CDATA[<p>We often deal with viewing JSON documents in command line such as using curl against a server that returns JSON response.
 It is hard to read.</p>
@@ -731,7 +731,7 @@ It is hard to read.</p>
   <entry>
     <title type="html"><![CDATA[Testing Carrierwave with Fog for Amazon S3]]></title>
     <link href="http://www.zlu.me/blog/2012/07/17/testing-carrierwave-with-fog/"/>
-    <updated>2012-07-17T21:10:00+08:00</updated>
+    <updated>2012-07-17T21:10:00-07:00</updated>
     <id>http://www.zlu.me/blog/2012/07/17/testing-carrierwave-with-fog</id>
     <content type="html"><![CDATA[<p>Testing file upload using CarrierWave with Fog with S3 turns out to be difficult.</p>
 
@@ -858,7 +858,7 @@ using the FileUploader under test.  The upload url is the subject under test.</p
   <entry>
     <title type="html"><![CDATA[My Current Emacs]]></title>
     <link href="http://www.zlu.me/blog/2012/05/18/my-current-emacs/"/>
-    <updated>2012-05-18T19:49:00+08:00</updated>
+    <updated>2012-05-18T19:49:00-07:00</updated>
     <id>http://www.zlu.me/blog/2012/05/18/my-current-emacs</id>
     <content type="html"><![CDATA[<pre>
 Emacs with Sidebar enabled.
@@ -877,7 +877,7 @@ Emacs with Rinari enabled.
   <entry>
     <title type="html"><![CDATA[TDD by Jim Weirich]]></title>
     <link href="http://www.zlu.me/blog/2012/05/13/tdd-by-jim-weirich/"/>
-    <updated>2012-05-13T18:28:00+08:00</updated>
+    <updated>2012-05-13T18:28:00-07:00</updated>
     <id>http://www.zlu.me/blog/2012/05/13/tdd-by-jim-weirich</id>
     <content type="html"><![CDATA[<p>I invited Jim Weirich to give us a week-long training on TDD/BDD/Agile.  Here&#8217;re the raw notes.</p>
 
@@ -950,7 +950,7 @@ actions are and_return</p>
   <entry>
     <title type="html"><![CDATA[Running Wireshark on Mountain Lion]]></title>
     <link href="http://www.zlu.me/blog/2012/02/28/running-wireshark-on-mountain-lion/"/>
-    <updated>2012-02-28T09:06:00+08:00</updated>
+    <updated>2012-02-28T09:06:00-08:00</updated>
     <id>http://www.zlu.me/blog/2012/02/28/running-wireshark-on-mountain-lion</id>
     <content type="html"><![CDATA[<p>X11 has been removed from Mountain Lion and you first need to install XQuartz</p>
 ]]></content>
@@ -959,7 +959,7 @@ actions are and_return</p>
   <entry>
     <title type="html"><![CDATA[Install Native Ruby Gem in Mountain Lion Preview]]></title>
     <link href="http://www.zlu.me/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview/"/>
-    <updated>2012-02-21T13:59:00+08:00</updated>
+    <updated>2012-02-21T13:59:00-08:00</updated>
     <id>http://www.zlu.me/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview</id>
     <content type="html"><![CDATA[<p>In Preview of OS X Mountain Lion, XCode has been distributed as a .app package verses the traditional installer.
 Also the Commandline Tools are not installed by default.  Commandline Tools contains cc/gcc that you will need.</p>
@@ -1022,7 +1022,7 @@ Provided configuration options:
   <entry>
     <title type="html"><![CDATA[RubyMine and PivotalTracker Integration]]></title>
     <link href="http://www.zlu.me/blog/2012/02/14/rubymine-and-pivotaltracker-integration/"/>
-    <updated>2012-02-14T20:32:00+08:00</updated>
+    <updated>2012-02-14T20:32:00-08:00</updated>
     <id>http://www.zlu.me/blog/2012/02/14/rubymine-and-pivotaltracker-integration</id>
     <content type="html"><![CDATA[<p><strong>Task Server</strong> is a lesser known feature in RubyMine.  You can enable PivotalTracker (PT) integration by adding
 PT project as a Task Server.</p>
@@ -1055,7 +1055,7 @@ finish the story.  How cool is that?  Now try to do that in Emacs or VI, I dare 
   <entry>
     <title type="html"><![CDATA[A Couple Things to Watch Out For Using PrivatePub]]></title>
     <link href="http://www.zlu.me/blog/2012/02/12/a-couple-things-to-watch-out-for-using-privatepub/"/>
-    <updated>2012-02-12T20:38:00+08:00</updated>
+    <updated>2012-02-12T20:38:00-08:00</updated>
     <id>http://www.zlu.me/blog/2012/02/12/a-couple-things-to-watch-out-for-using-privatepub</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/ryanb/private_pub">Private Pub</a> is a convinent gem wraps around <a href="http://faye.jcoglan.com/ruby.html">Faye</a>.</p>
 
@@ -1077,7 +1077,7 @@ publish to a channel uniquely identified by each session of the chat.</p></li>
   <entry>
     <title type="html"><![CDATA[RSpec Arbitrary Handling of Arguments]]></title>
     <link href="http://www.zlu.me/blog/2012/02/12/rspec-arbitrary-handling-of-arguments/"/>
-    <updated>2012-02-12T19:32:00+08:00</updated>
+    <updated>2012-02-12T19:32:00-08:00</updated>
     <id>http://www.zlu.me/blog/2012/02/12/rspec-arbitrary-handling-of-arguments</id>
     <content type="html"><![CDATA[<p>RSpec lets you test the number, type, and order of arguments.  For example,</p>
 
@@ -1120,7 +1120,7 @@ The second is a hash and it equals to {:foo => &#8216;foo&#8217;}</p>
   <entry>
     <title type="html"><![CDATA[On Agile]]></title>
     <link href="http://www.zlu.me/blog/2012/01/30/on-agile/"/>
-    <updated>2012-01-30T18:11:00+08:00</updated>
+    <updated>2012-01-30T18:11:00-08:00</updated>
     <id>http://www.zlu.me/blog/2012/01/30/on-agile</id>
     <content type="html"><![CDATA[<p>Programmers do not like rules.</p>
 
