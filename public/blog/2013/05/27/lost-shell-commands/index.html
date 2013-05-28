@@ -5,14 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>RSpec Arbitrary Handling of Arguments - @zlu</title>
+  <title>Lost Shell Commands? - @zlu</title>
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="RSpec lets you test the number, type, and order of arguments. For example, 1
-2
-Foo.should_receive(:bar).with(1, kind_of(Hash), anything())
-Foo.bar(1 &hellip;">
+  <meta name="description" content="Sometime when you modify .bashrc or .bash_profile and source it, you may notice that you have &lsquo;lost&rsquo; your shell commands.
+You will see & &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +19,7 @@ Foo.bar(1 &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.zlu.me/blog/2012/02/12/rspec-arbitrary-handling-of-arguments/">
+  <link rel="canonical" href="http://www.zlu.me/blog/2013/05/27/lost-shell-commands/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -91,7 +89,7 @@ Foo.bar(1 &hellip;">
   <header>
     
       
-        <h1 class="entry-title">RSpec Arbitrary Handling of Arguments</h1>
+        <h1 class="entry-title">Lost Shell Commands?</h1>
       
     
     
@@ -108,7 +106,7 @@ Foo.bar(1 &hellip;">
   
 
 
-<time datetime="2012-02-12T19:32:00-05:00" pubdate data-updated="true">Feb 12<span>th</span>, 2012</time>
+<time datetime="2013-05-27T21:32:00-04:00" pubdate data-updated="true">May 27<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -117,41 +115,21 @@ Foo.bar(1 &hellip;">
   </header>
 
 
-<div class="entry-content"><p>RSpec lets you test the number, type, and order of arguments.  For example,</p>
+<div class="entry-content"><p>Sometime when you modify .bashrc or .bash_profile and source it, you may notice that you have &lsquo;lost&rsquo; your shell commands.
+You will see &lsquo;command not found&rsquo; for the simplest commands such as <code>ls</code> and <code>which</code>.</p>
 
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Foo</span><span class="o">.</span><span class="n">should_receive</span><span class="p">(</span><span class="ss">:bar</span><span class="p">)</span><span class="o">.</span><span class="n">with</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">kind_of</span><span class="p">(</span><span class="no">Hash</span><span class="p">),</span> <span class="n">anything</span><span class="p">())</span>
-</span><span class='line'><span class="no">Foo</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;b&#39;</span><span class="p">},</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>Most like this happens because you have accidentally override your PATH.  So instead of doing:</p>
 
+<p><code>PATH=my/custom/path:$PATH</code>, you did <code>PATH=my/custom/path</code>.</p>
 
-<p>Pass!</p>
+<p>Here&rsquo;s a simpel way to fix it.</p>
 
-<p>This tests that class method <strong>bar</strong> will be called against class <strong>Foo</strong> with 3 arguments.  The first argument is integer 1,
-the second argument is an instance of Hash, the third argument can be anything.</p>
-
-<p>What if you want to test a bit more on the argument than that?</p>
-
-<p>For example, in order to test a <a href="https://github.com/ryanb/private_pub">private_pub</a> method <strong>publish_to</strong>:</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">PrivatePub</span><span class="o">.</span><span class="n">should_receive</span><span class="p">(</span><span class="ss">:publish_to</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">channel</span><span class="p">,</span> <span class="n">data</span><span class="o">|</span>
-</span><span class='line'>  <span class="n">channel</span><span class="o">.</span><span class="n">should</span> <span class="n">eq</span> <span class="s1">&#39;messages/new&#39;</span>
-</span><span class='line'>  <span class="n">data</span><span class="o">[</span><span class="ss">:foo</span><span class="o">].</span><span class="n">should</span> <span class="n">eq</span> <span class="s1">&#39;foo&#39;</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="no">PrivatePub</span><span class="o">.</span><span class="n">publish_to</span><span class="o">[</span><span class="s1">&#39;messages/new&#39;</span><span class="p">,</span> <span class="p">{</span><span class="ss">:foo</span> <span class="o">=&gt;</span> <span class="s1">&#39;foo&#39;</span><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>echo 'PATH=/bin:/usr/bin' &gt; foo && source foo</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Pass!</p>
-
-<p>This tests that <strong>publish_to</strong> takes 2 arguments.  The first is channel and should be equal to &lsquo;messages/new&rsquo;.
-The second is a hash and it equals to {:foo => &lsquo;foo&rsquo;}</p>
+<p>This will get recover your commands so you can modify your .bashrc or .bash_profile with nano.  Remember to back up a working
+version before working on them next time :)</p>
 </div>
 
 
@@ -174,12 +152,12 @@ The second is a hash and it equals to {:foo => &lsquo;foo&rsquo;}</p>
   
 
 
-<time datetime="2012-02-12T19:32:00-05:00" pubdate data-updated="true">Feb 12<span>th</span>, 2012</time>
+<time datetime="2013-05-27T21:32:00-04:00" pubdate data-updated="true">May 27<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/rspec/'>rspec</a>, <a class='category' href='/blog/categories/tdd/'>tdd</a>
+    <a class='category' href='/blog/categories/bash/'>Bash</a>, <a class='category' href='/blog/categories/shell/'>Shell</a>
   
 </span>
 
@@ -188,8 +166,8 @@ The second is a hash and it equals to {:foo => &lsquo;foo&rsquo;}</p>
     
       <div class="sharing">
     
-    <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.zlu.me/blog/2012/02/12/rspec-arbitrary-handling-of-arguments/"
-       data-via="zlu" data-counturl="http://www.zlu.me/blog/2012/02/12/rspec-arbitrary-handling-of-arguments/">Tweet</a>
+    <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.zlu.me/blog/2013/05/27/lost-shell-commands/"
+       data-via="zlu" data-counturl="http://www.zlu.me/blog/2013/05/27/lost-shell-commands/">Tweet</a>
     
     
     <div class="g-plusone" data-size="small"></div>
@@ -207,7 +185,7 @@ The second is a hash and it equals to {:foo => &lsquo;foo&rsquo;}</p>
         type:'3',
         count:'1', /**是否显示分享数，1显示(可选)*/
         appkey:'', /**您申请的应用appkey,显示分享来源(可选)*/
-        title:"http://www.zlu.me/blog/2012/02/12/rspec-arbitrary-handling-of-arguments/",/**分享的文字内容(可选，默认为所在页面的title)*/
+        title:"http://www.zlu.me/blog/2013/05/27/lost-shell-commands/",/**分享的文字内容(可选，默认为所在页面的title)*/
         pic:'', /**分享图片的路径(可选)*/
         ralateUid:"2091903003", /**关联用户的UID，分享微博会@该用户(可选)*/
     	language:'zh_cn', /**设置语言，zh_cn|zh_tw(可选)*/
@@ -226,10 +204,8 @@ The second is a hash and it equals to {:foo => &lsquo;foo&rsquo;}</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left articlenav" href="/blog/2012/01/30/on-agile/" title="Previous Post: On Agile">&laquo; On Agile</a>
+        <a class="basic-alignment left articlenav" href="/blog/2013/02/04/postgres-gotchas/" title="Previous Post: Postgres Gotchas">&laquo; Postgres Gotchas</a>
       
-      
-        <a class="basic-alignment right articlenav" href="/blog/2012/02/12/a-couple-things-to-watch-out-for-using-privatepub/" title="Next Post: A Couple Things to Watch Out For Using PrivatePub">A Couple Things to Watch Out For Using PrivatePub &raquo;</a>
       
     </p>
   </footer>
@@ -373,8 +349,8 @@ The second is a hash and it equals to {:foo => &lsquo;foo&rsquo;}</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.zlu.me/blog/2012/02/12/rspec-arbitrary-handling-of-arguments/';
-        var disqus_url = 'http://www.zlu.me/blog/2012/02/12/rspec-arbitrary-handling-of-arguments/';
+        var disqus_identifier = 'http://www.zlu.me/blog/2013/05/27/lost-shell-commands/';
+        var disqus_url = 'http://www.zlu.me/blog/2013/05/27/lost-shell-commands/';
         var disqus_script = 'embed.js';
       
     (function () {

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: BDD | @zlu]]></title>
   <link href="http://www.zlu.me/blog/categories/bdd/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2013-04-22T13:57:09-07:00</updated>
+  <updated>2013-05-27T22:18:23-04:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -16,19 +16,19 @@
   <entry>
     <title type="html"><![CDATA[TDD by Jim Weirich]]></title>
     <link href="http://www.zlu.me/blog/2012/05/13/tdd-by-jim-weirich/"/>
-    <updated>2012-05-13T18:28:00-07:00</updated>
+    <updated>2012-05-13T18:28:00-04:00</updated>
     <id>http://www.zlu.me/blog/2012/05/13/tdd-by-jim-weirich</id>
-    <content type="html"><![CDATA[<p>I invited Jim Weirich to give us a week-long training on TDD/BDD/Agile.  Here're the raw notes.</p>
+    <content type="html"><![CDATA[<p>I invited Jim Weirich to give us a week-long training on TDD/BDD/Agile.  Here&rsquo;re the raw notes.</p>
 
 <p>The way of Testivus</p>
 
 <p>Code driven from tests are more composable</p>
 
-<p>RSpec - Focus on Behavior</p>
+<p>RSpec &ndash; Focus on Behavior</p>
 
 <p>Avoid testing state</p>
 
-<p>As a client, I don't care about internal member variables or implementations, I only care about the result.</p>
+<p>As a client, I don&rsquo;t care about internal member variables or implementations, I only care about the result.</p>
 
 <p>Reveal our intentions</p>
 
@@ -44,7 +44,7 @@
 Also class inherits from top-level class
 Why helper methods should be in various levels (nesting) of tests</p>
 
-<p>predicate - any method ends with ?</p>
+<p>predicate &ndash; any method ends with ?</p>
 
 <p>be/equal => object identity</p>
 
@@ -55,20 +55,20 @@ Why helper methods should be in various levels (nesting) of tests</p>
 <p>Implicit subject</p>
 
 <p>its(:symbol) {  should be_true }
-specify is a 'kind of' its</p>
+specify is a &lsquo;kind of&rsquo; its</p>
 
 <p>Given/When/Then</p>
 
-<p>rspec differentiate mocks and stubs.  stubs doesn't have to be called while mocks have to be at least once.
+<p>rspec differentiate mocks and stubs.  stubs doesn&rsquo;t have to be called while mocks have to be at least once.
 constraints are should_recieve, once, etc.
 actions are and_return</p>
 
-<p>stubs don't care how many times you call it or parameters passed in</p>
+<p>stubs don&rsquo;t care how many times you call it or parameters passed in</p>
 
-<p>Flatten the cost of change in software engineering - how?
+<p>Flatten the cost of change in software engineering &ndash; how?
   The key is to increase feedback</p>
 
-<p>YAGNI - You ain't going to need it #Agile - No speculative coding!</p>
+<p>YAGNI &ndash; You ain&rsquo;t going to need it #Agile &ndash; No speculative coding!</p>
 
 <p>What is simple?
   Passes all the tests
@@ -81,7 +81,7 @@ actions are and_return</p>
 <p>Sustainable Pace (40-hr work week in America)</p>
 
 <p>Initial Importance
-  Must/Should/Could/Won't
+  Must/Should/Could/Won&rsquo;t
   Do high value and high risk stories first</p>
 ]]></content>
   </entry>

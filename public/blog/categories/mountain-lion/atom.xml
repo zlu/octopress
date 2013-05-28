@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mountain lion | @zlu]]></title>
   <link href="http://www.zlu.me/blog/categories/mountain-lion/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2013-04-22T13:57:09-07:00</updated>
+  <updated>2013-05-27T22:18:23-04:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Running Wireshark on Mountain Lion]]></title>
     <link href="http://www.zlu.me/blog/2012/02/28/running-wireshark-on-mountain-lion/"/>
-    <updated>2012-02-28T09:06:00-08:00</updated>
+    <updated>2012-02-28T09:06:00-05:00</updated>
     <id>http://www.zlu.me/blog/2012/02/28/running-wireshark-on-mountain-lion</id>
     <content type="html"><![CDATA[<p>X11 has been removed from Mountain Lion and you first need to install XQuartz</p>
 ]]></content>
@@ -25,7 +25,7 @@
   <entry>
     <title type="html"><![CDATA[Install Native Ruby Gem in Mountain Lion Preview]]></title>
     <link href="http://www.zlu.me/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview/"/>
-    <updated>2012-02-21T13:59:00-08:00</updated>
+    <updated>2012-02-21T13:59:00-05:00</updated>
     <id>http://www.zlu.me/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview</id>
     <content type="html"><![CDATA[<p>In Preview of OS X Mountain Lion, XCode has been distributed as a .app package verses the traditional installer.
 Also the Commandline Tools are not installed by default.  Commandline Tools contains cc/gcc that you will need.</p>
@@ -34,11 +34,11 @@ Also the Commandline Tools are not installed by default.  Commandline Tools cont
 
 <p>Open XCode and cmd + , to open Preferences panel where you can install Commandline Tools:</p>
 
-<p><img src="https://img.skitch.com/20120221-r2cidbjd92nh9tmswq19hj6rdc.jpg"></p>
+<p><img class="<a" src="href="https://img.skitch.com/20120221-r2cidbjd92nh9tmswq19hj6rdc.jpg">https://img.skitch.com/20120221-r2cidbjd92nh9tmswq19hj6rdc.jpg</a>"></p>
 
 <p>Now in shell you should be able to <code>locate cc</code> and <code>locate gcc</code></p>
 
-<p>Now if you try to <code>gem install hpricot</code> or any gem that requires native extension (c), you may encounter problems
+<p>Now if you try to <code>gem install hpricot</code> or any gem that requires native extension &copy;, you may encounter problems
 looks like this:</p>
 
 <pre>
@@ -74,7 +74,7 @@ Provided configuration options:
 
 <p>If you cat the mkmf.log, you may see something like this:</p>
 
-<p>"gcc-4.2 -o conftest ...."</p>
+<p>&ldquo;gcc-4.2 -o conftest &hellip;.&rdquo;</p>
 
 <p>So the fix is not to add configuration options but to simply create sym link of gcc-4.2:
 <div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>shell </span></figcaption>

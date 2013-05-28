@@ -9,7 +9,7 @@
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="I run postgres locally for development on OS X (mountain lion). I&#8217;ve run into a few issues and am documenting solutions
+  <meta name="description" content="I run postgres locally for development on OS X (mountain lion). I&rsquo;ve run into a few issues and am documenting solutions
 here. Issue 1: &hellip;">
   
 
@@ -106,7 +106,7 @@ here. Issue 1: &hellip;">
   
 
 
-<time datetime="2013-02-04T11:16:00-08:00" pubdate data-updated="true">Feb 4<span>th</span>, 2013</time>
+<time datetime="2013-02-04T11:16:00-05:00" pubdate data-updated="true">Feb 4<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -115,12 +115,12 @@ here. Issue 1: &hellip;">
   </header>
 
 
-<div class="entry-content"><p>I run postgres locally for development on OS X (mountain lion).  I&#8217;ve run into a few issues and am documenting solutions
+<div class="entry-content"><p>I run postgres locally for development on OS X (mountain lion).  I&rsquo;ve run into a few issues and am documenting solutions
 here.</p>
 
 <h2>Issue 1: Insufficient Shared Memory</h2>
 
-<p>Postgres requires sufficient shared memory or it won&#8217;t start.  If there isn&#8217;t enough, postgres server will fail to start
+<p>Postgres requires sufficient shared memory or it won&rsquo;t start.  If there isn&rsquo;t enough, postgres server will fail to start
 and in server.log you will see this:</p>
 
 <pre><code>FATAL:  could not create shared memory segment: Cannot allocate memory
@@ -154,7 +154,7 @@ HINT:  This error usually means that PostgreSQL's request for a shared memory se
 <p> More details can be found here:
  <a href="http://www.postgresql.org/docs/9.2/static/kernel-resources.html#SYSVIPC">Upgrade Postgres</a></p></li>
 <li><p>Reduce resource requirements
- In postgresql.conf you could search for &#8220;shared memory&#8221; and see all resources (such as max_connections and max_prepared_transactions).
+ In postgresql.conf you could search for &ldquo;shared memory&rdquo; and see all resources (such as max_connections and max_prepared_transactions).
  Reduce the requirements as you see fit.</p></li>
 </ol>
 
@@ -173,17 +173,12 @@ HINT:  This error usually means that PostgreSQL's request for a shared memory se
 <li>Install postgres 9.2.x (with homebrew).</li>
 <li>Create symlink for plist file for launchctl (it is named differently than 9.1 so you will need to do it again).  The post-install
  instruction of homebrew contains the exact command.
-
-<pre><code> cp /usr/local/Cellar/postgresql/9.2.1/homebrew.mxcl.postgresql.plist ~/Library/LaunchAgents/
-</code></pre>
-
-<p> And remove the plist file that belonged to 9.1.x</p></li>
+     cp /usr/local/Cellar/postgresql/9.2.1/homebrew.mxcl.postgresql.plist ~/Library/LaunchAgents/
+ And remove the plist file that belonged to 9.1.x</li>
 <li><code>initdb</code> (this creates the 9.2.x version of the database).</li>
 <li>Import the postgres data backup from the previous <code>pg_dumpall</code> command.</li>
 <li>Load plist:
-
-<pre><code> launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
-</code></pre></li>
+     launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist</li>
 </ol>
 
 
@@ -191,7 +186,7 @@ HINT:  This error usually means that PostgreSQL's request for a shared memory se
 
 <h2>Issue 3: Rails Server Fails to Start</h2>
 
-<p>If you are doing Rails development, after upgrade postgres and issue &#8216;rails s&#8217; for your project, you may see this error
+<p>If you are doing Rails development, after upgrade postgres and issue &lsquo;rails s&rsquo; for your project, you may see this error
 which fails Rails server from starting:</p>
 
 <pre><code>PGError (could not connect to server: Permission denied
@@ -225,7 +220,7 @@ pg gem.</p>
   
 
 
-<time datetime="2013-02-04T11:16:00-08:00" pubdate data-updated="true">Feb 4<span>th</span>, 2013</time>
+<time datetime="2013-02-04T11:16:00-05:00" pubdate data-updated="true">Feb 4<span>th</span>, 2013</time>
       
 
 <span class="categories">
@@ -280,6 +275,8 @@ pg gem.</p>
         <a class="basic-alignment left articlenav" href="/blog/2012/11/10/housekeeping-rvm/" title="Previous Post: Housekeeping RVM">&laquo; Housekeeping RVM</a>
       
       
+        <a class="basic-alignment right articlenav" href="/blog/2013/05/27/lost-shell-commands/" title="Next Post: Lost Shell Commands?">Lost Shell Commands? &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -311,6 +308,10 @@ pg gem.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/05/27/lost-shell-commands/">Lost Shell Commands?</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/02/04/postgres-gotchas/">Postgres Gotchas</a>
       </li>
     
@@ -324,10 +325,6 @@ pg gem.</p>
     
       <li class="post">
         <a href="/blog/2012/11/07/rolling-deployment/">Rolling Deployment</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/01/encourage-social-sharing-in-china/">Encouraging Social Sharing in China</a>
       </li>
     
   </ul>

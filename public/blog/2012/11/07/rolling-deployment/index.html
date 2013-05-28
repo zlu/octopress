@@ -106,7 +106,7 @@ less intrusive to end &hellip;">
   
 
 
-<time datetime="2012-11-07T20:30:00-08:00" pubdate data-updated="true">Nov 7<span>th</span>, 2012</time>
+<time datetime="2012-11-07T20:30:00-05:00" pubdate data-updated="true">Nov 7<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -158,10 +158,10 @@ load balancer --> |-> web server2 (blue)  -|---> database
 
 <h2>Example</h2>
 
-<p>In this example, I use Apache&#8217;s <a href="http://httpd.apache.org/docs/2.2/mod/mod_proxy_balancer.html">mod_proxy_balancer</a>.
+<p>In this example, I use Apache&rsquo;s <a href="http://httpd.apache.org/docs/2.2/mod/mod_proxy_balancer.html">mod_proxy_balancer</a>.
 I use a typical Rails web server setup and <a href="https://github.com/capistrano/capistrano">Capistrano</a> for deployment.</p>
 
-<figure class='code'><figcaption><span>In Rails&#8217; production.rb  </span></figcaption>
+<figure class='code'><figcaption><span>In Rails&#8217; production.rb </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -175,7 +175,7 @@ I use a typical Rails web server setup and <a href="https://github.com/capistran
 
 
 
-<figure class='code'><figcaption><span>In Capistrano&#8217;s deploy.rb  </span></figcaption>
+<figure class='code'><figcaption><span>In Capistrano&#8217;s deploy.rb </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -218,9 +218,9 @@ manage_node method essentially submit the form to the balancer-manager.</p>
 <h2>Other Considerations</h2>
 
 <p>Why do I suggest running some basic tests as the acceptance criteria for rolling deployment?  I assume that the code
-being deployed is well tested and passed CI/QA etc.  But there&#8217;re all kinds of factors that can be different between test,
+being deployed is well tested and passed CI/QA etc.  But there&rsquo;re all kinds of factors that can be different between test,
 CI, and production environment.  Some library have different versions, VM images, or even the OS can be different.  I like
-to use a Mac Mini for in-house CI (or Travis for open-source projects).  There&#8217;s no guarantee that Travis or Mac Mini
+to use a Mac Mini for in-house CI (or Travis for open-source projects).  There&rsquo;s no guarantee that Travis or Mac Mini
 can be kept up-to-date with production environment.  I could spin up a CI instance that replicates production but keeping
 them in-sync still takes much effort.  There are also possibilities that integration test suites do not test views where
 a simple route change could prevent user from successfully logging in.  By running a simple Selenium test to login and
@@ -254,7 +254,7 @@ will keep sending requests to the server during deployment and server restart.</
   
 
 
-<time datetime="2012-11-07T20:30:00-08:00" pubdate data-updated="true">Nov 7<span>th</span>, 2012</time>
+<time datetime="2012-11-07T20:30:00-05:00" pubdate data-updated="true">Nov 7<span>th</span>, 2012</time>
       
 
 <span class="categories">
@@ -342,6 +342,10 @@ will keep sending requests to the server during deployment and server restart.</
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/05/27/lost-shell-commands/">Lost Shell Commands?</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/02/04/postgres-gotchas/">Postgres Gotchas</a>
       </li>
     
@@ -355,10 +359,6 @@ will keep sending requests to the server during deployment and server restart.</
     
       <li class="post">
         <a href="/blog/2012/11/07/rolling-deployment/">Rolling Deployment</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/01/encourage-social-sharing-in-china/">Encouraging Social Sharing in China</a>
       </li>
     
   </ul>

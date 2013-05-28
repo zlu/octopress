@@ -2,102 +2,106 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://www.zlu.me/blog/2011/11/01/git-auto-complete/</loc>
-        <lastmod>2012-10-31T22:14:40-07:00</lastmod>
+        <lastmod>2012-11-01T01:14:40-04:00</lastmod>
     </url>
     <url>
         <loc>http://www.zlu.me/blog/2012/01/30/on-agile/</loc>
-        <lastmod>2012-10-31T22:14:40-07:00</lastmod>
+        <lastmod>2012-11-01T01:14:40-04:00</lastmod>
     </url>
     <url>
         <loc>http://www.zlu.me/blog/2012/02/12/rspec-arbitrary-handling-of-arguments/</loc>
-        <lastmod>2012-10-31T22:14:40-07:00</lastmod>
+        <lastmod>2012-11-01T01:14:40-04:00</lastmod>
     </url>
     <url>
         <loc>
             http://www.zlu.me/blog/2012/02/12/a-couple-things-to-watch-out-for-using-privatepub/
         </loc>
-        <lastmod>2012-10-31T22:14:40-07:00</lastmod>
+        <lastmod>2012-11-01T01:14:40-04:00</lastmod>
     </url>
     <url>
         <loc>http://www.zlu.me/blog/2012/02/14/rubymine-and-pivotaltracker-integration/</loc>
-        <lastmod>2012-10-31T22:14:40-07:00</lastmod>
+        <lastmod>2012-11-01T01:14:40-04:00</lastmod>
     </url>
     <url>
         <loc>
             http://www.zlu.me/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview/
         </loc>
-        <lastmod>2012-10-31T22:14:40-07:00</lastmod>
+        <lastmod>2012-11-01T01:14:40-04:00</lastmod>
     </url>
     <url>
         <loc>http://www.zlu.me/blog/2012/02/28/running-wireshark-on-mountain-lion/</loc>
-        <lastmod>2012-10-31T22:14:40-07:00</lastmod>
+        <lastmod>2012-11-01T01:14:40-04:00</lastmod>
     </url>
     <url>
         <loc>http://www.zlu.me/blog/2012/05/13/tdd-by-jim-weirich/</loc>
-        <lastmod>2012-10-31T22:14:40-07:00</lastmod>
+        <lastmod>2012-11-01T01:14:40-04:00</lastmod>
     </url>
     <url>
         <loc>http://www.zlu.me/blog/2012/05/18/my-current-emacs/</loc>
-        <lastmod>2012-10-31T22:14:40-07:00</lastmod>
+        <lastmod>2012-11-01T01:14:40-04:00</lastmod>
     </url>
     <url>
         <loc>http://www.zlu.me/blog/2012/07/17/testing-carrierwave-with-fog/</loc>
-        <lastmod>2012-10-31T22:14:40-07:00</lastmod>
+        <lastmod>2012-11-01T01:14:40-04:00</lastmod>
     </url>
     <url>
         <loc>http://www.zlu.me/blog/2012/07/19/pretty-print-json-in-command-line/</loc>
-        <lastmod>2012-10-31T22:14:40-07:00</lastmod>
+        <lastmod>2012-11-01T01:14:40-04:00</lastmod>
     </url>
     <url>
         <loc>
             http://www.zlu.me/blog/2012/07/31/uninstall-multiple-versions-of-multiple-ruby-gem/
         </loc>
-        <lastmod>2012-10-31T22:14:40-07:00</lastmod>
+        <lastmod>2012-11-01T01:14:40-04:00</lastmod>
     </url>
     <url>
         <loc>http://www.zlu.me/blog/2012/08/30/accessing-facebook-in-vietnam/</loc>
-        <lastmod>2012-10-31T22:14:40-07:00</lastmod>
+        <lastmod>2012-11-01T01:14:40-04:00</lastmod>
     </url>
     <url>
         <loc>http://www.zlu.me/blog/2012/10/16/segmentation-fault-with-rails-and-json/</loc>
-        <lastmod>2012-10-31T22:14:40-07:00</lastmod>
+        <lastmod>2012-11-01T01:14:40-04:00</lastmod>
     </url>
     <url>
         <loc>
             http://www.zlu.me/blog/2012/10/16/a-small-difference-between-mongoid-and-activerecord-query-interface/
         </loc>
-        <lastmod>2012-10-31T22:14:40-07:00</lastmod>
+        <lastmod>2012-11-01T01:14:40-04:00</lastmod>
     </url>
     <url>
         <loc>http://www.zlu.me/blog/2012/10/29/install-and-create-rails-4-dot-0-app/</loc>
-        <lastmod>2012-10-31T22:14:40-07:00</lastmod>
+        <lastmod>2012-11-01T01:14:40-04:00</lastmod>
     </url>
     <url>
         <loc>http://www.zlu.me/blog/2012/11/01/encourage-social-sharing-in-china/</loc>
-        <lastmod>2013-02-17T07:04:48-08:00</lastmod>
+        <lastmod>2013-02-17T10:04:48-05:00</lastmod>
     </url>
     <url>
         <loc>http://www.zlu.me/blog/2012/11/07/rolling-deployment/</loc>
-        <lastmod>2012-11-08T00:40:55-08:00</lastmod>
+        <lastmod>2012-11-08T03:40:55-05:00</lastmod>
     </url>
     <url>
         <loc>http://www.zlu.me/blog/2012/11/08/what-happened-to-fd-3-and-4-in-mri/</loc>
-        <lastmod>2012-11-08T16:20:14-08:00</lastmod>
+        <lastmod>2012-11-08T19:20:14-05:00</lastmod>
     </url>
     <url>
         <loc>http://www.zlu.me/blog/2012/11/10/housekeeping-rvm/</loc>
-        <lastmod>2012-11-10T18:30:50-08:00</lastmod>
+        <lastmod>2012-11-10T21:30:50-05:00</lastmod>
     </url>
     <url>
         <loc>http://www.zlu.me/blog/2013/02/04/postgres-gotchas/</loc>
-        <lastmod>2013-02-04T00:09:14-08:00</lastmod>
+        <lastmod>2013-02-04T03:09:14-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.zlu.me/blog/2013/05/27/lost-shell-commands/</loc>
+        <lastmod>2013-05-27T21:50:28-04:00</lastmod>
     </url>
     <url>
         <loc>http://www.zlu.me/blog/archives/</loc>
-        <lastmod>2013-02-17T07:04:48-08:00</lastmod>
+        <lastmod>2013-05-27T21:50:28-04:00</lastmod>
     </url>
     <url>
         <loc>http://www.zlu.me/</loc>
-        <lastmod>2013-02-17T07:04:48-08:00</lastmod>
+        <lastmod>2013-05-27T21:50:28-04:00</lastmod>
     </url>
 </urlset>

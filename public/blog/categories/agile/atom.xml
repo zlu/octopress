@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Agile | @zlu]]></title>
+  <title><![CDATA[Category: agile | @zlu]]></title>
   <link href="http://www.zlu.me/blog/categories/agile/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2013-04-22T13:57:09-07:00</updated>
+  <updated>2013-05-27T22:18:35-04:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -14,75 +14,65 @@
 
   
   <entry>
-    <title type="html"><![CDATA[TDD by Jim Weirich]]></title>
-    <link href="http://www.zlu.me/blog/2012/05/13/tdd-by-jim-weirich/"/>
-    <updated>2012-05-13T18:28:00-07:00</updated>
-    <id>http://www.zlu.me/blog/2012/05/13/tdd-by-jim-weirich</id>
-    <content type="html"><![CDATA[<p>I invited Jim Weirich to give us a week-long training on TDD/BDD/Agile.  Here're the raw notes.</p>
+    <title type="html"><![CDATA[On Agile]]></title>
+    <link href="http://www.zlu.me/blog/2012/01/30/on-agile/"/>
+    <updated>2012-01-30T18:11:00-05:00</updated>
+    <id>http://www.zlu.me/blog/2012/01/30/on-agile</id>
+    <content type="html"><![CDATA[<p>Programmers do not like rules.</p>
 
-<p>The way of Testivus</p>
+<p>Programmers who are hesitate about adopting agile say agile is about adding rules
+to their development.</p>
 
-<p>Code driven from tests are more composable</p>
+<p>Agile is not about implementing new rules.  It is about breaking existing rules.<br/>
+The first rule to break when introducing XP into a traditional work place is to take down
+the cubicles.</p>
 
-<p>RSpec - Focus on Behavior</p>
+<p>Agile is about communication.  Pair programming is all about communication.  The pair
+communicate via code.  One write test, sees it fail, and the other write enough code
+to make the test pass.  The pair constantly communicate verbally to making design decisions.</p>
 
-<p>Avoid testing state</p>
+<p>Agile is about communication across functional areas.  Customers, production, development, and
+QA all need to communicate.  That is why heterogeneous pairing is so important.  Has
+QA accepted the done criteria before developers start working on it?  How many times
+do you have stories rejected and then started to talk to QA about what this feature
+is about?  Miscommunication and missed communication imply wasted development and test cycles.</p>
 
-<p>As a client, I don't care about internal member variables or implementations, I only care about the result.</p>
+<p>The hardest thing for most developers to get about XP is TDD/BDD.  If there is
+one thing you want to start with Agile, that has to be TDD.  TDD is not about writing
+some code then a couple of tests to cover what you think is sufficient.  It is about
+starting a feature by writing a single test and only enough code to make it pass.  A
+method with a hard-coded string sometime is enough to make the test pass and that is ok.<br/>
+Another example is simply returning a 200 for a web request.  The next test will be
+forcing the hard-coded string to change or returning an actual response body (or at
+least part of it).  It is harder to think about test first, it is also more code to
+write because you may have several tests for a single line of production code.  But
+the result is more robust and reliable code.  You will save time in the end because
+you have considered how to defeat and defend your own code from the beginning, and
+you will want to naturally refactor towards the end goal.  You will be less focused
+on the postive case, which is usually easy and spend more time on negative paths.</p>
 
-<p>Reveal our intentions</p>
+<p>Agile builds better programmers.  You may think TDD is a rule.  But it&rsquo;s really a habit.<br/>
+It is like Zen, a practice of life.  When thinking about a feature, you think about
+how to make it testable.  If you can&rsquo;t seem to figure out how to write test first, it
+means you are not understanding the feature well or the story needs redesign or being
+brutely honest, not getting TDD.  TDD takes practice, much like learning a new programming
+language.  I remember learning Java when I already know C.  OO concepts seem to be foreign
+and hard to grasp, at first.</p>
 
-<p>Focus on the design</p>
+<p>Agile does not stop you from experimenting with new technology and building prototypes just
+to figure out whether something will work or not.  It is called spikes.  You can spike
+often as needed but remember developer time is valuable and obligation to deliver
+features to customers on time.  Using existing infrastructure to meet customer requirements
+and refactor towards end goal is ideal.</p>
 
-<p>Forget unit, describe context</p>
-
-<p>context is an alias to describe</p>
-
-<p>describe/context is equivalent to creating a class of the object and behavior being described/contexted.
-  class DescribeRing . . end
-  class ContextWhenEmpty . . end
-Also class inherits from top-level class
-Why helper methods should be in various levels (nesting) of tests</p>
-
-<p>predicate - any method ends with ?</p>
-
-<p>be/equal => object identity</p>
-
-<p>eql or == is structural equality</p>
-
-<p>let(:symbol) { } creates a named method identified by :symbol.  When referred, the block will be executed exactly once.</p>
-
-<p>Implicit subject</p>
-
-<p>its(:symbol) {  should be_true }
-specify is a 'kind of' its</p>
-
-<p>Given/When/Then</p>
-
-<p>rspec differentiate mocks and stubs.  stubs doesn't have to be called while mocks have to be at least once.
-constraints are should_recieve, once, etc.
-actions are and_return</p>
-
-<p>stubs don't care how many times you call it or parameters passed in</p>
-
-<p>Flatten the cost of change in software engineering - how?
-  The key is to increase feedback</p>
-
-<p>YAGNI - You ain't going to need it #Agile - No speculative coding!</p>
-
-<p>What is simple?
-  Passes all the tests
-  Reveals the intention of the developer
-  No Duplication
-  Fewest huber of classes or methods</p>
-
-<p>Collective Ownership</p>
-
-<p>Sustainable Pace (40-hr work week in America)</p>
-
-<p>Initial Importance
-  Must/Should/Could/Won't
-  Do high value and high risk stories first</p>
+<p>Agile is about emotions.  Believe or not, coders are also emotional beings.  Agile
+considers emotions first then about machines and programming languages.  In order to
+better delivery business values, the team, as an aggregation of humans, needs to work
+towards the same goal.  By effective communication and interaction, people make better
+decisions.  Pair programming eliminates personal blames.  Shifting pairs changes
+code ownership from individual to team.  By building trust, pair forms a natural support
+system.  It is often comforting to have someone sitting next to you to point out logical
+flaws.  Afterall, coders want to deliver better code.</p>
 ]]></content>
   </entry>
   

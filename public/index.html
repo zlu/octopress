@@ -9,8 +9,8 @@
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="I run postgres locally for development on OS X (mountain lion). I&#8217;ve run into a few issues and am documenting solutions
-here. Issue 1: &hellip;">
+  <meta name="description" content="Sometime when you modify .bashrc or .bash_profile and source it, you may notice that you have &lsquo;lost&rsquo; your shell commands.
+You will see & &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -92,6 +92,60 @@ here. Issue 1: &hellip;">
   <header>
     
       <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2013/05/27/lost-shell-commands/">Lost Shell Commands?</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-27T21:32:00-04:00" pubdate data-updated="true">May 27<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/27/lost-shell-commands/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Sometime when you modify .bashrc or .bash_profile and source it, you may notice that you have &lsquo;lost&rsquo; your shell commands.
+You will see &lsquo;command not found&rsquo; for the simplest commands such as <code>ls</code> and <code>which</code>.</p>
+
+<p>Most like this happens because you have accidentally override your PATH.  So instead of doing:</p>
+
+<p><code>PATH=my/custom/path:$PATH</code>, you did <code>PATH=my/custom/path</code>.</p>
+
+<p>Here&rsquo;s a simpel way to fix it.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>echo 'PATH=/bin:/usr/bin' &gt; foo && source foo</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This will get recover your commands so you can modify your .bashrc or .bash_profile with nano.  Remember to back up a working
+version before working on them next time :)</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
         <h1 class="entry-title"><a href="/blog/2013/02/04/postgres-gotchas/">Postgres Gotchas</a></h1>
       
     
@@ -109,7 +163,7 @@ here. Issue 1: &hellip;">
   
 
 
-<time datetime="2013-02-04T11:16:00-08:00" pubdate data-updated="true">Feb 4<span>th</span>, 2013</time>
+<time datetime="2013-02-04T11:16:00-05:00" pubdate data-updated="true">Feb 4<span>th</span>, 2013</time>
         
          | <a href="/blog/2013/02/04/postgres-gotchas/#disqus_thread">Comments</a>
         
@@ -118,12 +172,12 @@ here. Issue 1: &hellip;">
   </header>
 
 
-  <div class="entry-content"><p>I run postgres locally for development on OS X (mountain lion).  I&#8217;ve run into a few issues and am documenting solutions
+  <div class="entry-content"><p>I run postgres locally for development on OS X (mountain lion).  I&rsquo;ve run into a few issues and am documenting solutions
 here.</p>
 
 <h2>Issue 1: Insufficient Shared Memory</h2>
 
-<p>Postgres requires sufficient shared memory or it won&#8217;t start.  If there isn&#8217;t enough, postgres server will fail to start
+<p>Postgres requires sufficient shared memory or it won&rsquo;t start.  If there isn&rsquo;t enough, postgres server will fail to start
 and in server.log you will see this:</p>
 
 <pre><code>FATAL:  could not create shared memory segment: Cannot allocate memory
@@ -157,7 +211,7 @@ HINT:  This error usually means that PostgreSQL's request for a shared memory se
 <p> More details can be found here:
  <a href="http://www.postgresql.org/docs/9.2/static/kernel-resources.html#SYSVIPC">Upgrade Postgres</a></p></li>
 <li><p>Reduce resource requirements
- In postgresql.conf you could search for &#8220;shared memory&#8221; and see all resources (such as max_connections and max_prepared_transactions).
+ In postgresql.conf you could search for &ldquo;shared memory&rdquo; and see all resources (such as max_connections and max_prepared_transactions).
  Reduce the requirements as you see fit.</p></li>
 </ol>
 
@@ -176,17 +230,12 @@ HINT:  This error usually means that PostgreSQL's request for a shared memory se
 <li>Install postgres 9.2.x (with homebrew).</li>
 <li>Create symlink for plist file for launchctl (it is named differently than 9.1 so you will need to do it again).  The post-install
  instruction of homebrew contains the exact command.
-
-<pre><code> cp /usr/local/Cellar/postgresql/9.2.1/homebrew.mxcl.postgresql.plist ~/Library/LaunchAgents/
-</code></pre>
-
-<p> And remove the plist file that belonged to 9.1.x</p></li>
+     cp /usr/local/Cellar/postgresql/9.2.1/homebrew.mxcl.postgresql.plist ~/Library/LaunchAgents/
+ And remove the plist file that belonged to 9.1.x</li>
 <li><code>initdb</code> (this creates the 9.2.x version of the database).</li>
 <li>Import the postgres data backup from the previous <code>pg_dumpall</code> command.</li>
 <li>Load plist:
-
-<pre><code> launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
-</code></pre></li>
+     launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist</li>
 </ol>
 
 
@@ -194,7 +243,7 @@ HINT:  This error usually means that PostgreSQL's request for a shared memory se
 
 <h2>Issue 3: Rails Server Fails to Start</h2>
 
-<p>If you are doing Rails development, after upgrade postgres and issue &#8216;rails s&#8217; for your project, you may see this error
+<p>If you are doing Rails development, after upgrade postgres and issue &lsquo;rails s&rsquo; for your project, you may see this error
 which fails Rails server from starting:</p>
 
 <pre><code>PGError (could not connect to server: Permission denied
@@ -236,7 +285,7 @@ pg gem.</p>
   
 
 
-<time datetime="2012-11-10T18:13:00-08:00" pubdate data-updated="true">Nov 10<span>th</span>, 2012</time>
+<time datetime="2012-11-10T18:13:00-05:00" pubdate data-updated="true">Nov 10<span>th</span>, 2012</time>
         
          | <a href="/blog/2012/11/10/housekeeping-rvm/#disqus_thread">Comments</a>
         
@@ -248,7 +297,7 @@ pg gem.</p>
   <div class="entry-content"><p>When a new version of Ruby comes out, I like to use RVM to install it, migrate ruby gems to new ruby, and remove the
 older version of ruby.  This prevent the disk bloated with different versions of Rubies and duplicate gem(sets).</p>
 
-<p>First, always update the RVM because it&#8217;ll also update known list of Ruby.</p>
+<p>First, always update the RVM because it&rsquo;ll also update known list of Ruby.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm get stable
@@ -276,7 +325,7 @@ older version of ruby.  This prevent the disk bloated with different versions of
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>The output shows abridged result since the full list is long.  I currently have p286 installed and I&#8217;m about to install p327
+<p>The output shows abridged result since the full list is long.  I currently have p286 installed and I&rsquo;m about to install p327
 because it contains a security fix for DoS attack in p286.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -333,7 +382,7 @@ because it contains a security fix for DoS attack in p286.</p>
   
 
 
-<time datetime="2012-11-08T16:07:00-08:00" pubdate data-updated="true">Nov 8<span>th</span>, 2012</time>
+<time datetime="2012-11-08T16:07:00-05:00" pubdate data-updated="true">Nov 8<span>th</span>, 2012</time>
         
          | <a href="/blog/2012/11/08/what-happened-to-fd-3-and-4-in-mri/#disqus_thread">Comments</a>
         
@@ -399,7 +448,7 @@ in order.  So what happened to 3 and 4?</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>So Ruby&#8217;s RVM is using <em>pipes</em> with FD 3 and 4.  As far as what these pipes are used for, that&#8217;ll be another discussion.</p>
+<p>So Ruby&rsquo;s RVM is using <em>pipes</em> with FD 3 and 4.  As far as what these pipes are used for, that&rsquo;ll be another discussion.</p>
 </div>
   
   
@@ -430,7 +479,7 @@ in order.  So what happened to 3 and 4?</p>
   
 
 
-<time datetime="2012-11-07T20:30:00-08:00" pubdate data-updated="true">Nov 7<span>th</span>, 2012</time>
+<time datetime="2012-11-07T20:30:00-05:00" pubdate data-updated="true">Nov 7<span>th</span>, 2012</time>
         
          | <a href="/blog/2012/11/07/rolling-deployment/#disqus_thread">Comments</a>
         
@@ -482,10 +531,10 @@ load balancer --> |-> web server2 (blue)  -|---> database
 
 <h2>Example</h2>
 
-<p>In this example, I use Apache&#8217;s <a href="http://httpd.apache.org/docs/2.2/mod/mod_proxy_balancer.html">mod_proxy_balancer</a>.
+<p>In this example, I use Apache&rsquo;s <a href="http://httpd.apache.org/docs/2.2/mod/mod_proxy_balancer.html">mod_proxy_balancer</a>.
 I use a typical Rails web server setup and <a href="https://github.com/capistrano/capistrano">Capistrano</a> for deployment.</p>
 
-<figure class='code'><figcaption><span>In Rails&#8217; production.rb  </span></figcaption>
+<figure class='code'><figcaption><span>In Rails&#8217; production.rb </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -499,7 +548,7 @@ I use a typical Rails web server setup and <a href="https://github.com/capistran
 
 
 
-<figure class='code'><figcaption><span>In Capistrano&#8217;s deploy.rb  </span></figcaption>
+<figure class='code'><figcaption><span>In Capistrano&#8217;s deploy.rb </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -542,9 +591,9 @@ manage_node method essentially submit the form to the balancer-manager.</p>
 <h2>Other Considerations</h2>
 
 <p>Why do I suggest running some basic tests as the acceptance criteria for rolling deployment?  I assume that the code
-being deployed is well tested and passed CI/QA etc.  But there&#8217;re all kinds of factors that can be different between test,
+being deployed is well tested and passed CI/QA etc.  But there&rsquo;re all kinds of factors that can be different between test,
 CI, and production environment.  Some library have different versions, VM images, or even the OS can be different.  I like
-to use a Mac Mini for in-house CI (or Travis for open-source projects).  There&#8217;s no guarantee that Travis or Mac Mini
+to use a Mac Mini for in-house CI (or Travis for open-source projects).  There&rsquo;s no guarantee that Travis or Mac Mini
 can be kept up-to-date with production environment.  I could spin up a CI instance that replicates production but keeping
 them in-sync still takes much effort.  There are also possibilities that integration test suites do not test views where
 a simple route change could prevent user from successfully logging in.  By running a simple Selenium test to login and
@@ -586,7 +635,7 @@ will keep sending requests to the server during deployment and server restart.</
   
 
 
-<time datetime="2012-11-01T19:40:00-07:00" pubdate data-updated="true">Nov 1<span>st</span>, 2012</time>
+<time datetime="2012-11-01T19:40:00-04:00" pubdate data-updated="true">Nov 1<span>st</span>, 2012</time>
         
          | <a href="/blog/2012/11/01/encourage-social-sharing-in-china/#disqus_thread">Comments</a>
         
@@ -595,7 +644,7 @@ will keep sending requests to the server during deployment and server restart.</
   </header>
 
 
-  <div class="entry-content"><p>I recently spent a month in China, where access to Facebook, Twitter, and GooglePlus are blocked.  I&#8217;ve always known
+  <div class="entry-content"><p>I recently spent a month in China, where access to Facebook, Twitter, and GooglePlus are blocked.  I&rsquo;ve always known
 about the Great Firewall, but I never really thought about how it can affect content-sharing that I have grown used to over
 the past years.</p>
 
@@ -644,7 +693,7 @@ times the entry has been shared.</li>
   
 
 
-<time datetime="2012-10-29T22:46:00-07:00" pubdate data-updated="true">Oct 29<span>th</span>, 2012</time>
+<time datetime="2012-10-29T22:46:00-04:00" pubdate data-updated="true">Oct 29<span>th</span>, 2012</time>
         
          | <a href="/blog/2012/10/29/install-and-create-rails-4-dot-0-app/#disqus_thread">Comments</a>
         
@@ -683,7 +732,7 @@ Because 4.0 is not yet official available, you have to jump through hoops to get
 
 
 <p>In the same directory of the Gemfile, issue <code>bundle install</code>.  This should install Rails 4.0.0.beta.
-But running <code>gem list rails</code> won&#8217;t show 4.0 being installed.  So do this instead:</p>
+But running <code>gem list rails</code> won&rsquo;t show 4.0 being installed.  So do this instead:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -776,7 +825,7 @@ should not be a surprise.</p>
   
 
 
-<time datetime="2012-10-16T21:29:00-07:00" pubdate data-updated="true">Oct 16<span>th</span>, 2012</time>
+<time datetime="2012-10-16T21:29:00-04:00" pubdate data-updated="true">Oct 16<span>th</span>, 2012</time>
         
          | <a href="/blog/2012/10/16/a-small-difference-between-mongoid-and-activerecord-query-interface/#disqus_thread">Comments</a>
         
@@ -788,7 +837,7 @@ should not be a surprise.</p>
   <div class="entry-content"><p>There are definitely some gotchas when switching from ActiveRecord to MongoDB (with Mongoid for example).  One of them
 is how the IN operator in SQL is supported.</p>
 
-<p>In ActiveRecord&#8217;s Query Interface, we can do <code>MyModel.where(:id =&gt; [1,3,5])</code> and expect this SQL query to be generated:
+<p>In ActiveRecord&rsquo;s Query Interface, we can do <code>MyModel.where(:id =&gt; [1,3,5])</code> and expect this SQL query to be generated:
 <code>select * from MyModel where (MyModel.id IN (1,3,5))</code>.  Not true when it comes to Mongoid.</p>
 
 <p>Mongo supports quite a few conditional operators such as &lt; (or $lt), $all, $in, etc.  So the above query needs to be constructed
@@ -802,7 +851,7 @@ as such:</p>
 
 <p>This builds a query that returns instances of MyModel that were created in the past 2 days.</p>
 
-<h1>TODO ActiveRecord#from - does not exist in Mongoid</h1>
+<h1>TODO ActiveRecord#from &ndash; does not exist in Mongoid</h1>
 </div>
   
   
@@ -833,7 +882,7 @@ as such:</p>
   
 
 
-<time datetime="2012-10-16T21:03:00-07:00" pubdate data-updated="true">Oct 16<span>th</span>, 2012</time>
+<time datetime="2012-10-16T21:03:00-04:00" pubdate data-updated="true">Oct 16<span>th</span>, 2012</time>
         
          | <a href="/blog/2012/10/16/segmentation-fault-with-rails-and-json/#disqus_thread">Comments</a>
         
@@ -860,7 +909,7 @@ as such:</p>
 <p>It is very weird if you think about it.  The <code>ruby -v</code> shows that the system is using ruby version 1.9.3 managed by rvm.
 But the error shows ruby 1.8.7!  It must be something I did with uninstalling versions of gems where executable requirements got messed up.</p>
 
-<p>Instead of imploding rvm, here&#8217;s what I did to correct the problem.</p>
+<p>Instead of imploding rvm, here&rsquo;s what I did to correct the problem.</p>
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -903,7 +952,7 @@ After reinstalling bundler, you can run <code>bundle install</code>, assuming yo
   
 
 
-<time datetime="2012-08-30T21:56:00-07:00" pubdate data-updated="true">Aug 30<span>th</span>, 2012</time>
+<time datetime="2012-08-30T21:56:00-04:00" pubdate data-updated="true">Aug 30<span>th</span>, 2012</time>
         
          | <a href="/blog/2012/08/30/accessing-facebook-in-vietnam/#disqus_thread">Comments</a>
         
@@ -913,7 +962,7 @@ After reinstalling bundler, you can run <code>bundle install</code>, assuming yo
 
 
   <div class="entry-content"><p>I just traveled to Saigon, Vietnam.  After checking hotel, I logged onto Wifi and browsed to Facebook.
-It won&#8217;t load!</p>
+It won&rsquo;t load!</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -924,7 +973,7 @@ It won&#8217;t load!</p>
 <p>Hmm, that was strange.  A quick google search shows that some ISPs block Facebook due to government regulation.  But the
 fix is quit easy.  All you need to do is to change your DNS server to Google DNS (8.8.8.8).</p>
 
-<p>In OSX, open System Preferences -> Network -> DNS, add 8.8.8.8 to DNS servers (making sure it&#8217;s the first in the list).</p>
+<p>In OSX, open System Preferences &ndash;> Network &ndash;> DNS, add 8.8.8.8 to DNS servers (making sure it&rsquo;s the first in the list).</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -935,83 +984,6 @@ fix is quit easy.  All you need to do is to change your DNS server to Google DNS
 
 
 <p>Now you can browse Facebook again.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2012/07/31/uninstall-multiple-versions-of-multiple-ruby-gem/">Uninstall Multiple Versions of Multiple Ruby Gems</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-31T10:13:00-07:00" pubdate data-updated="true">Jul 31<span>st</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/31/uninstall-multiple-versions-of-multiple-ruby-gem/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Let&#8217;s say you have multiple versions of spree gems installed and want to get rid of the older versions.</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>zlu@zlu-mba: gem list spree
-</span><span class='line'>spree <span class="o">(</span>1.1.3, 1.0.0, 1.0.0.rc2<span class="o">)</span>
-</span><span class='line'>spree_api <span class="o">(</span>1.1.3, 1.0.0, 1.0.0.rc2<span class="o">)</span>
-</span><span class='line'>spree_auth <span class="o">(</span>1.1.3, 1.0.0, 1.0.0.rc2<span class="o">)</span>
-</span><span class='line'>spree_cmd <span class="o">(</span>1.1.3, 1.0.0, 1.0.0.rc2<span class="o">)</span>
-</span><span class='line'>spree_core <span class="o">(</span>1.1.3, 1.0.0, 1.0.0.rc2<span class="o">)</span>
-</span><span class='line'>spree_dash <span class="o">(</span>1.1.3, 1.0.0, 1.0.0.rc2<span class="o">)</span>
-</span><span class='line'>spree_promo <span class="o">(</span>1.1.3, 1.0.0, 1.0.0.rc2<span class="o">)</span>
-</span><span class='line'>spree_sample <span class="o">(</span>1.1.3, 1.0.0, 1.0.0.rc2<span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Instead of doing this a bunch of times (for different gems and versions):</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>gem uninstall spree -v 1.0.0
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Do this:</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>gem uninstall spree<span class="o">{</span>,_api,_auth,_cmd,_core,_dash,_promo,_sample<span class="o">}</span> -v <span class="o">{</span>1.0.0, 1.0.0.rc2<span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This is a feature of bash shell - <a href="http://www.gnu.org/software/bash/manual/html_node/Brace-Expansion.html#Brace-Expansion">brace expansion</a>.</p>
 </div>
   
   
@@ -1046,6 +1018,10 @@ fix is quit easy.  All you need to do is to change your DNS server to Google DNS
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/05/27/lost-shell-commands/">Lost Shell Commands?</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/02/04/postgres-gotchas/">Postgres Gotchas</a>
       </li>
     
@@ -1059,10 +1035,6 @@ fix is quit easy.  All you need to do is to change your DNS server to Google DNS
     
       <li class="post">
         <a href="/blog/2012/11/07/rolling-deployment/">Rolling Deployment</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/01/encourage-social-sharing-in-china/">Encouraging Social Sharing in China</a>
       </li>
     
   </ul>

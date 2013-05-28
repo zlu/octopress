@@ -4,7 +4,7 @@
   <title><![CDATA[Category: carrierwave | @zlu]]></title>
   <link href="http://www.zlu.me/blog/categories/carrierwave/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2013-04-22T13:57:09-07:00</updated>
+  <updated>2013-05-27T22:18:23-04:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -16,13 +16,13 @@
   <entry>
     <title type="html"><![CDATA[Testing Carrierwave with Fog for Amazon S3]]></title>
     <link href="http://www.zlu.me/blog/2012/07/17/testing-carrierwave-with-fog/"/>
-    <updated>2012-07-17T21:10:00-07:00</updated>
+    <updated>2012-07-17T21:10:00-04:00</updated>
     <id>http://www.zlu.me/blog/2012/07/17/testing-carrierwave-with-fog</id>
     <content type="html"><![CDATA[<p>Testing file upload using CarrierWave with Fog with S3 turns out to be difficult.</p>
 
 <ul>
-<li>CarrierWave/Fog need a non-empty file, otherwise the url to the S3 object will be nil and can't be tested.</li>
-<li>Fog.mock! doesn't work out of box.  Some extra steps are needed to avoid uploading files to S3 when running tests.</li>
+<li>CarrierWave/Fog need a non-empty file, otherwise the url to the S3 object will be nil and can&rsquo;t be tested.</li>
+<li>Fog.mock! doesn&rsquo;t work out of box.  Some extra steps are needed to avoid uploading files to S3 when running tests.</li>
 </ul>
 
 
@@ -33,9 +33,9 @@
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 </pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">default</span><span class="p-Indicator">:</span>
-</span><span class='line'>  <span class="l-Scalar-Plain">aws_access_key_id</span><span class="p-Indicator">:</span> <span class="s">&#39;your-aws-access-key-id&#39;</span>
-</span><span class='line'>  <span class="l-Scalar-Plain">aws_secret_access_key</span><span class="p-Indicator">:</span> <span class="s">&#39;your-aws-secret-access-key/&#39;</span>
-</span><span class='line'>  <span class="l-Scalar-Plain">region</span><span class="p-Indicator">:</span> <span class="s">&#39;your-aws-region&#39;</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">aws_access_key_id</span><span class="p-Indicator">:</span> <span class="nl">&amp;lsquo</span><span class="l-Scalar-Plain">;your-aws-access-key-id&amp;rsquo;</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">aws_secret_access_key</span><span class="p-Indicator">:</span> <span class="nl">&amp;lsquo</span><span class="l-Scalar-Plain">;your-aws-secret-access-key/&amp;rsquo;</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">region</span><span class="p-Indicator">:</span> <span class="nl">&amp;lsquo</span><span class="l-Scalar-Plain">;your-aws-region&amp;rsquo;</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Next, put this to your config/initializers/carrier_wave.rb</p>
@@ -48,12 +48,12 @@
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Fog</span><span class="o">.</span><span class="n">credentials_path</span> <span class="o">=</span> <span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;config/fog_credentials.yml&#39;</span><span class="p">)</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Fog</span><span class="o">.</span><span class="n">credentials_path</span> <span class="o">=</span> <span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">config</span><span class="o">/</span><span class="n">fog_credentials</span><span class="o">.</span><span class="n">yml</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;)</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="sr">&lt;p&gt;fog_dir = Rails.env == &#39;production&#39; ? &#39;production-bucket&#39; : &#39;dev-bucket&#39;&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'><span class="sr">&lt;p&gt;fog_dir = Rails.env == &amp;lsquo;production&amp;rsquo; ? &amp;lsquo;production-bucket&amp;rsquo; : &amp;lsquo;dev-bucket&amp;rsquo;&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="no">CarrierWave</span><span class="o">.</span><span class="n">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
-</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">fog_credentials</span> <span class="o">=</span> <span class="p">{</span><span class="ss">:provider</span> <span class="o">=&gt;</span> <span class="s1">&#39;AWS&#39;</span><span class="p">}</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">fog_credentials</span> <span class="o">=</span> <span class="p">{</span><span class="ss">:provider</span> <span class="o">=&gt;</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="no">AWS</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;}</span>
 </span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">fog_directory</span>  <span class="o">=</span> <span class="n">fog_dir</span>
 </span><span class='line'><span class="k">end</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
@@ -65,9 +65,9 @@
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Fog</span><span class="o">.</span><span class="n">mock!</span>
-</span><span class='line'><span class="no">Fog</span><span class="o">.</span><span class="n">credentials_path</span> <span class="o">=</span> <span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;config/fog_credentials.yml&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">connection</span> <span class="o">=</span> <span class="no">Fog</span><span class="o">::</span><span class="no">Storage</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:provider</span> <span class="o">=&gt;</span> <span class="s1">&#39;AWS&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">connection</span><span class="o">.</span><span class="n">directories</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:key</span> <span class="o">=&gt;</span> <span class="s1">&#39;dev-bucket&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="no">Fog</span><span class="o">.</span><span class="n">credentials_path</span> <span class="o">=</span> <span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">config</span><span class="o">/</span><span class="n">fog_credentials</span><span class="o">.</span><span class="n">yml</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;)</span>
+</span><span class='line'><span class="n">connection</span> <span class="o">=</span> <span class="ss">Fog</span><span class="p">:</span><span class="ss">:Storage</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:provider</span> <span class="o">=&gt;</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="no">AWS</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;)</span>
+</span><span class='line'><span class="n">connection</span><span class="o">.</span><span class="n">directories</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:key</span> <span class="o">=&gt;</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">dev</span><span class="o">-</span><span class="n">bucket</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;)</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Note, the :key value <em>must</em> match whats defined for fog_dir (dev-bucket) in carrier_wave.rb</p>
@@ -116,7 +116,7 @@
 </span><span class='line'><span class="sr">&lt;p&gt;describe FileUploader do</span>
 </span><span class='line'><span class="sr">  include FakeFS::SpecHelpers&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="n">context</span> <span class="s1">&#39;for non-production environment&#39;</span> <span class="k">do</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="n">context</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="k">for</span> <span class="n">non</span><span class="o">-</span><span class="n">production</span> <span class="n">environment</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;</span> <span class="k">do</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;it &#39;should upload video clip to dev-bucket on s3&#39; do</span>
 </span><span class='line'><span class="sr">  FakeFS.activate!</span>
