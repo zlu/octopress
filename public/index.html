@@ -9,8 +9,13 @@
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="Sometime when you modify .bashrc or .bash_profile and source it, you may notice that you have &lsquo;lost&rsquo; your shell commands.
-You will see & &hellip;">
+  <meta name="description" content="Have you ever tried to define initialized method for an ActiveRecord? Try it if you haven&rsquo;t. 1
+2
+3
+4
+5
+6
+class MyRecord &lt; ActiveRecord::Base &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,6 +90,111 @@ You will see & &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2013/05/29/initialization-is-an-interesting-thing/">Initialization Is an Interesting Thing</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-29T22:51:00-04:00" pubdate data-updated="true">May 29<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/29/initialization-is-an-interesting-thing/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Have you ever tried to define <code>initialized</code> method for an <code>ActiveRecord</code>?</p>
+
+<p>Try it if you haven&rsquo;t.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class MyRecord &lt; ActiveRecord::Base
+</span><span class='line'>  def initialize
+</span><span class='line'>  end
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>MyRecord.new  #&lt;MyRecord not initialized&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is probably not what you have expected.  Why is MyRecord not initialized?</p>
+
+<p>Well, ActiveRecord::Base has already defined <code>initialize</code> method.  It is used to instantiate Rails models.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>def initialize(attributes = nil, options = {})</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you really want to override it with your own version, you would want to do this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class MyRecord &lt; ActiveRecord::Base
+</span><span class='line'>  def initialize(attributes = nil, options = {})
+</span><span class='line'>    super
+</span><span class='line'>    # now do your own initialization
+</span><span class='line'>  end
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>MyRecord.new</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This should build a new AR for you (if you have a defined my_records table in database).</p>
+
+<p>Rails provides a cleaner way to handle this via after_initilize callback.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class MyClass &lt; ActiveRecord::Base
+</span><span class='line'>  after_initialize do
+</span><span class='line'>    # do your thing here
+</span><span class='line'>    puts 'more to do after initialization'
+</span><span class='line'>  end
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>after_initialize</code> is called when ActiveRecord is instantiated and before it is saved.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -929,68 +1039,6 @@ After reinstalling bundler, you can run <code>bundle install</code>, assuming yo
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2012/08/30/accessing-facebook-in-vietnam/">Accessing Facebook in Vietnam</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-30T21:56:00-04:00" pubdate data-updated="true">Aug 30<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/08/30/accessing-facebook-in-vietnam/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I just traveled to Saigon, Vietnam.  After checking hotel, I logged onto Wifi and browsed to Facebook.
-It won&rsquo;t load!</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>zlu@zlu-mba:~$ ping www.facebook.com
-</span><span class='line'>ping: cannot resolve www.facebook.com: Unknown host</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Hmm, that was strange.  A quick google search shows that some ISPs block Facebook due to government regulation.  But the
-fix is quit easy.  All you need to do is to change your DNS server to Google DNS (8.8.8.8).</p>
-
-<p>In OSX, open System Preferences &ndash;> Network &ndash;> DNS, add 8.8.8.8 to DNS servers (making sure it&rsquo;s the first in the list).</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>zlu@zlu-mba:~$ ping www.facebook.com
-</span><span class='line'>PING www.facebook.com (66.220.153.70): 56 data bytes
-</span><span class='line'>64 bytes from 66.220.153.70: icmp_seq=0 ttl=238 time=269.573 ms</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now you can browse Facebook again.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1018,6 +1066,10 @@ fix is quit easy.  All you need to do is to change your DNS server to Google DNS
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/05/29/initialization-is-an-interesting-thing/">Initialization Is An Interesting Thing</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/05/27/lost-shell-commands/">Lost Shell Commands?</a>
       </li>
     
@@ -1031,10 +1083,6 @@ fix is quit easy.  All you need to do is to change your DNS server to Google DNS
     
       <li class="post">
         <a href="/blog/2012/11/08/what-happened-to-fd-3-and-4-in-mri/">What Happened to FD 3 and 4 in MRI</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/07/rolling-deployment/">Rolling Deployment</a>
       </li>
     
   </ul>
