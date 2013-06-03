@@ -4,7 +4,7 @@
   <title><![CDATA[@zlu]]></title>
   <link href="http://www.zlu.me/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2013-05-29T23:30:50-04:00</updated>
+  <updated>2013-06-03T01:45:37-04:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -12,6 +12,140 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[System Calls In Ruby]]></title>
+    <link href="http://www.zlu.me/blog/2013/06/03/system-calls-in-ruby/"/>
+    <updated>2013-06-03T00:42:00-04:00</updated>
+    <id>http://www.zlu.me/blog/2013/06/03/system-calls-in-ruby</id>
+    <content type="html"><![CDATA[<p>There are a few ways to execute system commands in Ruby: backticks, system, exec, %x[], and Open3#popen3.
+We will take a look at the their differences and briefly discuss security concerns of applying them.</p>
+
+<h2>Backticks (Kernel#`)</h2>
+
+<p>When using backticks, the result is returned as string.  Process status of method execution is stored in $?</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p429</span> <span class="p">:</span><span class="mo">006</span> <span class="o">&gt;</span> <span class="sb">`ls`</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="s2">&quot;CHANGELOG.markdown</span><span class="se">\n</span><span class="s2">Gemfile</span><span class="se">\n</span><span class="s2">Gemfile.lock</span><span class="se">\n</span><span class="s2">README.markdown</span><span class="se">\n</span><span class="s2">Rakefile</span><span class="se">\n</span><span class="s2">_config.yml</span><span class="se">\n</span><span class="s2">config.rb</span><span class="se">\n</span><span class="s2">config.ru</span><span class="se">\n</span><span class="s2">plugins</span><span class="se">\n</span><span class="s2">public</span><span class="se">\n</span><span class="s2">sass</span><span class="se">\n</span><span class="s2">sass.old</span><span class="se">\n</span><span class="s2">source</span><span class="se">\n</span><span class="s2">source.old</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p429</span> <span class="p">:</span><span class="mo">007</span> <span class="o">&gt;</span> <span class="vg">$?</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="c1">#&lt;Process::Status: pid 35977 exit 0&gt;</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p429</span> <span class="p">:</span><span class="mo">00</span><span class="mi">8</span> <span class="o">&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="n">_</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="c1">#&lt;Process::Status: pid 35977 exit 0&gt;</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p429</span> <span class="p">:</span><span class="mo">00</span><span class="mi">9</span> <span class="o">&gt;</span> <span class="n">s</span><span class="o">.</span><span class="n">success?</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="kp">true</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>%x</h2>
+
+<p>%x() or %x[] is similar to using backticks.</p>
+
+<h2>Kernel#system</h2>
+
+<p>When using system method, the result is true or false depending on whether the command is executed successfully.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p429</span> <span class="p">:</span><span class="mo">002</span> <span class="o">&gt;</span> <span class="nb">system</span> <span class="s1">&#39;ls&#39;</span>
+</span><span class='line'><span class="no">CHANGELOG</span><span class="o">.</span><span class="n">markdown</span> <span class="no">README</span><span class="o">.</span><span class="n">markdown</span>    <span class="n">config</span><span class="o">.</span><span class="n">rb</span>          <span class="kp">public</span>             <span class="n">source</span>
+</span><span class='line'><span class="no">Gemfile</span>            <span class="no">Rakefile</span>           <span class="n">config</span><span class="o">.</span><span class="n">ru</span>          <span class="n">sass</span>               <span class="n">source</span><span class="o">.</span><span class="n">old</span>
+</span><span class='line'><span class="no">Gemfile</span><span class="o">.</span><span class="n">lock</span>       <span class="n">_config</span><span class="o">.</span><span class="n">yml</span>        <span class="n">plugins</span>            <span class="n">sass</span><span class="o">.</span><span class="n">old</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="kp">true</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p429</span> <span class="p">:</span><span class="mo">003</span> <span class="o">&gt;</span> <span class="nb">system</span> <span class="s1">&#39;ls a&#39;</span>
+</span><span class='line'><span class="ss">ls</span><span class="p">:</span> <span class="ss">a</span><span class="p">:</span> <span class="no">No</span> <span class="n">such</span> <span class="n">file</span> <span class="ow">or</span> <span class="n">directory</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="kp">false</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Kernel#exec</h2>
+
+<p>exec replaces the current process by running the given external command.  If you invoke exec in irb, then the irb process
+will be replaced by the running external command.  You will get the shell prompt back after exec finishes.  If you invoke
+exec in a ruby program, that program will stop execution (just like the irb process).</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">zlu</span><span class="vi">@zlu</span><span class="o">-</span><span class="ss">mba</span><span class="p">:</span><span class="o">~</span><span class="sr">/projects/me</span><span class="o">/</span><span class="n">blog</span><span class="o">-</span><span class="n">zlu</span> <span class="p">(</span><span class="n">master</span> <span class="o">*</span><span class="p">)</span><span class="err">$</span> <span class="n">irb</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p429</span> <span class="p">:</span><span class="mo">001</span> <span class="o">&gt;</span> <span class="nb">exec</span> <span class="s1">&#39;ls&#39;</span>
+</span><span class='line'><span class="no">CHANGELOG</span><span class="o">.</span><span class="n">markdown</span> <span class="no">README</span><span class="o">.</span><span class="n">markdown</span>    <span class="n">config</span><span class="o">.</span><span class="n">rb</span>          <span class="kp">public</span>             <span class="n">source</span>
+</span><span class='line'><span class="no">Gemfile</span>            <span class="no">Rakefile</span>           <span class="n">config</span><span class="o">.</span><span class="n">ru</span>          <span class="n">sass</span>               <span class="n">source</span><span class="o">.</span><span class="n">old</span>
+</span><span class='line'><span class="no">Gemfile</span><span class="o">.</span><span class="n">lock</span>       <span class="n">_config</span><span class="o">.</span><span class="n">yml</span>        <span class="n">plugins</span>            <span class="n">sass</span><span class="o">.</span><span class="n">old</span>
+</span><span class='line'><span class="n">zlu</span><span class="vi">@zlu</span><span class="o">-</span><span class="ss">mba</span><span class="p">:</span><span class="o">~</span><span class="sr">/projects/me</span><span class="o">/</span><span class="n">blog</span><span class="o">-</span><span class="n">zlu</span> <span class="p">(</span><span class="n">master</span> <span class="o">*</span><span class="p">)</span><span class="err">$</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Open3#popen3</h2>
+
+<p>popen3 executes the command while opening stdin, stdout, and stderr and a thread to wait for the command execution.</p>
+
+<figure class='code'><figcaption><span>stdout with successfully execution </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p429</span> <span class="p">:</span><span class="mo">010</span> <span class="o">&gt;</span> <span class="nb">require</span> <span class="s1">&#39;open3&#39;</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="kp">true</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p429</span> <span class="p">:</span><span class="mo">011</span> <span class="o">&gt;</span> <span class="no">Open3</span><span class="o">.</span><span class="n">popen3</span> <span class="s1">&#39;ls&#39;</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="o">[</span><span class="c1">#&lt;IO:fd 6&gt;, #&lt;IO:fd 7&gt;, #&lt;IO:fd 9&gt;, #&lt;Thread:0x007fcd928ece18 run&gt;]</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p429</span> <span class="p">:</span><span class="mo">012</span> <span class="o">&gt;</span> <span class="n">i</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">_</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="o">[</span><span class="c1">#&lt;IO:fd 6&gt;, #&lt;IO:fd 7&gt;, #&lt;IO:fd 9&gt;, #&lt;Thread:0x007fcd928ece18 dead&gt;]</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p429</span> <span class="p">:</span><span class="mo">014</span> <span class="o">&gt;</span> <span class="n">o</span><span class="o">.</span><span class="n">read</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="s2">&quot;CHANGELOG.markdown</span><span class="se">\n</span><span class="s2">Gemfile</span><span class="se">\n</span><span class="s2">Gemfile.lock</span><span class="se">\n</span><span class="s2">README.markdown</span><span class="se">\n</span><span class="s2">Rakefile</span><span class="se">\n</span><span class="s2">_config.yml</span><span class="se">\n</span><span class="s2">config.rb</span><span class="se">\n</span><span class="s2">config.ru</span><span class="se">\n</span><span class="s2">plugins</span><span class="se">\n</span><span class="s2">public</span><span class="se">\n</span><span class="s2">sass</span><span class="se">\n</span><span class="s2">sass.old</span><span class="se">\n</span><span class="s2">source</span><span class="se">\n</span><span class="s2">source.old</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>stderr with unsuccessfully execution </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p429</span> <span class="p">:</span><span class="mo">027</span> <span class="o">&gt;</span> <span class="no">Open3</span><span class="o">.</span><span class="n">popen3</span><span class="p">(</span><span class="s1">&#39;ls a&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">t</span><span class="o">|</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p429</span> <span class="p">:</span><span class="mo">02</span><span class="mi">9</span><span class="o">?&gt;</span>   <span class="nb">p</span> <span class="n">e</span><span class="o">.</span><span class="n">read</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p429</span> <span class="p">:</span><span class="mo">030</span><span class="o">?&gt;</span>   <span class="k">end</span>
+</span><span class='line'><span class="s2">&quot;ls: a: No such file or directory</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="s2">&quot;ls: a: No such file or directory</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There are a few variations of popen3 methods such as popen2 where a couple of streams are merged 2&amp;>1, for example.</p>
+
+<h2>Security Concerns</h2>
+
+<p>Much like SQL Injection, similar things can happen when using these method calls.
+Consider a command like <code>ls a;rm a</code>.  or even worse <code>ls a;rm -rf *</code>
+We can address such concerns with another form of popen3(cmd, args).  For the command above, it is
+<code>popen3('ls', 'a;rm -rf*')</code>.  The last part of the command is interpreted as the options for <code>ls</code>.</p>
+
+<p>Take a look at this playful little app <a href="https://github.com/zlu/web_shell">web_shell</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Initialization Is An Interesting Thing]]></title>
@@ -1141,28 +1275,6 @@ autostart the story.</p>
 finish the story.  How cool is that?  Now try to do that in Emacs or VI, I dare you :P</p>
 
 <p>P.S. I like Emacs.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[A Couple Things to Watch Out For Using PrivatePub]]></title>
-    <link href="http://www.zlu.me/blog/2012/02/12/a-couple-things-to-watch-out-for-using-privatepub/"/>
-    <updated>2012-02-12T20:38:00-05:00</updated>
-    <id>http://www.zlu.me/blog/2012/02/12/a-couple-things-to-watch-out-for-using-privatepub</id>
-    <content type="html"><![CDATA[<p><a href="https://github.com/ryanb/private_pub">Private Pub</a> is a convinent gem wraps around <a href="http://faye.jcoglan.com/ruby.html">Faye</a>.</p>
-
-<p>There are a few things to consider when using PrivatePub.</p>
-
-<ol>
-<li><p>It does <strong>not</strong> support ssl.
-However, there is a <a href="https://github.com/ryanb/private_pub/pull/33">pull request</a> for it.</p></li>
-<li><p>You almost always want to add some sort of filtering on the server or client side, or maybe both.
-For example, if you don&rsquo;t want your chat message to be received by everyone logged in, you will need to
-publish to a channel uniquely identified by each session of the chat.</p></li>
-</ol>
-
-
-<p><strong>UPDATE</strong> @rbates has merged this pull request.  I was able to verify ssl support indeed works!</p>
 ]]></content>
   </entry>
   

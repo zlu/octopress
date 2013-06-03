@@ -1,0 +1,513 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>System Calls In Ruby - @zlu</title>
+  <meta name="author" content="Zhao Lu">
+
+  
+  <meta name="description" content="There are a few ways to execute system commands in Ruby: backticks, system, exec, %x[], and Open3#popen3.
+We will take a look at the their &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.zlu.me/blog/2013/06/03/system-calls-in-ruby/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="@zlu" type="application/atom+xml">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7031506-4']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <div id="logo">
+  	<div id="logoLeft">{</div>
+  	<div id="logoText">mob</div>
+  	<div id="logoRight">}</div>
+  	<div class="clear"></div>
+  </div>
+  <h1><a href="/">@zlu</a></h1>
+  
+    <h2>foo bar</h2>
+  
+  <div class="clear"></div>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.zlu.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      
+        <h1 class="entry-title">System Calls in Ruby</h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-03T00:42:00-04:00" pubdate data-updated="true">Jun 3<span>rd</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>There are a few ways to execute system commands in Ruby: backticks, system, exec, %x[], and Open3#popen3.
+We will take a look at the their differences and briefly discuss security concerns of applying them.</p>
+
+<h2>Backticks (Kernel#`)</h2>
+
+<p>When using backticks, the result is returned as string.  Process status of method execution is stored in $?</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p429</span> <span class="p">:</span><span class="mo">006</span> <span class="o">&gt;</span> <span class="sb">`ls`</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="s2">&quot;CHANGELOG.markdown</span><span class="se">\n</span><span class="s2">Gemfile</span><span class="se">\n</span><span class="s2">Gemfile.lock</span><span class="se">\n</span><span class="s2">README.markdown</span><span class="se">\n</span><span class="s2">Rakefile</span><span class="se">\n</span><span class="s2">_config.yml</span><span class="se">\n</span><span class="s2">config.rb</span><span class="se">\n</span><span class="s2">config.ru</span><span class="se">\n</span><span class="s2">plugins</span><span class="se">\n</span><span class="s2">public</span><span class="se">\n</span><span class="s2">sass</span><span class="se">\n</span><span class="s2">sass.old</span><span class="se">\n</span><span class="s2">source</span><span class="se">\n</span><span class="s2">source.old</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p429</span> <span class="p">:</span><span class="mo">007</span> <span class="o">&gt;</span> <span class="vg">$?</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="c1">#&lt;Process::Status: pid 35977 exit 0&gt;</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p429</span> <span class="p">:</span><span class="mo">00</span><span class="mi">8</span> <span class="o">&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="n">_</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="c1">#&lt;Process::Status: pid 35977 exit 0&gt;</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p429</span> <span class="p">:</span><span class="mo">00</span><span class="mi">9</span> <span class="o">&gt;</span> <span class="n">s</span><span class="o">.</span><span class="n">success?</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="kp">true</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>%x</h2>
+
+<p>%x() or %x[] is similar to using backticks.</p>
+
+<h2>Kernel#system</h2>
+
+<p>When using system method, the result is true or false depending on whether the command is executed successfully.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p429</span> <span class="p">:</span><span class="mo">002</span> <span class="o">&gt;</span> <span class="nb">system</span> <span class="s1">&#39;ls&#39;</span>
+</span><span class='line'><span class="no">CHANGELOG</span><span class="o">.</span><span class="n">markdown</span> <span class="no">README</span><span class="o">.</span><span class="n">markdown</span>    <span class="n">config</span><span class="o">.</span><span class="n">rb</span>          <span class="kp">public</span>             <span class="n">source</span>
+</span><span class='line'><span class="no">Gemfile</span>            <span class="no">Rakefile</span>           <span class="n">config</span><span class="o">.</span><span class="n">ru</span>          <span class="n">sass</span>               <span class="n">source</span><span class="o">.</span><span class="n">old</span>
+</span><span class='line'><span class="no">Gemfile</span><span class="o">.</span><span class="n">lock</span>       <span class="n">_config</span><span class="o">.</span><span class="n">yml</span>        <span class="n">plugins</span>            <span class="n">sass</span><span class="o">.</span><span class="n">old</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="kp">true</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p429</span> <span class="p">:</span><span class="mo">003</span> <span class="o">&gt;</span> <span class="nb">system</span> <span class="s1">&#39;ls a&#39;</span>
+</span><span class='line'><span class="ss">ls</span><span class="p">:</span> <span class="ss">a</span><span class="p">:</span> <span class="no">No</span> <span class="n">such</span> <span class="n">file</span> <span class="ow">or</span> <span class="n">directory</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="kp">false</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Kernel#exec</h2>
+
+<p>exec replaces the current process by running the given external command.  If you invoke exec in irb, then the irb process
+will be replaced by the running external command.  You will get the shell prompt back after exec finishes.  If you invoke
+exec in a ruby program, that program will stop execution (just like the irb process).</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">zlu</span><span class="vi">@zlu</span><span class="o">-</span><span class="ss">mba</span><span class="p">:</span><span class="o">~</span><span class="sr">/projects/me</span><span class="o">/</span><span class="n">blog</span><span class="o">-</span><span class="n">zlu</span> <span class="p">(</span><span class="n">master</span> <span class="o">*</span><span class="p">)</span><span class="err">$</span> <span class="n">irb</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p429</span> <span class="p">:</span><span class="mo">001</span> <span class="o">&gt;</span> <span class="nb">exec</span> <span class="s1">&#39;ls&#39;</span>
+</span><span class='line'><span class="no">CHANGELOG</span><span class="o">.</span><span class="n">markdown</span> <span class="no">README</span><span class="o">.</span><span class="n">markdown</span>    <span class="n">config</span><span class="o">.</span><span class="n">rb</span>          <span class="kp">public</span>             <span class="n">source</span>
+</span><span class='line'><span class="no">Gemfile</span>            <span class="no">Rakefile</span>           <span class="n">config</span><span class="o">.</span><span class="n">ru</span>          <span class="n">sass</span>               <span class="n">source</span><span class="o">.</span><span class="n">old</span>
+</span><span class='line'><span class="no">Gemfile</span><span class="o">.</span><span class="n">lock</span>       <span class="n">_config</span><span class="o">.</span><span class="n">yml</span>        <span class="n">plugins</span>            <span class="n">sass</span><span class="o">.</span><span class="n">old</span>
+</span><span class='line'><span class="n">zlu</span><span class="vi">@zlu</span><span class="o">-</span><span class="ss">mba</span><span class="p">:</span><span class="o">~</span><span class="sr">/projects/me</span><span class="o">/</span><span class="n">blog</span><span class="o">-</span><span class="n">zlu</span> <span class="p">(</span><span class="n">master</span> <span class="o">*</span><span class="p">)</span><span class="err">$</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Open3#popen3</h2>
+
+<p>popen3 executes the command while opening stdin, stdout, and stderr and a thread to wait for the command execution.</p>
+
+<figure class='code'><figcaption><span>stdout with successfully execution </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p429</span> <span class="p">:</span><span class="mo">010</span> <span class="o">&gt;</span> <span class="nb">require</span> <span class="s1">&#39;open3&#39;</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="kp">true</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p429</span> <span class="p">:</span><span class="mo">011</span> <span class="o">&gt;</span> <span class="no">Open3</span><span class="o">.</span><span class="n">popen3</span> <span class="s1">&#39;ls&#39;</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="o">[</span><span class="c1">#&lt;IO:fd 6&gt;, #&lt;IO:fd 7&gt;, #&lt;IO:fd 9&gt;, #&lt;Thread:0x007fcd928ece18 run&gt;]</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p429</span> <span class="p">:</span><span class="mo">012</span> <span class="o">&gt;</span> <span class="n">i</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">_</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="o">[</span><span class="c1">#&lt;IO:fd 6&gt;, #&lt;IO:fd 7&gt;, #&lt;IO:fd 9&gt;, #&lt;Thread:0x007fcd928ece18 dead&gt;]</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p429</span> <span class="p">:</span><span class="mo">014</span> <span class="o">&gt;</span> <span class="n">o</span><span class="o">.</span><span class="n">read</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="s2">&quot;CHANGELOG.markdown</span><span class="se">\n</span><span class="s2">Gemfile</span><span class="se">\n</span><span class="s2">Gemfile.lock</span><span class="se">\n</span><span class="s2">README.markdown</span><span class="se">\n</span><span class="s2">Rakefile</span><span class="se">\n</span><span class="s2">_config.yml</span><span class="se">\n</span><span class="s2">config.rb</span><span class="se">\n</span><span class="s2">config.ru</span><span class="se">\n</span><span class="s2">plugins</span><span class="se">\n</span><span class="s2">public</span><span class="se">\n</span><span class="s2">sass</span><span class="se">\n</span><span class="s2">sass.old</span><span class="se">\n</span><span class="s2">source</span><span class="se">\n</span><span class="s2">source.old</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>stderr with unsuccessfully execution </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p429</span> <span class="p">:</span><span class="mo">027</span> <span class="o">&gt;</span> <span class="no">Open3</span><span class="o">.</span><span class="n">popen3</span><span class="p">(</span><span class="s1">&#39;ls a&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">t</span><span class="o">|</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p429</span> <span class="p">:</span><span class="mo">02</span><span class="mi">9</span><span class="o">?&gt;</span>   <span class="nb">p</span> <span class="n">e</span><span class="o">.</span><span class="n">read</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p429</span> <span class="p">:</span><span class="mo">030</span><span class="o">?&gt;</span>   <span class="k">end</span>
+</span><span class='line'><span class="s2">&quot;ls: a: No such file or directory</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="s2">&quot;ls: a: No such file or directory</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There are a few variations of popen3 methods such as popen2 where a couple of streams are merged 2&amp;>1, for example.</p>
+
+<h2>Security Concerns</h2>
+
+<p>Much like SQL Injection, similar things can happen when using these method calls.
+Consider a command like <code>ls a;rm a</code>.  or even worse <code>ls a;rm -rf *</code>
+We can address such concerns with another form of popen3(cmd, args).  For the command above, it is
+<code>popen3('ls', 'a;rm -rf*')</code>.  The last part of the command is interpreted as the options for <code>ls</code>.</p>
+
+<p>Take a look at this playful little app <a href="https://github.com/zlu/web_shell">web_shell</a>.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Zhao Lu</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-03T00:42:00-04:00" pubdate data-updated="true">Jun 3<span>rd</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ruby/'>Ruby</a>, <a class='category' href='/blog/categories/security/'>Security</a>, <a class='category' href='/blog/categories/system-call/'>System call</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+    
+    <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.zlu.me/blog/2013/06/03/system-calls-in-ruby/"
+       data-via="zlu" data-counturl="http://www.zlu.me/blog/2013/06/03/system-calls-in-ruby/">Tweet</a>
+    
+    
+    <div class="g-plusone" data-size="small"></div>
+    
+    
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+    
+    
+    <script type="text/javascript" charset="utf-8">
+    (function(){
+      var _w = 72 , _h = 16;
+      var text = document.getElementsByClassName("entry-title")[0]
+      var param = {
+        url:location.href,
+        type:'3',
+        count:'1', /**是否显示分享数，1显示(可选)*/
+        appkey:'', /**您申请的应用appkey,显示分享来源(可选)*/
+        title:"http://www.zlu.me/blog/2013/06/03/system-calls-in-ruby/",/**分享的文字内容(可选，默认为所在页面的title)*/
+        pic:'', /**分享图片的路径(可选)*/
+        ralateUid:"2091903003", /**关联用户的UID，分享微博会@该用户(可选)*/
+    	language:'zh_cn', /**设置语言，zh_cn|zh_tw(可选)*/
+        rnd:new Date().valueOf()
+      }
+      var temp = [];
+      for( var p in param ){
+        temp.push(p + '=' + encodeURIComponent( param[p] || '' ) )
+      }
+      document.write('<iframe allowTransparency="true" frameborder="0" scrolling="no" src="http://hits.sinajs.cn/A1/weiboshare.html?' + temp.join('&') + '" width="'+ _w+'" height="'+_h+'"></iframe>')
+    })()
+    </script>
+    
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left articlenav" href="/blog/2013/05/29/initialization-is-an-interesting-thing/" title="Previous Post: Initialization Is An Interesting Thing">&laquo; Initialization Is An Interesting Thing</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>Flickr</h1>
+	<div class="flickr">
+		<script type="text/javascript" src="http://www.flickr.com/badge_code_v2.gne?count=4&display=random&size=t&layout=v&source=user&user=76883175@N03"></script>
+	</div>
+</section><section>
+    <h1>About Me</h1>
+    Curious minds, yogi at <a href='https://www.foryogi.com'>ForYogi</a>, cyclist, and outdoor enthusiast.<br/>
+    <a href="http://www.linkedin.com/in/zhaolu">LinkedIn</a> |
+    <a href="http://zlu.github.com">Projects</a> |
+    <a href="https://github.com/zlu/wiki/wiki/_pages">Wiki</a>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/06/03/system-calls-in-ruby/">System Calls In Ruby</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/29/initialization-is-an-interesting-thing/">Initialization Is An Interesting Thing</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/27/lost-shell-commands/">Lost Shell Commands?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/04/postgres-gotchas/">Postgres Gotchas</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/11/10/housekeeping-rvm/">Housekeeping RVM</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/zlu">@zlu</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'zlu',
+            count: 1,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("zlu", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/zlu" class="twitter-follow-button" data-show-count="true">Follow @zlu</a>
+  
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/114923193968506814109?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+<html xmlns:wb=“http://open.weibo.com/wb”>
+<head>
+    <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+
+<section>
+    <wb:follow-button uid="2091903003" type="gray_2" width="136" height="24" ></wb:follow-button>
+</section>
+
+
+</html>
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Zhao Lu -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'zlu';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.zlu.me/blog/2013/06/03/system-calls-in-ruby/';
+        var disqus_url = 'http://www.zlu.me/blog/2013/06/03/system-calls-in-ruby/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+
+</body>
+</html>

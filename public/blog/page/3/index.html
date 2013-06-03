@@ -9,10 +9,8 @@
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="RSpec lets you test the number, type, and order of arguments. For example, 1
-2
-Foo.should_receive(:bar).with(1, kind_of(Hash), anything())
-Foo.bar(1 &hellip;">
+  <meta name="description" content="Private Pub is a convinent gem wraps around Faye. There are a few things to consider when using PrivatePub. It does not support ssl.
+However, there &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -87,6 +85,59 @@ Foo.bar(1 &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2012/02/12/a-couple-things-to-watch-out-for-using-privatepub/">A Couple Things to Watch Out for Using PrivatePub</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-12T20:38:00-05:00" pubdate data-updated="true">Feb 12<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/02/12/a-couple-things-to-watch-out-for-using-privatepub/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://github.com/ryanb/private_pub">Private Pub</a> is a convinent gem wraps around <a href="http://faye.jcoglan.com/ruby.html">Faye</a>.</p>
+
+<p>There are a few things to consider when using PrivatePub.</p>
+
+<ol>
+<li><p>It does <strong>not</strong> support ssl.
+However, there is a <a href="https://github.com/ryanb/private_pub/pull/33">pull request</a> for it.</p></li>
+<li><p>You almost always want to add some sort of filtering on the server or client side, or maybe both.
+For example, if you don&rsquo;t want your chat message to be received by everyone logged in, you will need to
+publish to a channel uniquely identified by each session of the chat.</p></li>
+</ol>
+
+
+<p><strong>UPDATE</strong> @rbates has merged this pull request.  I was able to verify ssl support indeed works!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -372,6 +423,10 @@ flaws.  Afterall, coders want to deliver better code.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/06/03/system-calls-in-ruby/">System Calls In Ruby</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/05/29/initialization-is-an-interesting-thing/">Initialization Is An Interesting Thing</a>
       </li>
     
@@ -385,10 +440,6 @@ flaws.  Afterall, coders want to deliver better code.</p>
     
       <li class="post">
         <a href="/blog/2012/11/10/housekeeping-rvm/">Housekeeping RVM</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/08/what-happened-to-fd-3-and-4-in-mri/">What Happened to FD 3 and 4 in MRI</a>
       </li>
     
   </ul>
