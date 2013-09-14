@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Bash | @zlu]]></title>
+  <link href="http://www.zlu.me/blog/categories/bash/atom.xml" rel="self"/>
+  <link href="http://www.zlu.me/"/>
+  <updated>2013-09-14T18:08:44+08:00</updated>
+  <id>http://www.zlu.me/</id>
+  <author>
+    <name><![CDATA[Zhao Lu]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Lost Shell Commands?]]></title>
+    <link href="http://www.zlu.me/blog/2013/05/27/lost-shell-commands/"/>
+    <updated>2013-05-27T21:32:00+08:00</updated>
+    <id>http://www.zlu.me/blog/2013/05/27/lost-shell-commands</id>
+    <content type="html"><![CDATA[<p>Sometime when you modify .bashrc or .bash_profile and source it, you may notice that you have &lsquo;lost&rsquo; your shell commands.
+You will see &lsquo;command not found&rsquo; for the simplest commands such as <code>ls</code> and <code>which</code>.</p>
+
+<p>Most like this happens because you have accidentally override your PATH.  So instead of doing:</p>
+
+<p><code>PATH=my/custom/path:$PATH</code>, you did <code>PATH=my/custom/path</code>.</p>
+
+<p>Here&rsquo;s a simpel way to fix it.</p>
+
+<p><code>
+echo 'PATH=/bin:/usr/bin' &gt; foo &amp;&amp; source foo
+</code></p>
+
+<p>This will get recover your commands so you can modify your .bashrc or .bash_profile with nano.  Remember to back up a working
+version before working on them next time :)</p>
+]]></content>
+  </entry>
+  
+</feed>

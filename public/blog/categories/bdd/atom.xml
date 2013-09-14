@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: BDD | @zlu]]></title>
+  <link href="http://www.zlu.me/blog/categories/bdd/atom.xml" rel="self"/>
+  <link href="http://www.zlu.me/"/>
+  <updated>2013-09-14T18:08:44+08:00</updated>
+  <id>http://www.zlu.me/</id>
+  <author>
+    <name><![CDATA[Zhao Lu]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[TDD by Jim Weirich]]></title>
+    <link href="http://www.zlu.me/blog/2012/05/13/tdd-by-jim-weirich/"/>
+    <updated>2012-05-13T18:28:00+08:00</updated>
+    <id>http://www.zlu.me/blog/2012/05/13/tdd-by-jim-weirich</id>
+    <content type="html"><![CDATA[<p>I invited Jim Weirich to give us a week-long training on TDD/BDD/Agile.  Here&rsquo;re the raw notes.</p>
+
+<p>The way of Testivus</p>
+
+<p>Code driven from tests are more composable</p>
+
+<p>RSpec &ndash; Focus on Behavior</p>
+
+<p>Avoid testing state</p>
+
+<p>As a client, I don&rsquo;t care about internal member variables or implementations, I only care about the result.</p>
+
+<p>Reveal our intentions</p>
+
+<p>Focus on the design</p>
+
+<p>Forget unit, describe context</p>
+
+<p>context is an alias to describe</p>
+
+<p>describe/context is equivalent to creating a class of the object and behavior being described/contexted.
+  class DescribeRing . . end
+  class ContextWhenEmpty . . end
+Also class inherits from top-level class
+Why helper methods should be in various levels (nesting) of tests</p>
+
+<p>predicate &ndash; any method ends with ?</p>
+
+<p>be/equal => object identity</p>
+
+<p>eql or == is structural equality</p>
+
+<p>let(:symbol) { } creates a named method identified by :symbol.  When referred, the block will be executed exactly once.</p>
+
+<p>Implicit subject</p>
+
+<p>its(:symbol) {  should be_true }
+specify is a &lsquo;kind of&rsquo; its</p>
+
+<p>Given/When/Then</p>
+
+<p>rspec differentiate mocks and stubs.  stubs doesn&rsquo;t have to be called while mocks have to be at least once.
+constraints are should_recieve, once, etc.
+actions are and_return</p>
+
+<p>stubs don&rsquo;t care how many times you call it or parameters passed in</p>
+
+<p>Flatten the cost of change in software engineering &ndash; how?
+  The key is to increase feedback</p>
+
+<p>YAGNI &ndash; You ain&rsquo;t going to need it #Agile &ndash; No speculative coding!</p>
+
+<p>What is simple?
+  Passes all the tests
+  Reveals the intention of the developer
+  No Duplication
+  Fewest huber of classes or methods</p>
+
+<p>Collective Ownership</p>
+
+<p>Sustainable Pace (40-hr work week in America)</p>
+
+<p>Initial Importance
+  Must/Should/Could/Won&rsquo;t
+  Do high value and high risk stories first</p>
+]]></content>
+  </entry>
+  
+</feed>

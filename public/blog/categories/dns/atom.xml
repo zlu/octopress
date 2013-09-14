@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: DNS | @zlu]]></title>
+  <link href="http://www.zlu.me/blog/categories/dns/atom.xml" rel="self"/>
+  <link href="http://www.zlu.me/"/>
+  <updated>2013-09-14T18:08:44+08:00</updated>
+  <id>http://www.zlu.me/</id>
+  <author>
+    <name><![CDATA[Zhao Lu]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Accessing Facebook in Vietnam]]></title>
+    <link href="http://www.zlu.me/blog/2012/08/30/accessing-facebook-in-vietnam/"/>
+    <updated>2012-08-30T21:56:00+08:00</updated>
+    <id>http://www.zlu.me/blog/2012/08/30/accessing-facebook-in-vietnam</id>
+    <content type="html"><![CDATA[<p>I just traveled to Saigon, Vietnam.  After checking hotel, I logged onto Wifi and browsed to Facebook.
+It won&rsquo;t load!</p>
+
+<p><code>
+zlu@zlu-mba:~$ ping www.facebook.com
+ping: cannot resolve www.facebook.com: Unknown host
+</code></p>
+
+<p>Hmm, that was strange.  A quick google search shows that some ISPs block Facebook due to government regulation.  But the
+fix is quit easy.  All you need to do is to change your DNS server to Google DNS (8.8.8.8).</p>
+
+<p>In OSX, open System Preferences &ndash;> Network &ndash;> DNS, add 8.8.8.8 to DNS servers (making sure it&rsquo;s the first in the list).</p>
+
+<p><code>
+zlu@zlu-mba:~$ ping www.facebook.com
+PING www.facebook.com (66.220.153.70): 56 data bytes
+64 bytes from 66.220.153.70: icmp_seq=0 ttl=238 time=269.573 ms
+</code></p>
+
+<p>Now you can browse Facebook again.</p>
+]]></content>
+  </entry>
+  
+</feed>

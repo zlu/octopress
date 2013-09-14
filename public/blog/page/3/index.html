@@ -9,8 +9,8 @@
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="Private Pub is a convinent gem wraps around Faye. There are a few things to consider when using PrivatePub. It does not support ssl.
-However, there &hellip;">
+  <meta name="description" content="Task Server is a lesser known feature in RubyMine. You can enable PivotalTracker (PT) integration by adding
+PT project as a Task Server. Press cmd &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -51,7 +51,7 @@ However, there &hellip;">
   <header role="banner"><hgroup>
   <div id="logo">
   	<div id="logoLeft">{</div>
-  	<div id="logoText">mob</div>
+  	<div id="logoText">zlu</div>
   	<div id="logoRight">}</div>
   	<div class="clear"></div>
   </div>
@@ -78,6 +78,7 @@ However, there &hellip;">
 <ul class="main-navigation">
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
 </ul>
 
 </nav>
@@ -85,6 +86,70 @@ However, there &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2012/02/14/rubymine-and-pivotaltracker-integration/">RubyMine and PivotalTracker Integration</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-14T20:32:00+08:00" pubdate data-updated="true">Feb 14<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/02/14/rubymine-and-pivotaltracker-integration/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>Task Server</strong> is a lesser known feature in RubyMine.  You can enable PivotalTracker (PT) integration by adding
+PT project as a Task Server.</p>
+
+<p>Press cmd + , to open Preferences.  Type task to see this panel:</p>
+
+<p><img src="http://f.cl.ly/items/0q0C3G471G1K3R2D0r1V/Screen%20Shot%202012-02-14%20at%208.56.43%20PM.png"></p>
+
+<p>Add PivotalTracker project by supplying project ID and api token.</p>
+
+<p>Now every story can be easily turned into a RubyMine changelist.
+Press cmd + shift + a, and type task.  Select open task.  Type part of the story to see a list of matched tracker stories.</p>
+
+<p><img src="http://f.cl.ly/items/2O1I0v3M403D2W1N2P0X/Screen%20Shot%202012-02-14%20at%208.59.44%20PM.png"></p>
+
+<p>Select the desired story to work on and check start story.  Now every change will be in this change list and RubyMine will
+autostart the story.</p>
+
+<p>Let&rsquo;s say you TDD&#8217;ed and finished the story.  Press cmd + k to open changelist view.</p>
+
+<p><img src="http://f.cl.ly/items/0w1K2E1E3S3S2m301W1Q/Screen%20Shot%202012-02-14%20at%209.03.29%20PM.png"></p>
+
+<p>You will see that commit message has been filled with story text.  Commit the change and RubyMine will automatically
+finish the story.  How cool is that?  Now try to do that in Emacs or VI, I dare you :P</p>
+
+<p>P.S. I like Emacs.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -109,7 +174,7 @@ However, there &hellip;">
   
 
 
-<time datetime="2012-02-12T20:38:00-05:00" pubdate data-updated="true">Feb 12<span>th</span>, 2012</time>
+<time datetime="2012-02-12T20:38:00+08:00" pubdate data-updated="true">Feb 12<span>th</span>, 2012</time>
         
          | <a href="/blog/2012/02/12/a-couple-things-to-watch-out-for-using-privatepub/#disqus_thread">Comments</a>
         
@@ -162,7 +227,7 @@ publish to a channel uniquely identified by each session of the chat.</p></li>
   
 
 
-<time datetime="2012-02-12T19:32:00-05:00" pubdate data-updated="true">Feb 12<span>th</span>, 2012</time>
+<time datetime="2012-02-12T19:32:00+08:00" pubdate data-updated="true">Feb 12<span>th</span>, 2012</time>
         
          | <a href="/blog/2012/02/12/rspec-arbitrary-handling-of-arguments/#disqus_thread">Comments</a>
         
@@ -236,7 +301,7 @@ The second is a hash and it equals to {:foo => &lsquo;foo&rsquo;}</p>
   
 
 
-<time datetime="2012-01-30T18:11:00-05:00" pubdate data-updated="true">Jan 30<span>th</span>, 2012</time>
+<time datetime="2012-01-30T18:11:00+08:00" pubdate data-updated="true">Jan 30<span>th</span>, 2012</time>
         
          | <a href="/blog/2012/01/30/on-agile/#disqus_thread">Comments</a>
         
@@ -330,7 +395,7 @@ flaws.  Afterall, coders want to deliver better code.</p>
   
 
 
-<time datetime="2011-11-01T22:04:00-04:00" pubdate data-updated="true">Nov 1<span>st</span>, 2011</time>
+<time datetime="2011-11-01T22:04:00+08:00" pubdate data-updated="true">Nov 1<span>st</span>, 2011</time>
         
          | <a href="/blog/2011/11/01/git-auto-complete/#disqus_thread">Comments</a>
         
@@ -423,6 +488,10 @@ flaws.  Afterall, coders want to deliver better code.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/06/23/how-to-integrate-instagram-to-rails-app/">How To Integrate Instagram To Rails App</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/06/03/system-calls-in-ruby/">System Calls In Ruby</a>
       </li>
     
@@ -436,10 +505,6 @@ flaws.  Afterall, coders want to deliver better code.</p>
     
       <li class="post">
         <a href="/blog/2013/02/04/postgres-gotchas/">Postgres Gotchas</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/10/housekeeping-rvm/">Housekeeping RVM</a>
       </li>
     
   </ul>

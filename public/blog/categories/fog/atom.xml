@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: fog | @zlu]]></title>
+  <link href="http://www.zlu.me/blog/categories/fog/atom.xml" rel="self"/>
+  <link href="http://www.zlu.me/"/>
+  <updated>2013-09-14T18:08:44+08:00</updated>
+  <id>http://www.zlu.me/</id>
+  <author>
+    <name><![CDATA[Zhao Lu]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Testing Carrierwave with Fog for Amazon S3]]></title>
+    <link href="http://www.zlu.me/blog/2012/07/17/testing-carrierwave-with-fog/"/>
+    <updated>2012-07-17T21:10:00+08:00</updated>
+    <id>http://www.zlu.me/blog/2012/07/17/testing-carrierwave-with-fog</id>
+    <content type="html"><![CDATA[<p>Testing file upload using CarrierWave with Fog with S3 turns out to be difficult.</p>
+
+<ul>
+<li>CarrierWave/Fog need a non-empty file, otherwise the url to the S3 object will be nil and can&rsquo;t be tested.</li>
+<li>Fog.mock! doesn&rsquo;t work out of box.  Some extra steps are needed to avoid uploading files to S3 when running tests.</li>
+</ul>
+
+
+<p>First, create config/fog_credentials.yml</p>
+
+<p>{% codeblock lang:yml %}
+default:
+  aws_access_key_id: &lsquo;your-aws-access-key-id&rsquo;
+  aws_secret_access_key: &lsquo;your-aws-secret-access-key/&rsquo;
+  region: &lsquo;your-aws-region&rsquo;
+{% endcodeblock %}</p>
+
+<p>Next, put this to your config/initializers/carrier_wave.rb</p>
+
+<p>{% codeblock lang:ruby %}
+Fog.credentials_path = Rails.root.join(&lsquo;config/fog_credentials.yml&rsquo;)</p>
+
+<p>fog_dir = Rails.env == &lsquo;production&rsquo; ? &lsquo;production-bucket&rsquo; : &lsquo;dev-bucket&rsquo;</p>
+
+<p>CarrierWave.configure do |config|
+  config.fog_credentials = {:provider => &lsquo;AWS&rsquo;}
+  config.fog_directory  = fog_dir
+end
+{% endcodeblock %}</p>
+
+<p>Next, put this into spec/support/fog_helper.rb</p>
+
+<p>{% codeblock lang:ruby %}
+Fog.mock!
+Fog.credentials_path = Rails.root.join(&lsquo;config/fog_credentials.yml&rsquo;)
+connection = Fog::Storage.new(:provider => &lsquo;AWS&rsquo;)
+connection.directories.create(:key => &lsquo;dev-bucket&rsquo;)
+{% endcodeblock %}</p>
+
+<p>Note, the :key value <em>must</em> match whats defined for fog_dir (dev-bucket) in carrier_wave.rb</p>
+
+<p>Suppose you want to test this class:</p>
+
+<p>{% codeblock lang:ruby %}
+class FileUploader &lt; CarrierWave::Uploader::Base
+  storage :fog
+end
+{% endcodeblock %}</p>
+
+<p>Your rspec test can be something like this:</p>
+
+<p>{% codeblock lang:ruby %}
+class TestFileUploader
+  mount_uploader :file, FileUploader
+end</p>
+
+<p>describe FileUploader do
+  include FakeFS::SpecHelpers</p>
+
+<p>  context &lsquo;for non-production environment&rsquo; do</p>
+
+<pre><code>it 'should upload video clip to dev-bucket on s3' do
+  FakeFS.activate!
+  FakeFS::File.should_receive(:chmod) #this is needed or you will get an exception
+  File.open('test_file', 'w') do |f|
+    f.puts('foo') # this is required or uploader_test.file.url will be nil
+  end
+  uploader_test = TestFileUploader.new
+  uploader_test.file = File.open('test_file')
+  uploader_test.save!
+  uploader_test.file.url.should match /.*\/dev-bucket.*/ #test to make sure that it is not production-bucket
+  FakeFS.deactivate!
+end
+</code></pre>
+
+<p>  end
+end
+{% endcodeblock %}</p>
+
+<p>Now the test is complete.  It uses fakefs to generate a fake file which is non-empty.  Fog will pretent to upload the file
+using the FileUploader under test.  The upload url is the subject under test.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -4,7 +4,7 @@
   <title><![CDATA[@zlu]]></title>
   <link href="http://www.zlu.me/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2013-06-03T01:45:37-04:00</updated>
+  <updated>2013-09-14T18:08:36+08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -14,9 +14,24 @@
 
   
   <entry>
+    <title type="html"><![CDATA[How To Integrate Instagram To Rails App]]></title>
+    <link href="http://www.zlu.me/blog/2013/06/23/how-to-integrate-instagram-to-rails-app/"/>
+    <updated>2013-06-23T22:13:00+08:00</updated>
+    <id>http://www.zlu.me/blog/2013/06/23/how-to-integrate-instagram-to-rails-app</id>
+    <content type="html"><![CDATA[<p>  #&lt;OmniAuth::AuthHash
+  # credentials=#&lt;Hashie::Mash expires=false token=&ldquo;353682345.0294759.441cfe2d7b8d4b00a16e802ba705e628&rdquo;>
+  # extra=#&lt;Hashie::Mash>
+  # info=#&lt;OmniAuth::AuthHash::InfoHash bio=&ldquo;There is a yogi in you.&rdquo; image=&ldquo;<a href="http://images.ak.instagram.com/profiles/profile_353682345_75sq_1367355477.jpg">http://images.ak.instagram.com/profiles/profile_353682345_75sq_1367355477.jpg</a>&rdquo;
+  #        name=&ldquo;ForYogi&rdquo; nickname=&ldquo;foryogi&rdquo; website=&ldquo;<a href="http://foryogi.com">http://foryogi.com</a>&rdquo;>
+  # provider=&ldquo;instagram&rdquo;
+  # uid=&ldquo;353682345&rdquo;></p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[System Calls In Ruby]]></title>
     <link href="http://www.zlu.me/blog/2013/06/03/system-calls-in-ruby/"/>
-    <updated>2013-06-03T00:42:00-04:00</updated>
+    <updated>2013-06-03T00:42:00+08:00</updated>
     <id>http://www.zlu.me/blog/2013/06/03/system-calls-in-ruby</id>
     <content type="html"><![CDATA[<p>There are a few ways to execute system commands in Ruby: backticks, system, exec, %x[], and Open3#popen3.
 We will take a look at the their differences and briefly discuss security concerns of applying them.</p>
@@ -150,7 +165,7 @@ We can address such concerns with another form of popen3(cmd, args).  For the co
   <entry>
     <title type="html"><![CDATA[Initialization Is An Interesting Thing]]></title>
     <link href="http://www.zlu.me/blog/2013/05/29/initialization-is-an-interesting-thing/"/>
-    <updated>2013-05-29T22:51:00-04:00</updated>
+    <updated>2013-05-29T22:51:00+08:00</updated>
     <id>http://www.zlu.me/blog/2013/05/29/initialization-is-an-interesting-thing</id>
     <content type="html"><![CDATA[<p>Have you ever tried to define <code>initialized</code> method for an <code>ActiveRecord</code>?</p>
 
@@ -224,7 +239,7 @@ We can address such concerns with another form of popen3(cmd, args).  For the co
   <entry>
     <title type="html"><![CDATA[Lost Shell Commands?]]></title>
     <link href="http://www.zlu.me/blog/2013/05/27/lost-shell-commands/"/>
-    <updated>2013-05-27T21:32:00-04:00</updated>
+    <updated>2013-05-27T21:32:00+08:00</updated>
     <id>http://www.zlu.me/blog/2013/05/27/lost-shell-commands</id>
     <content type="html"><![CDATA[<p>Sometime when you modify .bashrc or .bash_profile and source it, you may notice that you have &lsquo;lost&rsquo; your shell commands.
 You will see &lsquo;command not found&rsquo; for the simplest commands such as <code>ls</code> and <code>which</code>.</p>
@@ -247,7 +262,7 @@ version before working on them next time :)</p>
   <entry>
     <title type="html"><![CDATA[Postgres Gotchas]]></title>
     <link href="http://www.zlu.me/blog/2013/02/04/postgres-gotchas/"/>
-    <updated>2013-02-04T11:16:00-05:00</updated>
+    <updated>2013-02-04T11:16:00+08:00</updated>
     <id>http://www.zlu.me/blog/2013/02/04/postgres-gotchas</id>
     <content type="html"><![CDATA[<p>I run postgres locally for development on OS X (mountain lion).  I&rsquo;ve run into a few issues and am documenting solutions
 here.</p>
@@ -338,7 +353,7 @@ pg gem.</p>
   <entry>
     <title type="html"><![CDATA[Housekeeping RVM]]></title>
     <link href="http://www.zlu.me/blog/2012/11/10/housekeeping-rvm/"/>
-    <updated>2012-11-10T18:13:00-05:00</updated>
+    <updated>2012-11-10T18:13:00+08:00</updated>
     <id>http://www.zlu.me/blog/2012/11/10/housekeeping-rvm</id>
     <content type="html"><![CDATA[<p>When a new version of Ruby comes out, I like to use RVM to install it, migrate ruby gems to new ruby, and remove the
 older version of ruby.  This prevent the disk bloated with different versions of Rubies and duplicate gem(sets).</p>
@@ -404,7 +419,7 @@ because it contains a security fix for DoS attack in p286.</p>
   <entry>
     <title type="html"><![CDATA[What Happened to FD 3 and 4 in MRI]]></title>
     <link href="http://www.zlu.me/blog/2012/11/08/what-happened-to-fd-3-and-4-in-mri/"/>
-    <updated>2012-11-08T16:07:00-05:00</updated>
+    <updated>2012-11-08T16:07:00+08:00</updated>
     <id>http://www.zlu.me/blog/2012/11/08/what-happened-to-fd-3-and-4-in-mri</id>
     <content type="html"><![CDATA[<p>I got curious when this happened:</p>
 
@@ -470,7 +485,7 @@ in order.  So what happened to 3 and 4?</p>
   <entry>
     <title type="html"><![CDATA[Rolling Deployment]]></title>
     <link href="http://www.zlu.me/blog/2012/11/07/rolling-deployment/"/>
-    <updated>2012-11-07T20:30:00-05:00</updated>
+    <updated>2012-11-07T20:30:00+08:00</updated>
     <id>http://www.zlu.me/blog/2012/11/07/rolling-deployment</id>
     <content type="html"><![CDATA[<p>It is common to deploy new code to production several times a week (or even a day) in an agile shop.  How to make deployment
 less intrusive to end user has becoming a larger issue.  If you simply use <code>cap deploy production</code>, some web requests will
@@ -595,7 +610,7 @@ will keep sending requests to the server during deployment and server restart.</
   <entry>
     <title type="html"><![CDATA[Encouraging Social Sharing in China]]></title>
     <link href="http://www.zlu.me/blog/2012/11/01/encourage-social-sharing-in-china/"/>
-    <updated>2012-11-01T19:40:00-04:00</updated>
+    <updated>2012-11-01T19:40:00+08:00</updated>
     <id>http://www.zlu.me/blog/2012/11/01/encourage-social-sharing-in-china</id>
     <content type="html"><![CDATA[<p>I recently spent a month in China, where access to Facebook, Twitter, and GooglePlus are blocked.  I&rsquo;ve always known
 about the Great Firewall, but I never really thought about how it can affect content-sharing that I have grown used to over
@@ -622,7 +637,7 @@ times the entry has been shared.</li>
   <entry>
     <title type="html"><![CDATA[Install and Create Rails 4.0 App]]></title>
     <link href="http://www.zlu.me/blog/2012/10/29/install-and-create-rails-4-dot-0-app/"/>
-    <updated>2012-10-29T22:46:00-04:00</updated>
+    <updated>2012-10-29T22:46:00+08:00</updated>
     <id>http://www.zlu.me/blog/2012/10/29/install-and-create-rails-4-dot-0-app</id>
     <content type="html"><![CDATA[<p>Rails 4.0 development has started a while back.  It was merged into Rails&#8217; master branch on Github in 2011.
 As the writing of this blog entry, the stable version of Rails is 3.2.8.  Release candidate is at 3.2.9.rc1.
@@ -723,7 +738,7 @@ should not be a surprise.</p>
   <entry>
     <title type="html"><![CDATA[A Small Difference Between Mongoid and ActiveRecord Query Interface]]></title>
     <link href="http://www.zlu.me/blog/2012/10/16/a-small-difference-between-mongoid-and-activerecord-query-interface/"/>
-    <updated>2012-10-16T21:29:00-04:00</updated>
+    <updated>2012-10-16T21:29:00+08:00</updated>
     <id>http://www.zlu.me/blog/2012/10/16/a-small-difference-between-mongoid-and-activerecord-query-interface</id>
     <content type="html"><![CDATA[<p>There are definitely some gotchas when switching from ActiveRecord to MongoDB (with Mongoid for example).  One of them
 is how the IN operator in SQL is supported.</p>
@@ -749,7 +764,7 @@ as such:</p>
   <entry>
     <title type="html"><![CDATA[Segmentation fault with Rails and JSON]]></title>
     <link href="http://www.zlu.me/blog/2012/10/16/segmentation-fault-with-rails-and-json/"/>
-    <updated>2012-10-16T21:03:00-04:00</updated>
+    <updated>2012-10-16T21:03:00+08:00</updated>
     <id>http://www.zlu.me/blog/2012/10/16/segmentation-fault-with-rails-and-json</id>
     <content type="html"><![CDATA[<p>After manually cleaning Ruby gems on my system, I got this error running <code>rails c</code> or <code>rails s</code></p>
 
@@ -788,7 +803,7 @@ After reinstalling bundler, you can run <code>bundle install</code>, assuming yo
   <entry>
     <title type="html"><![CDATA[Accessing Facebook in Vietnam]]></title>
     <link href="http://www.zlu.me/blog/2012/08/30/accessing-facebook-in-vietnam/"/>
-    <updated>2012-08-30T21:56:00-04:00</updated>
+    <updated>2012-08-30T21:56:00+08:00</updated>
     <id>http://www.zlu.me/blog/2012/08/30/accessing-facebook-in-vietnam</id>
     <content type="html"><![CDATA[<p>I just traveled to Saigon, Vietnam.  After checking hotel, I logged onto Wifi and browsed to Facebook.
 It won&rsquo;t load!</p>
@@ -819,7 +834,7 @@ fix is quit easy.  All you need to do is to change your DNS server to Google DNS
   <entry>
     <title type="html"><![CDATA[Uninstall Multiple Versions of Multiple Ruby Gems]]></title>
     <link href="http://www.zlu.me/blog/2012/07/31/uninstall-multiple-versions-of-multiple-ruby-gem/"/>
-    <updated>2012-07-31T10:13:00-04:00</updated>
+    <updated>2012-07-31T10:13:00+08:00</updated>
     <id>http://www.zlu.me/blog/2012/07/31/uninstall-multiple-versions-of-multiple-ruby-gem</id>
     <content type="html"><![CDATA[<p>Let&rsquo;s say you have multiple versions of spree gems installed and want to get rid of the older versions.</p>
 
@@ -865,7 +880,7 @@ fix is quit easy.  All you need to do is to change your DNS server to Google DNS
   <entry>
     <title type="html"><![CDATA[Pretty Print JSON in Command Line]]></title>
     <link href="http://www.zlu.me/blog/2012/07/19/pretty-print-json-in-command-line/"/>
-    <updated>2012-07-19T16:28:00-04:00</updated>
+    <updated>2012-07-19T16:28:00+08:00</updated>
     <id>http://www.zlu.me/blog/2012/07/19/pretty-print-json-in-command-line</id>
     <content type="html"><![CDATA[<p>We often deal with viewing JSON documents in command line such as using curl against a server that returns JSON response.
 It is hard to read.</p>
@@ -957,7 +972,7 @@ It is hard to read.</p>
   <entry>
     <title type="html"><![CDATA[Testing Carrierwave with Fog for Amazon S3]]></title>
     <link href="http://www.zlu.me/blog/2012/07/17/testing-carrierwave-with-fog/"/>
-    <updated>2012-07-17T21:10:00-04:00</updated>
+    <updated>2012-07-17T21:10:00+08:00</updated>
     <id>http://www.zlu.me/blog/2012/07/17/testing-carrierwave-with-fog</id>
     <content type="html"><![CDATA[<p>Testing file upload using CarrierWave with Fog with S3 turns out to be difficult.</p>
 
@@ -1084,7 +1099,7 @@ using the FileUploader under test.  The upload url is the subject under test.</p
   <entry>
     <title type="html"><![CDATA[My Current Emacs]]></title>
     <link href="http://www.zlu.me/blog/2012/05/18/my-current-emacs/"/>
-    <updated>2012-05-18T19:49:00-04:00</updated>
+    <updated>2012-05-18T19:49:00+08:00</updated>
     <id>http://www.zlu.me/blog/2012/05/18/my-current-emacs</id>
     <content type="html"><![CDATA[<pre>
 Emacs with Sidebar enabled.
@@ -1103,7 +1118,7 @@ Emacs with Rinari enabled.
   <entry>
     <title type="html"><![CDATA[TDD by Jim Weirich]]></title>
     <link href="http://www.zlu.me/blog/2012/05/13/tdd-by-jim-weirich/"/>
-    <updated>2012-05-13T18:28:00-04:00</updated>
+    <updated>2012-05-13T18:28:00+08:00</updated>
     <id>http://www.zlu.me/blog/2012/05/13/tdd-by-jim-weirich</id>
     <content type="html"><![CDATA[<p>I invited Jim Weirich to give us a week-long training on TDD/BDD/Agile.  Here&rsquo;re the raw notes.</p>
 
@@ -1176,7 +1191,7 @@ actions are and_return</p>
   <entry>
     <title type="html"><![CDATA[Running Wireshark on Mountain Lion]]></title>
     <link href="http://www.zlu.me/blog/2012/02/28/running-wireshark-on-mountain-lion/"/>
-    <updated>2012-02-28T09:06:00-05:00</updated>
+    <updated>2012-02-28T09:06:00+08:00</updated>
     <id>http://www.zlu.me/blog/2012/02/28/running-wireshark-on-mountain-lion</id>
     <content type="html"><![CDATA[<p>X11 has been removed from Mountain Lion and you first need to install XQuartz</p>
 ]]></content>
@@ -1185,7 +1200,7 @@ actions are and_return</p>
   <entry>
     <title type="html"><![CDATA[Install Native Ruby Gem in Mountain Lion Preview]]></title>
     <link href="http://www.zlu.me/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview/"/>
-    <updated>2012-02-21T13:59:00-05:00</updated>
+    <updated>2012-02-21T13:59:00+08:00</updated>
     <id>http://www.zlu.me/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview</id>
     <content type="html"><![CDATA[<p>In Preview of OS X Mountain Lion, XCode has been distributed as a .app package verses the traditional installer.
 Also the Commandline Tools are not installed by default.  Commandline Tools contains cc/gcc that you will need.</p>
@@ -1242,39 +1257,6 @@ Provided configuration options:
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>ln -s /usr/bin/gcc /usr/bin/gcc-4.2</span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[RubyMine and PivotalTracker Integration]]></title>
-    <link href="http://www.zlu.me/blog/2012/02/14/rubymine-and-pivotaltracker-integration/"/>
-    <updated>2012-02-14T20:32:00-05:00</updated>
-    <id>http://www.zlu.me/blog/2012/02/14/rubymine-and-pivotaltracker-integration</id>
-    <content type="html"><![CDATA[<p><strong>Task Server</strong> is a lesser known feature in RubyMine.  You can enable PivotalTracker (PT) integration by adding
-PT project as a Task Server.</p>
-
-<p>Press cmd + , to open Preferences.  Type task to see this panel:</p>
-
-<p><img src="http://f.cl.ly/items/0q0C3G471G1K3R2D0r1V/Screen%20Shot%202012-02-14%20at%208.56.43%20PM.png"></p>
-
-<p>Add PivotalTracker project by supplying project ID and api token.</p>
-
-<p>Now every story can be easily turned into a RubyMine changelist.
-Press cmd + shift + a, and type task.  Select open task.  Type part of the story to see a list of matched tracker stories.</p>
-
-<p><img src="http://f.cl.ly/items/2O1I0v3M403D2W1N2P0X/Screen%20Shot%202012-02-14%20at%208.59.44%20PM.png"></p>
-
-<p>Select the desired story to work on and check start story.  Now every change will be in this change list and RubyMine will
-autostart the story.</p>
-
-<p>Let&rsquo;s say you TDD&#8217;ed and finished the story.  Press cmd + k to open changelist view.</p>
-
-<p><img src="http://f.cl.ly/items/0w1K2E1E3S3S2m301W1Q/Screen%20Shot%202012-02-14%20at%209.03.29%20PM.png"></p>
-
-<p>You will see that commit message has been filled with story text.  Commit the change and RubyMine will automatically
-finish the story.  How cool is that?  Now try to do that in Emacs or VI, I dare you :P</p>
-
-<p>P.S. I like Emacs.</p>
 ]]></content>
   </entry>
   

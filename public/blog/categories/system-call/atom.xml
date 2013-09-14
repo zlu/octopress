@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: System call | @zlu]]></title>
+  <link href="http://www.zlu.me/blog/categories/system-call/atom.xml" rel="self"/>
+  <link href="http://www.zlu.me/"/>
+  <updated>2013-09-14T18:08:44+08:00</updated>
+  <id>http://www.zlu.me/</id>
+  <author>
+    <name><![CDATA[Zhao Lu]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[System Calls In Ruby]]></title>
+    <link href="http://www.zlu.me/blog/2013/06/03/system-calls-in-ruby/"/>
+    <updated>2013-06-03T00:42:00+08:00</updated>
+    <id>http://www.zlu.me/blog/2013/06/03/system-calls-in-ruby</id>
+    <content type="html"><![CDATA[<p>There are a few ways to execute system commands in Ruby: backticks, system, exec, %x[], and Open3#popen3.
+We will take a look at the their differences and briefly discuss security concerns of applying them.</p>
+
+<h2>Backticks (Kernel#`)</h2>
+
+<p>When using backticks, the result is returned as string.  Process status of method execution is stored in $?</p>
+
+<p>{% codeblock lang:ruby %}
+1.9.3p429 :006 > <code>ls</code>
+ => &ldquo;CHANGELOG.markdown\nGemfile\nGemfile.lock\nREADME.markdown\nRakefile\n_config.yml\nconfig.rb\nconfig.ru\nplugins\npublic\nsass\nsass.old\nsource\nsource.old\n&rdquo;
+1.9.3p429 :007 > $?
+ => #&lt;Process::Status: pid 35977 exit 0>
+1.9.3p429 :008 > s = _
+ => #&lt;Process::Status: pid 35977 exit 0>
+1.9.3p429 :009 > s.success?
+ => true
+ {% endcodeblock %}</p>
+
+<h2>%x</h2>
+
+<p>%x() or %x[] is similar to using backticks.</p>
+
+<h2>Kernel#system</h2>
+
+<p>When using system method, the result is true or false depending on whether the command is executed successfully.</p>
+
+<p>{% codeblock lang:ruby %}
+1.9.3p429 :002 > system &lsquo;ls&rsquo;
+CHANGELOG.markdown README.markdown    config.rb          public             source
+Gemfile            Rakefile           config.ru          sass               source.old
+Gemfile.lock       _config.yml        plugins            sass.old
+ => true
+1.9.3p429 :003 > system &lsquo;ls a&rsquo;
+ls: a: No such file or directory
+ => false
+{% endcodeblock %}</p>
+
+<h2>Kernel#exec</h2>
+
+<p>exec replaces the current process by running the given external command.  If you invoke exec in irb, then the irb process
+will be replaced by the running external command.  You will get the shell prompt back after exec finishes.  If you invoke
+exec in a ruby program, that program will stop execution (just like the irb process).</p>
+
+<p>{% codeblock lang:ruby %}
+zlu@zlu-mba:~/projects/me/blog-zlu (master <em>)$ irb
+1.9.3p429 :001 > exec &lsquo;ls&rsquo;
+CHANGELOG.markdown README.markdown    config.rb          public             source
+Gemfile            Rakefile           config.ru          sass               source.old
+Gemfile.lock       _config.yml        plugins            sass.old
+zlu@zlu-mba:~/projects/me/blog-zlu (master </em>)$
+{% endcodeblock %}</p>
+
+<h2>Open3#popen3</h2>
+
+<p>popen3 executes the command while opening stdin, stdout, and stderr and a thread to wait for the command execution.</p>
+
+<p>{% codeblock stdout with successfully execution lang:ruby %}
+1.9.3p429 :010 > require &lsquo;open3&rsquo;
+ => true
+1.9.3p429 :011 > Open3.popen3 &lsquo;ls&rsquo;
+ => [#&lt;IO:fd 6>, #&lt;IO:fd 7>, #&lt;IO:fd 9>, #&lt;Thread:0x007fcd928ece18 run>]
+1.9.3p429 :012 > i, o, e, t = _
+ => [#&lt;IO:fd 6>, #&lt;IO:fd 7>, #&lt;IO:fd 9>, #&lt;Thread:0x007fcd928ece18 dead>]
+1.9.3p429 :014 > o.read
+ => &ldquo;CHANGELOG.markdown\nGemfile\nGemfile.lock\nREADME.markdown\nRakefile\n_config.yml\nconfig.rb\nconfig.ru\nplugins\npublic\nsass\nsass.old\nsource\nsource.old\n&rdquo;
+{% endcodeblock %}</p>
+
+<p>{% codeblock stderr with unsuccessfully execution lang:ruby %}
+1.9.3p429 :027 > Open3.popen3(&lsquo;ls a&rsquo;) do |i, o, e, t|
+1.9.3p429 :029?>   p e.read
+1.9.3p429 :030?>   end
+&ldquo;ls: a: No such file or directory\n&rdquo;
+ => &ldquo;ls: a: No such file or directory\n&rdquo;
+{% endcodeblock %}</p>
+
+<p>There are a few variations of popen3 methods such as popen2 where a couple of streams are merged 2&amp;>1, for example.</p>
+
+<h2>Security Concerns</h2>
+
+<p>Much like SQL Injection, similar things can happen when using these method calls.
+Consider a command like <code>ls a;rm a</code>.  or even worse <code>ls a;rm -rf *</code>
+We can address such concerns with another form of popen3(cmd, args).  For the command above, it is
+<code>popen3('ls', 'a;rm -rf*')</code>.  The last part of the command is interpreted as the options for <code>ls</code>.</p>
+
+<p>Take a look at this playful little app <a href="https://github.com/zlu/web_shell">web_shell</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>
