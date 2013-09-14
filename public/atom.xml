@@ -4,7 +4,7 @@
   <title><![CDATA[@zlu]]></title>
   <link href="http://www.zlu.me/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2013-09-14T18:08:36+08:00</updated>
+  <updated>2013-09-14T18:11:59+08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -12,21 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[How To Integrate Instagram To Rails App]]></title>
-    <link href="http://www.zlu.me/blog/2013/06/23/how-to-integrate-instagram-to-rails-app/"/>
-    <updated>2013-06-23T22:13:00+08:00</updated>
-    <id>http://www.zlu.me/blog/2013/06/23/how-to-integrate-instagram-to-rails-app</id>
-    <content type="html"><![CDATA[<p>  #&lt;OmniAuth::AuthHash
-  # credentials=#&lt;Hashie::Mash expires=false token=&ldquo;353682345.0294759.441cfe2d7b8d4b00a16e802ba705e628&rdquo;>
-  # extra=#&lt;Hashie::Mash>
-  # info=#&lt;OmniAuth::AuthHash::InfoHash bio=&ldquo;There is a yogi in you.&rdquo; image=&ldquo;<a href="http://images.ak.instagram.com/profiles/profile_353682345_75sq_1367355477.jpg">http://images.ak.instagram.com/profiles/profile_353682345_75sq_1367355477.jpg</a>&rdquo;
-  #        name=&ldquo;ForYogi&rdquo; nickname=&ldquo;foryogi&rdquo; website=&ldquo;<a href="http://foryogi.com">http://foryogi.com</a>&rdquo;>
-  # provider=&ldquo;instagram&rdquo;
-  # uid=&ldquo;353682345&rdquo;></p>
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[System Calls In Ruby]]></title>
@@ -1257,6 +1242,39 @@ Provided configuration options:
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>ln -s /usr/bin/gcc /usr/bin/gcc-4.2</span></code></pre></td></tr></table></div></figure>
 
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RubyMine and PivotalTracker Integration]]></title>
+    <link href="http://www.zlu.me/blog/2012/02/14/rubymine-and-pivotaltracker-integration/"/>
+    <updated>2012-02-14T20:32:00+08:00</updated>
+    <id>http://www.zlu.me/blog/2012/02/14/rubymine-and-pivotaltracker-integration</id>
+    <content type="html"><![CDATA[<p><strong>Task Server</strong> is a lesser known feature in RubyMine.  You can enable PivotalTracker (PT) integration by adding
+PT project as a Task Server.</p>
+
+<p>Press cmd + , to open Preferences.  Type task to see this panel:</p>
+
+<p><img src="http://f.cl.ly/items/0q0C3G471G1K3R2D0r1V/Screen%20Shot%202012-02-14%20at%208.56.43%20PM.png"></p>
+
+<p>Add PivotalTracker project by supplying project ID and api token.</p>
+
+<p>Now every story can be easily turned into a RubyMine changelist.
+Press cmd + shift + a, and type task.  Select open task.  Type part of the story to see a list of matched tracker stories.</p>
+
+<p><img src="http://f.cl.ly/items/2O1I0v3M403D2W1N2P0X/Screen%20Shot%202012-02-14%20at%208.59.44%20PM.png"></p>
+
+<p>Select the desired story to work on and check start story.  Now every change will be in this change list and RubyMine will
+autostart the story.</p>
+
+<p>Let&rsquo;s say you TDD&#8217;ed and finished the story.  Press cmd + k to open changelist view.</p>
+
+<p><img src="http://f.cl.ly/items/0w1K2E1E3S3S2m301W1Q/Screen%20Shot%202012-02-14%20at%209.03.29%20PM.png"></p>
+
+<p>You will see that commit message has been filled with story text.  Commit the change and RubyMine will automatically
+finish the story.  How cool is that?  Now try to do that in Emacs or VI, I dare you :P</p>
+
+<p>P.S. I like Emacs.</p>
 ]]></content>
   </entry>
   
