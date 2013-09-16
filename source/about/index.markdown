@@ -8,6 +8,9 @@ footer: true
 ---
 
 ### zlu
+![{{}}]I'm a programmer and [yogi](http).  I've worked in technology for a while and have dipped my foot in storage, insurance, telecommunication, and social media marketing industries.  As a developer, I always wanted to be a user of my software, so I can be passionate about programming it.  After attending [Deborah Burkman]()'s yoga retreat in Thailand, I started [ForYogi](https:for yogi.com).  It's a perfect blend of my two passions, writing code for yoga.
+
+I now spend time between ForYogi, consulting, and advising start-ups.  
 
 
 ### On The Web
@@ -43,3 +46,8 @@ A presentation given at Orange Research Salon
 - _May 2010, San Francisco, California_ - **[Status](https://speakerdeck.com/zlu/status-voicemail)**  
 A telephony-aided self-expression.  A presentation to [EComm 2010](http://america.ecomm.ec).
 
+### Patents
+
+- [ALTERNATE PROGRESS INDICATOR DISPLAYS]("http://appft.uspto.gov/netacgi/nph-Parser?Sect1=PTO2&Sect2=HITOFF&u=%2Fnetahtml%2FPTO%2Fsearch-adv.html&r=2&f=G&l=50&d=PG01&p=1&S1=(%22lu+zhao%22.IN.)&OS=IN/%22lu+zhao%22&RS=IN/%22lu+zhao%22")
+- [APPARATUS, SYSTEM, AND METHOD FOR PROVIDING A MULTI-DIMENSIONAL WEIGHTED PROPAGATED STATUS]("http://appft.uspto.gov/netacgi/nph-Parser?Sect1=PTO2&Sect2=HITOFF&u=%2Fnetahtml%2FPTO%2Fsearch-adv.html&r=5&f=G&l=50&d=PG01&p=1&S1=(%22lu+zhao%22.IN.)&OS=IN/%22lu+zhao%22&RS=IN/%22lu+zhao%22")
+- [Apparatus, system, and method for managing task instances]("http://appft.uspto.gov/netacgi/nph-Parser?Sect1=PTO2&Sect2=HITOFF&u=%2Fnetahtml%2FPTO%2Fsearch-adv.html&r=7&f=G&l=50&d=PG01&p=1&S1=(%22lu+zhao%22.IN.)&OS=IN/%22lu+zhao%22&RS=IN/%22lu+zhao%22")

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Capistrano | @zlu]]></title>
   <link href="http://www.zlu.me/blog/categories/capistrano/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2013-09-16T10:58:49+08:00</updated>
+  <updated>2013-09-16T16:52:30+08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -64,25 +64,39 @@ load balancer --> |-> web server2 (blue)  -|---> database
 <p>In this example, I use Apache&rsquo;s <a href="http://httpd.apache.org/docs/2.2/mod/mod_proxy_balancer.html">mod_proxy_balancer</a>.
 I use a typical Rails web server setup and <a href="https://github.com/capistrano/capistrano">Capistrano</a> for deployment.</p>
 
-<p>{% codeblock In Rails' production.rb lang:ruby %}
-role :app, &ldquo;server1.com&rdquo;, :group => :red
-role :app, &ldquo;server2.com&rdquo;, :group=> :blue
-role :app, &ldquo;server3.com&rdquo;, :group => :green
-role :apache, &ldquo;loadbalancer.com&rdquo;, :no_release => true
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>In Rails' production.rb </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">role</span> <span class="ss">:app</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">server1</span><span class="o">.</span><span class="n">com</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;,</span> <span class="ss">:group</span> <span class="o">=&gt;</span> <span class="ss">:red</span>
+</span><span class='line'><span class="n">role</span> <span class="ss">:app</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">server2</span><span class="o">.</span><span class="n">com</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;,</span> <span class="ss">:group</span><span class="o">=&gt;</span> <span class="ss">:blue</span>
+</span><span class='line'><span class="n">role</span> <span class="ss">:app</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">server3</span><span class="o">.</span><span class="n">com</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;,</span> <span class="ss">:group</span> <span class="o">=&gt;</span> <span class="ss">:green</span>
+</span><span class='line'><span class="n">role</span> <span class="ss">:apache</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">loadbalancer</span><span class="o">.</span><span class="n">com</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;,</span> <span class="ss">:no_release</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p>{% codeblock In Capistrano&rsquo;s deploy.rb lang:ruby %}
-def manage_node(action, group)
-  uri = URI.parse(&ldquo;<a href="http://#">http://#</a>{roles[:apache]}/balancer-manager&rdquo;)
-  response_body = Net::HTTP.get_response(uri).body
-  nonce = response_body.match(/nonce=(.*)\&ldquo;/)[1]
-  node = find_servers(:roles => :app, :only => {:group => group.to_sym})[0]
-  params = {:w => "<a href="http://#">http://#</a>{node}:8080&rdquo;, :b => stage, :nonce => nonce, :dw => action}
-  uri.query = URI.encode_www_form(params)
-  response = Net::HTTP.get_response(uri)
-  response.code == &ldquo;200&rdquo;
-end
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>In Capistrano&rsquo;s deploy.rb </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">manage_node</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;http://#&quot;</span><span class="o">&gt;</span><span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="c1">#&lt;/a&gt;{roles[:apache]}/balancer-manager&amp;rdquo;)</span>
+</span><span class='line'>  <span class="n">response_body</span> <span class="o">=</span> <span class="ss">Net</span><span class="p">:</span><span class="ss">:HTTP</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span><span class="o">.</span><span class="n">body</span>
+</span><span class='line'>  <span class="n">nonce</span> <span class="o">=</span> <span class="n">response_body</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sr">/nonce=(.*)\&amp;ldquo;/</span><span class="p">)</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+</span><span class='line'>  <span class="n">node</span> <span class="o">=</span> <span class="n">find_servers</span><span class="p">(</span><span class="ss">:roles</span> <span class="o">=&gt;</span> <span class="ss">:app</span><span class="p">,</span> <span class="ss">:only</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:group</span> <span class="o">=&gt;</span> <span class="n">group</span><span class="o">.</span><span class="n">to_sym</span><span class="p">})</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span>
+</span><span class='line'>  <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="ss">:w</span> <span class="o">=&gt;</span> <span class="s2">&quot;&lt;a href=&quot;</span><span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="c1">#&quot;&gt;http://#&lt;/a&gt;{node}:8080&amp;rdquo;, :b =&gt; stage, :nonce =&gt; nonce, :dw =&gt; action}</span>
+</span><span class='line'>  <span class="n">uri</span><span class="o">.</span><span class="n">query</span> <span class="o">=</span> <span class="no">URI</span><span class="o">.</span><span class="n">encode_www_form</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">response</span> <span class="o">=</span> <span class="ss">Net</span><span class="p">:</span><span class="ss">:HTTP</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">response</span><span class="o">.</span><span class="n">code</span> <span class="o">==</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="mi">200</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>mod_proxy_balancer has a balancer-manager GUI.  Admin is able to enable and disable node (web server) via a form.
 manage_node method essentially submit the form to the balancer-manager.</p>
