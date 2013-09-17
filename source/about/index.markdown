@@ -9,7 +9,11 @@ footer: true
 
 ### zlu
 
-![avatar]({{ site.url }}/assets/images/zlu-wdi-thumb.jpg)I'm a programmer and [yogi](http).  I've worked in technology for a while and have dipped my foot in storage, insurance, telecommunication, and social media marketing industries.  As a developer, I always wanted to be a user of my software, so I can be passionate about programming it.  After attending [Deborah Burkman]()'s yoga retreat in Thailand, I started [ForYogi](https:for yogi.com).  It's a perfect blend of my two passions, writing code for yoga.
+![avatar]({{ site.url }}/assets/images/zlu-wdi-thumb.jpg)
+
+I'm a programmer who enjoys practicing yoga.  
+
+I've worked in technology for a while and have dipped my foot in storage, insurance, telecommunication, and social media marketing industries.  As a developer, I always wanted to be a user of my software, so I can be passionate about programming it.  After attending [Deborah Burkman](https://www.foryogi.com/teachers/503)'s yoga retreat in Thailand, I started [ForYogi](https://foryogi.com).  It's a perfect blend of my two passions, writing code for yoga.
 
 I now spend time between ForYogi, consulting, and advising start-ups.  
 
