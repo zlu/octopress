@@ -17,7 +17,7 @@ I've worked in technology for a while and have dipped my foot in storage, insura
 
 I now spend time between ForYogi, consulting, and advising start-ups.  
 
-In my spare time, I like to [read][goodreads], taking [photos][flickr], and doing outdoor activities such as biking and hiking.  I used to spend a lot of time running (road and trail) until knee injuries stopped me.  I spent a good amount of times play indoor and sand volleyball as well as basketball.  I used to surf in Santa Cruz and Hawaii.  
+In my spare time, I like to [read][goodreads], taking [photos][flickr], and doing outdoor activities such as biking and hiking.  I used to spend a lot of time running (road and trail) until knee injuries stopped me.  I spent a good amount of times playing indoor and sand volleyball as well as basketball.  I used to surf in Santa Cruz and Hawaii.  
 
 
 ### On The Web

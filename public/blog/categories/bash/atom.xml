@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Bash | ]]></title>
+  <title><![CDATA[Category: bash | 吕钊]]></title>
   <link href="http://www.zlu.me/blog/categories/bash/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2013-09-17T15:25:42+08:00</updated>
+  <updated>2013-09-18T08:36:35+08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -14,25 +14,37 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Lost Shell Commands?]]></title>
-    <link href="http://www.zlu.me/blog/2013/05/27/lost-shell-commands/"/>
-    <updated>2013-05-27T21:32:00+08:00</updated>
-    <id>http://www.zlu.me/blog/2013/05/27/lost-shell-commands</id>
-    <content type="html"><![CDATA[<p>Sometime when you modify .bashrc or .bash_profile and source it, you may notice that you have &lsquo;lost&rsquo; your shell commands.
-You will see &lsquo;command not found&rsquo; for the simplest commands such as <code>ls</code> and <code>which</code>.</p>
+    <title type="html"><![CDATA[Uninstall Multiple Versions of Multiple Ruby Gems]]></title>
+    <link href="http://www.zlu.me/blog/2012/07/31/uninstall-multiple-versions-of-multiple-ruby-gem/"/>
+    <updated>2012-07-31T10:13:00+08:00</updated>
+    <id>http://www.zlu.me/blog/2012/07/31/uninstall-multiple-versions-of-multiple-ruby-gem</id>
+    <content type="html"><![CDATA[<p>Let&rsquo;s say you have multiple versions of spree gems installed and want to get rid of the older versions.</p>
 
-<p>Most like this happens because you have accidentally override your PATH.  So instead of doing:</p>
+<p>{% codeblock lang:bash %}
+zlu@zlu-mba: gem list spree
+spree (1.1.3, 1.0.0, 1.0.0.rc2)
+spree_api (1.1.3, 1.0.0, 1.0.0.rc2)
+spree_auth (1.1.3, 1.0.0, 1.0.0.rc2)
+spree_cmd (1.1.3, 1.0.0, 1.0.0.rc2)
+spree_core (1.1.3, 1.0.0, 1.0.0.rc2)
+spree_dash (1.1.3, 1.0.0, 1.0.0.rc2)
+spree_promo (1.1.3, 1.0.0, 1.0.0.rc2)
+spree_sample (1.1.3, 1.0.0, 1.0.0.rc2)
+{% endcodeblock %}</p>
 
-<p><code>PATH=my/custom/path:$PATH</code>, you did <code>PATH=my/custom/path</code>.</p>
+<p>Instead of doing this a bunch of times (for different gems and versions):</p>
 
-<p>Here&rsquo;s a simpel way to fix it.</p>
+<p>{% codeblock lang:bash %}
+gem uninstall spree -v 1.0.0
+{% endcodeblock %}</p>
 
-<p><code>
-echo 'PATH=/bin:/usr/bin' &gt; foo &amp;&amp; source foo
-</code></p>
+<p>Do this:</p>
 
-<p>This will get recover your commands so you can modify your .bashrc or .bash_profile with nano.  Remember to back up a working
-version before working on them next time :)</p>
+<p>{% codeblock lang:bash %}
+gem uninstall spree{,<em>api,</em>auth,<em>cmd,</em>core,<em>dash,</em>promo,_sample} -v {1.0.0, 1.0.0.rc2}
+{% endcodeblock %}</p>
+
+<p>This is a feature of bash shell &ndash; <a href="http://www.gnu.org/software/bash/manual/html_node/Brace-Expansion.html#Brace-Expansion">brace expansion</a>.</p>
 ]]></content>
   </entry>
   
