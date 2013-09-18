@@ -25,6 +25,7 @@ In my spare time, I like to [read][goodreads], taking [photos][flickr], and doin
 In general, I use **zlu** as my user name on networks and social channels when available.  
 
 - [Github](http://github.com/zlu) - The open source portion of my work.  Some old work done for [OpenVoice](http://github.com/openvoice).     
+- [Wiki](https://github.com/zlu/wiki/wiki/_pages) - I use github wiki because it is backed by git and supports browser based as well as offline markdown editing.
 - [LinkedIn](http://linkedin.com/u/zhaolu) - My business profile.  
 - Twitter - I tweet under [@zlu](http://twitter.com/zlu) and [@foryogi](http://twitter.com/foryogi)  
 - [SpeakerDeck](https://speakerdeck.com/zlu) - Some of the presentations I gave.  
