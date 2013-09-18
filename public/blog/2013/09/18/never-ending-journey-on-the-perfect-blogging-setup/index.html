@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>TDD by Jim Weirich - 吕钊</title>
+  <title>The Never Ending Journey On The Perfect Blogging Setup - 吕钊</title>
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="I invited Jim Weirich to give us a week-long training on TDD/BDD/Agile. Here&rsquo;re the raw notes. The way of Testivus Code driven from tests are &hellip;">
+  <meta name="description" content="Once in a while I search for a better blogging solution. Like many others I&rsquo;ve used Wordpress, Blogger, and Tumblr. I&rsquo;ve also used more &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.zlu.me/blog/2012/05/13/tdd-by-jim-weirich/">
+  <link rel="canonical" href="http://www.zlu.me/blog/2013/09/18/never-ending-journey-on-the-perfect-blogging-setup/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -90,7 +90,7 @@
   <header>
     
       
-        <h1 class="entry-title">TDD by Jim Weirich</h1>
+        <h1 class="entry-title">The Never Ending Journey on the Perfect Blogging Setup</h1>
       
     
     
@@ -107,7 +107,7 @@
   
 
 
-<time datetime="2012-05-13T18:28:00+08:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
+<time datetime="2013-09-18T09:58:00+08:00" pubdate data-updated="true">Sep 18<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -116,71 +116,44 @@
   </header>
 
 
-<div class="entry-content"><p>I invited Jim Weirich to give us a week-long training on TDD/BDD/Agile.  Here&rsquo;re the raw notes.</p>
+<div class="entry-content"><p>Once in a while I search for a better blogging solution.  Like many others I&rsquo;ve used Wordpress, Blogger, and Tumblr.  I&rsquo;ve also used more technical approaches such as self-hosted Wordpress.  I use <a href="http://octopress.org">Octopress</a> for this blog.  I have tempted to write my own blog software but some developers do.  Remy wrote his own <a href="http://www.whoisremy.com">blog</a> in RubyOnRails.</p>
 
-<p>The way of Testivus</p>
+<p>I recently needed to setup a blog for <a href="https://foryogi.com">ForYogi</a>.  I tried Tumblr, again, for a while.  I still don&rsquo;t like it.  I think it&rsquo;s better suited for a quick photo upload which some short description.  Instapaper&rsquo;s blog use it for obvious reason, but it&rsquo;s not visually appealing to me.  Knowing what Yahoo tends to do to their purchases, I decided to abandon it.  Wordpress is a bit too overwhelming for me, with its custom domain and many packages they sell.  I do like the plethora plugins and vibrant community Wordpress have though.  Blogger is the best choice for a hosted solution providing all I need for free.  I don&rsquo;t believe Blogger will be part of Google&rsquo;s killing spree as it is being used by many bloggers for advertising.  But its editing interface feels like MS Word in 1997.  Its post display is like a typical Google product, lacking the simplicity and elegancy of what Apple has.</p>
 
-<p>Code driven from tests are more composable</p>
+<p>I played around with <a href="http://roon.io">Roon</a> and liked their editing interface which supports Markdown.  They charge $12 annually for custom domain which you can get for free from many other services.  But that&rsquo;s fine, I&rsquo;m always up for supporting start-ups.  After making the first test post, I found something I don&rsquo;t quite like.  There&rsquo;s a rather large Roon icon on the posting, if you specify an image for it.  Roon seems to take the similar approach as Medium.  Focusing on content (hence no in-article commenting) is good.  But essentially you are writing <em><a href="http://www.marco.org/2013/08/05/be-your-own-platform">for free</a></em> for an online magazine.  The worst part though, is in their <a href="https://roon.io/terms">terms</a>:</p>
 
-<p>RSpec &ndash; Focus on Behavior</p>
+<blockquote><p>By submitting, posting or displaying content on or through the Service, you grant Nothing Magical Inc. a worldwide, non-exclusive, royalty-free license to use, adapt, publish, and display the content in any and all media or distribution methods (now known or later developed).</p></blockquote>
 
-<p>Avoid testing state</p>
+<p>To me, this is a <strong>deal-breaker</strong>.</p>
 
-<p>As a client, I don&rsquo;t care about internal member variables or implementations, I only care about the result.</p>
+<p><a href="http://scriptgr.am">Scriptgr.am</a>, which integrates with Dropbox and has more features than Roon, is better suited for me.</p>
 
-<p>Reveal our intentions</p>
+<p>Through the searching process, I figured out what I wanted:</p>
 
-<p>Focus on the design</p>
+<ul>
+<li>Support of markdown</li>
+<li>Clean interface</li>
+<li>True ownership of my content</li>
+<li>Free custom domain</li>
+<li>Least amount of coding</li>
+<li>Ease of deployment and minimum effort of maintenance</li>
+</ul>
 
-<p>Forget unit, describe context</p>
 
-<p>context is an alias to describe</p>
+<p><strong>My final setup is simple</strong></p>
 
-<p>describe/context is equivalent to creating a class of the object and behavior being described/contexted.
-  class DescribeRing . . end
-  class ContextWhenEmpty . . end
-Also class inherits from top-level class
-Why helper methods should be in various levels (nesting) of tests</p>
+<ul>
+<li>Jekyll, a blog-aware static site generator</li>
+<li>Mou, a desktop markdown editor</li>
+<li>Github Pages</li>
+</ul>
 
-<p>predicate &ndash; any method ends with ?</p>
 
-<p>be/equal => object identity</p>
+<p>Working with <a href="http://jekyllrb.com">Jekyll</a> is a pleasure.  I can use my editor of my choice to write postings and git to version control them.  Currently I&rsquo;m tinkering with <a href="mouapp.com">Mou</a>, a markdown editor.  I like its real-time preview pane and wishing emacs&#8217; markdown mode could offer it.  Github pages is fast and free.  I created a public repo &ndash; <a href="https://github.com/foryogi/foryogi.github.io">foryogi.github.io</a> and pushed to master.  Some online documentation mentions pushing to gh-pages branch, which did not work for me.  I also had to create a CNAME file by <code>echo "blog.foryogi.com" &gt; CNAME</code> at the root of project.  This is required for GH page redirect for subdomains to work.  Github has some problem with generating Jekyll-based pages and I haven&rsquo;t getting deployment emails at all.</p>
 
-<p>eql or == is structural equality</p>
+<p>I also added Twitter bootstrap and font-awesome.  I plan to add Google font to it next.  I also added support for Heroku, which requires Procfile, config.ru, and add a Heroku config var for the <a href="https://github.com/mattmanning/heroku-buildpack-ruby-jekyll">build pack</a>.  This <a href="https://github.com/mattmanning/heroku-buildpack-ruby-jekyll/pull/9">pull request</a> is useful to get around a build failure due to a change in Jekyll build command.</p>
 
-<p>let(:symbol) { } creates a named method identified by :symbol.  When referred, the block will be executed exactly once.</p>
-
-<p>Implicit subject</p>
-
-<p>its(:symbol) {  should be_true }
-specify is a &lsquo;kind of&rsquo; its</p>
-
-<p>Given/When/Then</p>
-
-<p>rspec differentiate mocks and stubs.  stubs doesn&rsquo;t have to be called while mocks have to be at least once.
-constraints are should_recieve, once, etc.
-actions are and_return</p>
-
-<p>stubs don&rsquo;t care how many times you call it or parameters passed in</p>
-
-<p>Flatten the cost of change in software engineering &ndash; how?
-  The key is to increase feedback</p>
-
-<p>YAGNI &ndash; You ain&rsquo;t going to need it #Agile &ndash; No speculative coding!</p>
-
-<p>What is simple?
-  Passes all the tests
-  Reveals the intention of the developer
-  No Duplication
-  Fewest huber of classes or methods</p>
-
-<p>Collective Ownership</p>
-
-<p>Sustainable Pace (40-hr work week in America)</p>
-
-<p>Initial Importance
-  Must/Should/Could/Won&rsquo;t
-  Do high value and high risk stories first</p>
+<p>I prefer GH page to Heroku because the initial load of Heroku page is always very slow.  GH doesn&rsquo;t have that problem.  But it is always good to have a backup.  If Github goes down, I can easily point CNAME to heroku.  If Amazon EC2 is down, then I&rsquo;m out of luck (I think gh and heroku both uses ec2, but maybe they also use rackspace).</p>
 </div>
 
 
@@ -203,14 +176,8 @@ actions are and_return</p>
   
 
 
-<time datetime="2012-05-13T18:28:00+08:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
+<time datetime="2013-09-18T09:58:00+08:00" pubdate data-updated="true">Sep 18<span>th</span>, 2013</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/agile/'>Agile</a>, <a class='category' href='/blog/categories/bdd/'>BDD</a>
-  
-</span>
 
 
     </p>
@@ -233,7 +200,7 @@ actions are and_return</p>
         type:'3',
         count:'1', /**是否显示分享数，1显示(可选)*/
         appkey:'', /**您申请的应用appkey,显示分享来源(可选)*/
-        title:"http://www.zlu.me/blog/2012/05/13/tdd-by-jim-weirich/",/**分享的文字内容(可选，默认为所在页面的title)*/
+        title:"http://www.zlu.me/blog/2013/09/18/never-ending-journey-on-the-perfect-blogging-setup/",/**分享的文字内容(可选，默认为所在页面的title)*/
         pic:'', /**分享图片的路径(可选)*/
         ralateUid:"2091903003", /**关联用户的UID，分享微博会@该用户(可选)*/
     	language:'zh_cn', /**设置语言，zh_cn|zh_tw(可选)*/
@@ -252,10 +219,8 @@ actions are and_return</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left articlenav" href="/blog/2012/02/28/running-wireshark-on-mountain-lion/" title="Previous Post: Running Wireshark on Mountain Lion">&laquo; Running Wireshark on Mountain Lion</a>
+        <a class="basic-alignment left articlenav" href="/blog/2013/06/03/system-calls-in-ruby/" title="Previous Post: System Calls In Ruby">&laquo; System Calls In Ruby</a>
       
-      
-        <a class="basic-alignment right articlenav" href="/blog/2012/05/18/my-current-emacs/" title="Next Post: My Current Emacs">My Current Emacs &raquo;</a>
       
     </p>
   </footer>
@@ -346,8 +311,8 @@ actions are and_return</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.zlu.me/blog/2012/05/13/tdd-by-jim-weirich/';
-        var disqus_url = 'http://www.zlu.me/blog/2012/05/13/tdd-by-jim-weirich/';
+        var disqus_identifier = 'http://www.zlu.me/blog/2013/09/18/never-ending-journey-on-the-perfect-blogging-setup/';
+        var disqus_url = 'http://www.zlu.me/blog/2013/09/18/never-ending-journey-on-the-perfect-blogging-setup/';
         var disqus_script = 'embed.js';
       
     (function () {

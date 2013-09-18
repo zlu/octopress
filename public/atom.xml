@@ -4,7 +4,7 @@
   <title><![CDATA[吕钊]]></title>
   <link href="http://www.zlu.me/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2013-09-18T09:25:19+08:00</updated>
+  <updated>2013-09-18T15:31:24+08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The Never Ending Journey On The Perfect Blogging Setup]]></title>
+    <link href="http://www.zlu.me/blog/2013/09/18/never-ending-journey-on-the-perfect-blogging-setup/"/>
+    <updated>2013-09-18T09:58:00+08:00</updated>
+    <id>http://www.zlu.me/blog/2013/09/18/never-ending-journey-on-the-perfect-blogging-setup</id>
+    <content type="html"><![CDATA[<p>Once in a while I search for a better blogging solution.  Like many others I&rsquo;ve used Wordpress, Blogger, and Tumblr.  I&rsquo;ve also used more technical approaches such as self-hosted Wordpress.  I use <a href="http://octopress.org">Octopress</a> for this blog.  I have tempted to write my own blog software but some developers do.  Remy wrote his own <a href="http://www.whoisremy.com">blog</a> in RubyOnRails.</p>
+
+<p>I recently needed to setup a blog for <a href="https://foryogi.com">ForYogi</a>.  I tried Tumblr, again, for a while.  I still don&rsquo;t like it.  I think it&rsquo;s better suited for a quick photo upload which some short description.  Instapaper&rsquo;s blog use it for obvious reason, but it&rsquo;s not visually appealing to me.  Knowing what Yahoo tends to do to their purchases, I decided to abandon it.  Wordpress is a bit too overwhelming for me, with its custom domain and many packages they sell.  I do like the plethora plugins and vibrant community Wordpress have though.  Blogger is the best choice for a hosted solution providing all I need for free.  I don&rsquo;t believe Blogger will be part of Google&rsquo;s killing spree as it is being used by many bloggers for advertising.  But its editing interface feels like MS Word in 1997.  Its post display is like a typical Google product, lacking the simplicity and elegancy of what Apple has.</p>
+
+<p>I played around with <a href="http://roon.io">Roon</a> and liked their editing interface which supports Markdown.  They charge $12 annually for custom domain which you can get for free from many other services.  But that&rsquo;s fine, I&rsquo;m always up for supporting start-ups.  After making the first test post, I found something I don&rsquo;t quite like.  There&rsquo;s a rather large Roon icon on the posting, if you specify an image for it.  Roon seems to take the similar approach as Medium.  Focusing on content (hence no in-article commenting) is good.  But essentially you are writing <em><a href="http://www.marco.org/2013/08/05/be-your-own-platform">for free</a></em> for an online magazine.  The worst part though, is in their <a href="https://roon.io/terms">terms</a>:</p>
+
+<blockquote><p>By submitting, posting or displaying content on or through the Service, you grant Nothing Magical Inc. a worldwide, non-exclusive, royalty-free license to use, adapt, publish, and display the content in any and all media or distribution methods (now known or later developed).</p></blockquote>
+
+<p>To me, this is a <strong>deal-breaker</strong>.</p>
+
+<p><a href="http://scriptgr.am">Scriptgr.am</a>, which integrates with Dropbox and has more features than Roon, is better suited for me.</p>
+
+<p>Through the searching process, I figured out what I wanted:</p>
+
+<ul>
+<li>Support of markdown</li>
+<li>Clean interface</li>
+<li>True ownership of my content</li>
+<li>Free custom domain</li>
+<li>Least amount of coding</li>
+<li>Ease of deployment and minimum effort of maintenance</li>
+</ul>
+
+
+<p><strong>My final setup is simple</strong></p>
+
+<ul>
+<li>Jekyll, a blog-aware static site generator</li>
+<li>Mou, a desktop markdown editor</li>
+<li>Github Pages</li>
+</ul>
+
+
+<p>Working with <a href="http://jekyllrb.com">Jekyll</a> is a pleasure.  I can use my editor of my choice to write postings and git to version control them.  Currently I&rsquo;m tinkering with <a href="mouapp.com">Mou</a>, a markdown editor.  I like its real-time preview pane and wishing emacs&#8217; markdown mode could offer it.  Github pages is fast and free.  I created a public repo &ndash; <a href="https://github.com/foryogi/foryogi.github.io">foryogi.github.io</a> and pushed to master.  Some online documentation mentions pushing to gh-pages branch, which did not work for me.  I also had to create a CNAME file by <code>echo "blog.foryogi.com" &gt; CNAME</code> at the root of project.  This is required for GH page redirect for subdomains to work.  Github has some problem with generating Jekyll-based pages and I haven&rsquo;t getting deployment emails at all.</p>
+
+<p>I also added Twitter bootstrap and font-awesome.  I plan to add Google font to it next.  I also added support for Heroku, which requires Procfile, config.ru, and add a Heroku config var for the <a href="https://github.com/mattmanning/heroku-buildpack-ruby-jekyll">build pack</a>.  This <a href="https://github.com/mattmanning/heroku-buildpack-ruby-jekyll/pull/9">pull request</a> is useful to get around a build failure due to a change in Jekyll build command.</p>
+
+<p>I prefer GH page to Heroku because the initial load of Heroku page is always very slow.  GH doesn&rsquo;t have that problem.  But it is always good to have a backup.  If Github goes down, I can easily point CNAME to heroku.  If Amazon EC2 is down, then I&rsquo;m out of luck (I think gh and heroku both uses ec2, but maybe they also use rackspace).</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[System Calls In Ruby]]></title>
@@ -1242,39 +1288,6 @@ Provided configuration options:
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>ln -s /usr/bin/gcc /usr/bin/gcc-4.2</span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[RubyMine and PivotalTracker Integration]]></title>
-    <link href="http://www.zlu.me/blog/2012/02/14/rubymine-and-pivotaltracker-integration/"/>
-    <updated>2012-02-14T20:32:00+08:00</updated>
-    <id>http://www.zlu.me/blog/2012/02/14/rubymine-and-pivotaltracker-integration</id>
-    <content type="html"><![CDATA[<p><strong>Task Server</strong> is a lesser known feature in RubyMine.  You can enable PivotalTracker (PT) integration by adding
-PT project as a Task Server.</p>
-
-<p>Press cmd + , to open Preferences.  Type task to see this panel:</p>
-
-<p><img src="http://f.cl.ly/items/0q0C3G471G1K3R2D0r1V/Screen%20Shot%202012-02-14%20at%208.56.43%20PM.png"></p>
-
-<p>Add PivotalTracker project by supplying project ID and api token.</p>
-
-<p>Now every story can be easily turned into a RubyMine changelist.
-Press cmd + shift + a, and type task.  Select open task.  Type part of the story to see a list of matched tracker stories.</p>
-
-<p><img src="http://f.cl.ly/items/2O1I0v3M403D2W1N2P0X/Screen%20Shot%202012-02-14%20at%208.59.44%20PM.png"></p>
-
-<p>Select the desired story to work on and check start story.  Now every change will be in this change list and RubyMine will
-autostart the story.</p>
-
-<p>Let&rsquo;s say you TDD&#8217;ed and finished the story.  Press cmd + k to open changelist view.</p>
-
-<p><img src="http://f.cl.ly/items/0w1K2E1E3S3S2m301W1Q/Screen%20Shot%202012-02-14%20at%209.03.29%20PM.png"></p>
-
-<p>You will see that commit message has been filled with story text.  Commit the change and RubyMine will automatically
-finish the story.  How cool is that?  Now try to do that in Emacs or VI, I dare you :P</p>
-
-<p>P.S. I like Emacs.</p>
 ]]></content>
   </entry>
   
