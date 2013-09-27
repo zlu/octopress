@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Install Native Ruby Gem in Mountain Lion Preview - 吕钊</title>
+  <title>Category: cms - 吕钊</title>
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="In Preview of OS X Mountain Lion, XCode has been distributed as a .app package verses the traditional installer.
-Also the Commandline Tools are not &hellip;">
+  <meta name="description" content="Category: cms">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ Also the Commandline Tools are not &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.zlu.me/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview/">
+  <link rel="canonical" href="http://www.zlu.meblog/categories/cms/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -86,177 +85,36 @@ Also the Commandline Tools are not &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      
-        <h1 class="entry-title">Install Native Ruby Gem in Mountain Lion Preview</h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-21T13:59:00+08:00" pubdate data-updated="true">Feb 21<span>st</span>, 2012</time>
-        
-         | <a href="#disqus_thread">Comments</a>
-        
-      </p>
+    <h1 class="entry-title">Category: Cms</h1>
     
   </header>
-
-
-<div class="entry-content"><p>In Preview of OS X Mountain Lion, XCode has been distributed as a .app package verses the traditional installer.
-Also the Commandline Tools are not installed by default.  Commandline Tools contains cc/gcc that you will need.</p>
-
-<p>After download the preview of XCode 4.4, drop it to the Application directory.</p>
-
-<p>Open XCode and cmd + , to open Preferences panel where you can install Commandline Tools:</p>
-
-<p><img src="https://img.skitch.com/20120221-r2cidbjd92nh9tmswq19hj6rdc.jpg"></p>
-
-<p>Now in shell you should be able to <code>locate cc</code> and <code>locate gcc</code></p>
-
-<p>Now if you try to <code>gem install hpricot</code> or any gem that requires native extension &copy;, you may encounter problems
-looks like this:</p>
-
-<pre>
-
-checking for main() in -lc... *** extconf.rb failed ***
-Could not create Makefile due to some reason, probably lack of
-necessary libraries and/or headers.  Check the mkmf.log file for more
-details.  You may need configuration options.
-
-Provided configuration options:
-        --with-opt-dir
-        --without-opt-dir
-        --with-opt-include
-        --without-opt-include=${opt-dir}/include
-        --with-opt-lib
-        --without-opt-lib=${opt-dir}/lib
-        --with-make-prog
-        --without-make-prog
-        --srcdir=.
-        --curdir
-        --ruby=C:/ruby/bin/ruby
-        --with-hpricot_scan-dir
-        --without-hpricot_scan-dir
-        --with-hpricot_scan-include
-        --without-hpricot_scan-include=${hpricot_scan-dir}/include
-        --with-hpricot_scan-lib
-        --without-hpricot_scan-lib=${hpricot_scan-dir}/lib
-        --with-clib
-        --without-clib
-
-</pre>
-
-
-<p>If you cat the mkmf.log, you may see something like this:</p>
-
-<p>&ldquo;gcc-4.2 -o conftest &hellip;.&rdquo;</p>
-
-<p>So the fix is not to add configuration options but to simply create sym link of gcc-4.2:</p>
-
-<figure class='code'><figcaption><span>shell </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ln -s /usr/bin/gcc /usr/bin/gcc-4.2</span></code></pre></td></tr></table></div></figure>
-
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Zhao Lu</span></span>
-
-      
-
-
-
-
-
+  <div id="blog-archives" class="category">
 
 
 
   
+  <h2>2013</h2>
 
-
-<time datetime="2012-02-21T13:59:00+08:00" pubdate data-updated="true">Feb 21<span>st</span>, 2012</time>
-      
-
-<span class="categories">
+<article>
   
-    <a class='category' href='/blog/categories/gem/'>gem</a>, <a class='category' href='/blog/categories/mountain-lion/'>mountain lion</a>, <a class='category' href='/blog/categories/os-x/'>os x</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
-  
-</span>
+<h1><a href="/blog/2013/09/27/quicksurveyofrailscms/">Quick Survey Of Rails CMS</a></h1>
+<time datetime="2013-09-27T21:37:00+08:00" pubdate><span class='month'>Sep</span> <span class='day'>27</span> <span class='year'>2013</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/cms/'>cms</a>, <a class='category' href='/blog/categories/rails/'>rails</a></span>
+</footer>
 
 
-    </p>
-    
-      <div class="sharing">
-    
-    
-    <div class="g-plusone" data-size="small"></div>
-    
-    
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-    
-    
-    <script type="text/javascript" charset="utf-8">
-    (function(){
-      var _w = 72 , _h = 16;
-      var text = document.getElementsByClassName("entry-title")[0]
-      var param = {
-        url:location.href,
-        type:'3',
-        count:'1', /**是否显示分享数，1显示(可选)*/
-        appkey:'', /**您申请的应用appkey,显示分享来源(可选)*/
-        title:"http://www.zlu.me/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview/",/**分享的文字内容(可选，默认为所在页面的title)*/
-        pic:'', /**分享图片的路径(可选)*/
-        ralateUid:"2091903003", /**关联用户的UID，分享微博会@该用户(可选)*/
-    	language:'zh_cn', /**设置语言，zh_cn|zh_tw(可选)*/
-        rnd:new Date().valueOf()
-      }
-      var temp = [];
-      for( var p in param ){
-        temp.push(p + '=' + encodeURIComponent( param[p] || '' ) )
-      }
-      document.write('<iframe allowTransparency="true" frameborder="0" scrolling="no" src="http://hits.sinajs.cn/A1/weiboshare.html?' + temp.join('&') + '" width="'+ _w+'" height="'+_h+'"></iframe>')
-    })()
-    </script>
-    
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left articlenav" href="/blog/2012/02/14/rubymine-and-pivotaltracker-integration/" title="Previous Post: RubyMine and PivotalTracker Integration">&laquo; RubyMine and PivotalTracker Integration</a>
-      
-      
-        <a class="basic-alignment right articlenav" href="/blog/2012/02/28/running-wireshark-on-mountain-lion/" title="Next Post: Running Wireshark on Mountain Lion">Running Wireshark on Mountain Lion &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-  </section>
+
+  
+</article>
 
 </div>
 
@@ -336,10 +194,7 @@ Provided configuration options:
       var disqus_shortname = 'zlu';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.zlu.me/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview/';
-        var disqus_url = 'http://www.zlu.me/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

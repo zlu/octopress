@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Install Native Ruby Gem in Mountain Lion Preview - 吕钊</title>
+  <title>Quick Survey Of Rails CMS - 吕钊</title>
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="In Preview of OS X Mountain Lion, XCode has been distributed as a .app package verses the traditional installer.
-Also the Commandline Tools are not &hellip;">
+  <meta name="description" content="Selecting a Content Management System (CMS) is never an easy task. I have recently spent a good amount of time tinkering with different &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ Also the Commandline Tools are not &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.zlu.me/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview/">
+  <link rel="canonical" href="http://www.zlu.me/blog/2013/09/27/quicksurveyofrailscms/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -91,7 +90,7 @@ Also the Commandline Tools are not &hellip;">
   <header>
     
       
-        <h1 class="entry-title">Install Native Ruby Gem in Mountain Lion Preview</h1>
+        <h1 class="entry-title">Quick Survey of Rails CMS</h1>
       
     
     
@@ -108,7 +107,7 @@ Also the Commandline Tools are not &hellip;">
   
 
 
-<time datetime="2012-02-21T13:59:00+08:00" pubdate data-updated="true">Feb 21<span>st</span>, 2012</time>
+<time datetime="2013-09-27T21:37:00+08:00" pubdate data-updated="true">Sep 27<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -117,61 +116,37 @@ Also the Commandline Tools are not &hellip;">
   </header>
 
 
-<div class="entry-content"><p>In Preview of OS X Mountain Lion, XCode has been distributed as a .app package verses the traditional installer.
-Also the Commandline Tools are not installed by default.  Commandline Tools contains cc/gcc that you will need.</p>
+<div class="entry-content"><p>Selecting a Content Management System (CMS) is never an easy task.  I have recently spent a good amount of time tinkering with different implementation and would like to share my learnings here.</p>
 
-<p>After download the preview of XCode 4.4, drop it to the Application directory.</p>
+<p>There are many solutions on the market so you should solidify your requirements.  Here are mine:</p>
 
-<p>Open XCode and cmd + , to open Preferences panel where you can install Commandline Tools:</p>
+<p>This CMS will be used for <a href="https://foryogi.com">ForYogi</a></p>
 
-<p><img src="https://img.skitch.com/20120221-r2cidbjd92nh9tmswq19hj6rdc.jpg"></p>
-
-<p>Now in shell you should be able to <code>locate cc</code> and <code>locate gcc</code></p>
-
-<p>Now if you try to <code>gem install hpricot</code> or any gem that requires native extension &copy;, you may encounter problems
-looks like this:</p>
-
-<pre>
-
-checking for main() in -lc... *** extconf.rb failed ***
-Could not create Makefile due to some reason, probably lack of
-necessary libraries and/or headers.  Check the mkmf.log file for more
-details.  You may need configuration options.
-
-Provided configuration options:
-        --with-opt-dir
-        --without-opt-dir
-        --with-opt-include
-        --without-opt-include=${opt-dir}/include
-        --with-opt-lib
-        --without-opt-lib=${opt-dir}/lib
-        --with-make-prog
-        --without-make-prog
-        --srcdir=.
-        --curdir
-        --ruby=C:/ruby/bin/ruby
-        --with-hpricot_scan-dir
-        --without-hpricot_scan-dir
-        --with-hpricot_scan-include
-        --without-hpricot_scan-include=${hpricot_scan-dir}/include
-        --with-hpricot_scan-lib
-        --without-hpricot_scan-lib=${hpricot_scan-dir}/lib
-        --with-clib
-        --without-clib
-
-</pre>
+<ul>
+<li>Tutorial &ndash; I need to add tutorials on how to use the site for teachers/studios/users.</li>
+<li>Knowledge Base &ndash; I need to be able to add articles for yoga-related topics.  It can be as simple as definition of  <em>yogi</em> or Sanskrit terminologies such as <em>asana</em>.</li>
+<li>Help &ndash; help content has to be accessed by the application and displayed in various parts of the app.</li>
+<li>FAQ.</li>
+<li>Searching capability.</li>
+<li>Customizable layout.</li>
+<li>Drop-in support for existing Rails project.</li>
+<li>Inexpensive &ndash; Some hosted solution can get pricey depending on storage and other factors.</li>
+</ul>
 
 
-<p>If you cat the mkmf.log, you may see something like this:</p>
+<p> ####General Impression</p>
 
-<p>&ldquo;gcc-4.2 -o conftest &hellip;.&rdquo;</p>
+<p> CMS is often used by developers to create customizable mostly static websites for clients.</p>
 
-<p>So the fix is not to add configuration options but to simply create sym link of gcc-4.2:</p>
+<p><strong><a href="">RefineryCMS</a></strong></p>
 
-<figure class='code'><figcaption><span>shell </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ln -s /usr/bin/gcc /usr/bin/gcc-4.2</span></code></pre></td></tr></table></div></figure>
+<p><strong><a href="">LocomotivesCMS</a></strong></p>
 
+<p><strong><a href="">AlchemyCMS</a></strong></p>
+
+<p><strong><a href="">BrowserCMS</a></strong></p>
+
+<p><strong><a href="">ComfortableMexicanSofa</a></strong></p>
 </div>
 
 
@@ -194,12 +169,12 @@ Provided configuration options:
   
 
 
-<time datetime="2012-02-21T13:59:00+08:00" pubdate data-updated="true">Feb 21<span>st</span>, 2012</time>
+<time datetime="2013-09-27T21:37:00+08:00" pubdate data-updated="true">Sep 27<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/gem/'>gem</a>, <a class='category' href='/blog/categories/mountain-lion/'>mountain lion</a>, <a class='category' href='/blog/categories/os-x/'>os x</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+    <a class='category' href='/blog/categories/cms/'>cms</a>, <a class='category' href='/blog/categories/rails/'>rails</a>
   
 </span>
 
@@ -224,7 +199,7 @@ Provided configuration options:
         type:'3',
         count:'1', /**是否显示分享数，1显示(可选)*/
         appkey:'', /**您申请的应用appkey,显示分享来源(可选)*/
-        title:"http://www.zlu.me/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview/",/**分享的文字内容(可选，默认为所在页面的title)*/
+        title:"http://www.zlu.me/blog/2013/09/27/quicksurveyofrailscms/",/**分享的文字内容(可选，默认为所在页面的title)*/
         pic:'', /**分享图片的路径(可选)*/
         ralateUid:"2091903003", /**关联用户的UID，分享微博会@该用户(可选)*/
     	language:'zh_cn', /**设置语言，zh_cn|zh_tw(可选)*/
@@ -243,10 +218,8 @@ Provided configuration options:
     
     <p class="meta">
       
-        <a class="basic-alignment left articlenav" href="/blog/2012/02/14/rubymine-and-pivotaltracker-integration/" title="Previous Post: RubyMine and PivotalTracker Integration">&laquo; RubyMine and PivotalTracker Integration</a>
+        <a class="basic-alignment left articlenav" href="/blog/2013/09/18/never-ending-journey-on-the-perfect-blogging-setup/" title="Previous Post: The Never Ending Journey On The Perfect Blogging Setup">&laquo; The Never Ending Journey On The Perfect Blogging Setup</a>
       
-      
-        <a class="basic-alignment right articlenav" href="/blog/2012/02/28/running-wireshark-on-mountain-lion/" title="Next Post: Running Wireshark on Mountain Lion">Running Wireshark on Mountain Lion &raquo;</a>
       
     </p>
   </footer>
@@ -337,8 +310,8 @@ Provided configuration options:
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.zlu.me/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview/';
-        var disqus_url = 'http://www.zlu.me/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview/';
+        var disqus_identifier = 'http://www.zlu.me/blog/2013/09/27/quicksurveyofrailscms/';
+        var disqus_url = 'http://www.zlu.me/blog/2013/09/27/quicksurveyofrailscms/';
         var disqus_script = 'embed.js';
       
     (function () {

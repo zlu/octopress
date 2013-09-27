@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: cms | 吕钊]]></title>
+  <link href="http://www.zlu.me/blog/categories/cms/atom.xml" rel="self"/>
+  <link href="http://www.zlu.me/"/>
+  <updated>2013-09-28T00:38:30+08:00</updated>
+  <id>http://www.zlu.me/</id>
+  <author>
+    <name><![CDATA[Zhao Lu]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Quick Survey Of Rails CMS]]></title>
+    <link href="http://www.zlu.me/blog/2013/09/27/quicksurveyofrailscms/"/>
+    <updated>2013-09-27T21:37:00+08:00</updated>
+    <id>http://www.zlu.me/blog/2013/09/27/quicksurveyofrailscms</id>
+    <content type="html"><![CDATA[<p>Selecting a Content Management System (CMS) is never an easy task.  I have recently spent a good amount of time tinkering with different implementation and would like to share my learnings here.</p>
+
+<p>There are many solutions on the market so you should solidify your requirements.  Here are mine:</p>
+
+<p>This CMS will be used for <a href="https://foryogi.com">ForYogi</a></p>
+
+<ul>
+<li>Tutorial &ndash; I need to add tutorials on how to use the site for teachers/studios/users.</li>
+<li>Knowledge Base &ndash; I need to be able to add articles for yoga-related topics.  It can be as simple as definition of  <em>yogi</em> or Sanskrit terminologies such as <em>asana</em>.</li>
+<li>Help &ndash; help content has to be accessed by the application and displayed in various parts of the app.</li>
+<li>FAQ.</li>
+<li>Searching capability.</li>
+<li>Customizable layout.</li>
+<li>Drop-in support for existing Rails project.</li>
+<li>Inexpensive &ndash; Some hosted solution can get pricey depending on storage and other factors.</li>
+</ul>
+
+
+<p> ####General Impression</p>
+
+<p> CMS is often used by developers to create customizable mostly static websites for clients.</p>
+
+<p><strong><a href="">RefineryCMS</a></strong></p>
+
+<p><strong><a href="">LocomotivesCMS</a></strong></p>
+
+<p><strong><a href="">AlchemyCMS</a></strong></p>
+
+<p><strong><a href="">BrowserCMS</a></strong></p>
+
+<p><strong><a href="">ComfortableMexicanSofa</a></strong></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -9,8 +9,8 @@
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="There are definitely some gotchas when switching from ActiveRecord to MongoDB (with Mongoid for example). One of them
-is how the IN operator in SQL &hellip;">
+  <meta name="description" content="Rails 4.0 development has started a while back. It was merged into Rails&#8217; master branch on Github in 2011.
+As the writing of this blog entry, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -87,6 +87,138 @@ is how the IN operator in SQL &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2012/10/29/install-and-create-rails-4-dot-0-app/">Install and Create Rails 4.0 App</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-29T22:46:00+08:00" pubdate data-updated="true">Oct 29<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/10/29/install-and-create-rails-4-dot-0-app/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Rails 4.0 development has started a while back.  It was merged into Rails&#8217; master branch on Github in 2011.
+As the writing of this blog entry, the stable version of Rails is 3.2.8.  Release candidate is at 3.2.9.rc1.
+Because 4.0 is not yet official available, you have to jump through hoops to get a Rails 4 application up and running.</p>
+
+<h2>Install Rails 4.0 gem</h2>
+
+<p>Create this Gemfile:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>source 'http://rubygems.org'
+</span><span class='line'>
+</span><span class='line'>gem 'rails', :git =&gt; 'git://github.com/rails/rails.git'
+</span><span class='line'>gem 'uglifier', '&gt;= 1.0.30'
+</span><span class='line'>gem 'activerecord-deprecated_finders', :git =&gt; 'git://github.com/rails/activerecord-deprecated_finders.git'
+</span><span class='line'>gem 'journey', :git =&gt; 'git://github.com/rails/journey.git'</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>This Gemfile specifies the master branch of Rails, which contains 4.0 beta.</li>
+<li>Gem activerecord-deprecated_finders is a dependency.</li>
+<li>Gem journey, the Rails router, is also required.</li>
+</ul>
+
+
+<p>In the same directory of the Gemfile, issue <code>bundle install</code>.  This should install Rails 4.0.0.beta.
+But running <code>gem list rails</code> won&rsquo;t show 4.0 being installed.  So do this instead:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>zlu@zlu-mba:~/projects/test$ bundle show rails
+</span><span class='line'>/Users/zlu/.rvm/gems/ruby-1.9.3-p0/bundler/gems/rails-4e23c0ef341c</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The Rails executable is at:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>`bundle show rails`/railties/bin/rails</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>`bundle show rails`/railties/bin/rails -v should show: Rails 4.0.0.beta</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now you can use this version of rails to generate an app named foo.</p>
+
+<h2>Create Rails 4.0 app</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>`bundle show rails`/railties/bin/rails new foo</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This command  creates a typical rails app called foo and output an error about not being able to find Rails 4 gem, which
+should not be a surprise.</p>
+
+<p>You will edit foo/Gemfile to make <code>bundle install</code> work.</p>
+
+<p>Add the two gems Rails depends on:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem 'journey', github: 'rails/journey'
+</span><span class='line'>gem 'activerecord-deprecated_finders', github: 'rails/activerecord-deprecated_finders'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Change the source definition for the following gems:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem 'rails', '4.0.0.beta'
+</span><span class='line'>gem 'sass-rails',   '~&gt; 4.0.0.beta'
+</span><span class='line'>gem 'coffee-rails', '~&gt; 4.0.0.beta'
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem 'rails', github: 'rails/rails'
+</span><span class='line'>gem 'sass-rails', github: 'rails/sass-rails'
+</span><span class='line'>gem 'coffee-rails', github: 'rails/coffee-rails'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now you should be <code>bundle install</code>, sit back and enjoy your new Rails 4.0 app.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -829,100 +961,6 @@ actions are and_return</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview/">Install Native Ruby Gem in Mountain Lion Preview</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-21T13:59:00+08:00" pubdate data-updated="true">Feb 21<span>st</span>, 2012</time>
-        
-         | <a href="/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In Preview of OS X Mountain Lion, XCode has been distributed as a .app package verses the traditional installer.
-Also the Commandline Tools are not installed by default.  Commandline Tools contains cc/gcc that you will need.</p>
-
-<p>After download the preview of XCode 4.4, drop it to the Application directory.</p>
-
-<p>Open XCode and cmd + , to open Preferences panel where you can install Commandline Tools:</p>
-
-<p><img src="https://img.skitch.com/20120221-r2cidbjd92nh9tmswq19hj6rdc.jpg"></p>
-
-<p>Now in shell you should be able to <code>locate cc</code> and <code>locate gcc</code></p>
-
-<p>Now if you try to <code>gem install hpricot</code> or any gem that requires native extension &copy;, you may encounter problems
-looks like this:</p>
-
-<pre>
-
-checking for main() in -lc... *** extconf.rb failed ***
-Could not create Makefile due to some reason, probably lack of
-necessary libraries and/or headers.  Check the mkmf.log file for more
-details.  You may need configuration options.
-
-Provided configuration options:
-        --with-opt-dir
-        --without-opt-dir
-        --with-opt-include
-        --without-opt-include=${opt-dir}/include
-        --with-opt-lib
-        --without-opt-lib=${opt-dir}/lib
-        --with-make-prog
-        --without-make-prog
-        --srcdir=.
-        --curdir
-        --ruby=C:/ruby/bin/ruby
-        --with-hpricot_scan-dir
-        --without-hpricot_scan-dir
-        --with-hpricot_scan-include
-        --without-hpricot_scan-include=${hpricot_scan-dir}/include
-        --with-hpricot_scan-lib
-        --without-hpricot_scan-lib=${hpricot_scan-dir}/lib
-        --with-clib
-        --without-clib
-
-</pre>
-
-
-<p>If you cat the mkmf.log, you may see something like this:</p>
-
-<p>&ldquo;gcc-4.2 -o conftest &hellip;.&rdquo;</p>
-
-<p>So the fix is not to add configuration options but to simply create sym link of gcc-4.2:</p>
-
-<figure class='code'><figcaption><span>shell </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ln -s /usr/bin/gcc /usr/bin/gcc-4.2</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -945,6 +983,10 @@ Provided configuration options:
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/09/27/quicksurveyofrailscms/">Quick Survey Of Rails CMS</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/09/18/never-ending-journey-on-the-perfect-blogging-setup/">The Never Ending Journey On The Perfect Blogging Setup</a>
       </li>
     
@@ -958,10 +1000,6 @@ Provided configuration options:
     
       <li class="post">
         <a href="/blog/2013/05/27/lost-shell-commands/">Lost Shell Commands?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/02/04/postgres-gotchas/">Postgres Gotchas</a>
       </li>
     
   </ul>

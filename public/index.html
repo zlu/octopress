@@ -9,7 +9,7 @@
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="Once in a while I search for a better blogging solution. Like many others I&rsquo;ve used Wordpress, Blogger, and Tumblr. I&rsquo;ve also used more &hellip;">
+  <meta name="description" content="Selecting a Content Management System (CMS) is never an easy task. I have recently spent a good amount of time tinkering with different &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,6 +86,76 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2013/09/27/quicksurveyofrailscms/">Quick Survey of Rails CMS</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-27T21:37:00+08:00" pubdate data-updated="true">Sep 27<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/27/quicksurveyofrailscms/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Selecting a Content Management System (CMS) is never an easy task.  I have recently spent a good amount of time tinkering with different implementation and would like to share my learnings here.</p>
+
+<p>There are many solutions on the market so you should solidify your requirements.  Here are mine:</p>
+
+<p>This CMS will be used for <a href="https://foryogi.com">ForYogi</a></p>
+
+<ul>
+<li>Tutorial &ndash; I need to add tutorials on how to use the site for teachers/studios/users.</li>
+<li>Knowledge Base &ndash; I need to be able to add articles for yoga-related topics.  It can be as simple as definition of  <em>yogi</em> or Sanskrit terminologies such as <em>asana</em>.</li>
+<li>Help &ndash; help content has to be accessed by the application and displayed in various parts of the app.</li>
+<li>FAQ.</li>
+<li>Searching capability.</li>
+<li>Customizable layout.</li>
+<li>Drop-in support for existing Rails project.</li>
+<li>Inexpensive &ndash; Some hosted solution can get pricey depending on storage and other factors.</li>
+</ul>
+
+
+<p> ####General Impression</p>
+
+<p> CMS is often used by developers to create customizable mostly static websites for clients.</p>
+
+<p><strong><a href="">RefineryCMS</a></strong></p>
+
+<p><strong><a href="">LocomotivesCMS</a></strong></p>
+
+<p><strong><a href="">AlchemyCMS</a></strong></p>
+
+<p><strong><a href="">BrowserCMS</a></strong></p>
+
+<p><strong><a href="">ComfortableMexicanSofa</a></strong></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1018,138 +1088,6 @@ times the entry has been shared.</li>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2012/10/29/install-and-create-rails-4-dot-0-app/">Install and Create Rails 4.0 App</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-10-29T22:46:00+08:00" pubdate data-updated="true">Oct 29<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/10/29/install-and-create-rails-4-dot-0-app/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Rails 4.0 development has started a while back.  It was merged into Rails&#8217; master branch on Github in 2011.
-As the writing of this blog entry, the stable version of Rails is 3.2.8.  Release candidate is at 3.2.9.rc1.
-Because 4.0 is not yet official available, you have to jump through hoops to get a Rails 4 application up and running.</p>
-
-<h2>Install Rails 4.0 gem</h2>
-
-<p>Create this Gemfile:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>source 'http://rubygems.org'
-</span><span class='line'>
-</span><span class='line'>gem 'rails', :git =&gt; 'git://github.com/rails/rails.git'
-</span><span class='line'>gem 'uglifier', '&gt;= 1.0.30'
-</span><span class='line'>gem 'activerecord-deprecated_finders', :git =&gt; 'git://github.com/rails/activerecord-deprecated_finders.git'
-</span><span class='line'>gem 'journey', :git =&gt; 'git://github.com/rails/journey.git'</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>This Gemfile specifies the master branch of Rails, which contains 4.0 beta.</li>
-<li>Gem activerecord-deprecated_finders is a dependency.</li>
-<li>Gem journey, the Rails router, is also required.</li>
-</ul>
-
-
-<p>In the same directory of the Gemfile, issue <code>bundle install</code>.  This should install Rails 4.0.0.beta.
-But running <code>gem list rails</code> won&rsquo;t show 4.0 being installed.  So do this instead:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>zlu@zlu-mba:~/projects/test$ bundle show rails
-</span><span class='line'>/Users/zlu/.rvm/gems/ruby-1.9.3-p0/bundler/gems/rails-4e23c0ef341c</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The Rails executable is at:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>`bundle show rails`/railties/bin/rails</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>`bundle show rails`/railties/bin/rails -v should show: Rails 4.0.0.beta</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now you can use this version of rails to generate an app named foo.</p>
-
-<h2>Create Rails 4.0 app</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>`bundle show rails`/railties/bin/rails new foo</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This command  creates a typical rails app called foo and output an error about not being able to find Rails 4 gem, which
-should not be a surprise.</p>
-
-<p>You will edit foo/Gemfile to make <code>bundle install</code> work.</p>
-
-<p>Add the two gems Rails depends on:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gem 'journey', github: 'rails/journey'
-</span><span class='line'>gem 'activerecord-deprecated_finders', github: 'rails/activerecord-deprecated_finders'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Change the source definition for the following gems:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gem 'rails', '4.0.0.beta'
-</span><span class='line'>gem 'sass-rails',   '~&gt; 4.0.0.beta'
-</span><span class='line'>gem 'coffee-rails', '~&gt; 4.0.0.beta'
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>To</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gem 'rails', github: 'rails/rails'
-</span><span class='line'>gem 'sass-rails', github: 'rails/sass-rails'
-</span><span class='line'>gem 'coffee-rails', github: 'rails/coffee-rails'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now you should be <code>bundle install</code>, sit back and enjoy your new Rails 4.0 app.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1170,6 +1108,10 @@ should not be a surprise.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/09/27/quicksurveyofrailscms/">Quick Survey Of Rails CMS</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/09/18/never-ending-journey-on-the-perfect-blogging-setup/">The Never Ending Journey On The Perfect Blogging Setup</a>
       </li>
     
@@ -1183,10 +1125,6 @@ should not be a surprise.</p>
     
       <li class="post">
         <a href="/blog/2013/05/27/lost-shell-commands/">Lost Shell Commands?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/02/04/postgres-gotchas/">Postgres Gotchas</a>
       </li>
     
   </ul>

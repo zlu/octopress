@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tdd | 吕钊]]></title>
   <link href="http://www.zlu.me/blog/categories/tdd/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2013-09-18T22:58:05+08:00</updated>
+  <updated>2013-09-28T00:38:38+08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -20,11 +20,10 @@
     <id>http://www.zlu.me/blog/2012/02/12/rspec-arbitrary-handling-of-arguments</id>
     <content type="html"><![CDATA[<p>RSpec lets you test the number, type, and order of arguments.  For example,</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Foo</span><span class="o">.</span><span class="n">should_receive</span><span class="p">(</span><span class="ss">:bar</span><span class="p">)</span><span class="o">.</span><span class="n">with</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">kind_of</span><span class="p">(</span><span class="no">Hash</span><span class="p">),</span> <span class="n">anything</span><span class="p">())</span>
-</span><span class='line'><span class="no">Foo</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">{</span><span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">a</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;</span> <span class="o">=&gt;</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">b</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;},</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">b</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>{% codeblock lang:ruby %}
+Foo.should_receive(:bar).with(1, kind_of(Hash), anything())
+Foo.bar(1, {&lsquo;a&rsquo; => &lsquo;b&rsquo;}, &amp;b)
+{% endcodeblock %}
 Pass!</p>
 
 <p>This tests that class method <strong>bar</strong> will be called against class <strong>Foo</strong> with 3 arguments.  The first argument is integer 1,
@@ -34,17 +33,13 @@ the second argument is an instance of Hash, the third argument can be anything.<
 
 <p>For example, in order to test a <a href="https://github.com/ryanb/private_pub">private_pub</a> method <strong>publish_to</strong>:</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">PrivatePub</span><span class="o">.</span><span class="n">should_receive</span><span class="p">(</span><span class="ss">:publish_to</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">channel</span><span class="p">,</span> <span class="n">data</span><span class="o">|</span>
-</span><span class='line'>  <span class="n">channel</span><span class="o">.</span><span class="n">should</span> <span class="n">eq</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">messages</span><span class="o">/</span><span class="kp">new</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">data</span><span class="o">[</span><span class="ss">:foo</span><span class="o">].</span><span class="n">should</span> <span class="n">eq</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">foo</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="no">PrivatePub</span><span class="o">.</span><span class="n">publish_to</span><span class="o">[&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">messages</span><span class="o">/</span><span class="kp">new</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;,</span> <span class="p">{</span><span class="ss">:foo</span> <span class="o">=&gt;</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">foo</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>{% codeblock lang:ruby %}
+PrivatePub.should_receive(:publish_to) do |channel, data|
+  channel.should eq &lsquo;messages/new&rsquo;
+  data[:foo].should eq &lsquo;foo&rsquo;
+end
+PrivatePub.publish_to[&lsquo;messages/new&rsquo;, {:foo => &lsquo;foo&rsquo;}
+{% endcodeblock %}
 Pass!</p>
 
 <p>This tests that <strong>publish_to</strong> takes 2 arguments.  The first is channel and should be equal to &lsquo;messages/new&rsquo;.
