@@ -156,7 +156,7 @@
 
 <p>I also added Twitter bootstrap and font-awesome.  I plan to add Google font to it next.  I also added support for Heroku, which requires Procfile, config.ru, and add a Heroku config var for the <a href="https://github.com/mattmanning/heroku-buildpack-ruby-jekyll">build pack</a>.  This <a href="https://github.com/mattmanning/heroku-buildpack-ruby-jekyll/pull/9">pull request</a> is useful to get around a build failure due to a change in Jekyll build command.</p>
 
-<p>I prefer GH page to Heroku because the initial load of Heroku page is always very slow.  GH doesn&rsquo;t have that problem.  But it is always good to have a backup.  If Github goes down, I can easily point CNAME to heroku.  If Amazon EC2 is down, then I&rsquo;m out of luck (I think gh and heroku both uses ec2, but maybe they also use rackspace).</p>
+<p>I prefer GH page to Heroku because the initial load of Heroku site is always very slow.  GH doesn&rsquo;t have that problem.  I added heroku for backup in case Github goes down. It&rsquo;s trivial to point CNAME to heroku app.  If Amazon EC2 is down, then I&rsquo;m out of luck (I think GH and Heroku both use EC2, but maybe they also use Rackspace).</p>
 </div>
   
   
