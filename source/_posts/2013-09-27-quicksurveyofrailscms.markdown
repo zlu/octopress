@@ -61,9 +61,11 @@ Here is how to create a simple navigation for all the pages.  According to the [
 ```
 
 But where do you add it?  I tried to create a new partial _kb.html.erb under app/views/layouts and got a no partial found error.  It is looking for cms_content and application directories for partials.  So I created app/views/cms_content directory and moved the partial there.  This kind/level of details should, ideally, be in the guide.
-You can then invoke this partial inside of a layout:
+You can then invoke this partial inside of a layout: 
 
+{% raw %}
     {{ cms:partial:kb }}
+{% endraw %}
 
 Once you get how Liquid template markup works with comfy sofa, it becomes intuitive to create sites/layouts/pages.
 
