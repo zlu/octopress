@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Housekeeping RVM - 吕钊</title>
+  <title>Site Updates - 吕钊</title>
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="When a new version of Ruby comes out, I like to use RVM to install it, migrate ruby gems to new ruby, and remove the
-older version of ruby. This &hellip;">
+  <meta name="description" content="Spotify Play List I added my yoga playlist on Spotify on the sidebar, below recent posts.
+I changed default theme to white and used minimum width 250 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@ older version of ruby. This &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.zlu.me/blog/2012/11/10/housekeeping-rvm/">
+  <link rel="canonical" href="http://www.zlu.me/blog/2013/09/29/site-updates/">
   <link href="/favicon.ico" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -91,7 +91,7 @@ older version of ruby. This &hellip;">
   <header>
     
       
-        <h1 class="entry-title">Housekeeping RVM</h1>
+        <h1 class="entry-title">Site Updates</h1>
       
     
     
@@ -108,7 +108,7 @@ older version of ruby. This &hellip;">
   
 
 
-<time datetime="2012-11-10T18:13:00+08:00" pubdate data-updated="true">Nov 10<span>th</span>, 2012</time>
+<time datetime="2013-09-29T22:31:00+08:00" pubdate data-updated="true">Sep 29<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -117,64 +117,23 @@ older version of ruby. This &hellip;">
   </header>
 
 
-<div class="entry-content"><p>When a new version of Ruby comes out, I like to use RVM to install it, migrate ruby gems to new ruby, and remove the
-older version of ruby.  This prevent the disk bloated with different versions of Rubies and duplicate gem(sets).</p>
+<div class="entry-content"><h4><a href="https://developer.spotify.com/technologies/spotify-play-button/">Spotify Play List</a></h4>
 
-<p>First, always update the RVM because it&rsquo;ll also update known list of Ruby.</p>
+<p>I added my yoga playlist on <a href="http://www.spotify">Spotify</a> on the sidebar, below recent posts.
+I changed default theme to white and used minimum width 250 for the widget.
+Here is the <a href="https://github.com/zlu/octopress/commit/6b8ff500d01109b390ec1e1f79502d1fc4a1adbe">first commit</a>.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm get stable
-</span></code></pre></td></tr></table></div></figure>
+<p>See <a href="https://developer.spotify.com/technologies/spotify-play-button/documentation/">documentation</a> for more customization options.</p>
 
+<h4>Change Log</h4>
 
-<p>Then list known versions of Rubies</p>
+<p>Based on this <a href="https://gist.github.com/alx/730347">gist</a>, I added a change log (a Jekyll plugin) for this blog, just for fun.  The change log is on the side bar under tweets.  It displays the last 10 commits.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm list known
-</span><span class='line'>
-</span><span class='line'>...
-</span><span class='line'><span class="o">[</span>ruby-<span class="o">]</span>1.9.3-p286
-</span><span class='line'><span class="o">[</span>ruby-<span class="o">]</span>1.9.3-<span class="o">[</span>p327<span class="o">]</span>
-</span><span class='line'><span class="o">[</span>ruby-<span class="o">]</span>1.9.3-head
-</span><span class='line'><span class="o">[</span>ruby-<span class="o">]</span>2.0.0-preview1
-</span><span class='line'>...
-</span></code></pre></td></tr></table></div></figure>
+<p>Here is a relevant <a href="https://github.com/zlu/octopress/commit/2dc9ad5cade9cea359a3d8bd39752c90fb000f91">commit</a>.</p>
 
+<h4>Favicon</h4>
 
-<p>The output shows abridged result since the full list is long.  I currently have p286 installed and I&rsquo;m about to install p327
-because it contains a security fix for DoS attack in p286.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm install 1.9.3
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Since p327 is the default stable version (as indicated by []), the command above is sufficient.</p>
-
-<p>Now you can migrate the gem(sets)</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm migrate 1.9.3-p286 1.9.3-p327
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>As part of the migration, you could opt to remove old ruby version.  Then check the disk usage:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm disk-usage all
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Note</h2>
-
-<p><a href="https://github.com/wayneeseguin/rvm">RVM</a></p>
+<p>New favicon: <img src="http://www.zlu.me/favicon.ico" alt="zlu blog favicon" /></p>
 </div>
 
 
@@ -197,12 +156,12 @@ because it contains a security fix for DoS attack in p286.</p>
   
 
 
-<time datetime="2012-11-10T18:13:00+08:00" pubdate data-updated="true">Nov 10<span>th</span>, 2012</time>
+<time datetime="2013-09-29T22:31:00+08:00" pubdate data-updated="true">Sep 29<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/rvm/'>RVM</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+    <a class='category' href='/blog/categories/update/'>update</a>
   
 </span>
 
@@ -227,7 +186,7 @@ because it contains a security fix for DoS attack in p286.</p>
         type:'3',
         count:'1', /**是否显示分享数，1显示(可选)*/
         appkey:'', /**您申请的应用appkey,显示分享来源(可选)*/
-        title:"http://www.zlu.me/blog/2012/11/10/housekeeping-rvm/",/**分享的文字内容(可选，默认为所在页面的title)*/
+        title:"http://www.zlu.me/blog/2013/09/29/site-updates/",/**分享的文字内容(可选，默认为所在页面的title)*/
         pic:'', /**分享图片的路径(可选)*/
         ralateUid:"2091903003", /**关联用户的UID，分享微博会@该用户(可选)*/
     	language:'zh_cn', /**设置语言，zh_cn|zh_tw(可选)*/
@@ -246,10 +205,8 @@ because it contains a security fix for DoS attack in p286.</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left articlenav" href="/blog/2012/11/08/what-happened-to-fd-3-and-4-in-mri/" title="Previous Post: What Happened to FD 3 and 4 in MRI">&laquo; What Happened to FD 3 and 4 in MRI</a>
+        <a class="basic-alignment left articlenav" href="/blog/2013/09/27/quicksurveyofrailscms/" title="Previous Post: Quick Survey Of Rails CMS">&laquo; Quick Survey Of Rails CMS</a>
       
-      
-        <a class="basic-alignment right articlenav" href="/blog/2013/02/04/postgres-gotchas/" title="Next Post: Postgres Gotchas">Postgres Gotchas &raquo;</a>
       
     </p>
   </footer>
@@ -350,8 +307,8 @@ because it contains a security fix for DoS attack in p286.</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.zlu.me/blog/2012/11/10/housekeeping-rvm/';
-        var disqus_url = 'http://www.zlu.me/blog/2012/11/10/housekeeping-rvm/';
+        var disqus_identifier = 'http://www.zlu.me/blog/2013/09/29/site-updates/';
+        var disqus_url = 'http://www.zlu.me/blog/2013/09/29/site-updates/';
         var disqus_script = 'embed.js';
       
     (function () {

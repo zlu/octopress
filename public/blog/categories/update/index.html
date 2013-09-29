@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Housekeeping RVM - 吕钊</title>
+  <title>Category: update - 吕钊</title>
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="When a new version of Ruby comes out, I like to use RVM to install it, migrate ruby gems to new ruby, and remove the
-older version of ruby. This &hellip;">
+  <meta name="description" content="Category: update">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ older version of ruby. This &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.zlu.me/blog/2012/11/10/housekeeping-rvm/">
+  <link rel="canonical" href="http://www.zlu.meblog/categories/update/">
   <link href="/favicon.ico" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -86,180 +85,36 @@ older version of ruby. This &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      
-        <h1 class="entry-title">Housekeeping RVM</h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-10T18:13:00+08:00" pubdate data-updated="true">Nov 10<span>th</span>, 2012</time>
-        
-         | <a href="#disqus_thread">Comments</a>
-        
-      </p>
+    <h1 class="entry-title">Category: Update</h1>
     
   </header>
-
-
-<div class="entry-content"><p>When a new version of Ruby comes out, I like to use RVM to install it, migrate ruby gems to new ruby, and remove the
-older version of ruby.  This prevent the disk bloated with different versions of Rubies and duplicate gem(sets).</p>
-
-<p>First, always update the RVM because it&rsquo;ll also update known list of Ruby.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm get stable
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Then list known versions of Rubies</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm list known
-</span><span class='line'>
-</span><span class='line'>...
-</span><span class='line'><span class="o">[</span>ruby-<span class="o">]</span>1.9.3-p286
-</span><span class='line'><span class="o">[</span>ruby-<span class="o">]</span>1.9.3-<span class="o">[</span>p327<span class="o">]</span>
-</span><span class='line'><span class="o">[</span>ruby-<span class="o">]</span>1.9.3-head
-</span><span class='line'><span class="o">[</span>ruby-<span class="o">]</span>2.0.0-preview1
-</span><span class='line'>...
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The output shows abridged result since the full list is long.  I currently have p286 installed and I&rsquo;m about to install p327
-because it contains a security fix for DoS attack in p286.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm install 1.9.3
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Since p327 is the default stable version (as indicated by []), the command above is sufficient.</p>
-
-<p>Now you can migrate the gem(sets)</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm migrate 1.9.3-p286 1.9.3-p327
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>As part of the migration, you could opt to remove old ruby version.  Then check the disk usage:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm disk-usage all
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Note</h2>
-
-<p><a href="https://github.com/wayneeseguin/rvm">RVM</a></p>
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Zhao Lu</span></span>
-
-      
-
-
-
-
-
+  <div id="blog-archives" class="category">
 
 
 
   
+  <h2>2013</h2>
 
-
-<time datetime="2012-11-10T18:13:00+08:00" pubdate data-updated="true">Nov 10<span>th</span>, 2012</time>
-      
-
-<span class="categories">
+<article>
   
-    <a class='category' href='/blog/categories/rvm/'>RVM</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
-  
-</span>
+<h1><a href="/blog/2013/09/29/site-updates/">Site Updates</a></h1>
+<time datetime="2013-09-29T22:31:00+08:00" pubdate><span class='month'>Sep</span> <span class='day'>29</span> <span class='year'>2013</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/update/'>update</a></span>
+</footer>
 
 
-    </p>
-    
-      <div class="sharing">
-    
-    
-    <div class="g-plusone" data-size="small"></div>
-    
-    
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-    
-    
-    <script type="text/javascript" charset="utf-8">
-    (function(){
-      var _w = 72 , _h = 16;
-      var text = document.getElementsByClassName("entry-title")[0]
-      var param = {
-        url:location.href,
-        type:'3',
-        count:'1', /**是否显示分享数，1显示(可选)*/
-        appkey:'', /**您申请的应用appkey,显示分享来源(可选)*/
-        title:"http://www.zlu.me/blog/2012/11/10/housekeeping-rvm/",/**分享的文字内容(可选，默认为所在页面的title)*/
-        pic:'', /**分享图片的路径(可选)*/
-        ralateUid:"2091903003", /**关联用户的UID，分享微博会@该用户(可选)*/
-    	language:'zh_cn', /**设置语言，zh_cn|zh_tw(可选)*/
-        rnd:new Date().valueOf()
-      }
-      var temp = [];
-      for( var p in param ){
-        temp.push(p + '=' + encodeURIComponent( param[p] || '' ) )
-      }
-      document.write('<iframe allowTransparency="true" frameborder="0" scrolling="no" src="http://hits.sinajs.cn/A1/weiboshare.html?' + temp.join('&') + '" width="'+ _w+'" height="'+_h+'"></iframe>')
-    })()
-    </script>
-    
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left articlenav" href="/blog/2012/11/08/what-happened-to-fd-3-and-4-in-mri/" title="Previous Post: What Happened to FD 3 and 4 in MRI">&laquo; What Happened to FD 3 and 4 in MRI</a>
-      
-      
-        <a class="basic-alignment right articlenav" href="/blog/2013/02/04/postgres-gotchas/" title="Next Post: Postgres Gotchas">Postgres Gotchas &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-  </section>
+
+  
+</article>
 
 </div>
 
@@ -349,10 +204,7 @@ because it contains a security fix for DoS attack in p286.</p>
       var disqus_shortname = 'zlu';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.zlu.me/blog/2012/11/10/housekeeping-rvm/';
-        var disqus_url = 'http://www.zlu.me/blog/2012/11/10/housekeeping-rvm/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
