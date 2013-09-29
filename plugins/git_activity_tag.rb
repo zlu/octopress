@@ -15,7 +15,7 @@ module Jekyll
       g.log.each do |log|
         if(index < 10)
           result << "<li>"
-          result << log.date.strftime("%d %b")
+          result << log.date.strftime("%b %d")
           result << " - <a href='https://github.com/zlu/octopress/commit/"
           result << log.sha
           result << "/'>"
