@@ -4,7 +4,7 @@
   <title><![CDATA[吕钊]]></title>
   <link href="http://www.zlu.me/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2013-09-28T08:43:17+08:00</updated>
+  <updated>2013-09-29T17:25:51+08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -18,7 +18,9 @@
     <link href="http://www.zlu.me/blog/2013/09/27/quicksurveyofrailscms/"/>
     <updated>2013-09-27T21:37:00+08:00</updated>
     <id>http://www.zlu.me/blog/2013/09/27/quicksurveyofrailscms</id>
-    <content type="html"><![CDATA[<p>Selecting a Content Management System (CMS) is never an easy task.  I have recently spent a good amount of time tinkering with different implementations and would like to share my learnings here.</p>
+    <content type="html"><![CDATA[<p><strong>Update 1</strong> (September 29, 2013) &ndash; Added references and more CMS.</p>
+
+<p>Selecting a Content Management System (CMS) is never an easy task.  I have recently spent a good amount of time tinkering with different implementations and would like to share my learnings here.</p>
 
 <p>There are many solutions on the market so you should solidify your requirements to help you narrow down the choices.  This CMS will be used for <a href="https://foryogi.com">ForYogi</a> with the following requirements:</p>
 
@@ -93,9 +95,17 @@ You can then invoke this partial inside of a layout:</p>
 
 <p>Once you get how Liquid template markup works with comfy sofa, it becomes intuitive to create sites/layouts/pages.</p>
 
+<p><strong><a href="https://github.com/websitescenes/cms_admin">CMS_Admin</a></strong></p>
+
+<p>It is based on active_admin and uses devise for authentication.  It is Rails4 only but it is an app and not meant to be used with any existing Rails application.</p>
+
 <h3>Conclusion</h3>
 
 <p>I selected ComfortableMexicanSofa for its ease in integration into an existing Rails4 application with devise authentication.  The customization seems to be quite flexible.  It is also possible to invoke it from the main app which enables me to display help content in various places inside of the app.  The only requirement I haven&rsquo;t looked at is search.</p>
+
+<p><strong>References</strong></p>
+
+<p><a href="https://gist.github.com/ffmike/242751">A list of Rails CMS</a></p>
 ]]></content>
   </entry>
   

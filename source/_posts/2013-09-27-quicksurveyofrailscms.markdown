@@ -6,6 +6,8 @@ comments: true
 categories: [rails, cms]
 ---
 
+**Update 1** (September 29, 2013) - Added references and more CMS.
+
 Selecting a Content Management System (CMS) is never an easy task.  I have recently spent a good amount of time tinkering with different implementations and would like to share my learnings here.
 
 There are many solutions on the market so you should solidify your requirements to help you narrow down the choices.  This CMS will be used for [ForYogi](https://foryogi.com) with the following requirements:
@@ -69,6 +71,14 @@ You can then invoke this partial inside of a layout:
 
 Once you get how Liquid template markup works with comfy sofa, it becomes intuitive to create sites/layouts/pages.
 
+**[CMS_Admin](https://github.com/websitescenes/cms_admin)**
+
+It is based on active_admin and uses devise for authentication.  It is Rails4 only but it is an app and not meant to be used with any existing Rails application.
+
 ###Conclusion
 
 I selected ComfortableMexicanSofa for its ease in integration into an existing Rails4 application with devise authentication.  The customization seems to be quite flexible.  It is also possible to invoke it from the main app which enables me to display help content in various places inside of the app.  The only requirement I haven't looked at is search.
+
+**References**
+
+[A list of Rails CMS](https://gist.github.com/ffmike/242751)
