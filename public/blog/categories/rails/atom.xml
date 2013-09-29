@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: rails | 吕钊]]></title>
+  <title><![CDATA[Category: Rails | 吕钊]]></title>
   <link href="http://www.zlu.me/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2013-09-29T20:46:00+08:00</updated>
+  <updated>2013-09-29T20:49:29+08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -14,274 +14,99 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Quick Survey Of Rails CMS]]></title>
-    <link href="http://www.zlu.me/blog/2013/09/27/quicksurveyofrailscms/"/>
-    <updated>2013-09-27T21:37:00+08:00</updated>
-    <id>http://www.zlu.me/blog/2013/09/27/quicksurveyofrailscms</id>
-    <content type="html"><![CDATA[<p><strong>Update 1</strong> (September 29, 2013) &ndash; Added references and more CMS.</p>
+    <title type="html"><![CDATA[Initialization Is An Interesting Thing]]></title>
+    <link href="http://www.zlu.me/blog/2013/05/29/initialization-is-an-interesting-thing/"/>
+    <updated>2013-05-29T22:51:00+08:00</updated>
+    <id>http://www.zlu.me/blog/2013/05/29/initialization-is-an-interesting-thing</id>
+    <content type="html"><![CDATA[<p>Have you ever tried to define <code>initialized</code> method for an <code>ActiveRecord</code>?</p>
 
-<p>Selecting a Content Management System (CMS) is never an easy task.  I have recently spent a good amount of time tinkering with different implementations and would like to share my learnings here.</p>
-
-<p>There are many solutions on the market so you should solidify your requirements to help you narrow down the choices.  This CMS will be used for <a href="https://foryogi.com">ForYogi</a> with the following requirements:</p>
-
-<ul>
-<li>Admin can add tutorials on how to use the site for teachers/studios/users.</li>
-<li>Admin can add articles for yoga-related topics into a knowledge base.  Topics can be as simple as definition of  <em>yogi</em> or Sanskrit terminologies such as <em>asana</em>.</li>
-<li>Admin can add help content which can be accessed by the application and displayed in various parts of the app.</li>
-<li>Admin can add FAQs.</li>
-<li>Users can search contents in Knowledge Base.</li>
-<li>Admin can customize layout and css style.</li>
-<li>Drop-in support for existing Rails4 (Ruby 2) project.</li>
-<li>Inexpensive &ndash; Some hosted solution can get pricey depending on storage and other factors.</li>
-</ul>
-
-
-<h4>General Impression</h4>
-
-<p> CMS is often used by developers to create customizable mostly static websites for clients.  Most of the Rails CMS gems have over the years, <a href="http://guides.rubyonrails.org/engines.html%E2%80%8E">enginfied</a>, providing drop-in support for existing Rails apps.</p>
-
-<p><strong><a href="http://refinerycms.com">RefineryCMS</a></strong></p>
-
-<p>There are <a href="http://railscasts.com/episodes/332-refinery-cms-basics">free</a> and <a href="http://railscasts.com/episodes/333-extending-refinery-cms">pro</a> episodes of it on RailsCasts.com.  I don&rsquo;t have a pro-account so I only examined the free content.  My impression is it&rsquo;s easy to set it ground-up with customized style.  This CMS has been around for a long time and has a good community build around it.  There are two factors against me choosing it though:</p>
-
-<ul>
-<li>At the time of writing, its Rails4 support is <a href="https://github.com/refinery/refinerycms/commit/d9e7d4dfda3256ece0b527da269a1f2643a9afc2">work in progress</a>.</li>
-<li>Integrating it with an existing application using devise is quite involved according to this <a href="http://refinerycms.com/guides/with-an-existing-rails-31-devise-app">article</a>.</li>
-</ul>
-
-
-<p><strong><a href="http://locomotivecms.com">LocomotivesCMS</a></strong></p>
-
-<p>This one has a nicely styled site (compare to some other CMS) but has a few things that concerns me:</p>
-
-<ul>
-<li>It requires MongoDB.  It is not a big deal. I&rsquo;m not using Mongo in my current setup.  I can get a small setup using Heroku add-on but I&rsquo;d probably have to pay to get a storage bump-up in the near future.</li>
-<li>Weak <a href="http://doc.locomotivecms.com">documentation</a>.  I looked through the content and found documentation is quite superficial and lacking depth.  It is understandable as they offer a hosting solution.</li>
-<li>The <a href="https://github.com/locomotivecms/engine/issues/746">issue</a> on Rails4 support concerns me the most:
-
-<blockquote><p>Probably by the end of the year. However, It could happen sooner depending on how successful would be our hosting solution…Long story short, we need financial support to handle the next big version of the engine which will include a new UI.</p></blockquote></li>
-</ul>
-
-
-<p>As there is no guarantee for a rather future release of Rails4 support (at least not in their current roadmap), I pass.   <br/>
-<strong><a href="http://alchemy-cms.com">AlchemyCMS</a></strong></p>
-
-<p>I first learned about this CMS through the comments on the free RailsCasts episode.  They argued about why they are better than refineryCMS.  I liked their idea of storing pure content, not css style and layouts in database.  It&rsquo;ll only make migration to other systems easier.  I also noticed that they have a <a href="https://github.com/magiclabs/alchemy_cms/tree/3.0-dev">3.0-dev branch</a> supporting Rails4 with this <a href="fe94bedc761484940071129277970a6cd65fba10">sha</a>.  Installation has proved to be hard as there are a few conflict in various gems (if you use activeadmin and devise).  I was able to install it after some struggle.  However, I encountered problems running it (devise login, actions_cache).  It was just wasting more time than I wanted at this point.</p>
-
-<p><strong><a href="">BrowserCMS</a></strong></p>
-
-<p>The first problem I had is jquery-rails version being too low even for their <a href="https://github.com/browsermedia/browsercms">Rails 4 master branch</a> for which <a href="https://github.com/peakpg">peakpg</a> opened <a href="https://github.com/browsermedia/browsercms/issues/625">an issue</a>.  After fixing that in my own fork, I continue running into other problems.  Basically the Rails4 support is not quite ready yet.</p>
-
-<p><strong><a href="">ComfortableMexicanSofa</a></strong></p>
-
-<p>This cleverly named gem is lesser popular than the other gems I&rsquo;ve looked at based on the number of watches and forks on github.  However, it is the only one that worked out-of-box with an existing Rails4 app with devise authentication.  The documentation explains the theory well but lacks examples.  I suggest watching the RailsCasts <a href="http://railscasts.com/episodes/118%E2%80%8E">free episode</a> on <a href="http://liquidmarkup.org/%E2%80%8E">Liquid template</a> and really understand <a href="https://github.com/comfy/comfortable-mexican-sofa/wiki/Tags">tags</a> and how to apply partials/helpers.</p>
-
-<p>Here is how to create a simple navigation for all the pages.  According to the <a href="https://github.com/comfy/comfortable-mexican-sofa/wiki/Creating-navigation-from-pages">guide</a>, you need to add something like this:</p>
-
-<p><code>ruby
-&lt;% @cms_site.pages.root.children.published.each do |page| %&gt;
-  &lt;%= link_to(page.label, page.full_path) %&gt;&lt;br&gt;
-&lt;% end %&gt;
-</code></p>
-
-<p>But where do you add it?  I tried to create a new partial _kb.html.erb under app/views/layouts and got a no partial found error.  It is looking for cms_content and application directories for partials.  So I created app/views/cms_content directory and moved the partial there.  This kind/level of details should, ideally, be in the guide.
-You can then invoke this partial inside of a layout:</p>
-
-<p>{% raw %}</p>
-
-<pre><code>{{ cms:partial:kb }}
-</code></pre>
-
-<p>{% endraw %}</p>
-
-<p>Once you get how Liquid template markup works with comfy sofa, it becomes intuitive to create sites/layouts/pages.</p>
-
-<p><strong><a href="https://github.com/websitescenes/cms_admin">CMS_Admin</a></strong></p>
-
-<p>It is based on active_admin and uses devise for authentication.  It is Rails4 only but it is an app and not meant to be used with any existing Rails application.</p>
-
-<h3>Conclusion</h3>
-
-<p>I selected ComfortableMexicanSofa for its ease in integration into an existing Rails4 application with devise authentication.  The customization seems to be quite flexible.  It is also possible to invoke it from the main app which enables me to display help content in various places inside of the app.  The only requirement I haven&rsquo;t looked at is search.</p>
-
-<p><strong>References</strong></p>
-
-<p><a href="https://gist.github.com/ffmike/242751">A list of Rails CMS</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Install and Create Rails 4.0 App]]></title>
-    <link href="http://www.zlu.me/blog/2012/10/29/install-and-create-rails-4-dot-0-app/"/>
-    <updated>2012-10-29T22:46:00+08:00</updated>
-    <id>http://www.zlu.me/blog/2012/10/29/install-and-create-rails-4-dot-0-app</id>
-    <content type="html"><![CDATA[<p>Rails 4.0 development has started a while back.  It was merged into Rails' master branch on Github in 2011.
-As the writing of this blog entry, the stable version of Rails is 3.2.8.  Release candidate is at 3.2.9.rc1.
-Because 4.0 is not yet official available, you have to jump through hoops to get a Rails 4 application up and running.</p>
-
-<h2>Install Rails 4.0 gem</h2>
-
-<p>Create this Gemfile:</p>
+<p>Try it if you haven&rsquo;t.</p>
 
 <p>```
-source &lsquo;<a href="http://rubygems.org">http://rubygems.org</a>&rsquo;</p>
+class MyRecord &lt; ActiveRecord::Base
+  def initialize
+  end
+end</p>
 
-<p>gem &lsquo;rails&rsquo;, :git => &lsquo;git://github.com/rails/rails.git&rsquo;
-gem &lsquo;uglifier&rsquo;, &lsquo;>= 1.0.30&rsquo;
-gem &lsquo;activerecord-deprecated_finders&rsquo;, :git => &lsquo;git://github.com/rails/activerecord-deprecated_finders.git&rsquo;
-gem &lsquo;journey&rsquo;, :git => &lsquo;git://github.com/rails/journey.git&rsquo;
-```</p>
-
-<ul>
-<li>This Gemfile specifies the master branch of Rails, which contains 4.0 beta.</li>
-<li>Gem activerecord-deprecated_finders is a dependency.</li>
-<li>Gem journey, the Rails router, is also required.</li>
-</ul>
-
-
-<p>In the same directory of the Gemfile, issue <code>bundle install</code>.  This should install Rails 4.0.0.beta.
-But running <code>gem list rails</code> won&rsquo;t show 4.0 being installed.  So do this instead:</p>
-
-<p><code>
-zlu@zlu-mba:~/projects/test$ bundle show rails
-/Users/zlu/.rvm/gems/ruby-1.9.3-p0/bundler/gems/rails-4e23c0ef341c
-</code></p>
-
-<p>The Rails executable is at:
-<code>
-`bundle show rails`/railties/bin/rails
-</code></p>
-
-<p><code>
-`bundle show rails`/railties/bin/rails -v should show: Rails 4.0.0.beta
-</code></p>
-
-<p>Now you can use this version of rails to generate an app named foo.</p>
-
-<h2>Create Rails 4.0 app</h2>
-
-<p><code>
-`bundle show rails`/railties/bin/rails new foo
-</code>
-This command  creates a typical rails app called foo and output an error about not being able to find Rails 4 gem, which
-should not be a surprise.</p>
-
-<p>You will edit foo/Gemfile to make <code>bundle install</code> work.</p>
-
-<p>Add the two gems Rails depends on:</p>
-
-<p><code>
-gem 'journey', github: 'rails/journey'
-gem 'activerecord-deprecated_finders', github: 'rails/activerecord-deprecated_finders'
-</code></p>
-
-<p>Change the source definition for the following gems:</p>
-
-<p>```
-gem &lsquo;rails&rsquo;, &lsquo;4.0.0.beta&rsquo;
-gem &lsquo;sass-rails&rsquo;,   &lsquo;~> 4.0.0.beta&rsquo;
-gem &lsquo;coffee-rails&rsquo;, &lsquo;~> 4.0.0.beta&rsquo;</p>
+<p>MyRecord.new  #<MyRecord not initialized></p>
 
 <p>```</p>
 
-<p>To</p>
+<p>This is probably not what you have expected.  Why is MyRecord not initialized?</p>
+
+<p>Well, ActiveRecord::Base has already defined <code>initialize</code> method.  It is used to instantiate Rails models.</p>
 
 <p><code>
-gem 'rails', github: 'rails/rails'
-gem 'sass-rails', github: 'rails/sass-rails'
-gem 'coffee-rails', github: 'rails/coffee-rails'
+def initialize(attributes = nil, options = {})
 </code></p>
 
-<p>Now you should be <code>bundle install</code>, sit back and enjoy your new Rails 4.0 app.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Testing Carrierwave with Fog for Amazon S3]]></title>
-    <link href="http://www.zlu.me/blog/2012/07/17/testing-carrierwave-with-fog/"/>
-    <updated>2012-07-17T21:10:00+08:00</updated>
-    <id>http://www.zlu.me/blog/2012/07/17/testing-carrierwave-with-fog</id>
-    <content type="html"><![CDATA[<p>Testing file upload using CarrierWave with Fog with S3 turns out to be difficult.</p>
+<p>If you really want to override it with your own version, you would want to do this:</p>
 
-<ul>
-<li>CarrierWave/Fog need a non-empty file, otherwise the url to the S3 object will be nil and can&rsquo;t be tested.</li>
-<li>Fog.mock! doesn&rsquo;t work out of box.  Some extra steps are needed to avoid uploading files to S3 when running tests.</li>
-</ul>
+<p>```
+class MyRecord &lt; ActiveRecord::Base
+  def initialize(attributes = nil, options = {})</p>
 
+<pre><code>super
+# now do your own initialization
+</code></pre>
 
-<p>First, create config/fog_credentials.yml</p>
-
-<p>{% codeblock lang:yml %}
-default:
-  aws_access_key_id: &lsquo;your-aws-access-key-id&rsquo;
-  aws_secret_access_key: &lsquo;your-aws-secret-access-key/&rsquo;
-  region: &lsquo;your-aws-region&rsquo;
-{% endcodeblock %}</p>
-
-<p>Next, put this to your config/initializers/carrier_wave.rb</p>
-
-<p>{% codeblock lang:ruby %}
-Fog.credentials_path = Rails.root.join(&lsquo;config/fog_credentials.yml&rsquo;)</p>
-
-<p>fog_dir = Rails.env == &lsquo;production&rsquo; ? &lsquo;production-bucket&rsquo; : &lsquo;dev-bucket&rsquo;</p>
-
-<p>CarrierWave.configure do |config|
-  config.fog_credentials = {:provider => &lsquo;AWS&rsquo;}
-  config.fog_directory  = fog_dir
-end
-{% endcodeblock %}</p>
-
-<p>Next, put this into spec/support/fog_helper.rb</p>
-
-<p>{% codeblock lang:ruby %}
-Fog.mock!
-Fog.credentials_path = Rails.root.join(&lsquo;config/fog_credentials.yml&rsquo;)
-connection = Fog::Storage.new(:provider => &lsquo;AWS&rsquo;)
-connection.directories.create(:key => &lsquo;dev-bucket&rsquo;)
-{% endcodeblock %}</p>
-
-<p>Note, the :key value <em>must</em> match whats defined for fog_dir (dev-bucket) in carrier_wave.rb</p>
-
-<p>Suppose you want to test this class:</p>
-
-<p>{% codeblock lang:ruby %}
-class FileUploader &lt; CarrierWave::Uploader::Base
-  storage :fog
-end
-{% endcodeblock %}</p>
-
-<p>Your rspec test can be something like this:</p>
-
-<p>{% codeblock lang:ruby %}
-class TestFileUploader
-  mount_uploader :file, FileUploader
+<p>  end
 end</p>
 
-<p>describe FileUploader do
-  include FakeFS::SpecHelpers</p>
+<p>MyRecord.new
+```
+This should build a new AR for you (if you have a defined my_records table in database).</p>
 
-<p>  context &lsquo;for non-production environment&rsquo; do</p>
+<p>Rails provides a cleaner way to handle this via after_initilize callback.</p>
 
-<pre><code>it 'should upload video clip to dev-bucket on s3' do
-  FakeFS.activate!
-  FakeFS::File.should_receive(:chmod) #this is needed or you will get an exception
-  File.open('test_file', 'w') do |f|
-    f.puts('foo') # this is required or uploader_test.file.url will be nil
-  end
-  uploader_test = TestFileUploader.new
-  uploader_test.file = File.open('test_file')
-  uploader_test.save!
-  uploader_test.file.url.should match /.*\/dev-bucket.*/ #test to make sure that it is not production-bucket
-  FakeFS.deactivate!
-end
+<p>```
+class MyClass &lt; ActiveRecord::Base
+  after_initialize do</p>
+
+<pre><code># do your thing here
+puts 'more to do after initialization'
 </code></pre>
 
 <p>  end
 end
-{% endcodeblock %}</p>
+```</p>
 
-<p>Now the test is complete.  It uses fakefs to generate a fake file which is non-empty.  Fog will pretent to upload the file
-using the FileUploader under test.  The upload url is the subject under test.</p>
+<p><code>after_initialize</code> is called when ActiveRecord is instantiated and before it is saved.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Segmentation fault with Rails and JSON]]></title>
+    <link href="http://www.zlu.me/blog/2012/10/16/segmentation-fault-with-rails-and-json/"/>
+    <updated>2012-10-16T21:03:00+08:00</updated>
+    <id>http://www.zlu.me/blog/2012/10/16/segmentation-fault-with-rails-and-json</id>
+    <content type="html"><![CDATA[<p>After manually cleaning Ruby gems on my system, I got this error running <code>rails c</code> or <code>rails s</code></p>
+
+<p>{% codeblock lang:bash %}</p>
+
+<p>zlu@zlu-mba:~/projects/foo (master *)$ rails c
+/Users/zlu/.rvm/gems/ruby-1.9.3-p0/gems/json-1.7.5/lib/json/ext/parser.bundle: [BUG] Segmentation fault
+ruby 1.8.7 (2012-02-08 patchlevel 358) [universal-darwin12.0]</p>
+
+<p>Abort trap: 6</p>
+
+<p>{% endcodeblock %}</p>
+
+<p>It is very weird if you think about it.  The <code>ruby -v</code> shows that the system is using ruby version 1.9.3 managed by rvm.
+But the error shows ruby 1.8.7!  It must be something I did with uninstalling versions of gems where executable requirements got messed up.</p>
+
+<p>Instead of imploding rvm, here&rsquo;s what I did to correct the problem.</p>
+
+<p>{% codeblock lang:bash %}</p>
+
+<p>gem list | cut -d" &ldquo; -f1 | xargs gem uninstall -aIx
+gem install bundler
+bundle install</p>
+
+<p>{% endcodeblock %}</p>
+
+<p>The first command uninstalls all the gems, including bundler.
+After reinstalling bundler, you can run <code>bundle install</code>, assuming you are in a project directory where Gemfile.lock exists.</p>
 ]]></content>
   </entry>
   
