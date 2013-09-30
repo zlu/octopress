@@ -6,7 +6,8 @@ comments: true
 categories: [rails, cms]
 ---
 
-**Update 1** (September 29, 2013) - Added references and more CMS.
+**Update 1** (September 29, 2013) - Added references and more CMS.  
+**Update 2** (September 30, 2013) - ComfortableMexicanSofa does _not_ use Liquid Template, as GBH has pointed out in the comment.
 
 Selecting a Content Management System (CMS) is never an easy task.  I have recently spent a good amount of time tinkering with different implementations and would like to share my learnings here.
 

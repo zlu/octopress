@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mocking | 吕钊]]></title>
   <link href="http://www.zlu.me/blog/categories/mocking/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2013-09-29T23:16:31+08:00</updated>
+  <updated>2013-09-30T23:01:05+08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -28,74 +28,113 @@
 
 <p>First, create config/fog_credentials.yml</p>
 
-<p>{% codeblock lang:yml %}
-default:
-  aws_access_key_id: &lsquo;your-aws-access-key-id&rsquo;
-  aws_secret_access_key: &lsquo;your-aws-secret-access-key/&rsquo;
-  region: &lsquo;your-aws-region&rsquo;
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">default</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">aws_access_key_id</span><span class="p-Indicator">:</span> <span class="nl">&amp;lsquo</span><span class="l-Scalar-Plain">;your-aws-access-key-id&amp;rsquo;</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">aws_secret_access_key</span><span class="p-Indicator">:</span> <span class="nl">&amp;lsquo</span><span class="l-Scalar-Plain">;your-aws-secret-access-key/&amp;rsquo;</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">region</span><span class="p-Indicator">:</span> <span class="nl">&amp;lsquo</span><span class="l-Scalar-Plain">;your-aws-region&amp;rsquo;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Next, put this to your config/initializers/carrier_wave.rb</p>
 
-<p>{% codeblock lang:ruby %}
-Fog.credentials_path = Rails.root.join(&lsquo;config/fog_credentials.yml&rsquo;)</p>
-
-<p>fog_dir = Rails.env == &lsquo;production&rsquo; ? &lsquo;production-bucket&rsquo; : &lsquo;dev-bucket&rsquo;</p>
-
-<p>CarrierWave.configure do |config|
-  config.fog_credentials = {:provider => &lsquo;AWS&rsquo;}
-  config.fog_directory  = fog_dir
-end
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Fog</span><span class="o">.</span><span class="n">credentials_path</span> <span class="o">=</span> <span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">config</span><span class="o">/</span><span class="n">fog_credentials</span><span class="o">.</span><span class="n">yml</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;)</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;fog_dir = Rails.env == &amp;lsquo;production&amp;rsquo; ? &amp;lsquo;production-bucket&amp;rsquo; : &amp;lsquo;dev-bucket&amp;rsquo;&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="no">CarrierWave</span><span class="o">.</span><span class="n">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">fog_credentials</span> <span class="o">=</span> <span class="p">{</span><span class="ss">:provider</span> <span class="o">=&gt;</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="no">AWS</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;}</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">fog_directory</span>  <span class="o">=</span> <span class="n">fog_dir</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Next, put this into spec/support/fog_helper.rb</p>
 
-<p>{% codeblock lang:ruby %}
-Fog.mock!
-Fog.credentials_path = Rails.root.join(&lsquo;config/fog_credentials.yml&rsquo;)
-connection = Fog::Storage.new(:provider => &lsquo;AWS&rsquo;)
-connection.directories.create(:key => &lsquo;dev-bucket&rsquo;)
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Fog</span><span class="o">.</span><span class="n">mock!</span>
+</span><span class='line'><span class="no">Fog</span><span class="o">.</span><span class="n">credentials_path</span> <span class="o">=</span> <span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">config</span><span class="o">/</span><span class="n">fog_credentials</span><span class="o">.</span><span class="n">yml</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;)</span>
+</span><span class='line'><span class="n">connection</span> <span class="o">=</span> <span class="ss">Fog</span><span class="p">:</span><span class="ss">:Storage</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:provider</span> <span class="o">=&gt;</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="no">AWS</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;)</span>
+</span><span class='line'><span class="n">connection</span><span class="o">.</span><span class="n">directories</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:key</span> <span class="o">=&gt;</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">dev</span><span class="o">-</span><span class="n">bucket</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Note, the :key value <em>must</em> match whats defined for fog_dir (dev-bucket) in carrier_wave.rb</p>
 
 <p>Suppose you want to test this class:</p>
 
-<p>{% codeblock lang:ruby %}
-class FileUploader &lt; CarrierWave::Uploader::Base
-  storage :fog
-end
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">FileUploader</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="no">CarrierWave</span><span class="o">::</span><span class="no">Uploader</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="n">storage</span> <span class="ss">:fog</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Your rspec test can be something like this:</p>
 
-<p>{% codeblock lang:ruby %}
-class TestFileUploader
-  mount_uploader :file, FileUploader
-end</p>
-
-<p>describe FileUploader do
-  include FakeFS::SpecHelpers</p>
-
-<p>  context &lsquo;for non-production environment&rsquo; do</p>
-
-<pre><code>it 'should upload video clip to dev-bucket on s3' do
-  FakeFS.activate!
-  FakeFS::File.should_receive(:chmod) #this is needed or you will get an exception
-  File.open('test_file', 'w') do |f|
-    f.puts('foo') # this is required or uploader_test.file.url will be nil
-  end
-  uploader_test = TestFileUploader.new
-  uploader_test.file = File.open('test_file')
-  uploader_test.save!
-  uploader_test.file.url.should match /.*\/dev-bucket.*/ #test to make sure that it is not production-bucket
-  FakeFS.deactivate!
-end
-</code></pre>
-
-<p>  end
-end
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">TestFileUploader</span>
+</span><span class='line'>  <span class="n">mount_uploader</span> <span class="ss">:file</span><span class="p">,</span> <span class="no">FileUploader</span>
+</span><span class='line'><span class="k">end</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;describe FileUploader do</span>
+</span><span class='line'><span class="sr">  include FakeFS::SpecHelpers&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="n">context</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="k">for</span> <span class="n">non</span><span class="o">-</span><span class="n">production</span> <span class="n">environment</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;</span> <span class="k">do</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;it &#39;should upload video clip to dev-bucket on s3&#39; do</span>
+</span><span class='line'><span class="sr">  FakeFS.activate!</span>
+</span><span class='line'><span class="sr">  FakeFS::File.should_receive(:chmod) #this is needed or you will get an exception</span>
+</span><span class='line'><span class="sr">  File.open(&#39;test_file&#39;, &#39;w&#39;) do |f|</span>
+</span><span class='line'><span class="sr">    f.puts(&#39;foo&#39;) # this is required or uploader_test.file.url will be nil</span>
+</span><span class='line'><span class="sr">  end</span>
+</span><span class='line'><span class="sr">  uploader_test = TestFileUploader.new</span>
+</span><span class='line'><span class="sr">  uploader_test.file = File.open(&#39;test_file&#39;)</span>
+</span><span class='line'><span class="sr">  uploader_test.save!</span>
+</span><span class='line'><span class="sr">  uploader_test.file.url.should match /</span><span class="o">.</span><span class="n">*</span><span class="p">\</span><span class="o">/</span><span class="n">dev</span><span class="o">-</span><span class="n">bucket</span><span class="o">.</span><span class="n">*</span><span class="o">/</span> <span class="c1">#test to make sure that it is not production-bucket</span>
+</span><span class='line'>  <span class="no">FakeFS</span><span class="o">.</span><span class="n">deactivate!</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="o">&lt;</span><span class="sr">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Now the test is complete.  It uses fakefs to generate a fake file which is non-empty.  Fog will pretent to upload the file
 using the FileUploader under test.  The upload url is the subject under test.</p>

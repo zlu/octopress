@@ -4,7 +4,7 @@
   <title><![CDATA[Category: cms | 吕钊]]></title>
   <link href="http://www.zlu.me/blog/categories/cms/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2013-09-29T23:16:31+08:00</updated>
+  <updated>2013-09-30T23:01:05+08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -18,7 +18,8 @@
     <link href="http://www.zlu.me/blog/2013/09/27/quicksurveyofrailscms/"/>
     <updated>2013-09-27T21:37:00+08:00</updated>
     <id>http://www.zlu.me/blog/2013/09/27/quicksurveyofrailscms</id>
-    <content type="html"><![CDATA[<p><strong>Update 1</strong> (September 29, 2013) &ndash; Added references and more CMS.</p>
+    <content type="html"><![CDATA[<p><strong>Update 1</strong> (September 29, 2013) &ndash; Added references and more CMS.<br/>
+<strong>Update 2</strong> (September 30, 2013) &ndash; ComfortableMexicanSofa does <em>not</em> use Liquid Template, as GBH has pointed out in the comment.</p>
 
 <p>Selecting a Content Management System (CMS) is never an easy task.  I have recently spent a good amount of time tinkering with different implementations and would like to share my learnings here.</p>
 
@@ -87,12 +88,12 @@
 <p>But where do you add it?  I tried to create a new partial _kb.html.erb under app/views/layouts and got a no partial found error.  It is looking for cms_content and application directories for partials.  So I created app/views/cms_content directory and moved the partial there.  This kind/level of details should, ideally, be in the guide.
 You can then invoke this partial inside of a layout:</p>
 
-<p>{% raw %}</p>
+<p></p>
 
 <pre><code>{{ cms:partial:kb }}
 </code></pre>
 
-<p>{% endraw %}</p>
+<p></p>
 
 <p>Once you get how Liquid template markup works with comfy sofa, it becomes intuitive to create sites/layouts/pages.</p>
 
