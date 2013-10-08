@@ -3,8 +3,11 @@ layout: post
 title: "The Never Ending Journey On The Perfect Blogging Setup"
 date: 2013-09-18 09:58
 comments: true
-categories: 
+categories: ['jekyll', 'github', 'plugin']
+
 ---
+
+**_Update 1_** October 9, 2013 - Added source for using [custom plugins](#custom_plugins), which is disabled by Github pages running in safe mode.
 
 Once in a while I search for a better blogging solution.  Like many others I've used Wordpress, Blogger, and Tumblr.  I've also used more technical approaches such as self-hosted Wordpress.  I use [Octopress](http://octopress.org) for this blog.  I have tempted to write my own blog software but some developers do.  Remy wrote his own [blog](http://www.whoisremy.com) in RubyOnRails.
 
@@ -37,3 +40,7 @@ Working with [Jekyll](http://jekyllrb.com) is a pleasure.  I can use my editor o
 I also added Twitter bootstrap and font-awesome.  I plan to add Google font to it next.  I also added support for Heroku, which requires Procfile, config.ru, and add a Heroku config var for the [build pack](https://github.com/mattmanning/heroku-buildpack-ruby-jekyll).  This [pull request](https://github.com/mattmanning/heroku-buildpack-ruby-jekyll/pull/9) is useful to get around a build failure due to a change in Jekyll build command.
 
 I prefer GH page to Heroku because the initial load of Heroku site is always very slow.  GH doesn't have that problem.  I added heroku for backup in case Github goes down. It's trivial to point CNAME to heroku app.  If Amazon EC2 is down, then I'm out of luck (I think GH and Heroku both use EC2, but maybe they also use Rackspace).
+
+**<a id="custom_plugins"></a>Custom Plugins**
+
+Jekyll supports plugins which are custom ruby code.  Github Pages disables custom plugins due to security reason.  In order to run custom plugins, you will need to compile the source into _site and push that to Github.  Detailed instruction is [here](http://ixti.net/software/2013/01/28/using-jekyll-plugins-on-github-pages.html).

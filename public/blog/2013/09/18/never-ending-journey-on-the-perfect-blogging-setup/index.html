@@ -9,7 +9,7 @@
   <meta name="author" content="Zhao Lu">
 
   
-  <meta name="description" content="Once in a while I search for a better blogging solution. Like many others I&rsquo;ve used Wordpress, Blogger, and Tumblr. I&rsquo;ve also used more &hellip;">
+  <meta name="description" content="Update 1 October 9, 2013 &ndash; Added source for using custom plugins, which is disabled by Github pages running in safe mode. Once in a while I &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -116,7 +116,9 @@
   </header>
 
 
-<div class="entry-content"><p>Once in a while I search for a better blogging solution.  Like many others I&rsquo;ve used Wordpress, Blogger, and Tumblr.  I&rsquo;ve also used more technical approaches such as self-hosted Wordpress.  I use <a href="http://octopress.org">Octopress</a> for this blog.  I have tempted to write my own blog software but some developers do.  Remy wrote his own <a href="http://www.whoisremy.com">blog</a> in RubyOnRails.</p>
+<div class="entry-content"><p><strong><em>Update 1</em></strong> October 9, 2013 &ndash; Added source for using <a href="#custom_plugins">custom plugins</a>, which is disabled by Github pages running in safe mode.</p>
+
+<p>Once in a while I search for a better blogging solution.  Like many others I&rsquo;ve used Wordpress, Blogger, and Tumblr.  I&rsquo;ve also used more technical approaches such as self-hosted Wordpress.  I use <a href="http://octopress.org">Octopress</a> for this blog.  I have tempted to write my own blog software but some developers do.  Remy wrote his own <a href="http://www.whoisremy.com">blog</a> in RubyOnRails.</p>
 
 <p>I recently needed to setup a blog for <a href="https://foryogi.com">ForYogi</a>.  I tried Tumblr, again, for a while.  I still don&rsquo;t like it.  I think it&rsquo;s better suited for a quick photo upload which some short description.  Instapaper&rsquo;s blog use it for obvious reason, but it&rsquo;s not visually appealing to me.  Knowing what Yahoo tends to do to their purchases, I decided to abandon it.  Wordpress is a bit too overwhelming for me, with its custom domain and many packages they sell.  I do like the plethora plugins and vibrant community Wordpress have though.  Blogger is the best choice for a hosted solution providing all I need for free.  I don&rsquo;t believe Blogger will be part of Google&rsquo;s killing spree as it is being used by many bloggers for advertising.  But its editing interface feels like MS Word in 1997.  Its post display is like a typical Google product, lacking the simplicity and elegancy of what Apple has.</p>
 
@@ -154,6 +156,10 @@
 <p>I also added Twitter bootstrap and font-awesome.  I plan to add Google font to it next.  I also added support for Heroku, which requires Procfile, config.ru, and add a Heroku config var for the <a href="https://github.com/mattmanning/heroku-buildpack-ruby-jekyll">build pack</a>.  This <a href="https://github.com/mattmanning/heroku-buildpack-ruby-jekyll/pull/9">pull request</a> is useful to get around a build failure due to a change in Jekyll build command.</p>
 
 <p>I prefer GH page to Heroku because the initial load of Heroku site is always very slow.  GH doesn&rsquo;t have that problem.  I added heroku for backup in case Github goes down. It&rsquo;s trivial to point CNAME to heroku app.  If Amazon EC2 is down, then I&rsquo;m out of luck (I think GH and Heroku both use EC2, but maybe they also use Rackspace).</p>
+
+<p><strong><a id="custom_plugins"></a>Custom Plugins</strong></p>
+
+<p>Jekyll supports plugins which are custom ruby code.  Github Pages disables custom plugins due to security reason.  In order to run custom plugins, you will need to compile the source into _site and push that to Github.  Detailed instruction is <a href="http://ixti.net/software/2013/01/28/using-jekyll-plugins-on-github-pages.html">here</a>.</p>
 </div>
 
 
@@ -178,6 +184,12 @@
 
 <time datetime="2013-09-18T09:58:00+08:00" pubdate data-updated="true">Sep 18<span>th</span>, 2013</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/github/'>github</a>, <a class='category' href='/blog/categories/jekyll/'>jekyll</a>, <a class='category' href='/blog/categories/plugin/'>plugin</a>
+  
+</span>
 
 
     </p>
@@ -291,9 +303,13 @@
 
 <section>
     <h1>Change Log</h1>
-    <ul><li>Oct 08 - <a href='https://github.com/zlu/octopress/commit/194b39eea4b58e54cc4cd46b4598bed55c39d0d3/'>Revert "temporarily added widget from networked blos for site verification"
+    <ul><li>Oct 08 - <a href='https://github.com/zlu/octopress/commit/b7ee8371d15be01d890ccc835c1ad8a079ec7a0f/'>Revert "changed location of verification widget"
 
-This reverts commit 7c7216d5605a0cfe5a93e8381e2eecd94c4163ea.</a></li><li>Oct 08 - <a href='https://github.com/zlu/octopress/commit/7c7216d5605a0cfe5a93e8381e2eecd94c4163ea/'>temporarily added widget from networked blos for site verification</a></li><li>Sep 30 - <a href='https://github.com/zlu/octopress/commit/630a3d9fd48bee28c9db08adeeb5d9ff18835830/'>merging...</a></li><li>Sep 30 - <a href='https://github.com/zlu/octopress/commit/eff157a313accaecd893ddf303fa7c33b8bc398c/'>Added update2 to cms blog - correction on comfy _not_ using liquid</a></li><li>Sep 30 - <a href='https://github.com/zlu/octopress/commit/c197932a27f6a30441b544607161634a47bbc679/'>Added update2 to cms blog - correction on comfy _not_ using liquid</a></li><li>Sep 29 - <a href='https://github.com/zlu/octopress/commit/f515acd92f1d25443c1d9a32ca6dce36c4950a5e/'>Site updates</a></li><li>Sep 29 - <a href='https://github.com/zlu/octopress/commit/e7e3897b367698fecae43e743ff34b0162d5a78b/'>Minor change to time format for change log</a></li><li>Sep 29 - <a href='https://github.com/zlu/octopress/commit/b8053a2395d98e8da09931bb8e1b809338732590/'>Added new favicon</a></li><li>Sep 29 - <a href='https://github.com/zlu/octopress/commit/d3ca7d977f80c2424f9e133ed4dfa4c177c9dd7a/'>merging...</a></li><li>Sep 29 - <a href='https://github.com/zlu/octopress/commit/1bdab367f501fc5570e62b0cca9ed62a9c143d96/'>Merge branch 'master' of github.com:zlu/octopress</a></li></ul>
+This reverts commit 5f41690a27b58ad714bbd2ed0a96493b12845589.</a></li><li>Oct 08 - <a href='https://github.com/zlu/octopress/commit/5f41690a27b58ad714bbd2ed0a96493b12845589/'>changed location of verification widget</a></li><li>Oct 08 - <a href='https://github.com/zlu/octopress/commit/0497ba954dca54b38ac692a7ac098b4353994327/'>merge</a></li><li>Oct 08 - <a href='https://github.com/zlu/octopress/commit/101f20e549fc357ed5f66b80044ddc022eae62b9/'>Merge branch 'master' of github.com:zlu/octopress</a></li><li>Oct 08 - <a href='https://github.com/zlu/octopress/commit/194b39eea4b58e54cc4cd46b4598bed55c39d0d3/'>Revert "temporarily added widget from networked blos for site verification"
+
+This reverts commit 7c7216d5605a0cfe5a93e8381e2eecd94c4163ea.</a></li><li>Oct 08 - <a href='https://github.com/zlu/octopress/commit/5f4afc09e5bf64238217472e905c1e21cb5bce9f/'>Revert "temporarily added widget from networked blos for site verification"
+
+This reverts commit a64afa546d7045ab7667b018a185b0864d562626.</a></li><li>Oct 08 - <a href='https://github.com/zlu/octopress/commit/7c7216d5605a0cfe5a93e8381e2eecd94c4163ea/'>temporarily added widget from networked blos for site verification</a></li><li>Oct 08 - <a href='https://github.com/zlu/octopress/commit/a64afa546d7045ab7667b018a185b0864d562626/'>temporarily added widget from networked blos for site verification</a></li><li>Sep 30 - <a href='https://github.com/zlu/octopress/commit/630a3d9fd48bee28c9db08adeeb5d9ff18835830/'>merging...</a></li><li>Sep 30 - <a href='https://github.com/zlu/octopress/commit/eff157a313accaecd893ddf303fa7c33b8bc398c/'>Added update2 to cms blog - correction on comfy _not_ using liquid</a></li></ul>
 </section><html xmlns:wb=“http://open.weibo.com/wb”>
 <head>
     <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>

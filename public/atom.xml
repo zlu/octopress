@@ -4,7 +4,7 @@
   <title><![CDATA[吕钊]]></title>
   <link href="http://www.zlu.me/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2013-10-08T19:21:18+08:00</updated>
+  <updated>2013-10-09T00:55:46+08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -140,7 +140,9 @@ You can then invoke this partial inside of a layout:</p>
     <link href="http://www.zlu.me/blog/2013/09/18/never-ending-journey-on-the-perfect-blogging-setup/"/>
     <updated>2013-09-18T09:58:00+08:00</updated>
     <id>http://www.zlu.me/blog/2013/09/18/never-ending-journey-on-the-perfect-blogging-setup</id>
-    <content type="html"><![CDATA[<p>Once in a while I search for a better blogging solution.  Like many others I&rsquo;ve used Wordpress, Blogger, and Tumblr.  I&rsquo;ve also used more technical approaches such as self-hosted Wordpress.  I use <a href="http://octopress.org">Octopress</a> for this blog.  I have tempted to write my own blog software but some developers do.  Remy wrote his own <a href="http://www.whoisremy.com">blog</a> in RubyOnRails.</p>
+    <content type="html"><![CDATA[<p><strong><em>Update 1</em></strong> October 9, 2013 &ndash; Added source for using <a href="#custom_plugins">custom plugins</a>, which is disabled by Github pages running in safe mode.</p>
+
+<p>Once in a while I search for a better blogging solution.  Like many others I&rsquo;ve used Wordpress, Blogger, and Tumblr.  I&rsquo;ve also used more technical approaches such as self-hosted Wordpress.  I use <a href="http://octopress.org">Octopress</a> for this blog.  I have tempted to write my own blog software but some developers do.  Remy wrote his own <a href="http://www.whoisremy.com">blog</a> in RubyOnRails.</p>
 
 <p>I recently needed to setup a blog for <a href="https://foryogi.com">ForYogi</a>.  I tried Tumblr, again, for a while.  I still don&rsquo;t like it.  I think it&rsquo;s better suited for a quick photo upload which some short description.  Instapaper&rsquo;s blog use it for obvious reason, but it&rsquo;s not visually appealing to me.  Knowing what Yahoo tends to do to their purchases, I decided to abandon it.  Wordpress is a bit too overwhelming for me, with its custom domain and many packages they sell.  I do like the plethora plugins and vibrant community Wordpress have though.  Blogger is the best choice for a hosted solution providing all I need for free.  I don&rsquo;t believe Blogger will be part of Google&rsquo;s killing spree as it is being used by many bloggers for advertising.  But its editing interface feels like MS Word in 1997.  Its post display is like a typical Google product, lacking the simplicity and elegancy of what Apple has.</p>
 
@@ -178,6 +180,10 @@ You can then invoke this partial inside of a layout:</p>
 <p>I also added Twitter bootstrap and font-awesome.  I plan to add Google font to it next.  I also added support for Heroku, which requires Procfile, config.ru, and add a Heroku config var for the <a href="https://github.com/mattmanning/heroku-buildpack-ruby-jekyll">build pack</a>.  This <a href="https://github.com/mattmanning/heroku-buildpack-ruby-jekyll/pull/9">pull request</a> is useful to get around a build failure due to a change in Jekyll build command.</p>
 
 <p>I prefer GH page to Heroku because the initial load of Heroku site is always very slow.  GH doesn&rsquo;t have that problem.  I added heroku for backup in case Github goes down. It&rsquo;s trivial to point CNAME to heroku app.  If Amazon EC2 is down, then I&rsquo;m out of luck (I think GH and Heroku both use EC2, but maybe they also use Rackspace).</p>
+
+<p><strong><a id="custom_plugins"></a>Custom Plugins</strong></p>
+
+<p>Jekyll supports plugins which are custom ruby code.  Github Pages disables custom plugins due to security reason.  In order to run custom plugins, you will need to compile the source into _site and push that to Github.  Detailed instruction is <a href="http://ixti.net/software/2013/01/28/using-jekyll-plugins-on-github-pages.html">here</a>.</p>
 ]]></content>
   </entry>
   
