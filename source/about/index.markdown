@@ -34,6 +34,8 @@ In general, I use **zlu** as my user name on networks and social channels when a
 
 ### Teaching, Talks and Presentations
 
+- _Oct 2013, Beijing, China_ - **YogiOnRails**, a talk about [ForYogi](https://foryogi.com) given to [Beijing Rubyist](http://www.meetup.com/bjrubyist/).
+
 - _May 2013, New York, NY_ - **[Web Development Immersive](https://generalassemb.ly/instructors/zhao-lu/1464)**  
 Taught web programming (frontend and backend) in Ruby-on-Rails at [General Assembly](http://generalassemb.ly).
 
