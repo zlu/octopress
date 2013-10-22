@@ -4,7 +4,7 @@
   <title><![CDATA[吕钊]]></title>
   <link href="http://www.zlu.me/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2013-10-20T22:59:44+08:00</updated>
+  <updated>2013-10-22T15:04:53+08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -92,7 +92,7 @@ Here is the <a href="https://github.com/zlu/octopress/commit/6b8ff500d01109b390e
 <p>As there is no guarantee for a rather future release of Rails4 support (at least not in their current roadmap), I pass.   <br/>
 <strong><a href="http://alchemy-cms.com">AlchemyCMS</a></strong></p>
 
-<p>I first learned about this CMS through the comments on the free RailsCasts episode.  They argued about why they are better than refineryCMS.  I liked their idea of storing pure content, not css style and layouts in database.  It&rsquo;ll only make migration to other systems easier.  I also noticed that they have a <a href="https://github.com/magiclabs/alchemy_cms/tree/3.0-dev">3.0-dev branch</a> supporting Rails4 with this <a href="fe94bedc761484940071129277970a6cd65fba10">sha</a>.  Installation has proved to be hard as there are a few conflict in various gems (if you use activeadmin and devise).  I was able to install it after some struggle.  However, I encountered problems running it (devise login, actions_cache).  It was just wasting more time than I wanted at this point.</p>
+<p>I first learned about this CMS through the comments on the free RailsCasts episode.  They argued about why they are better than refineryCMS.  I liked their idea of storing pure content, not css style and layouts in database.  It&rsquo;ll only make migration to other systems easier.  I also noticed that they have a <a href="https://github.com/magiclabs/alchemy_cms/tree/3.0-dev">3.0-dev branch</a> supporting Rails4 with this <a href="fe94bedc761484940071129277970a6cd65fba10">sha</a>.  Installation has proven to be hard as there are a few conflict in various gems (if you use activeadmin and devise).  I was able to install it after some struggle.  However, I encountered problems running it (devise login, actions_cache).  It was just wasting more time than I wanted at this point.</p>
 
 <p><strong><a href="">BrowserCMS</a></strong></p>
 
@@ -108,7 +108,7 @@ Here is the <a href="https://github.com/zlu/octopress/commit/6b8ff500d01109b390e
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">% @cms_site.pages.root.children.published.each </span><span class="k">do</span> <span class="o">|</span><span class="n">page</span><span class="o">|</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">  &lt;%= link_to(page.label, page.full_path) %&gt;</span><span class="o">&lt;</span><span class="n">br</span><span class="o">&gt;</span>
+</span><span class='line'><span class="sx">  &lt;%= link_to(page.label, page.url) %&gt;</span><span class="o">&lt;</span><span class="n">br</span><span class="o">&gt;</span>
 </span><span class='line'><span class="o">&lt;</span><span class="sx">% end </span><span class="o">%&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 

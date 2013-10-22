@@ -4,7 +4,7 @@
   <title><![CDATA[Category: cms | 吕钊]]></title>
   <link href="http://www.zlu.me/blog/categories/cms/atom.xml" rel="self"/>
   <link href="http://www.zlu.me/"/>
-  <updated>2013-10-20T22:59:44+08:00</updated>
+  <updated>2013-10-22T15:04:53+08:00</updated>
   <id>http://www.zlu.me/</id>
   <author>
     <name><![CDATA[Zhao Lu]]></name>
@@ -67,7 +67,7 @@
 <p>As there is no guarantee for a rather future release of Rails4 support (at least not in their current roadmap), I pass.   <br/>
 <strong><a href="http://alchemy-cms.com">AlchemyCMS</a></strong></p>
 
-<p>I first learned about this CMS through the comments on the free RailsCasts episode.  They argued about why they are better than refineryCMS.  I liked their idea of storing pure content, not css style and layouts in database.  It&rsquo;ll only make migration to other systems easier.  I also noticed that they have a <a href="https://github.com/magiclabs/alchemy_cms/tree/3.0-dev">3.0-dev branch</a> supporting Rails4 with this <a href="fe94bedc761484940071129277970a6cd65fba10">sha</a>.  Installation has proved to be hard as there are a few conflict in various gems (if you use activeadmin and devise).  I was able to install it after some struggle.  However, I encountered problems running it (devise login, actions_cache).  It was just wasting more time than I wanted at this point.</p>
+<p>I first learned about this CMS through the comments on the free RailsCasts episode.  They argued about why they are better than refineryCMS.  I liked their idea of storing pure content, not css style and layouts in database.  It&rsquo;ll only make migration to other systems easier.  I also noticed that they have a <a href="https://github.com/magiclabs/alchemy_cms/tree/3.0-dev">3.0-dev branch</a> supporting Rails4 with this <a href="fe94bedc761484940071129277970a6cd65fba10">sha</a>.  Installation has proven to be hard as there are a few conflict in various gems (if you use activeadmin and devise).  I was able to install it after some struggle.  However, I encountered problems running it (devise login, actions_cache).  It was just wasting more time than I wanted at this point.</p>
 
 <p><strong><a href="">BrowserCMS</a></strong></p>
 
@@ -81,7 +81,7 @@
 
 <p><code>ruby
 &lt;% @cms_site.pages.root.children.published.each do |page| %&gt;
-  &lt;%= link_to(page.label, page.full_path) %&gt;&lt;br&gt;
+  &lt;%= link_to(page.label, page.url) %&gt;&lt;br&gt;
 &lt;% end %&gt;
 </code></p>
 

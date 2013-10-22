@@ -45,7 +45,7 @@ This one has a nicely styled site (compare to some other CMS) but has a few thin
 As there is no guarantee for a rather future release of Rails4 support (at least not in their current roadmap), I pass. 	
 **[AlchemyCMS](http://alchemy-cms.com)**
 
-I first learned about this CMS through the comments on the free RailsCasts episode.  They argued about why they are better than refineryCMS.  I liked their idea of storing pure content, not css style and layouts in database.  It'll only make migration to other systems easier.  I also noticed that they have a [3.0-dev branch](https://github.com/magiclabs/alchemy_cms/tree/3.0-dev) supporting Rails4 with this [sha](fe94bedc761484940071129277970a6cd65fba10).  Installation has proved to be hard as there are a few conflict in various gems (if you use activeadmin and devise).  I was able to install it after some struggle.  However, I encountered problems running it (devise login, actions_cache).  It was just wasting more time than I wanted at this point.
+I first learned about this CMS through the comments on the free RailsCasts episode.  They argued about why they are better than refineryCMS.  I liked their idea of storing pure content, not css style and layouts in database.  It'll only make migration to other systems easier.  I also noticed that they have a [3.0-dev branch](https://github.com/magiclabs/alchemy_cms/tree/3.0-dev) supporting Rails4 with this [sha](fe94bedc761484940071129277970a6cd65fba10).  Installation has proven to be hard as there are a few conflict in various gems (if you use activeadmin and devise).  I was able to install it after some struggle.  However, I encountered problems running it (devise login, actions_cache).  It was just wasting more time than I wanted at this point.
 
 **[BrowserCMS]()**
 
@@ -59,7 +59,7 @@ Here is how to create a simple navigation for all the pages.  According to the [
 
 ```ruby
 <% @cms_site.pages.root.children.published.each do |page| %>
-  <%= link_to(page.label, page.full_path) %><br>
+  <%= link_to(page.label, page.url) %><br>
 <% end %>
 ```
 
